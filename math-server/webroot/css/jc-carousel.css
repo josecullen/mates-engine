@@ -1,0 +1,275 @@
+.img{
+	height: 90%;
+}
+
+
+.carousel-bottom-nav{
+  height: 150px;
+  background: rgba(0,0,0,0.5);
+  color: rgba(0,0,0,0.5);
+}
+
+.carousel-top-nav{
+  background: rgba(0,0,0,0.5);
+  color: rgba(0,0,0,0.5);
+}
+
+h1.carousel, h3.carousel, h2.carousel, h1.info, h2.info, h3.info, h4.info{
+  opacity: 0.7;
+  color: #CCCCCC;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+
+div.carousel-bg {
+  width: 250%;
+  height: 250%;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  transform: translate(0%, -50%);
+  z-index: 2;
+}
+
+
+/* Animación del fondo */
+
+.carousel-bg.ng-animate {
+  opacity: 1;
+  transform: translate(0%, -50%);
+}
+
+.carousel-bg.ng-leave,
+.carousel-bg.ng-leave {
+  transition: 1s linear all;
+}
+
+.carousel-bg.ng-enter.ng-enter-active,
+.carousel-bg.ng-leave {
+  opacity: 1;
+}
+
+.carousel-bg.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+
+.carousel-bg.ng-enter {
+  transition: 1s linear all;
+  opacity: 0;
+}
+
+
+/* Fin animación del fondo */
+
+div.carousel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  color: black
+}
+
+
+/* Animación aparición del carousel */
+
+div.carousel.ng-animate {
+  position: absolute;
+  transform: translate(0%, -50%);
+}
+
+div.carousel.ng-enter {
+  transition: 1.5s linear all;
+  transition-delay: 0.5s;
+  animation-delay: 0.5s;
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+div.carousel.ng-enter.ng-enter-active,
+.carousel.ng-leave {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+
+/* Fin animación aparición del carousel */
+
+
+/* Animación de Bottom Nav */
+
+nav.carousel-bottom-nav.ng-enter {
+  animation: my_fade_animation 1.0s linear;
+  -webkit-animation: my_fade_animation 1.0s linear;
+}
+
+@keyframes my_fade_animation {
+  0% {
+    bottom: -200px;
+  }
+  70% {
+    bottom: -200px;
+  }
+  100% {
+    bottom: 0px;
+  }
+}
+
+@-webkit-keyframes my_fade_animation {
+  0% {
+    bottom: -200px;
+  }
+  70% {
+    bottom: -200px;
+  }
+  100% {
+    bottom: 0px;
+  }
+}
+
+nav.carousel-bottom-nav.ng-leave {
+  animation: leave_nav 0.5s linear;
+  -webkit-animation: leave_nav 0.5s linear;
+}
+
+@keyframes leave_nav {
+  0% {
+    bottom: 0px;
+  }
+  100% {
+    bottom: -200px;
+  }
+}
+
+@-webkit-keyframes leave_nav {
+  0% {
+    bottom: 0px;
+  }
+  100% {
+    bottom: -200px;
+  }
+}
+
+
+/* Fin Animación de Bottom Nav */
+
+
+/* Animación de Top Nav */
+
+nav.carousel-top-nav.ng-enter {
+  animation: top-nav-enter 1.5s linear;
+  -webkit-animation: top-nav-enter 1.5s linear;
+}
+
+@keyframes top-nav-enter {
+  0% {
+    top: -100px;
+  }
+  25% {
+    top: 0px;
+  }
+}
+
+@-webkit-keyframes top-nav-enter {
+  0% {
+    top: -100px;
+  }
+  25% {
+    top: 0px;
+  }
+}
+
+nav.carousel-top-nav.ng-leave {
+  animation: top-nav-leave 0.5s linear;
+  -webkit-animation: top-nav-leave 0.5s linear;
+}
+
+@keyframes top-nav-leave {
+  0% {
+    top: 0px;
+  }
+  100% {
+    top: -100px;
+  }
+}
+
+@-webkit-keyframes top-nav-leave {
+  0% {
+    top: 0px;
+  }
+  100% {
+    top: -100px;
+  }
+}
+
+/* Fin de Animación de Top Nav*/
+
+
+
+/* Animación de Texto Carousel */
+
+h1.carousel.ng-enter, h2.carousel.ng-enter, h3.carousel.ng-enter {
+  animation: carousel-text-enter 0.7s linear;
+  -webkit-animation: carousel-text-enter 0.7s linear;
+}
+
+@keyframes carousel-text-enter {
+  0%, 100%  { -webkit-filter: blur(0px); }
+  20% { -webkit-filter: blur(10px); }
+}
+
+@-webkit-keyframes carousel-text-enter {
+  0%, 100%  { -webkit-filter: blur(0px); }
+  20% { -webkit-filter: blur(10px); }
+}
+/* Fin de Animación de Texto de Carousel*/
+
+
+
+
+
+
+.imagen-if {
+  position: relative;
+  left: -50%;
+  top: -50%;
+  transform: translate(0%, -50%);
+}
+
+
+/* Animación de cambio de imagen */
+
+.img.ng-animate {
+  position: relative;
+  left: 0%;
+  top: 0%;
+  transform: translate(0%, -50%);
+}
+
+.img.ng-leave {
+  transition: 0.5s linear all;
+}
+
+.img.ng-enter {
+  transition: 0.5s linear all;
+  transition-delay: 0.5s;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
+.img.ng-enter {
+  transform: translateX(100%);
+}
+
+.img.ng-enter.ng-enter-active,
+.img.ng-leave {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.img.ng-leave.ng-leave-active {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+/* Fin Animación de cambio de imagen */
+
+
