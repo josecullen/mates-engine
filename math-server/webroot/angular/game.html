@@ -3,11 +3,51 @@
 .navbar-nav.nav-justified > li{
     float:none;
 }
+
+.layer-control{
+	background-color: rgba(0, 0, 0, 0.6);
+  	position: absolute;
+  	z-index: 2;
+	text-align: center;
+	
+	width: 100%;
+	height: 100%; 
+}
+
+h2{
+	color: white;
+	alpha: 0.5;
+}
+
+.sub-layer-control{
+	transform: translate(0%, 50%);	
+}
+
+
+
 </style>
+    <div class="layer-control container" ng-if="!game.estado.comenzo || game.estado.termino">
+    	<div class="sub-layer-control">
+	    	<div ng-if="!game.estado.comenzo">
+	    		<h2>¿Te animás a un desafío de lógica?</h2>
+	    		<br><br><br>
+	    		<button class="btn btn-default" ng-click="reset()">¡Empezar a Jugar!</button>
+	    	</div>
+	    	<div ng-if="game.estado.termino">
+		    	<h3>Juego Terminado!</h3>
+		    	<h4>Puntaje: {{game.puntos}}</h4>
+		    	<br><br><br>
+	    		<button class="btn btn-default" ng-click="reset()">¡Jugar de Nuevo!</button>
+		    </div>
+		    
+    	</div>    	
+    </div>
+
 <div class="container">
 	<nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
+    
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>

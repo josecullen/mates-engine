@@ -18,6 +18,10 @@ var app = angular.module('app', ['ngRoute'])
 	$scope.game = {
 			puntos: 0,
 			vidas: [1,2,3],
+			estado:{
+				comenzo: false,
+				termino: false	
+			},
 			ejercicio: {
 				expresion: "",
 				respuesta: "",
@@ -66,6 +70,7 @@ var app = angular.module('app', ['ngRoute'])
 	$scope.reset = function(){
 		angular.copy($scope.newGame, $scope.game);
 		$scope.getExercise($scope.game.nivel.niveles[$scope.game.nivel.actual]);
+		$scope.comenzar();
 	}
 	
 	$scope.response = function(response){
@@ -81,13 +86,19 @@ var app = angular.module('app', ['ngRoute'])
 		}else{
 			console.log("Incorrecta!");
 			$scope.game.vidas.pop();
+			if($scope.game.vidas.length == 0){
+				$scope.game.estado.termino = true;
+			}
 		}
 		$timeout(getNext, 2000);
 	}
 	
 	
+	$scope.comenzar = function(){
+		$scope.game.estado.comenzo = true;
+		$interval(updateTime, 1000);	
+	}
 	
-	$interval(updateTime, 1000);
 	
 	
 	
