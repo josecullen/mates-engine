@@ -31,7 +31,7 @@ var app = angular.module('app', ['ngRoute'])
 				}
 			},
 			tiempo: {
-				restante: 100,
+				restante: 130,
 				respuesta: 0,
 				bonificaciones: [3,5,7][10,5,3]
 			},
@@ -79,8 +79,8 @@ var app = angular.module('app', ['ngRoute'])
 		if(response == $scope.game.ejercicio.respuesta){
 			console.log("Correcta!");
 			$scope.game.puntos++;			
-			if($scope.game.tiempo.respuesta < 5){
-				$scope.game.tiempo.restante += 10;
+			if($scope.game.tiempo.respuesta < 8){
+				$scope.game.tiempo.restante += 15;
 			} 
 		
 		}else{
@@ -88,15 +88,17 @@ var app = angular.module('app', ['ngRoute'])
 			$scope.game.vidas.pop();
 			if($scope.game.vidas.length == 0){
 				$scope.game.estado.termino = true;
+				$interval.cancel(stopGame);
 			}
 		}
 		$timeout(getNext, 2000);
 	}
 	
-	
+	var stopGame;
 	$scope.comenzar = function(){
+		$interval.cancel(stopGame);
 		$scope.game.estado.comenzo = true;
-		$interval(updateTime, 1000);	
+		stopGame = $interval(updateTime, 1000);	
 	}
 	
 	
