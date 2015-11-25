@@ -59,6 +59,18 @@ public class ArithmeticVariable implements Variable<Double> {
 		return result;
 	}
 	
+	public static String getValueString(Double value){
+		String result = "";
+		
+		if(value % 1 == 0)
+			result = ""+value.intValue();
+		else
+			result = ""+value;
+		
+		return result;
+	}
+
+	
 	public static class RandomVariableInstancer{		
 		private double 
 			min = 0,

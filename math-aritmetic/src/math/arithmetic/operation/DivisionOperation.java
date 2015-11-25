@@ -15,7 +15,7 @@ public class DivisionOperation extends Operation<Double> {
 
 	@Override
 	public String getLaTex() {
-		return "/";
+		return "\\diagup";
 	}
 
 }

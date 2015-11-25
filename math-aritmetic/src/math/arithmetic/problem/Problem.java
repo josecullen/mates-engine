@@ -50,7 +50,7 @@ public class Problem {
 		problemExpression.setOperationAction(operationNode->{
 			String expression = ""+problemExpression.runOn(
 					operationNode.getLeftNode()) +" "+ 
-					operationNode.getOperation().getExpression() +" "+ 
+					operationNode.getOperation().getLaTex()+" "+ 
 					problemExpression.runOn(operationNode.getRightNode());
 			
 			return operationNode.getOperation().getSign() 
@@ -73,7 +73,7 @@ public class Problem {
 	
 	public String getSolvedExpression(){	
 		double result = br.getResult();
-		return problemExpression.runOn(operationNode) + " = "+ result;
+		return problemExpression.runOn(operationNode) + " = "+ ArithmeticVariable.getValueString(result);
 	}
 	
 	public void renew(){
@@ -89,12 +89,23 @@ public class Problem {
 	
 	public double[] getAnswerOptions(){
 		double[] answers = new double[5];
-		
-		for(int i = 0; i < answers.length; i++){
-			answers[i] = br.getResult() + (randomVariableInstancer.getValueWithDivisionFactor(0,10) - 5);
+		answers[0] = br.getResult();
+		for(int i = 1; i < answers.length; i++){
+			answers[i] = getNoRepeatedAnswer(answers);
+//					br.getResult() + (randomVariableInstancer.getValueWithDivisionFactor(0,10) - 5);
 		}
 		
 		return answers;
+	}
+	
+	private double getNoRepeatedAnswer(double[] answers){
+		double answer = br.getResult() + (randomVariableInstancer.getValueWithDivisionFactor(0,14) - 7);
+		for(Double ans : answers){
+			if(ans == answer){
+				answer = getNoRepeatedAnswer(answers);
+			}
+		}
+		return answer;
 	}
 	
 	

@@ -80,5 +80,6 @@
 	<classpathentry kind="lib" path="C:/eclipse/jose/vertx-versions/vert.x-3.0.0-full/lib/vertx-sql-common-3.0.0.jar"/>
 	<classpathentry kind="lib" path="C:/eclipse/jose/vertx-versions/vert.x-3.0.0-full/lib/vertx-unit-3.0.0.jar"/>
 	<classpathentry kind="lib" path="C:/eclipse/jose/vertx-versions/vert.x-3.0.0-full/lib/vertx-web-3.0.0.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/math-aritmetic"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

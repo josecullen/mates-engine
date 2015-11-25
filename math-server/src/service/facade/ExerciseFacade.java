@@ -14,9 +14,6 @@ public class ExerciseFacade {
 		jsonExercise.put("expression", exercise.getExpression());
 		jsonExercise.put("answer", getAnswerJson(exercise.getAnswer()));
 		
-		
-		
-		
 		return jsonExercise;
 	}
 	

@@ -20,21 +20,27 @@ public class OperationParser {
 
 	
 	public MathNode parse(String expression){
-		
-		boolean hasSign = hasSign(expression);
-		if(isOperand(expression)){
-			return newOperandInstance.apply(expression.trim());
-		}else{
-			OperationNode operation;
-			expression = stripOuterBraces(expression);
-			String values[] = analyzeMorf(expression);
-			
-			operation = newOperationInstance.apply(values[1]);
-			operation.getOperation().setSign(hasSign);
-			operation.setOperands(getLogicFromString(values[0]), getLogicFromString(values[2]));
-			return operation;
+		OperationNode operation = null;
+
+		try{
+			boolean hasSign = hasSign(expression);
+			if(isOperand(expression)){
+				return newOperandInstance.apply(expression.trim());
+			}else{
+				expression = stripOuterBraces(expression);
+				String values[] = analyzeMorf(expression);
+				
+				operation = newOperationInstance.apply(values[1]);
+				operation.getOperation().setSign(hasSign);
+				operation.setOperands(getLogicFromString(values[0]), getLogicFromString(values[2]));
+				return operation;
+			}
+		}catch(Exception e){
+			System.out.println("Parser Error on expression : "+expression);
 		}
 		
+		return operation;
+
 	}
 	
 	private <T> MathNode<T> getLogicFromString(String value){
