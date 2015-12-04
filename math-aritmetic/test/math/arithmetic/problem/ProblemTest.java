@@ -19,7 +19,7 @@ public class ProblemTest {
 	@Test
 	public void testSolvedExpression(){
 		Problem problem = new Problem("a + b");
-		assertEquals("( 0 + 0 ) = 0.0", problem.getSolvedExpression());
+		assertEquals("( 0 + 0 ) = 0", problem.getSolvedExpression());
 	}
 	
 	@Test
@@ -35,7 +35,7 @@ public class ProblemTest {
 		Problem problem = new Problem("a + b");
 		problem.renew();
 		System.out.println("Correct Answer : "+problem.getAnswer());
-		for(Double option : problem.getAnswerOptions()){
+		for(String option : problem.getAnswerOptions()){
 			System.out.println(option);
 		}
 	}

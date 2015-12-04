@@ -83,29 +83,45 @@ public class Problem {
 		br.setOperations(randomOperationBuilder);
 	}
 	
-	public double getAnswer(){
-		return br.getResult();
+	public String getAnswer(){
+		return ArithmeticVariable.getValueString(br.getResult());
 	}
 	
-	public double[] getAnswerOptions(){
+	public String[] getAnswerOptions(){
 		double[] answers = new double[5];
+		String[] stringAnswers = new String[5];
 		answers[0] = br.getResult();
 		for(int i = 1; i < answers.length; i++){
 			answers[i] = getNoRepeatedAnswer(answers);
-//					br.getResult() + (randomVariableInstancer.getValueWithDivisionFactor(0,10) - 5);
 		}
 		
-		return answers;
+		for(int i = 0; i < answers.length; i++)
+			stringAnswers[i] = ArithmeticVariable.getValueString(answers[i]);
+		
+		return stringAnswers;
 	}
 	
 	private double getNoRepeatedAnswer(double[] answers){
-		double answer = br.getResult() + (randomVariableInstancer.getValueWithDivisionFactor(0,14) - 7);
+		double answer = br.getResult() + (randomVariableInstancer.getValueWithDivisionFactor(0,20) - 10);
 		for(Double ans : answers){
 			if(ans == answer){
 				answer = getNoRepeatedAnswer(answers);
 			}
 		}
 		return answer;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append("variables: ");
+
+		br.getVariablesBroadcast().forEach(variable ->{
+			str.append("\t"+variable.getValue());
+		});
+	
+		
+		return str.toString();
 	}
 	
 	

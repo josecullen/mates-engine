@@ -8,7 +8,8 @@ var arithmeticApp = angular.module('arithmetic-app', [])
 		max: 6,
 		min: 0,
 		probablySign: 0.2,
-		operations: "+*"
+		operations: "+*",
+		divisionFactor: 1			
 	}
 	
 	$scope.newProblem = function(){
@@ -21,6 +22,7 @@ var arithmeticApp = angular.module('arithmetic-app', [])
 		$scope.path += "&max="+query.max;
 		$scope.path += "&min="+query.min;
 		$scope.path += "&probablySign="+query.probablySign;
+		$scope.path += "&divisionFactor="+query.divisionFactor;
 		$scope.path += "&operations="+$window.encodeURIComponent(query.operations);
 		return $scope.path;
 	}	

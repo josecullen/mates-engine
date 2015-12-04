@@ -17,10 +17,11 @@ public class ProblemFacade {
 	}
 	
 	public static JsonObject parseProblemToJson(Problem problem){
+//		System.out.println(problem);
 		JsonObject jsonProblem = new JsonObject();
 		
 		JsonArray answerOptions = new JsonArray();
-		for(Double answer : problem.getAnswerOptions()){
+		for(String answer : problem.getAnswerOptions()){
 			answerOptions.add(answer);
 		}		
 		

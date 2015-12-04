@@ -71,7 +71,7 @@ public class OperationUtilTest {
 				signCount++;		
 		}
 		
-		assertEquals(800, signCount, 100);
+		assertEquals(200, signCount, 100);
 	}
 	
 	@Test

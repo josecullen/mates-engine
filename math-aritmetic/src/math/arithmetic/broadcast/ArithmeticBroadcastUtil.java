@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import math.arithmetic.operand.ArithmeticVariable;
+import math.arithmetic.operation.DivisionOperation;
 import math.arithmetic.operation.OperationUtil;
 import math.arithmetic.operation.OperationUtil.RandomOperationBuilder;
 import math.arithmetic.tree.ArithmeticOperandNode;
@@ -109,11 +110,12 @@ public class ArithmeticBroadcastUtil {
 		
 		setOperations.setOperationAction(operationNode ->{
 			operationNode.setOperation(rob.build());
-			
 			return "";
 		});		
 		setOperations.runOn(tree);		
 	}
+	
+	
 	
 
 	

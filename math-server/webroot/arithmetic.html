@@ -2,7 +2,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <link rel='stylesheet' href="/bootstrap/dist/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap-theme.css">
@@ -39,6 +39,9 @@
 				</div>
 				<div class="btn-group" role="group">
 					<input class="form-control" ng-model="query.operations" data-toggle="tooltip" data-placement="bottom" title="Operaciones posibles">
+				</div>
+				<div class="btn-group" role="group">
+					<input class="form-control" ng-model="query.divisionFactor" data-toggle="tooltip" data-placement="bottom" title="Factor de división">
 				</div>
 				<div class="btn-group" role="group">
 					<button ng-click="newProblem()" class="btn btn-default">Nuevo Problema</button>
