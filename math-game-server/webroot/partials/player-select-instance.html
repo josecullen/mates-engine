@@ -1,0 +1,63 @@
+<meta charset="UTF-8">
+<div ng-if="instance.status == 'NOT_SELECTED'">
+
+	<div class="input-group">
+		<span class="input-group-addon">Nombre: </span> <input type="text" ng-model="player.name" class="form-control">
+	</div>
+	<br> <br>
+
+	<ul class="list-group">
+		<li ng-repeat="instance in instances" class="list-group-item"><a class="badge" ng-click="joinGame(player.name, instance)">¡Jugar!</a>
+			{{instance.gameName}}</li>
+	</ul>
+
+</div>
+
+<div ng-if="instance.status == 'SUCCESS'">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Nivel: {{gameStatus.levelCount}}</a>
+				<a class="navbar-brand" href="#">Problema: {{gameStatus.problemCount}}</a>
+				
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a>Puntos: {{gameStatus.points}} <span class="sr-only">(current)</span></a>
+					</li>					
+					<li ng-repeat="lives in game.vidas">
+						<a><img src="../assets/heart.png"></a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a>Tiempo respuesta: {{gameStatus.problemTime}}<span class="sr-only">(current)</span></a></li>
+
+					<li class="active"><a>Tiempo total: {{gameStatus.time}}<span class="sr-only">(current)</span></a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+	<div class="jumbotron">
+		<h3 mathjax-bind="actualProblem.problemExpression" style="text-align: center"></h3>
+		<h4 mathjax-bind="game.ejercicio.respuesta" ng-show="game.ejercicio.estado.respondio" style="text-align: center"></h4>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="btn-group btn-group-justified col-xs-9" role="group" aria-label="...">
+				<div class="btn-group" role="group" ng-repeat="answer in actualProblem.answerOptions">
+					<button ng-click="response(answer)" class="btn btn-primary">{{answer}}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>

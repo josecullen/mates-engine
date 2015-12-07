@@ -294,18 +294,60 @@ var arithmeticGameMultiApp = angular.module('arithmetic-game-multi', ['ngRoute']
     };
 })
 
-.factory('gameServices', function($http){
+.factory('gameServices', function($http, $log){
+	var path = "/arithmetic/v1/";
+	
 	var gameServices = {
 		games : {
 			get: function(){
-				var res = $http.get('/arithmetic/v1/game/multi').then(function(response){
-			        console.log(response);
+				var res = $http.get(path+'games').then(function(response){
+			        $log.debug(response);
 			        return response.data;
 				});
 				return res;	
-				}
 			}
-		};
+		},
+		game : {
+			get : function(gameId){
+				var res = $http.get(path+'game'+"&gameId="+gameId).then(function(response){
+			        $log.debug(response);
+			        return response.data;
+				});
+				return res;
+			},
+			post : function(gameConfig){
+				var res = $http.post(path+'game', gameConfig).then(function(response){
+			        $log.debug(response);
+			        return response.data;
+				});
+				return res;
+			},
+			put : function(updatedGame){
+				var res = $http.put(path+'game', updatedGame).then(function(response){
+			        $log.debug(response);
+			        return response.data;
+				});
+				return res;
+			}
+			
+		},
+		player : {
+			post : function(gamePlayer){
+				var res = $http.post(path+'player', gamePlayer).then(function(response){
+			        $log.debug(response);
+			        return response.data;
+				});
+				return res;
+			},
+			put : function(updatedPlayer){
+				var res = $http.put(path+'player', updatedPlayer).then(function(response){
+			        $log.debug(response);
+			        return response.data;
+				});
+				return res;
+			}
+		}	
+	};
 		
 	return gameServices;	
 });

@@ -1,0 +1,46 @@
+<html>
+<head>
+<script type="text/javascript" src="lib/sockjs-1.0.3.js"></script>
+</head>
+
+<script type="text/javascript">
+var sock;
+
+var openSocket = function(){
+	sock = new SockJS('http://localhost:8081/socketjs/');
+
+	sock.onopen = function() {
+	  console.log('open');
+	};
+	
+	sock.onmessage = function(e) {
+	  console.log('message', e.data);
+	};
+
+	sock.onclose = function() {
+	  console.log('close');
+	};
+}
+
+var sendMessage = function(message){
+	sock.send("rewrw");	
+}
+
+var closeSocket = function(){
+	sock.close();
+}
+
+
+
+</script>
+
+<body>
+<input >
+<button onclick="openSocket()">Open</button>
+<button onclick="sendMessage()">Send message</button>
+<button onclick="closeSocket()">Close</button>
+
+</body>
+
+
+</html>

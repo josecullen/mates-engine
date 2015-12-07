@@ -1,0 +1,18 @@
+<meta charset="UTF-8">
+<div ng-if="instance.status == 'NOT_SELECTED'">
+
+	<div class="input-group">
+		<span class="input-group-addon">Nombre: </span> <input type="text" ng-model="player.name" class="form-control">
+	</div>
+	<br> <br>
+
+	<ul class="list-group">
+		<li ng-repeat="instance in instances" class="list-group-item">
+			<a class="badge glyphicon glyphicon-trash" ng-click="joinGame(player.name, instance)"> </a>
+			<a class="badge glyphicon glyphicon-stats" ng-click="joinGame(player.name, instance)"> </a>		
+			
+			{{instance.gameName}}
+		</li>
+	</ul>
+
+</div>

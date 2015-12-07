@@ -1,0 +1,39 @@
+<meta charset="UTF-8">
+<div ng-repeat="game in games" class="jumbotron">
+	<h2>{{game.name}}</h2>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Expresión</th>
+				<th>Máximo</th>
+				<th>Mínimo</th>
+				<th>Prob. de signo</th>
+				<th>Operaciones</th>
+				<th>Factor de división</th>
+				<th>Repeticiones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="level in game.levels">
+				<td>{{level.form}}</td>
+				<td>{{level.max}}</td>
+				<td>{{level.min}}</td>
+				<td>{{level.probablySign}}</td>
+				<td>{{level.operations}}</td>
+				<td>{{level.divisionFactor}}</td>
+				<td>{{level.repetitions}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="btn-group btn-group-justified" role="group" aria-label="...">
+		<div class="btn-group" role="group">
+			<button type="button" class="btn btn-default" ng-click="createInstance(game)">Crear instancia</button>
+		</div>
+		<div class="btn-group" role="group">
+			<button type="button" class="btn btn-default">Editar</button>
+		</div>
+		<div class="btn-group" role="group">
+			<button type="button" class="btn btn-default" ng-click="del(game._id)">Eliminar</button>
+		</div>
+	</div>
+</div>
