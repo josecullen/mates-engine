@@ -2,11 +2,12 @@
 	'use strict';
 
 	define([], function(require) {
-		var app = angular.module('app', [ 'controllers', 'ngRoute' ]);
+		var app = angular.module('app', [ 'controllers', 'ngRoute', 'nvd3' ]);
 		app.config([ '$routeProvider', function($routeProvider) {
 			$routeProvider
 				.when('/admin-game-new', {
-					templateUrl : 'partials/admin-game-new.html'
+					templateUrl : 'partials/admin-game-new.html',
+					controller: 'gameController'
 				})
 				.when('/admin-game-list', {
 					templateUrl : 'partials/admin-game-list.html',

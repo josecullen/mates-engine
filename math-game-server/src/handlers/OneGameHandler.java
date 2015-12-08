@@ -16,7 +16,7 @@ public class OneGameHandler {
 			System.out.println("data" +data.toString());
 			JsonObject game = new JsonObject(data.toString()).put("collection", "game");
 			
-			handler.vertx().eventBus().send("insert-game", game, ar ->{
+			handler.vertx().eventBus().send("insert", game.encode(), ar ->{
 		    	 if (ar.succeeded()) {
 		    		handler.response().end("Se ha guardado el juego satisfactoriamente: "+ ar.result().body().toString());		    		    
 		    	 }else{

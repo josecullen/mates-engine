@@ -42,10 +42,11 @@ public class OnePlayerHandler {
 			JsonObject requestScore = new JsonObject(data.toString());
 			JsonObject scoring = new JsonObject()
 					.put("id", requestScore.getString("id"))
+					.put("instanceId", requestScore.getString("instanceId"))
 					.put("score", requestScore.getInteger("score"))
 					.put("corrects", requestScore.getInteger("corrects"))
 					.put("incorrects", requestScore.getInteger("incorrects"));
-
+			
 			
 			handler.vertx().eventBus().send("update-player-scoring", scoring.encode(), ar ->{
 				if (ar.succeeded()) {
@@ -53,7 +54,8 @@ public class OnePlayerHandler {
 						.put("status", "SUCCESS")
 						.put("message", "Se ha actualizado el jugador satisfactoriamente: "+ ar.result().body().toString());
 					System.out.println(result);
-		    		handler.response().end(result.encodePrettily());
+		    		handler.response().end(result.encodePrettily());		    		
+		    		
 		    	 }else{
 		    		 JsonObject result = new JsonObject()
 						.put("status", "FAIL")
@@ -61,7 +63,9 @@ public class OnePlayerHandler {
 		    		 System.out.println("problem . . . "+ar.cause());
 		    		 handler.response().end("Ha ocurrido un inconveniente. . . "+ar.cause());
 		    	 }
-			});		
+			});
+			
+			
 		});
 	};
 	

@@ -51,8 +51,12 @@ public class UpdateVerticle extends AbstractVerticle {
 		updatePlayerScoring.handler(message -> {
 			
 			JsonObject scoring = new JsonObject(message.body().toString());
-			JsonObject matchJson = new JsonObject().put("players.id", scoring.getString("id"));
+			JsonObject matchJson = new JsonObject()
+				.put("players.id", scoring.getString("id"))
+				.put("_id", scoring.getString("instanceId"));
+			
 			scoring.remove("id");
+			scoring.remove("instanceId");
 			
 			JsonObject updateJson = new JsonObject()
 					.put("$set", new JsonObject().put("players.$.scoring", scoring));
@@ -62,7 +66,9 @@ public class UpdateVerticle extends AbstractVerticle {
 			
 			client.update("instance", matchJson, updateJson, res ->{
 				  if (res.succeeded()) {					  
-					  message.reply("OK - pushed player! "+res.result());				    
+					  message.reply("OK - pushed player! "+res.result());
+					  System.out.println("publishing update: " + matchJson.getString("instanceId"));
+					  vertx.eventBus().publish(matchJson.getString("_id"), "update");
 				  } else {
 					  System.out.println(res.cause());
 					  message.reply(res.cause());

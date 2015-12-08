@@ -37,5 +37,26 @@ public class FindVerticle extends AbstractVerticle {
 		});
 
 		
+		
+		
+		MessageConsumer<String> findOne = vertx.eventBus().consumer("find-one");
+		
+		findOne.handler(message -> {
+			JsonObject jsonQuery = new JsonObject(message.body());
+			
+			
+			client.findOne(jsonQuery.getString("collection"), jsonQuery.getJsonObject("query"), new JsonObject(), res ->{
+				 if (res.succeeded()) {				  
+					  message.reply(res.result());				    
+				  } else {			
+					  message.reply(res.cause());
+				  }
+			});
+			
+			
+		});
+		
+		
+		
 	}
 }

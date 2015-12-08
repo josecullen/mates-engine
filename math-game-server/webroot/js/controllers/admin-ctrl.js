@@ -1,6 +1,6 @@
 define(["angular", "js/controllers", 'js/services/service', 'js/services/game-services'], function(angular, controllers){
 
-	controllers.controller('gameController', ['$scope', 'game', '$log', function($scope, $log, game){
+	controllers.controller('gameController', ['$scope', 'game','$location', '$interval', '$log', function($scope, game, $location, $interval, $log){
     	$scope.gameStatus = 'NOT CREATED';
     	
 		$scope.game = {
@@ -38,6 +38,7 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     	}
     	
     	$scope.submitGame = function(){
+    		$log.info("submit game");
     		console.log($scope.game);
     		game.one.post($scope.game).then(function(response){
     			$scope.gameStatus = 'CREATED';

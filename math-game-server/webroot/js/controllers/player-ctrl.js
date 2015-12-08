@@ -9,6 +9,7 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     	
     	$scope.gameStatus = {
     		id : "",
+    		instanceId : "",
     		problemCount: 0,
     		corrects: 0,
     		incorrects: 0,    	
@@ -96,6 +97,7 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
 					$scope.instance = instance;
 					$scope.instance.status = 'SUCCESS';
 					$scope.gameStatus.id = response.id;
+					$scope.gameStatus.instanceId = $scope.instance._id;
 					$scope.begin();
 					$log.info($scope.instance);
 					$log.info($scope.gameStatus);

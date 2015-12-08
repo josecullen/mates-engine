@@ -24,7 +24,7 @@ import mongo.FindVerticle;
 import mongo.InsertVerticle;
 import mongo.UpdateVerticle;
 
-public class PruebaRequire {
+public class ApplicationServer {
 	static int PORT = 8081;
 	
 	private static String PATH = "/arithmetic/v1/";
@@ -123,24 +123,38 @@ public class PruebaRequire {
 		sockJSHandler.socketHandler(sockJSSocket ->{
 
 			
-			Handler<Buffer> handler = buffer->{
+			Handler<Buffer> handler = buffer->{			
+				String instanceId = buffer.toString();
+			
+				JsonObject query = new JsonObject()
+					.put("collection", "instance")
+					.put("query", new JsonObject().put("_id", instanceId));
 				
-//				sockJSSocket.write(buffer.appendString("asdasd"));
+				System.out.println("Creando eventBus consumer "+instanceId);
 				
-
-				MessageConsumer<String> consumer = eb.consumer("chat");
+				MessageConsumer<String> consumer = eb.consumer(instanceId);
 				
 				consumer.handler(message -> {
 				  System.out.println("I have received a message: " + message.body());
-				  sockJSSocket.write(buffer.appendString(message.body()));
+				  
+					vertx.eventBus().send("find-one", query.encode(), ar ->{
+						if(ar.succeeded()){
+							sockJSSocket.write(Buffer.buffer(ar.result().body().toString()));
+						}else{
+							sockJSSocket.write(Buffer.buffer("query error"));
+						}
+					});
+				  
 				});
 				
-				eb.publish("chat", buffer.getString(0, buffer.length()));				
-//				
+				
+				vertx.eventBus().publish(instanceId, "update");
+//				sockJSSocket.write(buffer.appendString("EventBus consumer creado "+buffer.toString()));
 
 			};
+
 			sockJSSocket.handler(handler);
-//			sockJSSocket.handler(sockJSSocket::write);
+
 		});
 		
 		router.route("/socketjs/*").handler(sockJSHandler);
