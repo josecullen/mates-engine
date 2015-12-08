@@ -91,12 +91,18 @@ public class Problem {
 		double[] answers = new double[5];
 		String[] stringAnswers = new String[5];
 		answers[0] = br.getResult();
-		for(int i = 1; i < answers.length; i++){
-			answers[i] = getNoRepeatedAnswer(answers);
-		}
+		
+		for(int i = 1; i < answers.length; i++)
+			answers[i] = getNoRepeatedAnswer(answers);		
 		
 		for(int i = 0; i < answers.length; i++)
 			stringAnswers[i] = ArithmeticVariable.getValueString(answers[i]);
+		
+		//Reubicar respuesta correcta
+		int newPosition = (int)(Math.random()*5);
+		String auxAnswer = stringAnswers[newPosition];
+		stringAnswers[newPosition] = stringAnswers[0];
+		stringAnswers[0] = auxAnswer;
 		
 		return stringAnswers;
 	}

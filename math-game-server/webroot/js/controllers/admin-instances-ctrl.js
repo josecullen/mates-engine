@@ -40,6 +40,7 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
 			  $scope.$apply(function(){
 				  $scope.instance.data = JSON.parse(e.data);
 				  $scope.instance.data.players.forEach(function(player){
+					  
 					  if (typeof player.scoring != 'undefined'){
 						  $scope.data[0].values.push({  
 							  "label" : player.name,
@@ -48,7 +49,7 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
 					  }
 					  
 				  });
-				  
+				 				  
 			  });
 			  
 			};
@@ -68,11 +69,7 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
 		}
 		
 		
-		
-		
-		
-		
-		
+
 		
 		
 		

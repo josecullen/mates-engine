@@ -71,8 +71,8 @@ define(["angular", "js/services"], function(angular, services){
 					}
 				},
 				one : {
-					get : function(){
-						return $http.get(instanceOnePath).then(thenFunction);					
+					get : function(gameId, instanceId, type){
+						return $http.get(instanceOnePath+"?gameId="+gameId+"&instanceId="+instanceId+"&type="+type).then(thenFunction);					
 					},
 					post : function(gameConfig){
 						console.log(gameConfig);

@@ -3,8 +3,21 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
 	controllers.controller('gameController', ['$scope', 'game','$location', '$interval', '$log', function($scope, game, $location, $interval, $log){
     	$scope.gameStatus = 'NOT CREATED';
     	
-		$scope.game = {
+    	$scope.statuses = [{
+            id: "MULTI_INSTANCE_GAME",
+            name: "Juego multi instancia"        
+        }, {
+            id: "ONE_INSTANCE_GAME",
+            name: "Juego de una instancia"        
+        }, {
+            id: "TOURNAMENT",
+            name: "Tournament"        
+        }];
+    	
+    	
+    	$scope.game = {
     		name: "",
+    		type: $scope.statuses[0].id,
     		levels: []
     	}    	
     	
@@ -45,6 +58,28 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     		});
     	};
 
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+        
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     	
     	$scope.addLevel();
     	

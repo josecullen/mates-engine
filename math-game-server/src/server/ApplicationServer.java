@@ -149,8 +149,8 @@ public class ApplicationServer {
 				
 				
 				vertx.eventBus().publish(instanceId, "update");
-//				sockJSSocket.write(buffer.appendString("EventBus consumer creado "+buffer.toString()));
 
+				
 			};
 
 			sockJSSocket.handler(handler);

@@ -7,6 +7,8 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     		status : "NOT_SELECTED"
     	};
     	
+    	$scope.player = { name: ""};
+    	
     	$scope.gameStatus = {
     		id : "",
     		instanceId : "",
@@ -29,6 +31,7 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     		if($scope.gameStatus.time <= 0){
     			$log.info("GAME OVER");
     			$interval.cancel(stopGame);
+				$scope.instance.status = "GAME_OVER";
     		}
     	}
     	
@@ -71,7 +74,7 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     		if(problemCount == levels[levelCount].length -1){
     			if(levelCount == levels.length -1){
     				$log.info("GAME OVER");
-    				$scope.instance.status = "GAME OVER";
+    				$scope.instance.status = "GAME_OVER";
     			}else{
     				$scope.gameStatus.levelCount++;
     				$scope.gameStatus.problemCount = 0;
@@ -87,23 +90,57 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     	
 		
 		$scope.joinGame = function(name, instance){
+			$scope.gameStatus = {
+		    		id : "",
+		    		instanceId : "",
+		    		problemCount: 0,
+		    		corrects: 0,
+		    		incorrects: 0,    	
+		    		score: 0,		
+		    		time: 60,
+		    		problemTime: 0,
+		    		levelCount: 0
+		    	};
+			
 			var params = {
 				"playerName" : name,
 				"instance" : instance 
 			};
+			
 			game.player.one.post(params).then(function(response){
 				console.log(response);
+			
 				if(response.status == 'SUCCESS'){
-					$scope.instance = instance;
-					$scope.instance.status = 'SUCCESS';
-					$scope.gameStatus.id = response.id;
-					$scope.gameStatus.instanceId = $scope.instance._id;
-					$scope.begin();
-					$log.info($scope.instance);
-					$log.info($scope.gameStatus);
+					
+					$log.debug("SUCCESS");
+					$log.debug(instance);
+					
+					if(instance.type == "MULTI_INSTANCE_GAME"){
+						
+						$log.debug("MULTI_INSTANCE_GAME");
+						
+						game.instance.one.get(instance.gameId, instance._id, "RANDOM").then(function(instanceResponse){
+							$scope.instance = instanceResponse;	
+							$scope.instance.type = "MULTI_INSTANCE_GAME";
+							$scope.configGame(response.id);
+							$scope.begin();	
+						});
+					
+					}else{
+						$scope.instance = instance;
+						$scope.configGame(response.id);
+						$scope.begin();
+					}
+
 				}
 			});			
 		};
+		
+		$scope.configGame = function(id){
+			$scope.instance.status = 'SUCCESS';
+			$scope.gameStatus.id = id;
+			$scope.gameStatus.instanceId = $scope.instance._id;
+		}
 		
 		game.instance.all.get().then(function(response){
     		console.log(response);

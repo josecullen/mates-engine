@@ -13,6 +13,16 @@
 
 </div>
 
+<div ng-if="instance.status == 'GAME_OVER'">
+	<div class="row">
+			<div class="btn-group btn-group-justified col-xs-9" role="group" aria-label="...">
+				<div class="btn-group" role="group">
+					<button ng-click="joinGame(player.name, instance)" class="btn btn-success">¡JUGAR OTRA VEZ!</button>
+				</div>
+			</div>
+		</div>
+</div>
+
 <div ng-if="instance.status == 'SUCCESS'">
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
