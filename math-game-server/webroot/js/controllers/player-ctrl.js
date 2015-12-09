@@ -10,15 +10,15 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     	$scope.player = { name: ""};
     	
     	$scope.gameStatus = {
-    		id : "",
-    		instanceId : "",
-    		problemCount: 0,
-    		corrects: 0,
-    		incorrects: 0,    	
-    		score: 0,		
-    		time: 60,
-    		problemTime: 0,
-    		levelCount: 0
+//    		id : "",
+//    		instanceId : "",
+//    		problemCount: 0,
+//    		corrects: 0,
+//    		incorrects: 0,    	
+//    		score: 0,		
+//    		time: 60,
+//    		problemTime: 0,
+//    		levelCount: 0
     	};
     	
     	$scope.actualProblem;
@@ -46,11 +46,22 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     	$scope.response = function(answer){
     		if(answer == $scope.actualProblem.correctAnswer){
     			$scope.gameStatus.corrects++;
-    			$scope.gameStatus.score += 15;
+    			$scope.gameStatus.score += 10;
     			if($scope.gameStatus.problemTime < 5){
+    				$scope.gameStatus.time += 5;
+    				$scope.gameStatus.score += 3;
+    			}else if($scope.gameStatus.problemTime < 8){
     				$scope.gameStatus.time += 3;
+    				$scope.gameStatus.score += 1;
+    			}else if($scope.gameStatus.problemTime < 10){
+    				$scope.gameStatus.time += 1;
     			}
-    		}else{
+    		}else{    			
+    			$scope.gameStatus.lives.pop();
+    			if($scope.gameStatus.lives.length == 0){
+    				$scope.instance.status = "GAME_OVER";
+    			}
+    			
     			$scope.gameStatus.incorrects++;
     		}
     		$scope.gameStatus.problemTime = 0;
@@ -76,6 +87,7 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     				$log.info("GAME OVER");
     				$scope.instance.status = "GAME_OVER";
     			}else{
+    				
     				$scope.gameStatus.levelCount++;
     				$scope.gameStatus.problemCount = 0;
     			}
@@ -93,6 +105,7 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
 			$scope.gameStatus = {
 		    		id : "",
 		    		instanceId : "",
+		    		lives: [1,2,3],
 		    		problemCount: 0,
 		    		corrects: 0,
 		    		incorrects: 0,    	

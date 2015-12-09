@@ -17,6 +17,9 @@
 	<div class="row">
 			<div class="btn-group btn-group-justified col-xs-9" role="group" aria-label="...">
 				<div class="btn-group" role="group">
+					<button ng-click="instance.status = 'NOT_SELECTED'" class="btn btn-success">CAMBIAR USUARIO o JUEGO</button>
+				</div>
+				<div class="btn-group" role="group">
 					<button ng-click="joinGame(player.name, instance)" class="btn btn-success">¡JUGAR OTRA VEZ!</button>
 				</div>
 			</div>
@@ -33,23 +36,29 @@
 <!-- 				</button> -->
 <!-- 				<a class="navbar-brand hidden-xs" href="#">Nivel: {{gameStatus.levelCount}}</a> -->
 <!-- 				<a class="navbar-brand hidden-xs" href="#">Problema: {{gameStatus.problemCount}}</a>		 -->
-				<a class="navbar-brand" href="#">Nivel: {{gameStatus.levelCount}} : {{gameStatus.problemCount}}</a>
-				<a class="navbar-brand" href="#">Tiempos: {{gameStatus.problemTime}} : {{gameStatus.time}}</a>
+					<a class="navbar-brand" href="#">Nivel: {{gameStatus.levelCount}} : {{gameStatus.problemCount}}</a>
+					<a class="navbar-brand" href="#" ng-repeat="live in gameStatus.lives">
+						<img src="../assets/heart.png">
+					</a>
+
+<!-- 				<a class="navbar-brand" href="#">Tiempos: {{gameStatus.problemTime}} : {{gameStatus.time}}</a> -->
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li class="active">
-						<a>Puntos: {{gameStatus.points}} <span class="sr-only">(current)</span></a>
+						<a>Puntos: {{gameStatus.score}} <span class="sr-only">(current)</span></a>
 					</li>	
 									
 					<li class="active">
 						<a>Tiempos: {{gameStatus.problemTime}} : {{gameStatus.time}}<span class="sr-only">(current)</span></a>
 					</li>
 									
-					<li ng-repeat="lives in game.vidas">
-						<a><img src="../assets/heart.png"></a>
-					</li>
+<!-- 					<li > -->
+						<a ng-repeat="lives in game.vidas">
+							<img src="../assets/heart.png" >
+							</a>
+<!-- 					</li> -->
 				</ul>
 <!-- 				<ul class="nav navbar-nav navbar-right"> -->
 <!-- 					<li class="active"><a>Tiempos: {{gameStatus.problemTime}} : {{gameStatus.time}}<span class="sr-only">(current)</span></a></li> -->
@@ -63,17 +72,17 @@
 		<!-- /.container-fluid -->	
 	</nav>
 	
-	
-	<div class="jumbotron">
-		<h3 mathjax-bind="actualProblem.problemExpression" style="text-align: center"></h3>
-		<h4 mathjax-bind="game.ejercicio.respuesta" ng-show="game.ejercicio.estado.respondio" style="text-align: center"></h4>
+	<div class="jumbotron" style="height: 30px">
+<!-- 	style="text-align: center" -->
+		<h3 mathjax-bind="actualProblem.problemExpression" ></h3>
+<!-- 		<h4 mathjax-bind="game.ejercicio.respuesta" ng-show="game.ejercicio.estado.respondio" style="text-align: center"></h4> -->
 	</div>
 
 	<div class="container">
 		<div class="row">
 			<div class="btn-group btn-group-justified col-xs-9" role="group" aria-label="...">
 				<div class="btn-group" role="group" ng-repeat="answer in actualProblem.answerOptions">
-					<button ng-click="response(answer)" class="btn btn-primary">{{answer}}</button>
+					<button ng-click="response(answer)" class="btn btn-primary" mathjax-bind="answer"></button>
 				</div>
 			</div>
 		</div>
