@@ -1,6 +1,37 @@
 <style type="text/css">
 	.problem-expression{
-		text-align: center
+		text-align: center;
+	}
+	a{
+		color: white;
+	}
+	a:hover {
+		cursor:pointer;
+	}
+
+	.btn-black{
+		color: white;
+		background-color: black;
+	}
+	.btn.black:hover{
+		color: black;
+		background-color: white;		
+	}
+	.btn.black:active{
+		color: white;
+		background-color: black;		
+	}
+	.btn.black:link{
+		color: white;
+		background-color: black;		
+	}
+	.btn.black:visited{
+		color: white;
+		background-color: black;		
+	}
+	.btn.black:focus{
+		color: white;
+		background-color: black;		
 	}
 </style>
 
@@ -33,53 +64,51 @@
 </div>
 
 <div ng-if="instance.status == 'SUCCESS'">
-	<nav class="navbar navbar-default">
+
+	
+
+	<nav class="navbar navbar-inverse">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Nivel: {{gameStatus.levelCount}} : {{gameStatus.problemCount}}</a>
+			<a class="navbar-brand" href="#" ng-repeat="live in gameStatus.lives" style="margin: -5px">	<img src="../assets/heart.png"> </a>
+			<a class="navbar-brand" href="#">Tiempos: {{gameStatus.problemTime}} : {{gameStatus.time}}</a> 
+		</div>
+	</nav>
+
+<!--
+	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
-
-			<div class="navbar-header">
-					<a class="navbar-brand" href="#">Nivel: {{gameStatus.levelCount}} : {{gameStatus.problemCount}}</a>
-					<a class="navbar-brand" href="#" ng-repeat="live in gameStatus.lives">
-						<img src="../assets/heart.png" >
-					</a>
-
- 				<a class="navbar-brand" href="#">Tiempos: {{gameStatus.problemTime}} : {{gameStatus.time}}</a> 
-			</div>
-
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="active">
-						<a>Puntos: {{gameStatus.score}} <span class="sr-only">(current)</span></a>
-					</li>	
-									
-					<li class="active">
-						<a>Tiempos: {{gameStatus.problemTime}} : {{gameStatus.time}}<span class="sr-only">(current)</span></a>
-					</li>
-									
-						<a ng-repeat="lives in game.vidas">
-							<img src="../assets/heart.png" >
-							</a>
+						<a class="navbar-brand">Nivel: {{gameStatus.levelCount}} : {{gameStatus.problemCount}}</a>
+					</li>									
+					<li class="active" style="padding: 8px" ng-repeat="live in gameStatus.lives">
+						<img src="../assets/heart.png" height="30px" width="30px">
+					</li>									
+					<a class="active">
+						<a class="navbar-brand">Tiempos: {{gameStatus.problemTime}} : {{gameStatus.time}}</a> 
+					</a>
 				</ul>
-
 			</div>
-			<!-- /.navbar-collapse -->
 		</div>
-		<!-- /.container-fluid -->	
 	</nav>
-	
+-->	
+
+
 	<div class="jumbotron container-fluid" >
-<!-- 	style="text-align: center" -->
 		<h3 class="problem-expression" mathjax-bind="actualProblem.problemExpression" ></h3>
-<!-- 		<h4 mathjax-bind="game.ejercicio.respuesta" ng-show="game.ejercicio.estado.respondio" style="text-align: center"></h4> -->
 	</div>
 
 	<div class="container">
 		<div class="row">
 			<div class="btn-group btn-group-justified col-xs-9" role="group" aria-label="...">
 				<div class="btn-group" role="group" ng-repeat="answer in actualProblem.answerOptions">
-					<button ng-click="response(answer)" class="btn btn-primary" mathjax-bind="answer"></button>
-				</div>
+					<button ng-click="response(answer)" class="btn btn-black" mathjax-bind="answer"></button>
+				</div>	
 			</div>
 		</div>
 	</div>
-	
+
 </div>
+	

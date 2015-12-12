@@ -74,7 +74,7 @@ public class Problem {
 	}
 
 	public String getProblemExpression(){
-		return problemExpression.runOn(operationNode) + " = ?";
+		return problemExpression.runOn(operationNode) + " = ";
 	}
 	
 	public String getSolvedExpression(){	
