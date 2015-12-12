@@ -14,6 +14,29 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
 				$scope.instances = response;
 			});
 		}
+
+		$scope.del = function(instanceId){
+			game.instance.one.del(instanceId).then(function(response){
+				if(response.status == 'SUCCESS'){
+					$log.info("delete OK");
+				}else{
+					$log.error(response.message);
+				}
+			});
+		};
+
+		$scope.erase = function(instance){
+			instance.players = [];
+			game.instance.one.put(instance).then(function(response){
+				if(response.status == 'SUCCESS'){
+					$log.info("players remove OK");
+				}else{
+					$log.error(response.message);
+				}
+			});
+		};
+
+
 	
 		$scope.showStats = function(instanceId){
 			$log.info(instanceId);
@@ -69,9 +92,6 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
 		}
 		
 		
-
-		
-		
 		
 		$scope.options = {
 	            chart: {
@@ -106,18 +126,6 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
 	                values: [ ]
 	            }
 	        ]
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		

@@ -5,7 +5,9 @@
 
 	<ul class="list-group">
 		<li ng-repeat="instance in instances" class="list-group-item">
-			<a class="badge glyphicon glyphicon-trash" ng-click="joinGame(player.name, instance)"> </a>
+			
+			<a class="badge glyphicon glyphicon-trash" ng-click="del(instance._id)"> </a>
+			<a class="badge glyphicon glyphicon-erase" ng-click="erase(instance)"> </a>
 			<a class="badge glyphicon glyphicon-stats" ng-click="showStats( instance._id )"> </a>		
 			
 			{{instance.gameName}}
@@ -16,7 +18,4 @@
 
 <div ng-if="instance.status == 'SUCCESS'">
     <nvd3 options="options" data="data"></nvd3>
-
-<!-- 	instance -->
-<!-- 	{{data}} -->
 </div>

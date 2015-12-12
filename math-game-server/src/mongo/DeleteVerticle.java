@@ -30,6 +30,30 @@ public class DeleteVerticle extends AbstractVerticle {
 			});
 
 		});
+		
+		
+		
+		MessageConsumer<String> remove = vertx.eventBus().consumer("remove");
+
+		remove.handler(message -> {
+			System.out.println("DeleteVerticle remove");			
+			
+			JsonObject request = new JsonObject(message.body().toString());
+			
+			client.remove(request.getString("collection"), request.getJsonObject("query"), res -> {
+				JsonObject response = new JsonObject();
+				if (res.succeeded()) {
+					response.put("status", "SUCCESS");					
+				} else {
+					response.put("status", "FAIL").put("message", res.cause());
+				}
+				message.reply(response);
+
+			});
+
+		});
+		
+		
 
 	}
 }

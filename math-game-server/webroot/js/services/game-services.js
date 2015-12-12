@@ -74,15 +74,15 @@ define(["angular", "js/services"], function(angular, services){
 					get : function(gameId, instanceId, type){
 						return $http.get(instanceOnePath+"?gameId="+gameId+"&instanceId="+instanceId+"&type="+type).then(thenFunction);					
 					},
-					post : function(gameConfig){
-						console.log(gameConfig);
-						return $http.post(instanceOnePath,gameConfig).then(thenFunction);					
+					post : function(instanceConfig){
+						console.log(instanceConfig);
+						return $http.post(instanceOnePath,instanceConfig).then(thenFunction);					
 					},
-					put : function(){
-						return $http.put(instanceOnePath).then(thenFunction);					
+					put : function(instanceConfig){
+						return $http.put(instanceOnePath,instanceConfig).then(thenFunction);					
 					},
-					del : function(){
-						return $http.delete(instanceOnePath).then(thenFunction);					
+					del : function(instanceId){
+						return $http.delete(instanceOnePath+"?instanceId="+instanceId).then(thenFunction);					
 					}
 				}
 			}

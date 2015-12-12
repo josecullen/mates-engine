@@ -1,0 +1,80 @@
+<meta charset="UTF-8">
+
+{{gameStatus}}
+
+<div class="input-group">
+	<span class="input-group-addon">Nombre de la Partida: </span> <input type="text" ng-model="game.name" class="form-control">
+</div>
+<div class="input-group">
+	<span class="input-group-addon">Tipo de Partida: </span> 
+	<bs-dropdown data-menu-type="button" select-val="game.type = selectedVal" preselected-item=" game.type " data-dropdown-data="statuses"></bs-dropdown>{{game.type}}
+</div>
+
+
+
+
+
+<br>
+<br>
+
+<div class="jumbotron" ng-repeat="level in game.levels track by $index">
+	<h4>Nivel {{$index}}</h4>
+	<div class="row">
+		<div class="btn-group btn-group-justified col-xs-9" role="group" aria-label="...">
+			<div class="btn-group" role="group">
+				<span class="input-group-addon">Expresión</span> <input class="form-control" ng-model="level.form" data-toggle="tooltip" data-placement="bottom"
+					title="Forma de la expresión">
+			</div>
+			<div class="btn-group" role="group">
+				<span class="input-group-addon">Mínimo</span> <input type="number" class="form-control" ng-model="level.min" data-toggle="tooltip"
+					data-placement="bottom" title="Mínimo valor de una variable">
+			</div>
+			<div class="btn-group" role="group">
+				<span class="input-group-addon">Máximo</span> <input type="number" class="form-control" ng-model="level.max" data-toggle="tooltip"
+					data-placement="bottom" title="Máximo valor de una variable">
+			</div>
+			<div class="btn-group" role="group">
+				<span class="input-group-addon">Signo</span> <input type="number" class="form-control" ng-model="level.probablySign" data-toggle="tooltip"
+					data-placement="bottom" title="Probabilidad de signo (-)">
+			</div>
+			<div class="btn-group" role="group">
+				<span class="input-group-addon">Operaciones</span> <input class="form-control" ng-model="level.operations" data-toggle="tooltip"
+					data-placement="bottom" title="Operaciones posibles">
+			</div>
+			<div class="btn-group" role="group">
+				<span class="input-group-addon">Divisores</span> <input type="number" class="form-control" ng-model="level.divisionFactor" data-toggle="tooltip"
+					data-placement="bottom" title="Factor de división">
+			</div>
+			<div class="btn-group" role="group">
+				<span class="input-group-addon">Cantidad</span> <input type="number" class="form-control" ng-model="level.repetitions" data-toggle="tooltip"
+					data-placement="bottom" title="Repeticiones del ejercicios en el juego">
+			</div>
+		</div>
+		<div class="col-xs-2">
+			<div class="btn-group" role="group">
+				<button ng-click="addLevel()" class="btn btn-primary glyphicon glyphicon-plus"></button>
+			</div>
+			<div class="btn-group" role="group">
+				<button ng-click="removeLevel($index)" class="btn btn-danger glyphicon glyphicon-minus"></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+	<div class="container">
+		<button ng-if="gameStatus != 'CREATED'" ng-click="submitGame()" class="btn btn-success col-xs-4 col-md-offset-4" ng-disabled="game.name.length < 5" >¡Crear juego!</button>	
+		<div class="alert alert-success" ng-if="gameStatus == 'CREATED'">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> 
+			<strong>¡Excelente!</strong> Su juego ha sido creado satisfactoriamente 
+			<br>
+			<a href="#/admin-game-edit/new" class="btn btn-success">Nuevo Juego</a>
+			<a href="#/admin-game-list" class="btn btn-success">Administrar Juegos</a>
+		</div>
+	</div>
+</nav>
+

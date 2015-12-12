@@ -111,13 +111,35 @@ public class OneInstanceHandler {
 	public static Handler<RoutingContext> PUT = handler ->{
 		
 		handler.request().bodyHandler(data ->{
-			JsonObject gameJson = new JsonObject(data.toString());
-
+			System.out.println("data" +data.toString());
+			JsonObject instance = new JsonObject(data.toString()).put("collection", "instance");
+			
+			handler.vertx().eventBus().send("save", instance.encode(), ar ->{
+		    	 if (ar.succeeded()) {
+		    		handler.response().end(ar.result().body().toString());		    		    
+		    	 }else{
+		    		 System.out.println("problem . . . "+ar.cause());
+		    		 handler.response().end(ar.result().body().toString());
+		    	 }
+		    });
+			
 		});
+
 
 	};
 	
 	public static Handler<RoutingContext> DELETE = handler ->{
-
+		String instanceId = handler.request().params().get("instanceId");
+		
+		JsonObject deleteRequest = new JsonObject()
+			.put("collection", "instance")
+			.put("query", new JsonObject().put("_id", instanceId));
+		
+		handler.vertx().eventBus().send("remove", deleteRequest.encode(), ar ->{
+			if(ar.succeeded()){
+				handler.response().end(ar.result().body().toString());
+			}
+		});		
+		
 	};
 }
