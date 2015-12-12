@@ -1,8 +1,11 @@
 define(["angular", "js/controllers", 'js/services/service', 'js/services/game-services'], function(angular, controllers){
 
-	controllers.controller('gameController', ['$scope', 'game','$location', '$interval', '$log', '$routeParams', 
-        function($scope, game, $location, $interval, $log, $routeParams){
+	controllers.controller('gameController', 
+        ['$scope', 'game','$location', '$interval', '$log', '$routeParams', '$rootScope',
+        function($scope, game, $location, $interval, $log, $routeParams, $rootScope ){
     	console.log($routeParams.gameId);
+
+        $rootScope.showNav = true;
 
         if($routeParams.gameId == "new"){
             $scope.gameStatus = 'NOT CREATED';

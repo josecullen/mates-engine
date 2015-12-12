@@ -12,9 +12,9 @@
 
 <body>
 	<div class="container" ng-controller="gameController">
+	
 
-
-		<nav class="navbar navbar-default navbar-fixed-top">
+		<nav class="navbar navbar-default navbar-fixed-top" ng-show="showNav">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="#">Juegos de Aritmética</a>
@@ -38,20 +38,13 @@
 						<li><a href="#/player-select-instance">¡Jugar!</a></li>
 						
 					</ul>
-
-
-				</div>
-				<!-- /.navbar-collapse -->
-
-
-			</div>
-			<!-- /.container-fluid -->
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
 		</nav>
-
 		<br>
-		<br>
-		<br>
-		<br>
+		<br ng-show="showNav">
+		<br ng-show="showNav">
+		<br ng-show="showNav">
 
 
 		<ng-view></ng-view>

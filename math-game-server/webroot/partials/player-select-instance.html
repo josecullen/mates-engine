@@ -1,3 +1,9 @@
+<style type="text/css">
+	.problem-expression{
+		text-align: center
+	}
+</style>
+
 <meta charset="UTF-8">
 <div ng-if="instance.status == 'NOT_SELECTED'">
 
@@ -72,9 +78,9 @@
 		<!-- /.container-fluid -->	
 	</nav>
 	
-	<div class="jumbotron" style="height: 30px">
+	<div class="jumbotron container-fluid" >
 <!-- 	style="text-align: center" -->
-		<h3 mathjax-bind="actualProblem.problemExpression" ></h3>
+		<h3 class="problem-expression" mathjax-bind="actualProblem.problemExpression" ></h3>
 <!-- 		<h4 mathjax-bind="game.ejercicio.respuesta" ng-show="game.ejercicio.estado.respondio" style="text-align: center"></h4> -->
 	</div>
 

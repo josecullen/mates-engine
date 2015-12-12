@@ -1,11 +1,22 @@
 define(["angular", "js/controllers", 'js/services/service', 'js/services/game-services'], function(angular, controllers){
 	
-	controllers.controller('playerCtrl', ['$scope', 'game','$location', '$interval', '$log', function($scope, game, $location, $interval, $log){
+	controllers.controller('playerCtrl', ['$scope', 'game','$location', '$interval', '$log', '$rootScope',
+        function($scope, game, $location, $interval, $log, $rootScope){
+
     	$scope.instances = [];
     	
     	$scope.instance = {
     		status : "NOT_SELECTED"
     	};
+
+        $scope.$watch('instance.status', function(newValue, oldValue) {
+            if(newValue == 'GAME_OVER' || newValue == 'NOT_SELECTED'){
+                $rootScope.showNav = true;
+            }else{
+                $rootScope.showNav = false;
+            }
+        });
+
     	
     	$scope.player = { name: ""};
     	
