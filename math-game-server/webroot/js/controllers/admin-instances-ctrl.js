@@ -39,11 +39,14 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
 
 	
 		$scope.showStats = function(instanceId){
-			$log.info(instanceId);
-			$scope.instance.instanceId = instanceId;
-			$scope.openSocket();
+			$location.path("/admin-instance-stats/"+instanceId);
+
+
+			//$log.info(instanceId);
+			//$scope.instance.instanceId = instanceId;
+			//$scope.openSocket();
 		};
-		
+		/*
 		$scope.sock;
 
 		$scope.openSocket = function(){
@@ -128,7 +131,7 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
 	        ]
 		
 		
-		
+		*/
 		
 		$scope.refreshInstances();
 	}]);

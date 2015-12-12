@@ -13,8 +13,9 @@
 					templateUrl : 'partials/admin-game-list.html',
 					controller: 'gameListCtrl'
 				})
-				.when('/admin-instance-new', {
-					templateUrl : 'partials/admin-instance-new.html'
+				.when('/admin-instance-stats/:instanceId', {
+					templateUrl : 'partials/admin-instance-stats.html',
+					controller: 'adminInstanceStats'
 				})
 				.when('/admin-instance-list', {
 					templateUrl : 'partials/admin-instance-list.html',

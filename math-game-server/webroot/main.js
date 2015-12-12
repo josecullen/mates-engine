@@ -50,6 +50,7 @@
 								'js/controllers/admin-ctrl',
 								'js/controllers/admin-game-list-ctrl',
 								'js/controllers/admin-instances-ctrl',
+								'js/controllers/admin-instance-stats',								
 								'js/controllers/player-ctrl',
 								'angular-route', 
 								'bootstrap' ]
