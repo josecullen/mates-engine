@@ -30,8 +30,8 @@ define(["angular", "js/services"], function(angular, services){
 					console.log("gameConf "+gameConf);
 					return $http.post(onePath, gameConf);					
 				},
-				put : function(){
-					return $http.put(onePath).then(thenFunction);					
+				put : function(gameConf){
+					return $http.put(onePath,gameConf).then(thenFunction);					
 				},
 				del : function(gameId){
 					return $http.delete(onePath+"?gameId="+gameId).then(thenFunction);					

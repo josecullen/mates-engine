@@ -1,7 +1,20 @@
 define(["angular", "js/controllers", 'js/services/service', 'js/services/game-services'], function(angular, controllers){
 
-	controllers.controller('gameController', ['$scope', 'game','$location', '$interval', '$log', function($scope, game, $location, $interval, $log){
-    	$scope.gameStatus = 'NOT CREATED';
+	controllers.controller('gameController', ['$scope', 'game','$location', '$interval', '$log', '$routeParams', 
+        function($scope, game, $location, $interval, $log, $routeParams){
+    	console.log($routeParams.gameId);
+
+        if($routeParams.gameId == "new"){
+            $scope.gameStatus = 'NOT CREATED';
+        }else{
+            $scope.gameStatus = 'EDITED';
+            $log.info('Request for existing game '+$routeParams.gameId);
+            game.one.get($routeParams.gameId).then(function(response){
+                $log.info(response);
+                $scope.game = response;
+            });
+        }
+
     	
     	$scope.statuses = [{
             id: "MULTI_INSTANCE_GAME",
@@ -11,7 +24,7 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
             name: "Juego de una instancia"        
         }, {
             id: "TOURNAMENT",
-            name: "Tournament"        
+            name: "Torneo"        
         }];
     	
     	
@@ -53,9 +66,18 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     	$scope.submitGame = function(){
     		$log.info("submit game");
     		console.log($scope.game);
-    		game.one.post($scope.game).then(function(response){
-    			$scope.gameStatus = 'CREATED';
-    		});
+    		
+            if($scope.gameStatus == 'NOT CREATED'){
+                game.one.post($scope.game).then(function(response){
+                    $scope.gameStatus = 'CREATED';
+                });
+            }else{
+                game.one.put($scope.game).then(function(response){
+                    $scope.gameStatus = 'CREATED';
+                    $scope.game._id = $routeParams.gameId;
+                });
+            }
+            
     	};
 
     	

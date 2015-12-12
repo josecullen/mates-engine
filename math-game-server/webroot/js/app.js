@@ -5,8 +5,8 @@
 		var app = angular.module('app', [ 'controllers', 'ngRoute', 'nvd3' ]);
 		app.config([ '$routeProvider', function($routeProvider) {
 			$routeProvider
-				.when('/admin-game-new', {
-					templateUrl : 'partials/admin-game-new.html',
+				.when('/admin-game-edit/:gameId', {
+					templateUrl : 'partials/admin-game-edit.html',
 					controller: 'gameController'
 				})
 				.when('/admin-game-list', {

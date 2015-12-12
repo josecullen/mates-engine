@@ -15,7 +15,38 @@ public class UpdateVerticle extends AbstractVerticle {
 		
 		MongoClient client = MongoClient.createShared(vertx, mongoConfig);
 		
-		MessageConsumer<String> pushPlayer = vertx.eventBus().consumer("push-player");
+		
+		MessageConsumer<String> save = vertx.eventBus().consumer("save");
+		
+		save.handler(message ->{
+			JsonObject params = new JsonObject(message.body().toString());
+
+			String collection = params.getString("collection");
+			
+			params.remove("collection");
+			
+			client.save(collection, params, res->{
+				if (res.succeeded()) {
+					  
+					  JsonObject result = new JsonObject()
+								.put("status", "SUCCESS")
+								.put("message", "Se ha actualizado el jugador satisfactoriamente");
+								
+
+					  message.reply(result.encode());				    
+				  } else {
+					  System.out.println(res.cause());
+					  message.reply(res.cause());
+				  }
+			});
+			
+		});
+		
+		
+		
+		
+		MessageConsumer<String> pushPlayer = vertx.eventBus().consumer("push-player");	
+		
 		
 		pushPlayer.handler(message -> {
 			
