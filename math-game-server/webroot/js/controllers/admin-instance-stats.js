@@ -5,6 +5,11 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
         
         console.log("adminInstanceStats "+ $routeParams.instanceId);
         
+        $scope.firstPosition = {
+            label : "",
+            value : 0
+        };
+
 		$scope.instance = {
         	instanceId : $routeParams.instanceId
         };
@@ -32,14 +37,28 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
                 $log.info('message', e.data);
                 $scope.$apply(function() {
                     $scope.instance.data = JSON.parse(e.data);
+
+                    $scope.candidateToFirst = {
+                        "label": $scope.firstPosition.label,
+                        "value": $scope.firstPosition.value
+                    }
+
                     $scope.instance.data.players.forEach(function(player) {
                         if (typeof player.scoring != 'undefined') {
-                            $scope.data[0].values.push({
+                            var newPlayer = {
                                 "label": player.name,
                                 "value": player.scoring.score
-                            });
+                            }
+
+                            if($scope.candidateToFirst.value < newPlayer.value){
+                                $scope.candidateToFirst = newPlayer;
+                            }
+
+                            $scope.data[0].values.push(newPlayer);
                         }
                     });
+
+                    $scope.firstPosition = $scope.candidateToFirst;
                 });
             };
         
