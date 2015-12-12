@@ -1,12 +1,18 @@
 package math.arithmetic.problem;
 
+import java.util.List;
+
 import math.arithmetic.broadcast.ArithmeticBroadcastUtil;
 import math.arithmetic.operand.ArithmeticVariable;
 import math.arithmetic.operand.ArithmeticVariable.RandomVariableInstancer;
+import math.arithmetic.operation.DivisionOperation;
 import math.arithmetic.operation.OperationUtil.RandomOperationBuilder;
 import math.arithmetic.parser.ArithmeticParser;
+import math.arithmetic.tree.ArithmeticOperandNode;
 import math.arithmetic.tree.ArithmeticOperationNode;
+import math.core.tree.OperationNode;
 import math.core.tree.broadcast.BroadcastAction;
+import math.core.tree.broadcast.BroadcastType;
 
 public class Problem {
 	ArithmeticOperationNode operationNode;
@@ -81,6 +87,22 @@ public class Problem {
 			variable.set(randomVariableInstancer.getInstance(variable.getVariable()));
 		});
 		br.setOperations(randomOperationBuilder);
+		
+		BroadcastAction<String> divisionOperations = new BroadcastAction<String>();
+		
+		divisionOperations.setOperationAction(operationNode ->{
+			if(operationNode.getOperation() instanceof DivisionOperation){
+				if(operationNode.rightNode instanceof ArithmeticOperandNode){
+					ArithmeticOperandNode rightOperand = (ArithmeticOperandNode)operationNode.rightNode;
+					if(rightOperand.getVariable().getValue() == 0){
+						rightOperand.getVariable().setValue(1.0);
+					}
+				}
+			}
+			return "";
+			
+		});
+		divisionOperations.runOn(operationNode);
 	}
 	
 	public String getAnswer(){

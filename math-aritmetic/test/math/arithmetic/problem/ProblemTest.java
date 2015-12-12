@@ -90,5 +90,22 @@ public class ProblemTest {
 		assertEquals(400, countSign, 100);
 		
 	}
+	
+	@Test
+	public void testDivideCero(){
+		RandomVariableInstancer rvi = new RandomVariableInstancer().max(3).min(0).probablySign(0.1);
+		RandomOperationBuilder rob = new RandomOperationBuilder().buildWithProbablySign(0.2).buildWithThisOperations("/");
+		
+		Problem problem = new Problem("(a + b)", rvi, rob );
+		
+		for(int i = 0; i < 1000; i++){
+			problem.renew();
+			System.out.println(problem.getProblemExpression());
+
+			System.out.println(problem.getSolvedExpression());	
+		}
+		
+		
+	}
 
 }

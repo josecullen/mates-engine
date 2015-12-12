@@ -9,6 +9,7 @@ import math.arithmetic.operation.OperationUtil;
 import math.arithmetic.operation.OperationUtil.RandomOperationBuilder;
 import math.arithmetic.tree.ArithmeticOperandNode;
 import math.core.tree.MathNode;
+import math.core.tree.OperationNode;
 import math.core.tree.broadcast.BroadcastAction;
 import math.core.tree.broadcast.BroadcastType;
 
@@ -32,6 +33,17 @@ public class ArithmeticBroadcastUtil {
 		
 		return getVariables.runOn(tree);
 	}
+	
+//	@SuppressWarnings("unchecked")
+//	public List<OperationNode<Double>> getOperationsBroadcast(){
+//		BroadcastAction<OperationNode<Double>> getVariables = new BroadcastAction<OperationNode<Double>>(BroadcastType.OPERATIONS);
+//		
+//		getVariables.setOperationAction(operationNode ->{
+//			
+//		});
+//		
+//		return getVariables.runOn(tree);	
+//	}
 	
 	@SuppressWarnings("unchecked")
 	public double getResult(){
@@ -114,6 +126,8 @@ public class ArithmeticBroadcastUtil {
 		});		
 		setOperations.runOn(tree);		
 	}
+	
+	
 	
 	
 	
