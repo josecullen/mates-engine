@@ -37,17 +37,12 @@
 		<div class="container-fluid">
 
 			<div class="navbar-header">
-<!-- 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> -->
-<!-- 					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> -->
-<!-- 				</button> -->
-<!-- 				<a class="navbar-brand hidden-xs" href="#">Nivel: {{gameStatus.levelCount}}</a> -->
-<!-- 				<a class="navbar-brand hidden-xs" href="#">Problema: {{gameStatus.problemCount}}</a>		 -->
 					<a class="navbar-brand" href="#">Nivel: {{gameStatus.levelCount}} : {{gameStatus.problemCount}}</a>
 					<a class="navbar-brand" href="#" ng-repeat="live in gameStatus.lives">
-						<img src="../assets/heart.png">
+						<img src="../assets/heart.png" >
 					</a>
 
-<!-- 				<a class="navbar-brand" href="#">Tiempos: {{gameStatus.problemTime}} : {{gameStatus.time}}</a> -->
+ 				<a class="navbar-brand" href="#">Tiempos: {{gameStatus.problemTime}} : {{gameStatus.time}}</a> 
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -60,18 +55,11 @@
 						<a>Tiempos: {{gameStatus.problemTime}} : {{gameStatus.time}}<span class="sr-only">(current)</span></a>
 					</li>
 									
-<!-- 					<li > -->
 						<a ng-repeat="lives in game.vidas">
 							<img src="../assets/heart.png" >
 							</a>
-<!-- 					</li> -->
 				</ul>
-<!-- 				<ul class="nav navbar-nav navbar-right"> -->
-<!-- 					<li class="active"><a>Tiempos: {{gameStatus.problemTime}} : {{gameStatus.time}}<span class="sr-only">(current)</span></a></li> -->
-				
-<!-- 					<li class="active"><a>Tiempo respuesta: {{gameStatus.problemTime}}<span class="sr-only">(current)</span></a></li> -->
-<!-- 					<li class="active"><a>Tiempo total: {{gameStatus.time}}<span class="sr-only">(current)</span></a></li> -->
-<!-- 				</ul> -->
+
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
