@@ -1,6 +1,8 @@
 define(["angular", "js/controllers", 'js/services/service', 'js/services/game-services', 'lib/sockjs-1.0.3'], function(angular, controllers){
 	
-	controllers.controller('adminInstancesCtrl', ['$scope', 'game','$location', '$interval', '$log', function($scope, game, $location, $interval, $log){
+	controllers.controller('adminInstancesCtrl', 
+		['$scope', 'game','$location', '$interval', '$log', '$route',
+		function($scope, game, $location, $interval, $log, $route){
 
 		console.log("adminInstanceCtrl");
 			
@@ -19,6 +21,7 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
 			game.instance.one.del(instanceId).then(function(response){
 				if(response.status == 'SUCCESS'){
 					$log.info("delete OK");
+					$route.reload();
 				}else{
 					$log.error(response.message);
 				}
