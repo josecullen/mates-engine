@@ -1,7 +1,8 @@
 define(["angular", "js/controllers", 'js/services/service', 'js/services/game-services'], function(angular, controllers){
 	
-	controllers.controller('playerCtrl', ['$scope', 'game','$location', '$interval', '$log', '$rootScope',
-        function($scope, game, $location, $interval, $log, $rootScope){
+	controllers.controller('playerCtrl', 
+        ['$scope', 'game','$location', '$interval', '$log', '$rootScope', '$timeout',
+        function($scope, game, $location, $interval, $log, $rootScope, $timeout){
 
     	$scope.instances = [];
     	
@@ -20,17 +21,7 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     	
     	$scope.player = { name: ""};
     	
-    	$scope.gameStatus = {
-//    		id : "",
-//    		instanceId : "",
-//    		problemCount: 0,
-//    		corrects: 0,
-//    		incorrects: 0,    	
-//    		score: 0,		
-//    		time: 60,
-//    		problemTime: 0,
-//    		levelCount: 0
-    	};
+    	$scope.gameStatus = {};
     	
     	$scope.actualProblem;
     	
@@ -77,7 +68,14 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     		}
     		$scope.gameStatus.problemTime = 0;
     		$scope.sendScoring();
-    		$scope.nextProblem();    		
+
+            $scope.gameStatus.problemStatus = "SHOW_SOLUTION";
+
+            $timeout(function(){
+                $scope.gameStatus.problemStatus = "SHOW_PROBLEM";
+                $scope.nextProblem();           
+            }, 1500);
+    		
     	};
     	
     	$scope.sendScoring = function(){
@@ -115,6 +113,7 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
 		$scope.joinGame = function(name, instance){
 			$scope.gameStatus = {
 		    		id : "",
+                    problemStatus: "SHOW_PROBLEM",
 		    		instanceId : "",
 		    		lives: [1,2,3],
 		    		problemCount: 0,

@@ -7,6 +7,7 @@
 					// General dependencies
 					'angular' : 'lib/angular/angular',
 					'angular-route' : 'lib/angular/angular-route',
+					'angular-animate' : 'lib/angular/angular-animate',
 					'jquery-ui' : 'lib/jquery/jquery-ui-1.11.4-custom/jquery-ui.min',
 					'bootstrap' : 'lib/bootstrap/js/bootstrap.min',
 					'angular-nvd3' : 'lib/angular-nvd3-1.0.5/dist/angular-nvd3',
@@ -21,6 +22,9 @@
 				shim : {
 					'angular' : {
 						exports : 'angular'
+					},
+					'angular-animate': {
+						deps : ['angular']
 					},
 					'jquery-ui' : {
 						deps : [ '/lib/jquery/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js' ]
@@ -39,6 +43,7 @@
 					
 					'app' : {
 						deps : ['angular', 
+								'angular-animate',
 						        'nvd3',
 						        'd3',
 						        'angular-nvd3',

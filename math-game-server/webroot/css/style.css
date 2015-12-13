@@ -1,3 +1,75 @@
+a {
+    color: white;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
 body {
     background-color: #eee;
+    text-align: center;
+}
+
+.well{
+    background-color: #FFC35A;
+    border : none;
+}
+.well > h3 {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
+
+
+.first-position-data{
+
+    display: inline;
+}
+
+.problem-expression {
+    text-align: center;
+}
+
+.btn-black {
+    color: white;
+    background-color: black;
+}
+
+.btn.black:hover {
+    color: black;
+    background-color: white;
+}
+
+.btn.black:active {
+    color: white;
+    background-color: black;
+}
+
+.btn.black:link {
+    color: white;
+    background-color: black;
+}
+
+.btn.black:visited {
+    color: white;
+    background-color: black;
+}
+
+.btn.black:focus {
+    color: white;
+    background-color: black;
+}
+
+.btn-green {
+    color: white;
+    background-color: green;
+}
+.btn-red {
+    color: white;
+    background-color: #C10D0D;
 }

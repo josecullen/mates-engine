@@ -1,7 +1,7 @@
 define(["angular", "js/controllers", 'js/services/service', 'js/services/game-services', 'lib/sockjs-1.0.3'], function(angular, controllers) {
     controllers.controller('adminInstanceStats', 
-    	['$scope', 'game', '$location', '$interval', '$log', '$routeParams',
-    	function($scope, game, $location, $interval, $log, $routeParams) {
+    	['$scope', 'game', '$location', '$interval', '$log', '$routeParams', '$timeout',
+    	function($scope, game, $location, $interval, $log, $routeParams, $timeout) {
         
         console.log("adminInstanceStats "+ $routeParams.instanceId);
         
@@ -58,7 +58,26 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
                         }
                     });
 
-                    $scope.firstPosition = $scope.candidateToFirst;
+                    if($scope.candidateToFirst.label != $scope.firstPosition.label){
+                        
+                        $scope.firstPositionNameClass = 'change-first-position';
+                        $scope.firstPositionScoreClass = 'change-first-position';
+                        
+                        $timeout(function(){
+                            $scope.firstPosition = $scope.candidateToFirst;
+                            $scope.firstPositionNameClass = '';
+                            $scope.firstPositionScoreClass = '';
+                        }, 750);
+
+                    }else if($scope.candidateToFirst.value != $scope.firstPosition.value){
+                        $scope.firstPositionScoreClass = 'change-first-position';
+                        
+                        $timeout(function(){
+                            $scope.firstPosition = $scope.candidateToFirst;
+                            $scope.firstPositionScoreClass = '';
+                        }, 750);
+                    }
+                    
                 });
             };
         
