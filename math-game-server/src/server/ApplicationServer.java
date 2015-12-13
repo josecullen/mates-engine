@@ -12,6 +12,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.MessageConsumer;
+import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.MongoClient;
@@ -78,6 +79,9 @@ public class ApplicationServer {
 		
 		
 		Router router = Router.router(vertx);
+		
+//		router.route().handler(io.vertx.ext.web.handler.CorsHandler.create("/").allowedMethod(HttpMethod.GET));
+		
 
 		router.route("/").handler(handler ->{
 			handler.response().sendFile("webroot/index.html");

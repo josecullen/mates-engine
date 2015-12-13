@@ -1,13 +1,12 @@
 <meta charset="UTF-8">
 
-{{gameStatus}}
 
 <div class="input-group">
 	<span class="input-group-addon">Nombre de la Partida: </span> <input type="text" ng-model="game.name" class="form-control">
 </div>
 <div class="input-group">
 	<span class="input-group-addon">Tipo de Partida: </span> 
-	<bs-dropdown data-menu-type="button" select-val="game.type = selectedVal" preselected-item=" game.type " data-dropdown-data="statuses"></bs-dropdown>{{game.type}}
+	<bs-dropdown data-menu-type="button" select-val="game.type = selectedVal" preselected-item=" game.type " data-dropdown-data="statuses"></bs-dropdown>
 </div>
 
 

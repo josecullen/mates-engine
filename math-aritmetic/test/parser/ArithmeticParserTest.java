@@ -15,22 +15,21 @@ public class ArithmeticParserTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void test() {
-//		OperationParser.setNewOperandFunction(expression ->{
-//			ArithmeticOperandNode node = new ArithmeticOperandNode();
-//			ArithmeticVariable variable = new ArithmeticVariable(expression);
-//			node.setVariable(variable);
-//			return node;
-//		});
-//		
-//		OperationParser.setNewOperationFunction(expression ->{
-//			ArithmeticOperationNode node = new ArithmeticOperationNode(OperationUtil.getInstanceFromExpression(expression));
-//			return node;
-//		});
+	public void testNormal() {
 		
 		OperationNode<Double> operation = (OperationNode<Double>)ArithmeticParser.getInstance().parse("(a + b) + (5 + 2)");
 		
-//		OperationNode<Double> operation = (OperationNode<Double>)OperationParser.parse("(a + b) + (5 + 2)");
+		ArithmeticBroadcastUtil br = new ArithmeticBroadcastUtil(operation);
+		System.out.println(br.getExpression());
+	}
+	/**
+	 * Error cuando la variable está pegada al operador
+	 */
+	@Test
+	public void test() {
+		
+		OperationNode<Double> operation = (OperationNode<Double>)ArithmeticParser.getInstance().parse("(a + b) + c");
+		
 		ArithmeticBroadcastUtil br = new ArithmeticBroadcastUtil(operation);
 		System.out.println(br.getExpression());
 	}

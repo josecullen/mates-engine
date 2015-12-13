@@ -131,6 +131,7 @@ public class Problem {
 	
 	private double getNoRepeatedAnswer(double[] answers){
 		double answer = br.getResult() + (randomVariableInstancer.getValueWithDivisionFactor(0,20) - 10);
+		System.out.println(br.getExpression());
 		for(Double ans : answers){
 			if(ans == answer){
 				answer = getNoRepeatedAnswer(answers);
