@@ -61,7 +61,7 @@ public class ArithmeticVariable implements Variable<Double> {
 		if(variable.getSign())
 			result = "-"+result;			
 		
-		return result;
+		return "{"+result+"}";
 	}
 	
 	public static String getValueString(Double value){
@@ -70,13 +70,10 @@ public class ArithmeticVariable implements Variable<Double> {
 		if(value % 1 == 0)
 			result = ""+value.intValue();
 		else{
-//			double trunc = truncateDecimals(3, value);		
-			
 			result = ""+"\\frac{"+getDividend(value)+"}{"+getDivisor(value)+"}";
-//			result = ""+value;
 		}
 		
-		return result;
+		return "{"+result+"}";
 	}
 	
 	public static int getDividend(double number){

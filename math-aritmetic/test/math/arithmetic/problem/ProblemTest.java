@@ -13,7 +13,7 @@ public class ProblemTest {
 	@Test
 	public void testProblemExpression() {
 		Problem problem = new Problem("a + b");
-		assertEquals("( 0 + 0 ) = ?", problem.getProblemExpression());
+		assertEquals("( 0 + 0 ) = ", problem.getProblemExpression());
 	}
 	
 	@Test

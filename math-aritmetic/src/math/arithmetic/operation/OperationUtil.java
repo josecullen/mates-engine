@@ -8,7 +8,7 @@ import math.core.operation.Operation;
 public class OperationUtil {		
 
 	public static Map<String, Operation<Double>> getOperationMap(){
-		return getOperationMap("-+*/");
+		return getOperationMap("-+*/^");
 	}
 	
 	public static Map<String, Operation<Double>> getOperationMap(String operationsPattern){
@@ -21,6 +21,8 @@ public class OperationUtil {
 			operations.put("*", new MultiplicationOperation());
 		if("/".matches("["+operationsPattern+"]"))
 			operations.put("/", new DivisionOperation());
+		if("^".matches("["+operationsPattern+"]"))
+			operations.put("^", new PowOperation());
 		
 		return operations;
 	}
@@ -31,7 +33,7 @@ public class OperationUtil {
 	
 	public static class RandomOperationBuilder{
 		private double probablySign = 0; // Por defecto no hay signo
-		private String operationsPattern = "+-/*";		
+		private String operationsPattern = "+-/*\\^";		
 		
 		public RandomOperationBuilder() {}
 		

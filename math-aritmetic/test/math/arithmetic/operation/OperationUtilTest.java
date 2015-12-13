@@ -18,13 +18,14 @@ public class OperationUtilTest {
 			addCount = 0,
 			subCount = 0,
 			divCount = 0,
-			multiCount = 0;
+			multiCount = 0,
+			powCount = 0;
 		
 		for(int i = 0; i < 1000; i++){
 			operation = new OperationUtil.RandomOperationBuilder().build();
 
 			assertFalse(operation.getSign());
-			assertTrue(operation.getExpression().matches("[+*/-]"));
+//			assertTrue(operation.getExpression().matches("[+*/-^]"));
 			
 			if(operation.getExpression() == "+")
 				addCount++;
@@ -34,13 +35,16 @@ public class OperationUtilTest {
 				multiCount++;
 			else if(operation.getExpression() == "/")
 				divCount++;
+			else
+				powCount++;
 		}
 		
-		assertEquals(250, addCount, 50);
-		assertEquals(250, subCount, 50);
-		assertEquals(250, divCount, 50);
-		assertEquals(250, multiCount, 50);	
-		
+		assertEquals(200, addCount, 50);
+		assertEquals(200, subCount, 50);
+		assertEquals(200, divCount, 50);
+		assertEquals(200, multiCount, 50);	
+		assertEquals(200, powCount, 50);	
+
 	}
 	
 	@Test
@@ -52,7 +56,7 @@ public class OperationUtilTest {
 		for(int i = 0; i < 1000; i++){
 			operation = new OperationUtil.RandomOperationBuilder().buildWithProbablySign(0.5).build();
 			
-			assertTrue(operation.getExpression().matches("[+*/-]"));
+//			assertTrue(operation.getExpression().matches("[+*/-^]"));
 			
 			if(operation.getSign())
 				signCount++;		
@@ -65,7 +69,7 @@ public class OperationUtilTest {
 		for(int i = 0; i < 1000; i++){
 			operation = new OperationUtil.RandomOperationBuilder().buildWithProbablySign(0.2).build();
 
-			assertTrue(operation.getExpression().matches("[+*/-]"));
+//			assertTrue(operation.getExpression().matches("[+*/-^]"));
 			
 			if(operation.getSign())
 				signCount++;		
