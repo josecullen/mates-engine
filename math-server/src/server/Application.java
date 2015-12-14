@@ -1,24 +1,24 @@
 package server;
 
+import game.ArithmeticGameMulti;
+import game.ArithmeticGameMulti.Player;
+import game.ArithmeticGameMulti.State;
+import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.StaticHandler;
-import math.arithmetic.operand.ArithmeticVariable.RandomVariableInstancer;
-import math.arithmetic.operation.OperationUtil.RandomOperationBuilder;
-import math.arithmetic.problem.Problem;
-import service.facade.ExerciseFacade;
-import service.facade.OperationFacade;
-import service.facade.ProblemFacade;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import game.ArithmeticGameMulti;
-import game.ArithmeticGameMulti.Player;
-import game.ArithmeticGameMulti.State;
-import io.vertx.core.Vertx;
+import math.arithmetic.problem.SimpleProblem;
+import service.facade.ExerciseFacade;
+import service.facade.OperationFacade;
+import service.facade.ProblemFacade;
+import builders.ArithmeticVariableBuilder;
+import builders.OperationBuilder;
 
 public class Application {
 	static int PORT = 8080;
@@ -63,9 +63,9 @@ public class Application {
 			double probablySign = Double.parseDouble(handler.request().getParam("probablySign"));	
 			int divisionFactor = Integer.parseInt(handler.request().getParam("divisionFactor"));
 			
-			RandomVariableInstancer randomVariableInstancer = new RandomVariableInstancer().max(max).min(min).probablySign(probablySign).divisionFactor(divisionFactor);
-			RandomOperationBuilder randomOperationBuilder = new RandomOperationBuilder().buildWithProbablySign(probablySign).buildWithThisOperations(operations);
-			Problem problem = new Problem(form, randomVariableInstancer, randomOperationBuilder);
+			ArithmeticVariableBuilder randomVariableInstancer = new ArithmeticVariableBuilder().max(max).min(min).probablySign(probablySign).divisionFactor(divisionFactor);
+			OperationBuilder randomOperationBuilder = new OperationBuilder().buildWithProbablySign(probablySign).buildWithThisOperations(operations);
+			SimpleProblem problem = new SimpleProblem(form, randomVariableInstancer, randomOperationBuilder);
 			problem.renew();
 			
 			

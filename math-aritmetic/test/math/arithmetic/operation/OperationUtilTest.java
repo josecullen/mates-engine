@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import builders.OperationBuilder;
 import math.core.operation.Operation;
 
 public class OperationUtilTest {
@@ -22,7 +23,7 @@ public class OperationUtilTest {
 			powCount = 0;
 		
 		for(int i = 0; i < 1000; i++){
-			operation = new OperationUtil.RandomOperationBuilder().build();
+			operation = new OperationBuilder().build();
 
 			assertFalse(operation.getSign());
 //			assertTrue(operation.getExpression().matches("[+*/-^]"));
@@ -54,7 +55,7 @@ public class OperationUtilTest {
 			signCount = 0;
 		
 		for(int i = 0; i < 1000; i++){
-			operation = new OperationUtil.RandomOperationBuilder().buildWithProbablySign(0.5).build();
+			operation = new OperationBuilder().buildWithProbablySign(0.5).build();
 			
 //			assertTrue(operation.getExpression().matches("[+*/-^]"));
 			
@@ -67,7 +68,7 @@ public class OperationUtilTest {
 		signCount = 0;
 		
 		for(int i = 0; i < 1000; i++){
-			operation = new OperationUtil.RandomOperationBuilder().buildWithProbablySign(0.2).build();
+			operation = new OperationBuilder().buildWithProbablySign(0.2).build();
 
 //			assertTrue(operation.getExpression().matches("[+*/-^]"));
 			
@@ -84,21 +85,21 @@ public class OperationUtilTest {
 		String operationsPattern = "+-";
 		
 		for(int i = 0; i < 1000; i++){
-			operation = new OperationUtil.RandomOperationBuilder().buildWithThisOperations(operationsPattern).build();
+			operation = new OperationBuilder().buildWithThisOperations(operationsPattern).build();
 			assertTrue(operation.getExpression().matches("["+operationsPattern+"]"));			
 		}
 		
 		operationsPattern = "-";
 		
 		for(int i = 0; i < 1000; i++){
-			operation = new OperationUtil.RandomOperationBuilder().buildWithThisOperations(operationsPattern).build();
+			operation = new OperationBuilder().buildWithThisOperations(operationsPattern).build();
 			assertTrue(operation.getExpression().matches("["+operationsPattern+"]"));			
 		}
 		
 		operationsPattern = "-+/";
 		
 		for(int i = 0; i < 1000; i++){
-			operation = new OperationUtil.RandomOperationBuilder().buildWithThisOperations(operationsPattern).build();
+			operation = new OperationBuilder().buildWithThisOperations(operationsPattern).build();
 			assertTrue(operation.getExpression().matches("["+operationsPattern+"]"));			
 		}
 		

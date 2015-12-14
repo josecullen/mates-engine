@@ -1,15 +1,15 @@
 package game;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import math.arithmetic.operand.ArithmeticVariable.RandomVariableInstancer;
-import math.arithmetic.operation.OperationUtil.RandomOperationBuilder;
-import math.arithmetic.problem.Problem;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import math.arithmetic.problem.SimpleProblem;
 import service.facade.ProblemFacade;
+import builders.ArithmeticVariableBuilder;
+import builders.OperationBuilder;
 
 public class ArithmeticGameMulti {
 	String name;
@@ -29,7 +29,7 @@ public class ArithmeticGameMulti {
 	}
 	
 	
-	public List<Problem> problems = new ArrayList<>();		
+	public List<SimpleProblem> problems = new ArrayList<>();		
 	public List<Player> players = new ArrayList<>();
 	
 	
@@ -70,9 +70,9 @@ public class ArithmeticGameMulti {
 		int divisionFactor = level.getInteger("divisionFactor");		
 		
 		for(int i = 0; i < level.getInteger("repetitions"); i++){
-			RandomVariableInstancer randomVariableInstancer = new RandomVariableInstancer().max(max).min(min).probablySign(probablySign).divisionFactor(divisionFactor);
-			RandomOperationBuilder randomOperationBuilder = new RandomOperationBuilder().buildWithProbablySign(probablySign).buildWithThisOperations(operations);
-			Problem problem = new Problem(expression, randomVariableInstancer, randomOperationBuilder);
+			ArithmeticVariableBuilder randomVariableInstancer = new ArithmeticVariableBuilder().max(max).min(min).probablySign(probablySign).divisionFactor(divisionFactor);
+			OperationBuilder randomOperationBuilder = new OperationBuilder().buildWithProbablySign(probablySign).buildWithThisOperations(operations);
+			SimpleProblem problem = new SimpleProblem(expression, randomVariableInstancer, randomOperationBuilder);
 			problem.renew();
 			problems.add(problem);
 		}		

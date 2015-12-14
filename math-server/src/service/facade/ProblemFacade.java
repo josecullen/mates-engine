@@ -3,20 +3,20 @@ package service.facade;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import math.arithmetic.operand.ArithmeticVariable.RandomVariableInstancer;
-import math.arithmetic.operation.OperationUtil.RandomOperationBuilder;
-import math.arithmetic.problem.Problem;
+import math.arithmetic.problem.SimpleProblem;
+import builders.ArithmeticVariableBuilder;
+import builders.OperationBuilder;
 
 public class ProblemFacade {
 	
-	public static JsonObject getProblemJson(String form, RandomVariableInstancer rvi, RandomOperationBuilder rob){
-		Problem problem = new Problem(form, rvi, rob);
+	public static JsonObject getProblemJson(String form, ArithmeticVariableBuilder rvi, OperationBuilder rob){
+		SimpleProblem problem = new SimpleProblem(form, rvi, rob);
 		problem.renew();
 		
 		return null;
 	}
 	
-	public static JsonObject parseProblemToJson(Problem problem){
+	public static JsonObject parseProblemToJson(SimpleProblem problem){
 //		System.out.println(problem);
 		JsonObject jsonProblem = new JsonObject();
 		

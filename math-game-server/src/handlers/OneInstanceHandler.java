@@ -1,13 +1,13 @@
 package handlers;
 
 
+import builders.ArithmeticVariableBuilder;
+import builders.OperationBuilder;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import math.arithmetic.operand.ArithmeticVariable.RandomVariableInstancer;
-import math.arithmetic.operation.OperationUtil.RandomOperationBuilder;
-import math.arithmetic.problem.Problem;
+import math.arithmetic.problem.SimpleProblem;
 import service.facade.ProblemFacade;
 
 public class OneInstanceHandler {
@@ -82,18 +82,18 @@ public class OneInstanceHandler {
 			JsonArray instanceProblems = new JsonArray();
 
 			JsonObject level = (JsonObject)value;
-			RandomVariableInstancer rvi = 
-					new RandomVariableInstancer()
+			ArithmeticVariableBuilder rvi = 
+					new ArithmeticVariableBuilder()
 						.divisionFactor(level.getInteger("divisionFactor"))
 						.max(level.getDouble("max"))
 						.min(level.getDouble("min"))
 						.probablySign(level.getDouble("probablySign"));
-			RandomOperationBuilder rob =
-					new RandomOperationBuilder()
+			OperationBuilder rob =
+					new OperationBuilder()
 						.buildWithProbablySign(level.getDouble("probablySign"))
 						.buildWithThisOperations(level.getString("operations"));
 			
-			Problem problem = new Problem(level.getString("form"), rvi, rob);
+			SimpleProblem problem = new SimpleProblem(level.getString("form"), rvi, rob);
 			for(int i = 0; i < level.getInteger("repetitions"); i++){
 				problem.renew();
 				instanceProblems.add(ProblemFacade.parseProblemToJson(problem));

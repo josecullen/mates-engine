@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import math.arithmetic.operand.ArithmeticVariable;
-import math.arithmetic.operation.DivisionOperation;
-import math.arithmetic.operation.OperationUtil;
-import math.arithmetic.operation.OperationUtil.RandomOperationBuilder;
 import math.arithmetic.tree.ArithmeticOperandNode;
 import math.core.tree.MathNode;
-import math.core.tree.OperationNode;
 import math.core.tree.broadcast.BroadcastAction;
 import math.core.tree.broadcast.BroadcastType;
+import builders.OperationBuilder;
 
 public class ArithmeticBroadcastUtil {
 	MathNode<Double> tree;
@@ -33,17 +30,6 @@ public class ArithmeticBroadcastUtil {
 		
 		return getVariables.runOn(tree);
 	}
-	
-//	@SuppressWarnings("unchecked")
-//	public List<OperationNode<Double>> getOperationsBroadcast(){
-//		BroadcastAction<OperationNode<Double>> getVariables = new BroadcastAction<OperationNode<Double>>(BroadcastType.OPERATIONS);
-//		
-//		getVariables.setOperationAction(operationNode ->{
-//			
-//		});
-//		
-//		return getVariables.runOn(tree);	
-//	}
 	
 	@SuppressWarnings("unchecked")
 	public double getResult(){
@@ -105,8 +91,7 @@ public class ArithmeticBroadcastUtil {
 		
 		setOperations.setOperationAction(operationNode ->{
 			operationNode.setOperation(
-					new OperationUtil
-							.RandomOperationBuilder()
+					new OperationBuilder()
 							.buildWithThisOperations(operationsPattern)
 							.buildWithProbablySign(probablySign)
 							.build());
@@ -117,7 +102,7 @@ public class ArithmeticBroadcastUtil {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void setOperations(RandomOperationBuilder rob){
+	public void setOperations(OperationBuilder rob){
 		BroadcastAction<String> setOperations = new BroadcastAction<String>(BroadcastType.OPERATIONS);
 		
 		setOperations.setOperationAction(operationNode ->{

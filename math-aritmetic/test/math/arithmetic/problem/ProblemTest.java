@@ -1,30 +1,30 @@
 package math.arithmetic.problem;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import math.core.operand.Variable;
 
 import org.junit.Test;
 
-import math.arithmetic.operand.ArithmeticVariable.RandomVariableInstancer;
-import math.arithmetic.operation.OperationUtil.RandomOperationBuilder;
-import math.core.operand.Variable;
+import builders.ArithmeticVariableBuilder;
+import builders.OperationBuilder;
 
 public class ProblemTest {
 
 	@Test
 	public void testProblemExpression() {
-		Problem problem = new Problem("a + b");
-		assertEquals("( 0 + 0 ) = ", problem.getProblemExpression());
+		SimpleProblem problem = new SimpleProblem("a + b");
+		assertEquals("( {0} + {0} ) = ", problem.getProblemExpression());
 	}
 	
 	@Test
 	public void testSolvedExpression(){
-		Problem problem = new Problem("a + b");
-		assertEquals("( 0 + 0 ) = 0", problem.getSolvedExpression());
+		SimpleProblem problem = new SimpleProblem("a + b");
+		assertEquals("( {0} + {0} ) = {0}", problem.getSolvedExpression());
 	}
 	
 	@Test
 	public void testCorrectAnswer(){
-		Problem problem = new Problem("a + b");
+		SimpleProblem problem = new SimpleProblem("a + b");
 		problem.renew();
 		System.out.println(problem.getAnswer());
 	}
@@ -32,7 +32,7 @@ public class ProblemTest {
 	@Test
 	public void testAnswerOptions(){
 		System.out.println("Test answer options");
-		Problem problem = new Problem("a + b");
+		SimpleProblem problem = new SimpleProblem("a + b");
 		problem.renew();
 		System.out.println("Correct Answer : "+problem.getAnswer());
 		for(String option : problem.getAnswerOptions()){
@@ -42,7 +42,7 @@ public class ProblemTest {
 	
 	@Test
 	public void testRenew(){
-		Problem problem = new Problem("a + b");
+		SimpleProblem problem = new SimpleProblem("a + b");
 		System.out.println(problem.getProblemExpression());
 		System.out.println(problem.getSolvedExpression());
 		problem.renew();
@@ -62,10 +62,10 @@ public class ProblemTest {
 	@Test
 	public void testProbablySign(){
 
-		RandomVariableInstancer rvi = new RandomVariableInstancer().max(10).min(0).probablySign(0.5);
-		RandomOperationBuilder rob = new RandomOperationBuilder().buildWithProbablySign(0.2).buildWithThisOperations("+*");
+		ArithmeticVariableBuilder rvi = new ArithmeticVariableBuilder().max(10).min(0).probablySign(0.5);
+		OperationBuilder rob = new OperationBuilder().buildWithProbablySign(0.2).buildWithThisOperations("+*");
 		
-		Problem problem = new Problem("(a + b)", rvi, rob );
+		SimpleProblem problem = new SimpleProblem("(a + b)", rvi, rob );
 		
 		int countSign = 0;
 		for(int i = 0; i < 1000; i++){
@@ -93,10 +93,10 @@ public class ProblemTest {
 	
 	@Test
 	public void testDivideCero(){
-		RandomVariableInstancer rvi = new RandomVariableInstancer().max(3).min(0).probablySign(0.1);
-		RandomOperationBuilder rob = new RandomOperationBuilder().buildWithProbablySign(0.2).buildWithThisOperations("/");
+		ArithmeticVariableBuilder rvi = new ArithmeticVariableBuilder().max(3).min(0).probablySign(0.1);
+		OperationBuilder rob = new OperationBuilder().buildWithProbablySign(0.2).buildWithThisOperations("/");
 		
-		Problem problem = new Problem("(a + b)", rvi, rob );
+		SimpleProblem problem = new SimpleProblem("(a + b)", rvi, rob );
 		
 		for(int i = 0; i < 1000; i++){
 			problem.renew();
