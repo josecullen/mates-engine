@@ -1,7 +1,5 @@
 package math.arithmetic.operand;
 
-import java.text.DecimalFormat;
-
 import math.core.operand.Variable;
 
 public class ArithmeticVariable implements Variable<Double> {
@@ -12,7 +10,7 @@ public class ArithmeticVariable implements Variable<Double> {
 	
 	@Override
 	public Double getValue() {
-		return value;
+		return sign ? -value : value;
 	}
 
 	@Override

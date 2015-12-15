@@ -1,6 +1,6 @@
 package math.arithmetic.operand;
 
-public class VariableUtil {
+public class ArithmeticVariableUtil {
 	public static double getValueWithDivisionFactor(double min, double max, int divisionFactor){
 		double value = (Math.random() * (max - min)) + min;
 		double decimals = (int)((value - (int)value)*100);			
@@ -24,8 +24,8 @@ public class VariableUtil {
 			result = getValueString(variable.getValue());//""+new DecimalFormat("#.##").format(variable.getValue());
 		
 		
-		if(variable.getSign())
-			result = "-"+result;			
+//		if(variable.getSign())
+//			result = "-"+result;			
 		
 		return "{"+result+"}";
 	}
@@ -63,5 +63,21 @@ public class VariableUtil {
 		return Math.floor(value * Math.pow(10, decimals)) / Math.pow(10, decimals);
 	}
 	
+	/**
+	 * 
+	 * @param nearValue Valor de donde se sacan los demás valores (que serán cercanos a este). Naturalmente será el resultado. 
+	 * @param answers
+	 * @return
+	 */
+	public static double getNoRepeatedAnswer(double nearValue, double[] answers, int divisionFactor){
+		double answer = nearValue + (getValueWithDivisionFactor(0,20, divisionFactor) - 10);
+
+		for(Double ans : answers){
+			if(ans == answer){ 
+				answer = getNoRepeatedAnswer(nearValue, answers, divisionFactor);
+			}
+		}
+		return answer;
+	}
 	
 }

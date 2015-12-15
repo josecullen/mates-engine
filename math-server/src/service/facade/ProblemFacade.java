@@ -21,7 +21,7 @@ public class ProblemFacade {
 		JsonObject jsonProblem = new JsonObject();
 		
 		JsonArray answerOptions = new JsonArray();
-		for(String answer : problem.getAnswerOptions()){
+		for(String answer : problem.getAnswerOptions(5)){
 			answerOptions.add(answer);
 		}		
 		

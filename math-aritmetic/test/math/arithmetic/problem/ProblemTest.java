@@ -35,7 +35,7 @@ public class ProblemTest {
 		SimpleProblem problem = new SimpleProblem("a + b");
 		problem.renew();
 		System.out.println("Correct Answer : "+problem.getAnswer());
-		for(String option : problem.getAnswerOptions()){
+		for(String option : problem.getAnswerOptions(5)){
 			System.out.println(option);
 		}
 	}

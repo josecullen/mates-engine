@@ -2,7 +2,7 @@ package math.arithmetic.problem;
 
 import math.arithmetic.broadcast.ArithmeticBroadcastUtil;
 import math.arithmetic.operand.ArithmeticVariable;
-import math.arithmetic.operand.VariableUtil;
+import math.arithmetic.operand.ArithmeticVariableUtil;
 import math.arithmetic.operation.DivisionOperation;
 import math.arithmetic.parser.ArithmeticParser;
 import math.arithmetic.tree.ArithmeticOperandNode;
@@ -49,7 +49,7 @@ public class SimpleProblem {
 
 		problemExpression = new BroadcastAction<String>();
 		problemExpression.setOperandAction(operandNode ->{			
-			return VariableUtil.getValueString((ArithmeticVariable) operandNode.getVariable());
+			return ArithmeticVariableUtil.getValueString((ArithmeticVariable) operandNode.getVariable());
 		});
 		problemExpression.setOperationAction(operationNode->{
 			String expression = ""+problemExpression.runOn(
@@ -77,7 +77,7 @@ public class SimpleProblem {
 	
 	public String getSolvedExpression(){	
 		double result = br.getResult();
-		return problemExpression.runOn(operationNode) + " = "+ VariableUtil.getValueString(result);
+		return problemExpression.runOn(operationNode) + " = "+ ArithmeticVariableUtil.getValueString(result);
 	}
 	
 	public void renew(){
@@ -104,22 +104,22 @@ public class SimpleProblem {
 	}
 	
 	public String getAnswer(){
-		return VariableUtil.getValueString(br.getResult());
+		return ArithmeticVariableUtil.getValueString(br.getResult());
 	}
 	
-	public String[] getAnswerOptions(){
-		double[] answers = new double[5];
-		String[] stringAnswers = new String[5];
+	public String[] getAnswerOptions(int options){
+		double[] answers = new double[options];
+		String[] stringAnswers = new String[options];
 		answers[0] = br.getResult();
 		
 		for(int i = 1; i < answers.length; i++)
-			answers[i] = getNoRepeatedAnswer(answers);		
+			answers[i] = ArithmeticVariableUtil.getNoRepeatedAnswer(answers[0], answers, variableBuilder.getDivisionFactor());		
 		
 		for(int i = 0; i < answers.length; i++)
-			stringAnswers[i] = VariableUtil.getValueString(answers[i]);
+			stringAnswers[i] = ArithmeticVariableUtil.getValueString(answers[i]);
 		
 		//Reubicar respuesta correcta
-		int newPosition = (int)(Math.random()*5);
+		int newPosition = (int)(Math.random()*options);
 		String auxAnswer = stringAnswers[newPosition];
 		stringAnswers[newPosition] = stringAnswers[0];
 		stringAnswers[0] = auxAnswer;
@@ -127,16 +127,7 @@ public class SimpleProblem {
 		return stringAnswers;
 	}
 	
-	private double getNoRepeatedAnswer(double[] answers){
-		double answer = br.getResult() + (VariableUtil.getValueWithDivisionFactor(0,20, variableBuilder.getDivisionFactor()) - 10);
-		System.out.println(br.getExpression());
-		for(Double ans : answers){
-			if(ans == answer){ 
-				answer = getNoRepeatedAnswer(answers);
-			}
-		}
-		return answer;
-	}
+	
 	
 	@Override
 	public String toString() {
@@ -145,8 +136,7 @@ public class SimpleProblem {
 
 		br.getVariablesBroadcast().forEach(variable ->{
 			str.append("\t"+variable.getValue());
-		});
-	
+		});	
 		
 		return str.toString();
 	}
