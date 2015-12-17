@@ -23,10 +23,10 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     	
     	$scope.gameStatus = {};
     	
-    	$scope.actualProblem;
+    	$scope.actualProblem = {};
     	
     	updateTime = function(){
-    		console.log("updating");
+    		//console.log("updating");
     		$scope.gameStatus.time--;
     		$scope.gameStatus.problemTime++;
     		
@@ -45,38 +45,95 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     		$scope.actualProblem = $scope.instance.levels[0][0];
     	}
     	
-    	$scope.response = function(answer){
-    		if(answer == $scope.actualProblem.correctAnswer){
-    			$scope.gameStatus.corrects++;
-    			$scope.gameStatus.score += 10;
-    			if($scope.gameStatus.problemTime < 5){
-    				$scope.gameStatus.time += 5;
-    				$scope.gameStatus.score += 3;
-    			}else if($scope.gameStatus.problemTime < 8){
-    				$scope.gameStatus.time += 3;
-    				$scope.gameStatus.score += 1;
-    			}else if($scope.gameStatus.problemTime < 10){
-    				$scope.gameStatus.time += 1;
-    			}
-    		}else{    			
-    			$scope.gameStatus.lives.pop();
-    			if($scope.gameStatus.lives.length == 0){
-    				$scope.instance.status = "GAME_OVER";
-    			}
-    			
-    			$scope.gameStatus.incorrects++;
-    		}
-    		$scope.gameStatus.problemTime = 0;
-    		$scope.sendScoring();
 
+
+
+    	$scope.response = function(answer){
+    		if($scope.verifyAnswer(answer)){
+                if($scope.actualProblem.correctAnswer.length == 0){
+                    $scope.endProblem(true);
+                }    			
+    		}else{    			
+    			$scope.endProblem(false);               
+    		} 
+    	};
+
+
+        $scope.lessAnswers = [];
+        $scope.verifyAnswer = function(answer){
+
+            var correctAnswers = $scope.actualProblem.correctAnswer;
+
+            for (var i = $scope.actualProblem.correctAnswer.length - 1; i >= 0; i--) {                
+                if(answer == $scope.actualProblem.correctAnswer[i]){
+                    $scope.lessAnswers.push($scope.actualProblem.correctAnswer.splice(i, 1));
+
+                    $log.info("correct "+$scope.actualProblem.correctAnswer.length);
+                    return true;
+                }
+            };
+
+            $log.warn("incorrect");
+            return false;
+        }
+
+        $scope.checkButtonOptionAnswer = function(answer){
+
+            var correctAnswers = $scope.lessAnswers;
+   
+            for (var i = correctAnswers.length - 1; i >= 0; i--) {                
+                if(answer == correctAnswers[i]){
+                    $log.info("correct");
+                    return true;
+                }
+            };
+
+            $log.warn("incorrect");
+            return false;
+        }
+
+        $scope.endProblem = function(wasCorrect){
+            if(wasCorrect){
+                $scope.gameStatus.corrects++;
+                $scope.gameStatus.score += 10;
+                if($scope.gameStatus.problemTime < 5){
+                    $scope.gameStatus.time += 5;
+                    $scope.gameStatus.score += 3;
+                }else if($scope.gameStatus.problemTime < 8){
+                    $scope.gameStatus.time += 3;
+                    $scope.gameStatus.score += 1;
+                }else if($scope.gameStatus.problemTime < 10){
+                    $scope.gameStatus.time += 1;
+                }
+            }else{
+                $scope.gameStatus.lives.pop();
+
+                if($scope.gameStatus.lives.length == 0){
+                    $scope.instance.status = "GAME_OVER";
+                }
+                
+                $scope.gameStatus.incorrects++;
+            }
+
+            for (var i = $scope.actualProblem.correctAnswer - 1; i >= 0; i--) {  
+                $scope.lessAnswers
+                    .push($scope.actualProblem.correctAnswer.splice(i, 1));
+              
+            };
+
+         
+
+            $scope.sendScoring();
             $scope.gameStatus.problemStatus = "SHOW_SOLUTION";
 
             $timeout(function(){
+                $scope.gameStatus.problemTime = 0;
                 $scope.gameStatus.problemStatus = "SHOW_PROBLEM";
                 $scope.nextProblem();           
             }, 1500);
-    		
-    	};
+        };
+
+
     	
     	$scope.sendScoring = function(){
     		$log.info("sending scoring . . .");
@@ -105,6 +162,8 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     		}
     		
     		$scope.actualProblem = $scope.instance.levels[$scope.gameStatus.levelCount][$scope.gameStatus.problemCount];
+            $scope.lessAnswers = [];            
+                  
        	};
       	
     	
@@ -170,7 +229,9 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     		$scope.instances = response;
     	});
 		
-		
+		$scope.printInstance = function(){
+            return angular.toJson($scope.instance, true);
+        };
 		
 		
     }]);

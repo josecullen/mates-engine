@@ -6,23 +6,35 @@
 </div>
 <div class="input-group">
 	<span class="input-group-addon">Tipo de Partida: </span> 
-	<bs-dropdown data-menu-type="button" select-val="game.type = selectedVal" preselected-item=" game.type " data-dropdown-data="statuses"></bs-dropdown>
+	<bs-dropdown data-menu-type="button" style="display:block" select-val="game.type = selectedVal" preselected-item=" game.type " data-dropdown-data="statuses"></bs-dropdown>
 </div>
 
 
 
+<pre>JSON.stringify({{game}})</pre>
+
 
 
 <br>
 <br>
 
-<div class="jumbotron" ng-repeat="level in game.levels track by $index">
+<div class="jumbotron" >
+	<div ng-repeat="level in game.levels track by $index">
+
 	<h4>Nivel {{$index}}</h4>
-	<div class="row">
-		<div class="btn-group btn-group-justified col-xs-9" role="group" aria-label="...">
+
+	<bs-dropdown 
+		data-menu-type="button" 
+		select-val="level.type =  selectedVal" 
+		preselected-item=" level.type " 
+		data-dropdown-data="levelTypes">
+	</bs-dropdown>
+
+	<div class="row" ng-show="level.type == 'SIMPLE'">
+		<div class="btn-group btn-group-justified col-xs-9" role="group">			
 			<div class="btn-group" role="group">
-				<span class="input-group-addon">Expresión</span> <input class="form-control" ng-model="level.form" data-toggle="tooltip" data-placement="bottom"
-					title="Forma de la expresión">
+				<span class="input-group-addon">Expresión</span> 
+				<input class="form-control" ng-model="level.form" data-toggle="tooltip" data-placement="bottom"	title="Forma de la expresión">
 			</div>
 			<div class="btn-group" role="group">
 				<span class="input-group-addon">Mínimo</span> <input type="number" class="form-control" ng-model="level.min" data-toggle="tooltip"
@@ -48,19 +60,112 @@
 				<span class="input-group-addon">Cantidad</span> <input type="number" class="form-control" ng-model="level.repetitions" data-toggle="tooltip"
 					data-placement="bottom" title="Repeticiones del ejercicios en el juego">
 			</div>
-		</div>
-		<div class="col-xs-2">
-			<div class="btn-group" role="group">
-				<button ng-click="addLevel()" class="btn btn-primary glyphicon glyphicon-plus"></button>
-			</div>
-			<div class="btn-group" role="group">
-				<button ng-click="removeLevel($index)" class="btn btn-danger glyphicon glyphicon-minus"></button>
-			</div>
-		</div>
+		</div>		
 	</div>
+
+
+	<div class="row" 
+		 ng-show=
+		 	"level.type == 'EQUATION_1' || 
+		 	 level.type == 'EQUATION_2' ||	 	
+		 	 level.type == 'EQUATION_3'"
+		>		
+
+		<div class="btn-group btn-group-justified col-xs-12" role="group">
+			<div class="btn-group" role="group">
+				<span class="input-group-addon">a</span> 
+					<div class="btn-group col-xs-3" role="group">
+						<span class="input-group-addon">min</span> 
+						<input class="form-control" type="number" ng-model="level.a.min" >
+					</div>
+					<div class="btn-group col-xs-3" role="group">
+						<span class="input-group-addon">max</span> 
+						<input class="form-control" type="number" ng-model="level.a.max">
+					</div>
+					<div class="btn-group col-xs-3" role="group">
+						<span class="input-group-addon">sign</span> 
+						<input class="form-control" type="number" ng-model="level.a.sign">
+					</div>
+					<div class="btn-group col-xs-3" role="group">
+						<span class="input-group-addon">div</span> 
+						<input class="form-control" type="number" ng-model="level.a.div">
+					</div>
+			</div>	
+			<div class="btn-group" role="group">
+				<span class="input-group-addon">x1</span> 
+					<div class="btn-group col-xs-3" role="group">
+						<span class="input-group-addon">min</span> 
+						<input class="form-control"  type="number"ng-model="level.x1.min">
+					</div>
+					<div class="btn-group col-xs-3" role="group">
+						<span class="input-group-addon">max</span> 
+						<input class="form-control" type="number" ng-model="level.x1.max">
+					</div>
+					<div class="btn-group col-xs-3" role="group">
+						<span class="input-group-addon">sign</span> 
+						<input class="form-control" type="number" ng-model="level.x1.sign">
+					</div>
+					<div class="btn-group col-xs-3" role="group">
+						<span class="input-group-addon">div</span> 
+						<input class="form-control" type="number" ng-model="level.x1.div">
+					</div>
+			</div>	
+			<div class="btn-group" role="group">
+				<span class="input-group-addon">x2</span> 
+					<div class="btn-group col-xs-3" role="group">
+						<span class="input-group-addon">min</span> 
+						<input class="form-control" type="number" ng-model="level.x2.min">
+					</div>
+					<div class="btn-group col-xs-3" role="group">
+						<span class="input-group-addon">max</span> 
+						<input class="form-control" type="number" ng-model="level.x2.max">
+					</div>
+					<div class="btn-group col-xs-3" role="group">
+						<span class="input-group-addon">sign</span> 
+						<input class="form-control" type="number" ng-model="level.x2.sign">
+					</div>
+					<div class="btn-group col-xs-3" type="number" role="group">
+						<span class="input-group-addon">div</span> 
+						<input class="form-control" type="number" ng-model="level.x2.div">
+					</div>
+			</div>	
+			<div class="btn-group" role="group">
+				<span class="input-group-addon">x3</span> 
+					<div class="btn-group col-xs-3" role="group">
+						<span class="input-group-addon">min</span> 
+						<input class="form-control" type="number" ng-model="level.x3.min">
+					</div>
+					<div class="btn-group col-xs-3" role="group">
+						<span class="input-group-addon">max</span> 
+						<input class="form-control" type="number" ng-model="level.x3.max">
+					</div>
+					<div class="btn-group col-xs-3" role="group">
+						<span class="input-group-addon">sign</span> 
+						<input class="form-control" type="number" ng-model="level.x3.sign">
+					</div>
+					<div class="btn-group col-xs-3" role="group">
+						<span class="input-group-addon">div</span> 
+						<input class="form-control" type="number" ng-model="level.x3.div">
+					</div>
+			</div>	
+						
+		</div>
+
+
+	
 </div>
 
 
+<div class="col-xs-2">
+		<div class="btn-group" role="group">
+			<button ng-click="addLevel()" class="btn btn-primary glyphicon glyphicon-plus"></button>
+		</div>
+		<div class="btn-group" role="group">
+			<button ng-click="removeLevel($index)" class="btn btn-danger glyphicon glyphicon-minus"></button>
+		</div>
+	</div>
+
+	
 
 <br>
 <br>

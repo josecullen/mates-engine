@@ -8,7 +8,11 @@ a:hover {
 
 body {
     background-color: #eee;
-    text-align: center;
+}
+
+.btn-group{
+    margin:0;
+    padding: 0;
 }
 
 .well{

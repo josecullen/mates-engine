@@ -46,7 +46,12 @@ public class EquationBuilderTest {
 
 	private void printProblem(EquationProblem problem) {
 		System.out.println(problem.getProblemExpression());
-		System.out.println(problem.getAnswer());
+		
+		for(String answer : problem.getAnswer()){
+			System.out.print(answer);
+		}
+		
+		System.out.println();			
 		
 		for(String option : problem.getAnswerOptions(5)){
 			System.out.print(option);

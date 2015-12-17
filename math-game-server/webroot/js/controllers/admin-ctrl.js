@@ -29,25 +29,32 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
             id: "TOURNAMENT",
             name: "Torneo"        
         }];
+
+
+        $scope.levelTypes = [{
+            id: "SIMPLE",
+            name: "Simple"        
+        }, {
+            id: "EQUATION_1",
+            name: "Ecuación 1 grado"        
+        }, {
+            id: "EQUATION_2",
+            name: "Ecuación 2 grado"        
+        }, {
+            id: "EQUATION_3",
+            name: "Ecuación 3 grado"        
+        }];
     	
     	
     	$scope.game = {
     		name: "",
     		type: $scope.statuses[0].id,
     		levels: []
-    	}    	
+    	} 
+
     	
     	$scope.addLevel = function(){
-    		var level = {
-    			form: "a + b",
-    			max: 6,
-    			min: 0,
-    			probablySign: 0.2,
-    			operations: "+*",
-    			divisionFactor: 1,
-    			repetitions: 5
-    		};
-    		
+    		var level = {"type":$scope.levelTypes[0].id,"form":"a + b","max":6,"min":0,"probablySign":0.2,"operations":"+*","divisionFactor":1,"repetitions":5,"a":{"min":1,"max":4,"sign":0.2,"div":1},"x1":{"min":1,"max":4,"sign":0.2,"div":1},"x2":{"min":1,"max":4,"sign":0.2,"div":1},"x3":{"min":1,"max":3,"sign":2,"div":1}};
     		$scope.game.levels.push(level);
     	};
     	
@@ -83,25 +90,6 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
             
     	};
 
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-        
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
     	
     	
     	

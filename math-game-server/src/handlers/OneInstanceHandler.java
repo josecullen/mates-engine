@@ -2,11 +2,13 @@ package handlers;
 
 
 import builders.ArithmeticVariableBuilder;
+import builders.EquationBuilder;
 import builders.OperationBuilder;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
+import math.arithmetic.problem.EquationLevel;
 import math.arithmetic.problem.SimpleProblem;
 import service.facade.ProblemFacade;
 
@@ -74,38 +76,113 @@ public class OneInstanceHandler {
 		});
 	};
 	
+	private static final String 
+		SIMPLE = "SIMPLE",
+		EQUATION_1 = "EQUATION_1",
+		EQUATION_2 = "EQUATION_2",
+		EQUATION_3 = "EQUATION_3";
 	
 	private static JsonArray createInstanceLevels(JsonArray gameLevels){
 		JsonArray instanceLevels = new JsonArray();
 
 		gameLevels.forEach(value ->{
-			JsonArray instanceProblems = new JsonArray();
 
 			JsonObject level = (JsonObject)value;
-			ArithmeticVariableBuilder rvi = 
-					new ArithmeticVariableBuilder()
-						.divisionFactor(level.getInteger("divisionFactor"))
-						.max(level.getDouble("max"))
-						.min(level.getDouble("min"))
-						.probablySign(level.getDouble("probablySign"));
-			OperationBuilder rob =
-					new OperationBuilder()
-						.buildWithProbablySign(level.getDouble("probablySign"))
-						.buildWithThisOperations(level.getString("operations"));
 			
-			SimpleProblem problem = new SimpleProblem(level.getString("form"), rvi, rob);
-			for(int i = 0; i < level.getInteger("repetitions"); i++){
-				problem.renew();
-				instanceProblems.add(ProblemFacade.parseProblemToJson(problem));
+			switch (level.getString("type")) {
+				case SIMPLE:
+					instanceLevels.add(createSimpleLevelProblems(level));
+					break;
+				case EQUATION_1:
+					instanceLevels.add(createEquationLevelProblems(level, 1));
+					break;
+				case EQUATION_2:
+					instanceLevels.add(createEquationLevelProblems(level, 2));
+					break;
+				case EQUATION_3:
+					instanceLevels.add(createEquationLevelProblems(level, 3));
+					break;
+
 			}
-			instanceLevels.add(instanceProblems);
+			
+			
+			
+			
 		});
 		
 		return instanceLevels;
 	}
 	
+	private static JsonArray createSimpleLevelProblems(JsonObject level){
+		JsonArray instanceProblems = new JsonArray();
+
+		
+		ArithmeticVariableBuilder rvi = 
+				new ArithmeticVariableBuilder()
+					.divisionFactor(level.getInteger("divisionFactor"))
+					.max(level.getDouble("max"))
+					.min(level.getDouble("min"))
+					.probablySign(level.getDouble("probablySign"));
+		
+		OperationBuilder rob =
+				new OperationBuilder()
+					.buildWithProbablySign(level.getDouble("probablySign"))
+					.buildWithThisOperations(level.getString("operations"));
+		
+		SimpleProblem problem = new SimpleProblem(level.getString("form"), rvi, rob);
+		
+		for(int i = 0; i < level.getInteger("repetitions"); i++){
+			problem.renew();
+			instanceProblems.add(ProblemFacade.parseProblemToJson(problem));
+		}
+		
+		return instanceProblems;
+	}
 	
+	private static JsonArray createEquationLevelProblems(JsonObject level, int equationGrade){
+		JsonArray instanceProblems = new JsonArray();
+		
+		JsonObject a = level.getJsonObject("a");
+		JsonObject x1 = level.getJsonObject("x1");
+		JsonObject x2 = level.getJsonObject("x2");
+		JsonObject x3 = level.getJsonObject("x3");
+		
+		EquationLevel eqLevel = null;
+		
+		switch (equationGrade) {
+			case 1:
+				eqLevel = EquationLevel.LEVEL_1;
+				break;
+			case 2:
+				eqLevel = EquationLevel.LEVEL_2;
+				break;
+			case 3:
+				eqLevel = EquationLevel.LEVEL_3;
+				break;
+		}
+		
+		EquationBuilder equationBuilder = new EquationBuilder()
+			.buildWithLevel(eqLevel)
+			.buildWithA(parseToArithmeticVariableBuilder(a))
+			.buildWithX1(parseToArithmeticVariableBuilder(x1))
+			.buildWithX2(parseToArithmeticVariableBuilder(x2))
+			.buildWithX3(parseToArithmeticVariableBuilder(x3));
+		
+		for(int i = 0; i < level.getInteger("repetitions"); i++){
+			instanceProblems.add(ProblemFacade.parseProblemToJson(equationBuilder.build()));
+		}
+		
+		return instanceProblems;
+	}
 	
+	private static ArithmeticVariableBuilder parseToArithmeticVariableBuilder(JsonObject conf){
+		ArithmeticVariableBuilder builder = new ArithmeticVariableBuilder()
+			.min(conf.getDouble("min"))
+			.max(conf.getDouble("max"))
+			.probablySign(conf.getDouble("sign"))
+			.divisionFactor(conf.getInteger("div"));
+		return builder;
+	}
 	
 	
 	public static Handler<RoutingContext> PUT = handler ->{

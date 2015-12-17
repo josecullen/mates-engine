@@ -11,7 +11,7 @@ import math.core.tree.broadcast.BroadcastAction;
 import builders.ArithmeticVariableBuilder;
 import builders.OperationBuilder;
 
-public class SimpleProblem {
+public class SimpleProblem implements Problem{
 	ArithmeticOperationNode operationNode;
 	private ArithmeticVariableBuilder variableBuilder;
 	private OperationBuilder operationBuilder;
@@ -103,8 +103,10 @@ public class SimpleProblem {
 		divisionOperations.runOn(operationNode);
 	}
 	
-	public String getAnswer(){
-		return ArithmeticVariableUtil.getValueString(br.getResult());
+	public String[] getAnswer(){
+		String[] answer = new String[1];
+		answer[0] = ArithmeticVariableUtil.getValueString(br.getResult());
+		return answer;
 	}
 	
 	public String[] getAnswerOptions(int options){
@@ -132,12 +134,23 @@ public class SimpleProblem {
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		str.append("variables: ");
-
-		br.getVariablesBroadcast().forEach(variable ->{
-			str.append("\t"+variable.getValue());
-		});	
+//		str.append("variables: ");
+//
+//		br.getVariablesBroadcast().forEach(variable ->{
+//			str.append("\t"+variable.getValue());
+//		});
+		str.append(getSolvedExpression());
 		
+		str.append("\nAnswers : \n");
+		
+		for(String answer : getAnswer())
+			str.append(answer);
+		
+		str.append("\nOptions : \n");
+		for(String option : getAnswerOptions(5))
+			str.append(option);
+		
+		str.append("\n");
 		return str.toString();
 	}
 	

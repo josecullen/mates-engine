@@ -10,32 +10,32 @@ public class EquationBuilder {
 	
 	EquationLevel level;
 	
-	EquationBuilder buildWithLevel(EquationLevel level){
+	public EquationBuilder buildWithLevel(EquationLevel level){
 		this.level = level;
 		return this;
 	}
 	
-	EquationBuilder buildWithA(ArithmeticVariableBuilder a){
+	public EquationBuilder buildWithA(ArithmeticVariableBuilder a){
 		this.a = a;
 		return this;
 	}
 	
-	EquationBuilder buildWithX1(ArithmeticVariableBuilder x1){
+	public EquationBuilder buildWithX1(ArithmeticVariableBuilder x1){
 		this.x1 = x1;
 		return this;
 	}
 	
-	EquationBuilder buildWithX2(ArithmeticVariableBuilder x2){
+	public EquationBuilder buildWithX2(ArithmeticVariableBuilder x2){
 		this.x2 = x2;
 		return this;
 	}
 	
-	EquationBuilder buildWithX3(ArithmeticVariableBuilder x3){
+	public EquationBuilder buildWithX3(ArithmeticVariableBuilder x3){
 		this.x3 = x3;
 		return this;
 	}
 	
-	EquationProblem build(){
+	public EquationProblem build(){
 		EquationProblem problem = 
 				new EquationProblem(
 						level, 

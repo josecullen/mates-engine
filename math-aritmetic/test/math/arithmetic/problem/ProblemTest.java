@@ -70,7 +70,7 @@ public class ProblemTest {
 		int countSign = 0;
 		for(int i = 0; i < 1000; i++){
 			problem.renew();
-			System.out.println(problem.getProblemExpression());
+//			System.out.println(problem.getProblemExpression());
 			for(Variable<Double> var : problem.br.getVariablesBroadcast()){
 				if(var.getSign()) countSign++;
 			}
@@ -82,6 +82,7 @@ public class ProblemTest {
 		rvi.setProbablySign(0.2);
 		for(int i = 0; i < 1000; i++){
 			problem.renew();
+			System.out.println(problem);
 			for(Variable<Double> var : problem.br.getVariablesBroadcast()){
 				if(var.getSign()) countSign++;
 			}
@@ -100,9 +101,9 @@ public class ProblemTest {
 		
 		for(int i = 0; i < 1000; i++){
 			problem.renew();
-			System.out.println(problem.getProblemExpression());
-
-			System.out.println(problem.getSolvedExpression());	
+//			System.out.println(problem.getProblemExpression());
+//
+//			System.out.println(problem.getSolvedExpression());	
 		}
 		
 		

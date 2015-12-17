@@ -51,37 +51,20 @@ public class EquationProblem implements Problem {
 	}
 
 	@Override
-	public String getAnswer() {
-		StringBuilder answer = new StringBuilder();
+	public String[] getAnswer() {
+		
+		String[] answer = new String[level.getLevelValue()];
 		
 		switch (level) {
-			case LEVEL_1:
-				answer
-					.append("[ ")
-					.append(ArithmeticVariableUtil.getValueString(x1))
-					.append(" ]");				
-				return answer.toString();
-			case LEVEL_2:
-				answer
-					.append("[ ")
-					.append(ArithmeticVariableUtil.getValueString(x1))
-					.append(" ")
-					.append(ArithmeticVariableUtil.getValueString(x2))
-					.append(" ]");
-				return answer.toString();
 			case LEVEL_3:
-				answer
-					.append("[ ")
-					.append(ArithmeticVariableUtil.getValueString(x1))
-					.append(" ")
-					.append(ArithmeticVariableUtil.getValueString(x2))
-					.append(" ")
-					.append(ArithmeticVariableUtil.getValueString(x3))
-					.append(" ]");
-			return answer.toString();			
-			default:
-				return "";
+				answer[2] = ArithmeticVariableUtil.getValueString(x3);
+			case LEVEL_2:
+				answer[1] = ArithmeticVariableUtil.getValueString(x2);					
+			case LEVEL_1:
+				answer[0] = ArithmeticVariableUtil.getValueString(x1);
 		}		
+		
+		return answer;
 	}
 
 	@Override

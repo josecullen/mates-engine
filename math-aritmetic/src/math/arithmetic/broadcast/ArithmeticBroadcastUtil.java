@@ -6,8 +6,10 @@ import java.util.List;
 import math.arithmetic.operand.ArithmeticVariable;
 import math.arithmetic.tree.ArithmeticOperandNode;
 import math.core.tree.MathNode;
+import math.core.tree.OperandNode;
 import math.core.tree.broadcast.BroadcastAction;
 import math.core.tree.broadcast.BroadcastType;
+import math.core.tree.broadcast.OperandAction;
 import builders.OperationBuilder;
 
 public class ArithmeticBroadcastUtil {
@@ -19,7 +21,7 @@ public class ArithmeticBroadcastUtil {
 	
 	public List<ArithmeticVariable> getVariablesBroadcast(){		
 		BroadcastAction<List<ArithmeticVariable>> getVariables = new BroadcastAction<List<ArithmeticVariable>>(BroadcastType.OPERANDS);
-		
+				
 		getVariables.setOperandAction(operandNode ->{
 			if(getVariables.getResult() == null)
 				getVariables.setResult(new ArrayList<ArithmeticVariable>());			
@@ -36,9 +38,9 @@ public class ArithmeticBroadcastUtil {
 		BroadcastAction<Double> broadcastGetResult = new BroadcastAction<Double>();
 		broadcastGetResult.setOperandAction(operandNode ->{					
 			
-			if (operandNode.getVariable().getSign())
-				return -((double)operandNode.getVariable().getValue());
-			else
+//			if (operandNode.getVariable().getSign())
+//				return -((double)operandNode.getVariable().getValue());
+//			else
 				return operandNode.getVariable().getValue();
 		});
 		
