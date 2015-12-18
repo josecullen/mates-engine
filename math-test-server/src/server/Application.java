@@ -1,0 +1,31 @@
+package server;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.http.HttpServer;
+import io.vertx.ext.web.Router;
+import io.vertx.ext.web.handler.StaticHandler;
+
+public class Application {
+	static int PORT = 8082;
+	public static void main(String[] args) {
+		Vertx vertx = Vertx.vertx();
+		HttpServer server = vertx.createHttpServer();		
+	
+		Router router = Router.router(vertx);
+
+		router.route("/").handler(handler ->{
+			handler.response().sendFile("webroot/index.html");
+		});
+		
+		
+
+		
+		
+		
+		router.route("/*").handler(StaticHandler.create());
+		
+		server.requestHandler(router::accept).listen(PORT);
+		System.out.println("Server open in port "+PORT);
+	}
+
+}
