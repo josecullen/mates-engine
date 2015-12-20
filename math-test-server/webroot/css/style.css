@@ -1,0 +1,21 @@
+.tools{
+	margin: 10px;
+	width: 20%;
+	float: left;
+}
+
+.tools-bottom{
+	margin: 10px;
+	width: 500px;
+	float: left;
+	position: absolute;
+    bottom: 0;
+}
+
+.tools-right-bottom{
+	margin: 10px;
+	width: 20%;
+		float: right;
+
+	text-align: right;
+}
