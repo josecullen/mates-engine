@@ -10,6 +10,7 @@
 					'angular-animate' : 'lib/angular/angular-animate',
 					'jquery-ui' : 'lib/jquery/jquery-ui-1.11.4-custom/jquery-ui.min',
 					'bootstrap' : 'lib/bootstrap/js/bootstrap.min',
+					'bootstrap-ui' : 'lib/ui-bootstrap.min',
 					'ng-dialog' : 'lib/ng-dialog/ngDialog',
 					// Local dependencies
 					'app' : 'js/app'

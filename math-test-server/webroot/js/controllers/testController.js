@@ -15,6 +15,9 @@ define(['js/controllers', 'ng-dialog'], function( controllers){
     	$scope.selectedTestInstance = {};
     	$scope.selectedProblem = {};
 
+
+
+
     	$scope.addProblem = function(){
     		var problem = {
     			consign : "Consigna",
@@ -31,7 +34,11 @@ define(['js/controllers', 'ng-dialog'], function( controllers){
 				    		max: 10,
 				    		sign: 0.5,
 				    		div: 2,
-				    		operations: "*-"
+				    		operations: "*-",
+				    		a: { min: 1, max: 4, sign: 0.2, div: 1 },
+				    		x1: { min: 1, max: 4, sign: 0.2, div: 1 },
+				    		x2: { min: 1, max: 4, sign: 0.2, div: 1 },
+				    		x3: { min: 1, max: 4, sign: 0.2, div: 1 }
 		    			}		    		
 		       		};
 		       		this.exercises.push($scope.exercise);
@@ -59,8 +66,10 @@ define(['js/controllers', 'ng-dialog'], function( controllers){
 		$scope.exerciseConfig = function (exercise) {
 			ngDialog.open({
 				template: 'firstDialog',
-				controller: ['$scope', function($scope, otherService) {
+				controller: ['$scope', function($scope) {
 				 	$scope.exercise = exercise;
+
+
 				}],
 				className: 'ngdialog-theme-default ngdialog-theme-custom'
 			});

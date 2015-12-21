@@ -1,8 +1,8 @@
 (function() {
 	'use strict';
 
-	define(['js/controllers/testController', 'js/services/problemServices', 'ng-dialog' ], function(controllers) {
-		var app = angular.module('app', ['controllers', 'services', 'ngDialog']);
+	define(['js/controllers/testController', 'js/services/problemServices', 'ng-dialog', 'bootstrap-ui', 'angular-animate' ], function(controllers) {
+		var app = angular.module('app', ['controllers', 'services', 'ngDialog', 'ui.bootstrap', "ngAnimate"]);
 	
 			
 		app.directive("mathjaxBind", function() {
