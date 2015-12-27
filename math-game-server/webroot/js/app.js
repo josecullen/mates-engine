@@ -2,7 +2,7 @@
 	'use strict';
 
 	define([], function(require) {
-		var app = angular.module('app', [ 'controllers', 'ngRoute', 'ngAnimate', 'nvd3' ]);
+		var app = angular.module('app', [ 'controllers', 'ngRoute', 'ngAnimate', 'nvd3', 'ui.bootstrap' ]);
 		app.config([ '$routeProvider', function($routeProvider) {
 			$routeProvider
 				.when('/admin-game-edit/:gameId', {
@@ -25,10 +25,6 @@
 					templateUrl : 'partials/player-select-instance.html',
 					controller: 'playerCtrl'
 				})
-//				.when('/player-play',{
-//					templateUrl : 'partials/player-play.html',
-//					controller: 'playerCtrl'
-//				})
 				.otherwise({
 					redirectTo : '/player-select-instance'
 				});

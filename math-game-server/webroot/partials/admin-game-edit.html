@@ -6,11 +6,11 @@
 </div>
 <div class="input-group">
 	<span class="input-group-addon">Tipo de Partida: </span> 
-	<bs-dropdown data-menu-type="button" style="display:block" select-val="game.type = selectedVal" preselected-item=" game.type " data-dropdown-data="statuses"></bs-dropdown>
+	<div class="btn-group btn-group-justified">
+        <label class="btn btn-default" ng-model="game.type" uib-btn-radio="'MULTI_INSTANCE_GAME'">Multi-Instancia</label>
+        <label class="btn btn-default" ng-model="game.type" uib-btn-radio="'ONE_INSTANCE_GAME'">Una Instancia</label>
+	</div>
 </div>
-
-
-
 
 
 
@@ -21,13 +21,13 @@
 	<div ng-repeat="level in game.levels track by $index">
 
 	<h4>Nivel {{$index}}</h4>
-
-	<bs-dropdown 
-		data-menu-type="button" 
-		select-val="level.type =  selectedVal" 
-		preselected-item=" level.type " 
-		data-dropdown-data="levelTypes">
-	</bs-dropdown>
+	
+	<div class="btn-group btn-group-justified">
+        <label class="btn btn-default" ng-model="level.type" uib-btn-radio="'SIMPLE'">Simple</label>
+        <label class="btn btn-default" ng-model="level.type" uib-btn-radio="'EQUATION_1'">Ecuación 1°</label>
+        <label class="btn btn-default" ng-model="level.type" uib-btn-radio="'EQUATION_2'">Ecuación 2°</label>
+		<label class="btn btn-default" ng-model="level.type" uib-btn-radio="'EQUATION_3'">Ecuación 3°</label>
+	</div>
 
 	<div class="row" ng-show="level.type == 'SIMPLE'">
 		<div class="btn-group btn-group-justified col-xs-9" role="group">			

@@ -48,6 +48,7 @@
 						        'd3',
 						        'angular-nvd3',
 						        'js/controllers',
+						        'lib/ui-bootstrap.min',
 						        'lib/sockjs-1.0.3',
 								'js/services/service',
 								'js/services/game-services',
