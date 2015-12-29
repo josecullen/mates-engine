@@ -1,8 +1,8 @@
 define(["angular", "js/controllers", 'js/services/service', 'js/services/game-services'], function(angular, controllers){
 	
 	controllers.controller('playerCtrl', 
-        ['$scope', 'game','$location', '$interval', '$log', '$rootScope', '$timeout',
-        function($scope, game, $location, $interval, $log, $rootScope, $timeout){
+        ['$scope', 'game','$location', '$interval', '$log', '$rootScope', '$timeout', '$sce',
+        function($scope, game, $location, $interval, $log, $rootScope, $timeout, $sce){
 
     	$scope.instances = [];
     	
@@ -17,7 +17,35 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
                 $rootScope.showNav = false;
             }
         });
+        
+        //$scope.htmlTooltip = $sce.trustAsHtml('<h2>I\'ve been made <b>bold</b></h2>');
+        $scope.tooltips = {            
+            toolTipClass : 'tooltip-ok',
+            score : {
+                message : $sce.trustAsHtml(''),
+                toolTipClass : 'tooltip-ok',
+                show : false
+            },
+            time : {
+                message : $sce.trustAsHtml(''),
+                toolTipClass : 'tooltip-ok',
+                show : false
+            },
+            lives : {
+                message : $sce.trustAsHtml('<h2>-1</h2>'),
+                toolTipClass : 'tooltip-nook',
+            }
+        };
 
+        $scope.showHideTooltips = function(mustShow){
+            if(mustShow){
+                $scope.tooltips.score.show = true;
+                $scope.tooltips.time.show = true;
+            }else{
+                $scope.tooltips.score.show = false;
+                $scope.tooltips.time.show = false;
+           }
+        }
     	
     	$scope.player = { name: ""};
     	
@@ -44,6 +72,23 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     		stopGame = $interval(updateTime, 1000);	
     		$scope.actualProblem = $scope.instance.levels[0][0];
     	}
+
+        $scope.pauseAndReleaseTime = function(){
+          if (angular.isDefined(stop)) {
+            $interval.cancel(stopGame);
+            stopGame = undefined;
+
+            $timeout(function(){
+                $scope.showHideTooltips(false);
+
+                if ( angular.isDefined(stopGame) ) {
+                    return;
+                }else{
+                    stopGame = $interval(updateTime, 1000);    
+                }                
+            }, 1700);
+          }
+        }
     	
 
 
@@ -61,19 +106,19 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
 
         $scope.lessAnswers = [];
         $scope.verifyAnswer = function(answer){
-
+            $scope.pauseAndReleaseTime();
             var correctAnswers = $scope.actualProblem.correctAnswer;
 
             for (var i = $scope.actualProblem.correctAnswer.length - 1; i >= 0; i--) {                
                 if(answer == $scope.actualProblem.correctAnswer[i]){
                     $scope.lessAnswers.push($scope.actualProblem.correctAnswer.splice(i, 1));
 
-                    $log.info("correct "+$scope.actualProblem.correctAnswer.length);
+                    //$log.info("correct "+$scope.actualProblem.correctAnswer.length);
                     return true;
                 }
             };
 
-            $log.warn("incorrect");
+            //$log.warn("incorrect");
             return false;
         }
 
@@ -83,28 +128,45 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
    
             for (var i = correctAnswers.length - 1; i >= 0; i--) {                
                 if(answer == correctAnswers[i]){
-                    $log.info("correct");
+            //        $log.info("correct");
                     return true;
                 }
             };
 
-            $log.warn("incorrect");
+            //$log.warn("incorrect");
             return false;
         }
 
         $scope.endProblem = function(wasCorrect){
             if(wasCorrect){
+                var plusScore = 10;
+                var plusTime = 0;
                 $scope.gameStatus.corrects++;
-                $scope.gameStatus.score += 10;
+
+                //$scope.gameStatus.score += 10;
                 if($scope.gameStatus.problemTime < 5){
-                    $scope.gameStatus.time += 5;
-                    $scope.gameStatus.score += 3;
+                    //$scope.gameStatus.time += 5;
+                    plusTime += 5;
+                    plusScore += 3;
+                    $scope.tooltips.toolTipClass = 'tooltip-great';
                 }else if($scope.gameStatus.problemTime < 8){
-                    $scope.gameStatus.time += 3;
-                    $scope.gameStatus.score += 1;
+                    plusTime += 3;
+                    plusScore += 1;
+                    $scope.tooltips.toolTipClass = 'tooltip-good';
                 }else if($scope.gameStatus.problemTime < 10){
-                    $scope.gameStatus.time += 1;
+                    plusTime += 1;
+                    $scope.tooltips.toolTipClass = 'tooltip-ok';
+                }else{
+                    $scope.tooltips.toolTipClass = 'tooltip-pass';    
                 }
+                
+                $scope.gameStatus.score = plusScore;
+                
+                $scope.tooltips.score = $sce.trustAsHtml('<h2>+'+plusScore+'</h2>');
+                $scope.tooltips.time = $sce.trustAsHtml('<h2>+'+plusTime+'</h2>');
+                $scope.showHideTooltips(true);
+                
+
             }else{
                 $scope.gameStatus.lives.pop();
 
@@ -120,8 +182,6 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
                     .push($scope.actualProblem.correctAnswer.splice(i, 1));
               
             };
-
-         
 
             $scope.sendScoring();
             $scope.gameStatus.problemStatus = "SHOW_SOLUTION";
@@ -163,7 +223,7 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
     		
     		$scope.actualProblem = $scope.instance.levels[$scope.gameStatus.levelCount][$scope.gameStatus.problemCount];
             $scope.lessAnswers = [];            
-                  
+
        	};
       	
     	

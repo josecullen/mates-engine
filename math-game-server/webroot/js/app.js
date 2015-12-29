@@ -33,13 +33,25 @@
 		app.directive("mathjaxBind", function() {
 		    return {
 		        restrict: "A",
-		        controller: ["$scope", "$element", "$attrs", function($scope, $element, $attrs) {
+		        controller: ["$scope", "$element", "$attrs", "$window", "$timeout", 
+		                     function($scope, $element, $attrs, $window, $timeout) {
 		            $scope.$watch($attrs.mathjaxBind, function(value) {
 		                var $script = angular.element("<script type='math/tex'>")
 		                    .html(value == undefined ? "" : value);
 		                $element.html("");
 		                $element.append($script);
 		                MathJax.Hub.Queue(["Reprocess", MathJax.Hub, $element[0]]);
+
+		                $window.MathJax.Hub.Register.StartupHook("Begin",function () { 
+		                	$element[0].style.visibility = 'hidden';
+		                });		                
+		                $window.MathJax.Hub.Register.StartupHook("End",function () { 
+		                	$timeout(function(){
+			                	$element[0].style.visibility = '';
+		                	}, 1500);	                	
+		                }); 
+
+		                
 		            });
 		        }]
 		    };

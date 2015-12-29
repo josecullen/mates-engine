@@ -24,9 +24,39 @@ body {
     padding: 0;
 }
 
+.tooltip-great + .tooltip > .tooltip-inner {
+    background-color: #00FF18;
+}
+.tooltip-good + .tooltip > .tooltip-inner {
+    background-color: #7FC879;
+}
+.tooltip-ok + .tooltip > .tooltip-inner {
+    background-color: #C4D534;
+}
+.tooltip-pass + .tooltip > .tooltip-inner {
+    background-color: #9F9A9A;
+}
+.tooltip-nook + .tooltip > .tooltip-inner {
+    background-color: #D80B0B;
+}
 
 
 
+.inner-center{    
+    position: relative;
+    width: 100px;
+    height: 50px;
+    top: 20%;
+    margin: 0 auto;     
+}
+
+.inner-right{   
+    position: relative;
+    width: 100px;
+    height: 50px;
+    margin: -30px 80%;      
+    background-color: #038403;
+}
 
 
 
