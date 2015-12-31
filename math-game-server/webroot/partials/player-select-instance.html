@@ -35,27 +35,27 @@
 
 
 <div ng-if="instance.status == 'SUCCESS'">	
-
-	<nav class="navbar navbar-inverse">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Nivel: {{gameStatus.levelCount}} : {{gameStatus.problemCount}}</a>
-			<a 
-				class="navbar-brand"
-				ng-class="tooltips.toolTipClass" 
-				href="#"
-				uib-tooltip-html="tooltips.score"
-          		tooltip-placement="bottom"
-		        tooltip-is-open="tooltips.score.show"
-		        tooltip-enable="true" >Puntos: {{gameStatus.score}}</a>
-			<a class="navbar-brand vertical-in" href="#" ng-repeat="live in gameStatus.lives" style="margin: -5px">	<img src="../assets/heart.png"> </a>
-			<a class="navbar-brand" href="#"
-				ng-class="tooltips.toolTipClass" 
-				uib-tooltip-html="tooltips.time"
-          		tooltip-placement="bottom"
-		        tooltip-is-open="tooltips.time.show"
-		        tooltip-enable="true">Tiempos: {{gameStatus.problemTime}} : {{gameStatus.time}}</a> 
-		</div>
-	</nav>
+	<game-info></game-info>
+<!-- 	<nav class="navbar navbar-inverse"> -->
+<!-- 		<div class="navbar-header"> -->
+<!-- 			<a class="navbar-brand" href="#">Nivel: {{gameStatus.levelCount}} : {{gameStatus.problemCount}}</a> -->
+<!-- 			<a  -->
+<!-- 				class="navbar-brand" -->
+<!-- 				ng-class="tooltips.toolTipClass"  -->
+<!-- 				href="#" -->
+<!-- 				uib-tooltip-html="tooltips.score" -->
+<!--           		tooltip-placement="bottom" -->
+<!-- 		        tooltip-is-open="tooltips.score.show" -->
+<!-- 		        tooltip-enable="true" >Puntos: {{gameStatus.score}}</a> -->
+<!-- 			<a class="navbar-brand vertical-in" href="#" ng-repeat="live in gameStatus.lives" style="margin: -5px">	<img src="../assets/heart.png"> </a> -->
+<!-- 			<a class="navbar-brand" href="#" -->
+<!-- 				ng-class="tooltips.toolTipClass"  -->
+<!-- 				uib-tooltip-html="tooltips.time" -->
+<!--           		tooltip-placement="bottom" -->
+<!-- 		        tooltip-is-open="tooltips.time.show" -->
+<!-- 		        tooltip-enable="true">Tiempos: {{gameStatus.problemTime}} : {{gameStatus.time}}</a>  -->
+<!-- 		</div> -->
+<!-- 	</nav> -->
 
 	<div class="jumbotron container-fluid" >
 

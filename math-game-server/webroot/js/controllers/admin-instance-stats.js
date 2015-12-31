@@ -1,4 +1,4 @@
-define(["angular", "js/controllers", 'js/services/service', 'js/services/game-services', 'lib/sockjs-1.0.3'], function(angular, controllers) {
+define(["angular", "js/controllers",'js/services/game-services', 'lib/sockjs-1.0.3'], function(angular, controllers) {
     controllers.controller('adminInstanceStats', 
     	['$scope', 'game', '$location', '$interval', '$log', '$routeParams', '$timeout',
     	function($scope, game, $location, $interval, $log, $routeParams, $timeout) {

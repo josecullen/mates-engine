@@ -1,4 +1,4 @@
-define(["angular", "js/controllers", 'js/services/service', 'js/services/game-services'], function(angular, controllers){
+define(["angular", "js/controllers", 'js/services/game-services'], function(angular, controllers){
 
 	controllers.controller('gameController', 
         ['$scope', 'game','$location', '$interval', '$log', '$routeParams', '$rootScope',
@@ -89,13 +89,8 @@ define(["angular", "js/controllers", 'js/services/service', 'js/services/game-se
             }
             
     	};
-
     	
-    	
-    	
-    	
-    	$scope.addLevel();
-    	
+    	$scope.addLevel();    	
     	
     }]);        
 });
