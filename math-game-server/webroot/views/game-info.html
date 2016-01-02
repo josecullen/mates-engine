@@ -1,14 +1,14 @@
 <nav class="navbar navbar-inverse">
 	<div class="navbar-header">
 		<a 	class="navbar-brand" 
-			href="#">Nivel: {{gameStatus.levelCount}} : {{gameStatus.problemCount}}
+			href="#">Nivel: {{gameLevels.order.level + 1}} : {{gameLevels.order.problem + 1}}
 		</a> 
 		<a 	class="navbar-brand"
-			ng-class="tooltips.toolTipClass" 
+			ng-class="tooltips.tooltipClass" 
 			href="#" 
-			uib-tooltip-html="tooltips.score" 
+			uib-tooltip-html="tooltips.score.message" 
 			tooltip-placement="bottom"
-			tooltip-is-open="tooltips.score.show" 
+			tooltip-is-open="tooltips.show" 
 			tooltip-enable="true">Puntos: {{gameStatus.score}}
 		</a> 
 		<a 	class="navbar-brand vertical-in" href="#"
@@ -18,10 +18,10 @@
 		</a> 
 		<a 	class="navbar-brand" 
 			href="#" 
-			ng-class="tooltips.toolTipClass" 
-			uib-tooltip-html="tooltips.time" 
+			ng-class="tooltips.tooltipClass" 
+			uib-tooltip-html="tooltips.time.message" 
 			tooltip-placement="bottom"
-			tooltip-is-open="tooltips.time.show" 
+			tooltip-is-open="tooltips.show" 
 			tooltip-enable="true">Tiempos: {{gameTimer.problemTime.value}} : {{gameTimer.gameTime.value}}
 		</a>
 	</div>

@@ -1,4 +1,4 @@
-define(["angular", "js/directives"], function(angular, directives){
+define(["angular", "js/directives", 'js/services/game-tooltips'], function(angular, directives){
 	directives.directive('gameInfo', function(){
 		return {
 			restrict : 'E',
@@ -7,17 +7,22 @@ define(["angular", "js/directives"], function(angular, directives){
 		};
 	});
 	
-	directives.controller('gameInfoCtrl',['$scope','$sce', function($scope, $sce){
-		console.log("gameInfoCtrl");
-		$scope.tooltips = {            
+	directives.controller('gameInfoCtrl',['$scope','$sce', 'gameTooltips', 
+        function($scope, $sce, gameTooltips){
+		
+        console.log("gameInfoCtrl");
+		$scope.tooltips = gameTooltips.tooltips;
+
+        /*
+        $scope.tooltips = {            
             toolTipClass : 'tooltip-ok',
             score : {
-                message : $sce.trustAsHtml(''),
+                message : $sce.trustAsHtml('<h2>asa</h2>'),
                 toolTipClass : 'tooltip-ok',
                 show : false
             },
             time : {
-                message : $sce.trustAsHtml(''),
+                message : $sce.trustAsHtml('<h2></h2>'),
                 toolTipClass : 'tooltip-ok',
                 show : false
             },
@@ -36,5 +41,7 @@ define(["angular", "js/directives"], function(angular, directives){
                 $scope.tooltips.time.show = false;
            }
         }
+*/
+
 	}]);
 });
