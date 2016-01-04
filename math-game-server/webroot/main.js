@@ -54,6 +54,7 @@
 //								'js/services/service',
 								'js/services/game-services',
 								'js/services/game-handler-service',
+								'js/services/game-instance',
 								'js/controllers/admin-ctrl',
 								'js/controllers/admin-game-list-ctrl',
 								'js/controllers/admin-instances-ctrl',

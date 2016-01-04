@@ -1,5 +1,7 @@
 define(["angular", "js/services"], function(angular, services){
 	services.factory('game', ['$http', '$log', function($http, $log){
+		$log.info("gameServices");
+
 		var path = "/arithmetic/v1/";
 		var allPath = path+"all";
 		var onePath = path+"one";

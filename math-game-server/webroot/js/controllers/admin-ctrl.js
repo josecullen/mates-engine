@@ -1,9 +1,13 @@
-define(["angular", "js/controllers", 'js/services/game-services'], function(angular, controllers){
+define(["angular", "js/controllers"], 
+    function(angular, controllers){
 
 	controllers.controller('gameController', 
         ['$scope', 'game','$location', '$interval', '$log', '$routeParams', '$rootScope',
-        function($scope, game, $location, $interval, $log, $routeParams, $rootScope ){
-    	console.log($routeParams.gameId);
+        function($scope, game, $location, $interval, $log, $routeParams, $rootScope){
+    	
+        $log.info('gameController');
+        
+        console.log($routeParams.gameId);
 
         $rootScope.showNav = true;
 
