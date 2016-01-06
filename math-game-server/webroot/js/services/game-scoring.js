@@ -1,16 +1,17 @@
-define(["angular", "js/services", 'js/services/game-timer', 'js/services/game-instance'], 
+define(["angular", "js/services", 'js/services/game-timer', 'js/services/game-instance', 'js/services/game-tooltips'], 
     function(angular, services){
-	services.factory('gameScoring', ['$log', 'gameTimer', 'gameInstance', 
-        function($log, gameTimer, gameInstance){				
+	services.factory('gameScoring', ['$log', 'gameTimer', 'gameInstance', 'gameTooltips',
+        function($log, gameTimer, gameInstance, gameTooltips){				
 	    
         $log.info("gameScoring");
 
         var update = function(wasCorrect){
             var responseLevel = 0;
+            var plusScore = 0;
+            var plusTime = 0;
 
             if(wasCorrect){
-                var plusScore = 10;
-                var plusTime = 0;
+                plusScore = 10;
 
                 gameInstance.status.corrects++;
 
@@ -28,13 +29,21 @@ define(["angular", "js/services", 'js/services/game-timer', 'js/services/game-in
                 }else{
                     responseLevel = 1;
                 }
-
+                
                 gameInstance.status.score += plusScore;
                 
-            }else{                      
+            }else{        
+                $log.error("incorrect answer");
                 gameInstance.status.incorrects++;
+                gameInstance.status.lives.pop();
+                if(gameInstance.status.lives.length == 0){
+                    gameInstance.instance.status = "GAME_OVER";
+                }
             }
-            
+
+            gameTooltips.setScoreTooltip(plusScore);
+            gameTooltips.setTimeTooltip(plusTime);
+
             return responseLevel;            
         }
 

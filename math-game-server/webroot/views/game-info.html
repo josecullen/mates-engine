@@ -9,10 +9,10 @@
 			uib-tooltip-html="tooltips.score.message" 
 			tooltip-placement="bottom"
 			tooltip-is-open="tooltips.show" 
-			tooltip-enable="true">Puntos: {{gameStatus.score}}
+			tooltip-enable="true">Puntos: {{gameInstance.status.score}}
 		</a> 
 		<a 	class="navbar-brand vertical-in" href="#"
-			ng-repeat="live in gameStatus.lives" 
+			ng-repeat="live in gameInstance.status.lives" 
 			style="margin: -5px"> 
 			<img src="../assets/heart.png">
 		</a> 

@@ -1,18 +1,17 @@
 'use strict'
-define(["angular", "js/services"], function(angular, services){
-	services.factory('gameLevels', ['$log', function($log){				
+define(["angular", "js/services", 'js/services/game-instance'], function(angular, services){
+	services.factory('gameLevels', ['$log', 'gameInstance', function($log, gameInstance){				
 	    var GAME_OVER = false;
-        var gameInstance = {};
         var actualProblem;
 
         var next = function(){
             $log.info("next");
             
             if(actualProblem == undefined){            
-                actualProblem = gameInstance.levels[0][0];
+                actualProblem = gameInstance.instance.levels[0][0];
             }else{
                 if(order.next()){
-                    actualProblem = gameInstance.levels[order.level][order.problem];
+                    actualProblem = gameInstance.instance.levels[order.level][order.problem];
                 }else{               
                 }
             }
@@ -72,7 +71,7 @@ define(["angular", "js/services"], function(angular, services){
 
 
         var setGame = function(game){
-            gameInstance = game;
+            gameInstance.instance = game;
         }
 
         // Devuelve true si continúa el juego y false si ya no hay más problemas.
@@ -97,11 +96,11 @@ define(["angular", "js/services"], function(angular, services){
         }       
 
         function isLastProblemForLevel(problemNumber){
-            return problemNumber == gameInstance.levels[order.level].length -1;
+            return problemNumber == gameInstance.instance.levels[order.level].length -1;
         } 
 
         function isLastLevelForGame(levelNumber){
-            return levelNumber == gameInstance.levels.length - 1;
+            return levelNumber == gameInstance.instance.levels.length - 1;
         }
 
         function fillCorrectAnswerList(){
@@ -114,15 +113,25 @@ define(["angular", "js/services"], function(angular, services){
             $log.info(correctAnswerList);
         }
 
+        function resetOrder(){
+            $log.info("reseting order . . .");
+            game.order.level = 0;
+            game.order.problem = 0;
+            game.order.gameOver = false;
+            $log.info(game.order);
+            $log.info("reseted order");
+            actualProblem = undefined;
+        }
+
         var order = {
             level : 0,
             problem : 0,
+            reset : resetOrder,
             next : nextOrder,
             gameOver : false
         }
 
         var game = {
-            setGame : setGame,
             next : next,
             order : order,
             checkAnswer : checkAnswer,

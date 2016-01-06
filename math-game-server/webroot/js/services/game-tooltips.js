@@ -10,7 +10,6 @@ define(["angular", "js/services"], function(angular, services){
             'tooltip-great'
         ];
 
-
         var tooltips = {            
             tooltipClass : 'tooltip-ok',
             show : false,

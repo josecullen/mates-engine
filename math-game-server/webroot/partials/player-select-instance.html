@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 
 
-<div ng-if="instance.status == 'NOT_SELECTED'">
+<div ng-if="gameInstance.instance.status == 'NOT_SELECTED'">
 
 	<div class="input-group">
 		<span class="input-group-addon">Nombre: </span> <input type="text" ng-model="player.name" class="form-control">
@@ -20,30 +20,18 @@
 
 </div>
 
-<div ng-if="instance.status == 'GAME_OVER'">
-	<div class="row">
-			<div class="btn-group btn-group-justified col-xs-9" role="group">
-				<div class="btn-group" role="group">
-					<button ng-click="instance.status = 'NOT_SELECTED'" class="btn btn-warning">CAMBIAR USUARIO o JUEGO</button>
-				</div>
-				<div class="btn-group" role="group">
-					<button ng-click="joinGame(player.name, instance)" class="btn btn-success btn-lg"><b>¡JUGAR OTRA VEZ!</b></button>
-				</div>
-			</div>
-		</div>
-</div>
 
 
-<div ng-if="instance.status == 'SUCCESS'">	
+<div ng-if="gameInstance.instance.status == 'SUCCESS'">	
 	<game-info></game-info>
 	<div class="jumbotron container-fluid" >
 		<h3 class="problem-expression vertical-in" 
 			mathjax-bind="gameLevels.getActualProblem().problemExpression" 
-			ng-show="gameStatus.problemStatus == 'SHOW_PROBLEM'">
+			ng-show="gameInstance.status.problemStatus == 'SHOW_PROBLEM'">
 		</h3>
 		<h3 class="problem-expression vertical-in" 
 			mathjax-bind="gameLevels.getActualProblem().solvedExpression" 
-			ng-show="gameStatus.problemStatus == 'SHOW_SOLUTION'">
+			ng-show="gameInstance.status.problemStatus == 'SHOW_SOLUTION'">
 		</h3>
 	</div>
 
@@ -57,7 +45,7 @@
 						ng-click="response(answer)" 
 						class="btn btn-black" 
 						ng-class= 
-							"gameStatus.problemStatus == 'SHOW_SOLUTION' ?
+							"gameInstance.status.problemStatus == 'SHOW_SOLUTION' ?
 							( gameLevels.checkAnswer(answer).isCorrect ? 'btn-green' : 'btn-red') : 
 							'btn-black'"
 						mathjax-bind="answer">
@@ -69,5 +57,16 @@
 
 </div>
 
-
+<div ng-if="gameInstance.instance.status == 'GAME_OVER'">
+	<div class="row">
+			<div class="btn-group btn-group-justified col-xs-9" role="group">
+				<div class="btn-group" role="group">
+					<button ng-click="gameInstance.instance.status = 'NOT_SELECTED'" class="btn btn-warning">CAMBIAR USUARIO o JUEGO</button>
+				</div>
+				<div class="btn-group" role="group">
+					<button ng-click="joinGame(player.name, gameInstance.instance)" class="btn btn-success btn-lg"><b>¡JUGAR OTRA VEZ!</b></button>
+				</div>
+			</div>
+		</div>
+</div>
 	

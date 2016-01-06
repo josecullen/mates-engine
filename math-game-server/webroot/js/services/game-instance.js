@@ -4,11 +4,22 @@ define(["angular",'js/services', 'js/services/game-services'], function(angular,
         
         $log.info("gameInstance");
 
-        var instance = { status : "NOT_SELECTED" };
-        var status = {};
+        var status = {
+            id : "",
+            problemStatus: "SHOW_PROBLEM",
+            instanceId : "",
+            lives: [1,2,3],
+            problemCount: 0,
+            corrects: 0,
+            incorrects: 0,      
+            score: 0,       
+            time: 60,
+            problemTime: 0,
+            levelCount: 0
+        };
 
-        var joinGame = function(name, selectedInstance){
-            
+        var joinGame = function(name, selectedInstance, callback){
+
             resetStatus();
             
             var params = {"playerName" : name, "instance" : selectedInstance };
@@ -21,23 +32,26 @@ define(["angular",'js/services', 'js/services/game-services'], function(angular,
                         
                         game.instance.one.get(selectedInstance.gameId, selectedInstance._id, "RANDOM")
                         .then(function(instanceResponse){
-                            instance = instanceResponse; 
-                            instance.type = "MULTI_INSTANCE_GAME";
+                            gameInstance.instance = instanceResponse; 
+                            gameInstance.instance.type = "MULTI_INSTANCE_GAME";
                             configGame(response.id);
+                            callback();
                         });
                     
                     }else{
-                        instance = selectedInstance;
+                        gameInstance.instance = selectedInstance;
                         configGame(response.id);
+                        callback();
                     }
-                    return true;
+                        
                 }
-                return false;
+                
             });         
+
         };
 
         function resetStatus(){
-            status = {
+            gameInstance.status = {
                 id : "",
                 problemStatus: "SHOW_PROBLEM",
                 instanceId : "",
@@ -53,13 +67,13 @@ define(["angular",'js/services', 'js/services/game-services'], function(angular,
         }
 
         function configGame(id){
-            instance.status = 'SUCCESS';
-            status.id = id;
-            status.instanceId = instance._id;
+            gameInstance.instance.status = "SUCCESS";
+            gameInstance.status.id = id;
+            gameInstance.status.instanceId = gameInstance.instance._id;
         }
 
         var gameInstance = {
-            instance : instance,
+            instance : { status : "NOT_SELECTED" },
             status : status,
             join : joinGame
         };
