@@ -53,10 +53,16 @@ define(["angular",
             }
 
             $scope.sendScoring();
-            gameInstance.status.problemStatus = "SHOW_SOLUTION";
+            
+            gameLevels.next();
+            if(gameLevels.order.problem == 0){
+                gameInstance.status.problemStatus = "SHOW_NEW_LEVEL";    
+            }else{
+                gameInstance.status.problemStatus = "SHOW_SOLUTION";
+            }            
 
             $timeout(function(){
-                gameLevels.next();
+            //    gameLevels.next();
                 gameTimer.problemTime.reset();
                 gameTooltips.showHideTooltips(false);
                 gameInstance.status.problemStatus = "SHOW_PROBLEM";    

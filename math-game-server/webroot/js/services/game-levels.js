@@ -12,7 +12,6 @@ define(["angular", "js/services", 'js/services/game-instance'], function(angular
             }else{
                 if(order.next()){
                     actualProblem = gameInstance.instance.levels[order.level][order.problem];
-                }else{               
                 }
             }
             $log.info("actualProblem: ");

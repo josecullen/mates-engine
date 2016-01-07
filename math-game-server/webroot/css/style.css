@@ -15,6 +15,16 @@ body {
     padding: 0;
 }
 
+.level-message{
+    text-align: center;
+    line-height: 200px;
+    color: #DED7D7;
+}
+
+.level-container{
+    background-color: #6C2020;
+}
+
 .well{
     background-color: #FFC35A;
     border : none;

@@ -23,38 +23,47 @@
 
 
 <div ng-if="gameInstance.instance.status == 'SUCCESS'">	
-	<game-info></game-info>
-	<div class="jumbotron container-fluid" >
-		<h3 class="problem-expression vertical-in" 
-			mathjax-bind="gameLevels.getActualProblem().problemExpression" 
-			ng-show="gameInstance.status.problemStatus == 'SHOW_PROBLEM'">
-		</h3>
-		<h3 class="problem-expression vertical-in" 
-			mathjax-bind="gameLevels.getActualProblem().solvedExpression" 
-			ng-show="gameInstance.status.problemStatus == 'SHOW_SOLUTION'">
-		</h3>
+	
+	<div class="level-container" ng-if="gameInstance.status.problemStatus == 'SHOW_NEW_LEVEL' ">	
+		<h3 class="level-message">Nivel {{gameLevels.order.level +1}}</h3>	
 	</div>
 
-	<div class="container">
-		<div class="row">
-			<div class="btn-group btn-group-justified col-xs-9" role="group">
-				<div 	class="btn-group" 
-						role="group" 
-						ng-repeat="answer in gameLevels.getActualProblem().answerOptions track by $index">
-					<button 
-						ng-click="response(answer)" 
-						class="btn btn-black" 
-						ng-class= 
-							"gameInstance.status.problemStatus == 'SHOW_SOLUTION' ?
-							( gameLevels.checkAnswer(answer).isCorrect ? 'btn-green' : 'btn-red') : 
-							'btn-black'"
-						mathjax-bind="answer">
-					</button>
-				</div>	
+	<div  ng-if="gameInstance.status.problemStatus != 'SHOW_NEW_LEVEL' ">
+		<game-info></game-info>
+		<div class="jumbotron container-fluid" >
+			<h3 class="problem-expression vertical-in" 
+				mathjax-bind="gameLevels.getActualProblem().problemExpression" 
+				ng-show="gameInstance.status.problemStatus == 'SHOW_PROBLEM'">
+			</h3>
+			<h3 class="problem-expression vertical-in" 
+				mathjax-bind="gameLevels.getActualProblem().solvedExpression" 
+				ng-show="gameInstance.status.problemStatus == 'SHOW_SOLUTION'">
+			</h3>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="btn-group btn-group-justified col-xs-9" role="group">
+					<div 	class="btn-group" 
+							role="group" 
+							ng-repeat="answer in gameLevels.getActualProblem().answerOptions track by $index">
+						<button 
+							ng-click="response(answer)" 
+							class="btn btn-black" 
+							ng-class= 
+								"gameInstance.status.problemStatus == 'SHOW_SOLUTION' ?
+								( gameLevels.checkAnswer(answer).isCorrect ? 'btn-green' : 'btn-red') : 
+								'btn-black'"
+							mathjax-bind="answer">
+						</button>
+					</div>	
+				</div>
 			</div>
 		</div>
+		
 	</div>
 
+	
 </div>
 
 <div ng-if="gameInstance.instance.status == 'GAME_OVER'">
