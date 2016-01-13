@@ -39,6 +39,7 @@ define(["angular",'js/services', 'js/services/game-services'], function(angular,
                         });
                     
                     }else{
+                        alert("same game");
                         gameInstance.instance = selectedInstance;
                         configGame(response.id);
                         callback();

@@ -62,7 +62,6 @@ define(["angular",
             }            
 
             $timeout(function(){
-            //    gameLevels.next();
                 gameTimer.problemTime.reset();
                 gameTooltips.showHideTooltips(false);
                 gameInstance.status.problemStatus = "SHOW_PROBLEM";    

@@ -64,7 +64,7 @@ define(["angular", "js/services", 'js/services/game-instance'], function(angular
                     statusProblem.isProblemEnds = false;
                 }
             }
-            $log.warn(statusProblem);
+            //$log.warn(statusProblem);
             return statusProblem;
         }
 
@@ -75,14 +75,15 @@ define(["angular", "js/services", 'js/services/game-instance'], function(angular
 
         // Devuelve true si continúa el juego y false si ya no hay más problemas.
         var nextOrder = function(){
-            $log.info("nextOrder");
-            $log.info(order);
+            //$log.info("nextOrder");
+            //$log.info(order);
             alreadyAnswer = [];
             correctAnswerList = [];
 
             if(isLastProblemForLevel(order.problem)){
                 if(isLastLevelForGame(order.level)){
                     order.gameOver = true;
+                    gameInstance.instance.status = "GAME_OVER";
                 }else{
                     order.level++;
                     order.problem = 0;
@@ -113,12 +114,12 @@ define(["angular", "js/services", 'js/services/game-instance'], function(angular
         }
 
         function resetOrder(){
-            $log.info("reseting order . . .");
+            $log.info("reseting order");
             game.order.level = 0;
             game.order.problem = 0;
             game.order.gameOver = false;
-            $log.info(game.order);
-            $log.info("reseted order");
+            //$log.info(game.order);
+            //$log.info("reseted order");
             actualProblem = undefined;
         }
 

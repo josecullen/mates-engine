@@ -6,12 +6,54 @@ a:hover {
     cursor: pointer;
 }
 
-body {
-    background-color: #eee;
+body{
+    margin: 0;
+    padding: 0;
+    /*background-color: black;*/
+    height: 100%;
 }
+
+
+.color-1{ background-color: black;  }
+.color-2{ background-color: blue;   }
+.color-3{ background-color: green;  }
+.color-4{ background-color: grey;   }
+.color-5{ background-color: red;    }
+
+.contenido{
+    margin-top: 50px;
+    width: 100%;
+    height: 200px;
+    background-color: #E16969;
+}
+
 
 .btn-group{
     margin:0;
+    padding: 0;
+}
+
+.content{
+    background-color: #D7D7D7;
+    opacity: 0.5;
+    height: 100%;
+}
+
+.content > h3{
+    position: relative;
+    top: 20%;   
+    margin: 0 auto;    
+    color: black; 
+}
+
+.all-height-75{
+    height: 75%;
+}
+.all-height-100{
+    height: 100%;
+}
+.no-margin{
+    margin: 0;
     padding: 0;
 }
 
