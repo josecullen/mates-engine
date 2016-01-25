@@ -28,6 +28,7 @@ define(["angular",
         $scope.$watch('gameInstance.instance.status', function(newValue, oldValue) {
             if(newValue == 'GAME_OVER' || newValue == 'NOT_SELECTED'){
                 $rootScope.showNav = true;
+                disableFullScreen();
             }else{
                 $rootScope.showNav = false;
             }
@@ -92,8 +93,33 @@ define(["angular",
                 gameLevels.next();
                 gameTimer.start($scope.timeCallback);
             });
+            
         }
-
+        
+        
+        function enableFullScreen(){
+        	if (document.requestFullscreen) {
+        		document.requestFullscreen();
+        	} else if (document.webkitRequestFullscreen) {
+        		document.webkitRequestFullscreen();
+        	} else if (document.mozRequestFullScreen) {
+        		document.mozRequestFullScreen();
+        	} else if (document.msRequestFullscreen) {
+        		document.msRequestFullscreen();
+        	}
+        }
+        function disableFullScreen(){
+        	if (document.exitFullscreen) {
+        		document.exitFullscreen();
+        	} else if (document.webkitExitFullscreen) {
+        		document.webkitExitFullscreen();
+        	} else if (document.mozCancelFullScreen) {
+        		document.mozCancelFullScreen();
+        	} else if (document.msExitFullscreen) {
+        		document.msExitFullscreen();
+        	}
+        }
+        
         game.instance.all.get().then(function(response){
             console.log(response);
             $scope.instances = response;

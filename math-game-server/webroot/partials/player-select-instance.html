@@ -7,9 +7,10 @@
 <div ng-if="gameInstance.instance.status == 'NOT_SELECTED'">
 
 	<div class="input-group">
-		<span class="input-group-addon">Nombre: </span> <input type="text" ng-model="player.name" class="form-control">
+		<span class="input-group-addon">Nombre: </span> 
+		<input type="text" ng-model="player.name" class="form-control"><span class="input-group-addon" style="cursor:pointer">OK!</span>
 	</div>
-	<br> <br>
+	<br>
 
 	<ul class="list-group">
 		<li ng-repeat="instance in instances" class="list-group-item"><button class="badge" ng-click="joinGame(player.name, instance)" ng-disabled="player.name.length < 4">¡Jugar!</button>
@@ -18,7 +19,7 @@
 
 </div>
 
-<div class="all-height-100 no-margin" ng-if="gameInstance.instance.status == 'SUCCESS'">	
+<div id="game-div" class="all-height-100 no-margin" ng-if="gameInstance.instance.status == 'SUCCESS'">	
 
 	<div class="level-container" ng-if="gameInstance.status.problemStatus == 'SHOW_NEW_LEVEL' ">	
 		<h3 class="level-message">Nivel {{gameLevels.order.level +1}}</h3>	
@@ -61,8 +62,6 @@
 		</div>
 		
 	</div>
-
-
 </div>
 
 <div ng-if="gameInstance.instance.status == 'GAME_OVER'">
@@ -77,4 +76,3 @@
 		</div>
 	</div>
 </div>
-	

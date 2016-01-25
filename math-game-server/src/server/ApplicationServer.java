@@ -17,6 +17,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.MongoClient;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.StaticHandler;
+import io.vertx.ext.web.handler.impl.StaticHandlerImpl;
 import io.vertx.ext.web.handler.sockjs.SockJSHandler;
 import io.vertx.ext.web.handler.sockjs.SockJSHandlerOptions;
 import mongo.DeleteVerticle;
@@ -163,8 +164,13 @@ public class ApplicationServer {
 		router.route("/socketjs/*").handler(sockJSHandler);
 		
 		
+		StaticHandlerImpl shi = new StaticHandlerImpl();
+		shi.setAllowRootFileSystemAccess(true);
+		shi.setCachingEnabled(false);
+		shi.setMaxAgeSeconds(StaticHandlerImpl.DEFAULT_MAX_AGE_SECONDS);
 		
-		router.route("/*").handler(StaticHandler.create());
+		
+		router.route("/*").handler(shi);
 		
 		server.requestHandler(router::accept).listen(PORT);
 		System.out.println("Server open in port "+PORT);
