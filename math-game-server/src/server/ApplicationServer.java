@@ -163,11 +163,10 @@ public class ApplicationServer {
 		shi.setCachingEnabled(false);
 		//shi.setMaxAgeSeconds(StaticHandlerImpl.DEFAULT_MAX_AGE_SECONDS);
 		
-//		router.route("/*").handler(shi);
-		router.route("/*").handler(StaticHandler.create());
+		router.route("/*").handler(shi);
+//		router.route("/*").handler(StaticHandler.create());
 		
 		server.requestHandler(router::accept).listen(PORT);
 		System.out.println("Server open in port "+PORT);
 	}
-
-}
+	}
