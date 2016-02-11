@@ -28,9 +28,11 @@ define(["angular",
         $scope.$watch('gameInstance.instance.status', function(newValue, oldValue) {
             if(newValue == 'GAME_OVER' || newValue == 'NOT_SELECTED'){
                 $rootScope.showNav = true;
+                $rootScope.bodyStyle = {"background-color" : "white"};
                 disableFullScreen();
             }else{
                 $rootScope.showNav = false;
+                $rootScope.bodyStyle = {"background-color" : "black"};
             }
         });
         

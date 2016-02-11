@@ -10,7 +10,7 @@ define(["angular", "js/controllers"],
         console.log($routeParams.gameId);
 
         $rootScope.showNav = true;
-
+        $rootScope.bodyStyle = {};
         $scope.isAdmin = false;
 
         $scope.enterKey = function(){
