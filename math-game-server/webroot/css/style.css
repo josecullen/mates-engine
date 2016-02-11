@@ -145,46 +145,6 @@ span{
     background-color: black;
 }
 
-/*
-
-.btn:hover,
-.btn:active,
-.btn:link,
-.btn:visited,
-.btn:focus,
-.btn:checked,
-.btn:disabled,
-.btn:empty,
-.btn:enabled,
-.btn:invalid,
-.btn:target,
-.btn::selection,
-.btn:required {
-    background-color: black;
-    color: white;
-}
-
-
-.btn-black:active {
-    color: white;
-    background-color: black;
-}
-
-.btn-black:link {
-    color: white;
-    background-color: black;
-}
-
-.btn-black:visited {
-    color: white;
-    background-color: black;
-}
-
-.btn-black:focus {
-    color: white;
-    background-color: black;
-}*/
-
 .btn-green {
     color: white;
     background-color: green;
