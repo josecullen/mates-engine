@@ -44,7 +44,7 @@
 							ng-repeat="answer in gameLevels.getActualProblem().answerOptions track by $index">
 						<button 
 							ng-click="response(answer)" 
-							class="btn btn-black" 
+							class="btn btn-black btn-lg" 
 							ng-class= 
 								"gameInstance.status.problemStatus == 'SHOW_SOLUTION' ?
 								( gameLevels.checkAnswer(answer).isCorrect ? 'btn-green' : 'btn-red') : 
