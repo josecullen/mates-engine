@@ -18,7 +18,7 @@ define(["angular", "js/services"], function(angular, services){
     	
     	var resume = function(callback){
     		$interval.cancel(stopGame);
-    		
+
     		if(callback != undefined){
     			callbackPerSecond = callback;
     		}
@@ -35,7 +35,7 @@ define(["angular", "js/services"], function(angular, services){
     			callbackOnPause = callback;
     		}
 
-    		if (angular.isDefined(stop)) {
+    		if (angular.isDefined(stopGame)) {
 	            $interval.cancel(stopGame);
 	            stopGame = undefined;
         	}
@@ -55,8 +55,8 @@ define(["angular", "js/services"], function(angular, services){
 			pause : pause,
 			resume : resume,
 			gameTime : {				
-				value : 100,
-				initTime : 100
+				value : 60,
+				initTime : 60
 			},
 			problemTime : {
 				reset : resetProblemTime,

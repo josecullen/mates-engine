@@ -26,7 +26,11 @@ define(["angular",
         $scope.problemStatus = gameInstance.status.problemStatus;
 
         $scope.$watch('gameInstance.instance.status', function(newValue, oldValue) {
-            if(newValue == 'GAME_OVER' || newValue == 'NOT_SELECTED'){
+            $scope.checkGameOver(newValue);
+        });
+
+        $scope.checkGameOver = function(gameStatus){
+            if(gameStatus == 'GAME_OVER' || gameStatus == 'NOT_SELECTED'){
                 $rootScope.showNav = true;
                 $rootScope.bodyStyle = {"background-color" : "white"};
                 disableFullScreen();
@@ -34,14 +38,15 @@ define(["angular",
                 $rootScope.showNav = false;
                 $rootScope.bodyStyle = {"background-color" : "black"};
             }
-        });
+        }
         
 
         $scope.timeCallback = function(gameTime, problemTime){
-            if(gameTime <= 0){
-                $log.info("GAME OVER");
-                gameTimer.pause(0);
-                gameInstance.instance.status = "GAME_OVER";
+            $scope.prueba = gameTime <= 0;
+            if($scope.prueba){
+                $scope.gameTimer.pause(0);
+                gameInstance.instance.status = 'GAME_OVER';
+                $scope.checkGameOver(gameInstance.instance.status);
             }
         }
 
