@@ -17,7 +17,9 @@ public class OneGameHandler {
 		
 		handler.vertx().eventBus().send("find-one", mongoRequest.encode(), ar ->{
 	    	 if (ar.succeeded()) {
-	    		handler.response().end(ar.result().body().toString());		    		    
+	    		 if(ar.result().body() != null){
+	    			 handler.response().end(ar.result().body().toString());	 
+	    		 }    				    		    
 	    	 }else{
 	    		 System.out.println("problem . . . "+ar.cause());
 	    		 handler.response().end("Ha ocurrido un inconveniente. . . "+ar.cause());

@@ -84,8 +84,11 @@ public class ApplicationServer {
 		
 
 		router.route("/").handler(handler ->{
+			
 			handler.response().sendFile("webroot/index.html");
 		});
+		
+		
 		
 		router.get(PATH_ALL).handler(AllGamesHandler.GET);
 		router.delete(PATH_ALL).handler(AllGamesHandler.DELETE);
@@ -124,41 +127,32 @@ public class ApplicationServer {
 		SockJSHandlerOptions options = new SockJSHandlerOptions().setHeartbeatInterval(2000);
 		SockJSHandler sockJSHandler = SockJSHandler.create(vertx, options); 
 		
-		sockJSHandler.socketHandler(sockJSSocket ->{
-
-			
+		sockJSHandler.socketHandler(sockJSSocket ->{		
 			Handler<Buffer> handler = buffer->{			
 				String instanceId = buffer.toString();
 			
 				JsonObject query = new JsonObject()
 					.put("collection", "instance")
-					.put("query", new JsonObject().put("_id", instanceId));
+					.put("query", new JsonObject()
+					.put("_id", instanceId));
 				
-				System.out.println("Creando eventBus consumer "+instanceId);
-				
-				MessageConsumer<String> consumer = eb.consumer(instanceId);
+				System.out.println("Creando eventBus consumer "+instanceId);				
+				MessageConsumer<String> consumer = eb.consumer(instanceId);			
 				
 				consumer.handler(message -> {
-				  System.out.println("I have received a message: " + message.body());
-				  
+				  System.out.println("I have received a message: " + message.body());				  
 					vertx.eventBus().send("find-one", query.encode(), ar ->{
 						if(ar.succeeded()){
 							sockJSSocket.write(Buffer.buffer(ar.result().body().toString()));
 						}else{
 							sockJSSocket.write(Buffer.buffer("query error"));
 						}
-					});
-				  
-				});
+					});  
+				});	
 				
-				
-				vertx.eventBus().publish(instanceId, "update");
-
-				
+				vertx.eventBus().publish(instanceId, "update");		
 			};
-
 			sockJSSocket.handler(handler);
-
 		});
 		
 		router.route("/socketjs/*").handler(sockJSHandler);
@@ -167,10 +161,10 @@ public class ApplicationServer {
 		StaticHandlerImpl shi = new StaticHandlerImpl();
 		shi.setAllowRootFileSystemAccess(true);
 		shi.setCachingEnabled(false);
-		shi.setMaxAgeSeconds(StaticHandlerImpl.DEFAULT_MAX_AGE_SECONDS);
+		//shi.setMaxAgeSeconds(StaticHandlerImpl.DEFAULT_MAX_AGE_SECONDS);
 		
-		
-		router.route("/*").handler(shi);
+//		router.route("/*").handler(shi);
+		router.route("/*").handler(StaticHandler.create());
 		
 		server.requestHandler(router::accept).listen(PORT);
 		System.out.println("Server open in port "+PORT);

@@ -13,6 +13,10 @@ body{
     height: 100%;
 }
 
+span{
+    border-left-style: none !important;
+    border-left-width: 0 !important;
+}
 
 .color-1{ background-color: black;  }
 .color-2{ background-color: blue;   }
@@ -110,10 +114,7 @@ body{
     background-color: #038403;
 }
 
-
-
 .first-position-data{
-
     display: inline;
 }
 
@@ -126,30 +127,63 @@ body{
     background-color: black;
 }
 
-.btn.black:hover {
-    color: black;
-    background-color: white;
-}
 
-.btn.black:active {
+.btn-black:hover,
+.btn-black:active,
+.btn-black:link,
+.btn-black:visited,
+.btn-black:focus,
+.btn-black:checked,
+.btn-black:disabled,
+.btn-black:empty,
+.btn-black:enabled,
+.btn-black:invalid,
+.btn-black:target,
+.btn-black::selection,
+.btn-black:required{
     color: white;
     background-color: black;
 }
 
-.btn.black:link {
+/*
+
+.btn:hover,
+.btn:active,
+.btn:link,
+.btn:visited,
+.btn:focus,
+.btn:checked,
+.btn:disabled,
+.btn:empty,
+.btn:enabled,
+.btn:invalid,
+.btn:target,
+.btn::selection,
+.btn:required {
+    background-color: black;
+    color: white;
+}
+
+
+.btn-black:active {
     color: white;
     background-color: black;
 }
 
-.btn.black:visited {
+.btn-black:link {
     color: white;
     background-color: black;
 }
 
-.btn.black:focus {
+.btn-black:visited {
     color: white;
     background-color: black;
 }
+
+.btn-black:focus {
+    color: white;
+    background-color: black;
+}*/
 
 .btn-green {
     color: white;
@@ -159,3 +193,4 @@ body{
     color: white;
     background-color: #C10D0D;
 }
+

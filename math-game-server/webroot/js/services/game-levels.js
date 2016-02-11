@@ -29,7 +29,7 @@ define(["angular", "js/services", 'js/services/game-instance'], function(angular
             if(correctAnswerList.length == 0 || correctAnswerList == undefined){
                 fillCorrectAnswerList();
             }
-
+            
             return getStatusProblem(verifyAnswer(answer));
         }
 
@@ -40,11 +40,11 @@ define(["angular", "js/services", 'js/services/game-instance'], function(angular
             for (var i = correctAnswerList.length - 1; i >= 0; i--) {                
                 
                 if(answer == correctAnswerList[i]){
-                    //$log.warn(answer + " == " + correctAnswerList[i] + " = true");
+                    $log.warn(answer + " == " + correctAnswerList[i] + " = true");
                     alreadyAnswer.push(correctAnswerList.splice(i, 1));
                     return true;
                 }else{
-                  //  $log.warn(answer + " == " + correctAnswerList[i] + " = false");
+                    $log.warn(answer + " == " + correctAnswerList[i] + " = false");
                 }
                 
             };
@@ -104,13 +104,13 @@ define(["angular", "js/services", 'js/services/game-instance'], function(angular
         }
 
         function fillCorrectAnswerList(){
-            $log.info("fillCorrectAnswerList");
+           // $log.info("fillCorrectAnswerList");
             alreadyAnswer = [];
             correctAnswerList = [];
             actualProblem.correctAnswer.forEach(function(answer){
                 correctAnswerList.push(answer);
             });
-            $log.info(correctAnswerList);
+            //$log.info(correctAnswerList);
         }
 
         function resetOrder(){

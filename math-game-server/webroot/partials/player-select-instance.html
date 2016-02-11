@@ -5,18 +5,15 @@
 
 
 <div ng-if="gameInstance.instance.status == 'NOT_SELECTED'">
-
 	<div class="input-group">
 		<span class="input-group-addon">Nombre: </span> 
 		<input type="text" ng-model="player.name" class="form-control"><span class="input-group-addon" style="cursor:pointer">OK!</span>
 	</div>
 	<br>
-
 	<ul class="list-group">
 		<li ng-repeat="instance in instances" class="list-group-item"><button class="badge" ng-click="joinGame(player.name, instance)" ng-disabled="player.name.length < 4">¡Jugar!</button>
 			{{instance.gameName}}</li>
 	</ul>
-
 </div>
 
 <div id="game-div" class="all-height-100 no-margin" ng-if="gameInstance.instance.status == 'SUCCESS'">	
@@ -24,13 +21,12 @@
 	<div class="level-container" ng-if="gameInstance.status.problemStatus == 'SHOW_NEW_LEVEL' ">	
 		<h3 class="level-message">Nivel {{gameLevels.order.level +1}}</h3>	
 	</div>
-
 	<div class="all-height-100 no-margin" ng-if="gameInstance.status.problemStatus != 'SHOW_NEW_LEVEL' ">
-
 		<game-info></game-info>
 		<div class="content all-height-75">
-
-			<h3 class="problem-expression vertical-in" 
+			<h3 
+				height="100"
+				class="problem-expression vertical-in" 
 				mathjax-bind="gameLevels.getActualProblem().problemExpression" 
 				ng-show="gameInstance.status.problemStatus == 'SHOW_PROBLEM'">
 			</h3>
@@ -38,7 +34,6 @@
 				mathjax-bind="gameLevels.getActualProblem().solvedExpression" 
 				ng-show="gameInstance.status.problemStatus == 'SHOW_SOLUTION'">
 			</h3>
-
 		</div>
 
 		<div class="container-fluid">

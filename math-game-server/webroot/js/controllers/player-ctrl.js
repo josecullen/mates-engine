@@ -44,29 +44,44 @@ define(["angular",
         }
 
         $scope.onPauseCallback = function(answer){               
-            gameTooltips.showHideTooltips(true);
+            
             var problemStatus = gameLevels.checkAnswer(answer);
 
             if(problemStatus.isCorrect && problemStatus.isProblemEnds){
+                gameTooltips.showHideTooltips(true);
                 gameTooltips.setResponseLevel(gameScoring.update(true));
-            }else if(!problemStatus.isCorrect){
-                gameTooltips.setResponseLevel(gameScoring.update(false));
-            }
-
-            $scope.sendScoring();
+                $scope.sendScoring();
             
-            gameLevels.next();
-            if(gameLevels.order.problem == 0){
-                gameInstance.status.problemStatus = "SHOW_NEW_LEVEL";    
-            }else{
-                gameInstance.status.problemStatus = "SHOW_SOLUTION";
-            }            
+                gameLevels.next();
+                if(gameLevels.order.problem == 0){
+                    gameInstance.status.problemStatus = "SHOW_NEW_LEVEL";    
+                }else{
+                    gameInstance.status.problemStatus = "SHOW_SOLUTION";
+                }            
 
-            $timeout(function(){
-                gameTimer.problemTime.reset();
-                gameTooltips.showHideTooltips(false);
-                gameInstance.status.problemStatus = "SHOW_PROBLEM";    
-            }, 1500);
+                $timeout(function(){
+                    gameTimer.problemTime.reset();
+                    gameTooltips.showHideTooltips(false);
+                    gameInstance.status.problemStatus = "SHOW_PROBLEM";    
+                }, 1500);
+            }else if(!problemStatus.isCorrect){
+                gameTooltips.showHideTooltips(true);
+                gameTooltips.setResponseLevel(gameScoring.update(false));
+                $scope.sendScoring();
+            
+                gameLevels.next();
+                if(gameLevels.order.problem == 0){
+                    gameInstance.status.problemStatus = "SHOW_NEW_LEVEL";    
+                }else{
+                    gameInstance.status.problemStatus = "SHOW_SOLUTION";
+                }            
+
+                $timeout(function(){
+                    gameTimer.problemTime.reset();
+                    gameTooltips.showHideTooltips(false);
+                    gameInstance.status.problemStatus = "SHOW_PROBLEM";    
+                }, 1500);
+            }
 
         }
 
@@ -119,12 +134,13 @@ define(["angular",
         		document.msExitFullscreen();
         	}
         }
+        $timeout(function(){
+            game.instance.all.get().then(function(response){
+                console.log(response);
+                $scope.instances = response;
+            });
+        },1000);
         
-        game.instance.all.get().then(function(response){
-            console.log(response);
-            $scope.instances = response;
-        });
-
 		
     }]);
 	

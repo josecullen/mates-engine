@@ -11,6 +11,12 @@ define(["angular", "js/controllers"],
 
         $rootScope.showNav = true;
 
+        $scope.isAdmin = false;
+
+        $scope.enterKey = function(){
+            $scope.isAdmin = "admin" == prompt("Ingrese la clave de administrador");
+        }
+
         if($routeParams.gameId == "new"){
             $scope.gameStatus = 'NOT CREATED';
         }else{
