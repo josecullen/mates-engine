@@ -2,9 +2,14 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <!--
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+-->
 <meta http-equiv="cache-control" content="max-age=0" />
 <meta http-equiv="cache-control" content="no-cache" />
 
@@ -33,6 +38,53 @@ MathJax.Hub.Config({
 });
 </script>
 
+<script type="text/javascript">
+	var isFullScreen = false;
+
+	function toggleFullScreen(){
+		if(!isFullScreen){
+			enableFullScreen();
+		}else{
+			disableFullScreen();
+		}
+		console.log(isFullScreen);
+	}
+
+	function enableFullScreen(){
+		isFullScreen = true;
+		var span = document.getElementById('fullScreenSpan');
+		span.className = "glyphicon glyphicon-resize-small";
+
+        if (document.body.requestFullscreen) {
+            document.body.requestFullscreen();
+        } else if (document.body.webkitRequestFullscreen) {
+            document.body.webkitRequestFullscreen();
+        } else if (document.body.mozRequestFullScreen) {
+            document.body.mozRequestFullScreen();
+        } else if (document.body.msRequestFullscreen) {
+            document.body.msRequestFullscreen();
+        }
+    }
+
+    function disableFullScreen(){
+    	isFullScreen = false;
+    	var span = document.getElementById('fullScreenSpan');
+		span.className = "glyphicon glyphicon-resize-full";
+
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    }
+
+
+</script>
+
 <script type="text/javascript" data-main="main" src="lib/requirejs/requirejs.js"></script>
 
 
@@ -41,16 +93,27 @@ MathJax.Hub.Config({
 
 
 
-<body class="all-height-100 no-margin" ng-style="bodyStyle">
+<body class="all-height-100 no-margin" id="allBody" ng-style="bodyStyle">
+<div class="full_loading" id="full_loading">
 
 	<div class="all-height-100 no-margin" ng-controller="gameController">	
 		<nav class="navbar navbar-inverse navbar-fixed-top" ng-show="showNav">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="#">Mates</a>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+        					<a href="#" onclick="toggleFullScreen()">
+        					<span id="fullScreenSpan" class="glyphicon glyphicon-resize-full"></span>
+        					</a>
+        				</li>
+        			</ul>
+				</div>
+				<div class="navbar-header">
+					
 				</div>
 
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<div class="navbar-header collapse navbar-collapse" >
 					<ul class="nav navbar-nav" >
 						<li class="dropdown">
 							<a 	href="#" 
@@ -70,19 +133,21 @@ MathJax.Hub.Config({
 							</ul>
 						</li>
 						<li><a href="#/player-select-instance">¡Jugar!</a></li>
-						
 					</ul>
 				</div>
+				
+					
 			</div>
 		</nav>
 
 		<br ng-show="showNav">
 		<br ng-show="showNav">
 		<br ng-show="showNav">
+		
 
 		 <ng-view></ng-view> 
 	</div>
 
-
+</div>
 </body>
 </html>

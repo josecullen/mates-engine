@@ -11,7 +11,12 @@
 	</div>
 	<br>
 	<ul class="list-group">
-		<li ng-repeat="instance in instances" class="list-group-item"><button class="badge" ng-click="joinGame(player.name, instance)" ng-disabled="player.name.length < 4">¡Jugar!</button>
+		<li ng-repeat="instance in instances" class="list-group-item">
+		<button 
+			class="badge" 
+			ng-click="joinGame(player.name, instance)" 
+			ng-disabled="player.name.length < 4"
+			onclick="enableFullScreen()" >¡Jugar!</button>
 			{{instance.gameName}}</li>
 	</ul>
 </div>
@@ -24,6 +29,7 @@
 	<div class="all-height-100 no-margin" ng-if="gameInstance.status.problemStatus != 'SHOW_NEW_LEVEL' ">
 		<game-info></game-info>
 		<div class="content all-height-75">
+		
 			<h3 
 				class="problem-expression vertical-in" 
 				mathjax-bind="gameLevels.getActualProblem().problemExpression" 
@@ -41,7 +47,7 @@
 					<div 	class="btn-group" 
 							role="group" 
 							ng-repeat="answer in gameLevels.getActualProblem().answerOptions track by $index">
-						<button 
+						<button 							
 							ng-click="response(answer)" 
 							class="btn btn-black btn-lg" 
 							ng-class= 
@@ -54,7 +60,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 </div>
 
@@ -65,7 +71,11 @@
 				<button ng-click="gameInstance.instance.status = 'NOT_SELECTED'" class="btn btn-warning">CAMBIAR USUARIO o JUEGO</button>
 			</div>
 			<div class="btn-group" role="group">
-				<button ng-click="joinGame(player.name, gameInstance.instance)" class="btn btn-success btn-lg"><b>¡JUGAR OTRA VEZ!</b></button>
+				<button 
+					ng-click="joinGame(player.name, gameInstance.instance)" 
+					onclick="toggleFullScreen()" 
+					class="btn btn-success btn-lg">
+					<b>¡JUGAR OTRA VEZ!</b></button>
 			</div>
 		</div>
 	</div>

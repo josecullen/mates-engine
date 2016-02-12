@@ -9,14 +9,16 @@ a:hover {
 body{
     margin: 0;
     padding: 0;
-    /*background-color: black;*/
     height: 100%;
+    width: 100%;
 }
+
 
 span{
     border-left-style: none !important;
     border-left-width: 0 !important;
 }
+
 
 .color-1{ background-color: black;  }
 .color-2{ background-color: blue;   }
@@ -39,35 +41,30 @@ span{
 
 .content{
     background-color: #D7D7D7;
-    opacity: 0.5;
-    height: 100%;
+    opacity: 0.7;
 }
 
 .content > h3{
     position: relative;
-    top: 20%;   
-    margin: 0 auto;    
+    top: 50%;
+    transform: translateY(-50%);
     color: black; 
 }
 
 .all-height-75{
     height: 75%;
 }
-.all-height-100{
-    height: 100%;
-}
-.no-margin{
-    margin: 0;
-    padding: 0;
-}
 
 .level-message{
     text-align: center;
-    line-height: 200px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);   
     color: #DED7D7;
 }
 
 .level-container{
+    height: 75%;
     background-color: #6C2020;
 }
 
@@ -153,4 +150,3 @@ span{
     color: white;
     background-color: #C10D0D;
 }
-
