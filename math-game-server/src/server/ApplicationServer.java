@@ -26,7 +26,7 @@ import mongo.InsertVerticle;
 import mongo.UpdateVerticle;
 
 public class ApplicationServer {
-	static int PORT = 8081;
+	static int PORT = 10000;//8081;
 	
 	private static String PATH = "/arithmetic/v1/";
 	private static String PATH_ALL = PATH+"all";
@@ -159,9 +159,10 @@ public class ApplicationServer {
 		
 		
 		StaticHandlerImpl shi = new StaticHandlerImpl();
-		shi.setAllowRootFileSystemAccess(true);
+		
+//		shi.setAllowRootFileSystemAccess(true);
 		shi.setCachingEnabled(false);
-		//shi.setMaxAgeSeconds(StaticHandlerImpl.DEFAULT_MAX_AGE_SECONDS);
+		shi.setMaxAgeSeconds(StaticHandlerImpl.DEFAULT_MAX_AGE_SECONDS);
 		
 		router.route("/*").handler(shi);
 //		router.route("/*").handler(StaticHandler.create());

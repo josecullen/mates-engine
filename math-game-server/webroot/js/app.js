@@ -2,7 +2,14 @@
 	'use strict';
 
 	define([], function(require) {
-		var app = angular.module('app', [ 'controllers', 'directives', 'ngRoute', 'ngAnimate', 'nvd3', 'ui.bootstrap' ]);
+		var app = angular.module('app', [ 
+			'controllers', 
+			'directives', 
+			'ngRoute', 
+			'ngAnimate', 
+			'nvd3', 
+			'ui.bootstrap'
+		]);
 		app.config([ '$routeProvider', function($routeProvider) {
 			$routeProvider
 				.when('/admin-game-edit/:gameId', {

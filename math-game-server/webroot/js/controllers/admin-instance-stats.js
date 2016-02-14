@@ -1,4 +1,4 @@
-define(["angular", "js/controllers",'js/services/game-services', 'lib/sockjs-1.0.3'], function(angular, controllers) {
+define(["angular", "js/controllers",'js/services/game-services', 'lib/sockjs-1.0.3.min'], function(angular, controllers) {
     controllers.controller('adminInstanceStats', 
     	['$scope', 'game', '$location', '$interval', '$log', '$routeParams', '$timeout',
     	function($scope, game, $location, $interval, $log, $routeParams, $timeout) {
@@ -24,7 +24,7 @@ define(["angular", "js/controllers",'js/services/game-services', 'lib/sockjs-1.0
 
         
         $scope.openSocket = function() {
-            $scope.sock = new SockJS('http://localhost:8081/socketjs/');
+            $scope.sock = new SockJS('http://localhost:10000/socketjs/');
             $scope.sock.onopen = function() {
                 $log.info('open');
                 $scope.$apply(function() {

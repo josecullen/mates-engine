@@ -35,10 +35,6 @@ define(["angular",
             if(gameStatus == 'GAME_OVER' || gameStatus == 'NOT_SELECTED'){
                 $rootScope.showNav = true;
                 $rootScope.bodyStyle = {"background-color" : "white"};
-      //          $timeout(function(){
-  //                  $log.info("disableFullscreen");
-//                    disableFullScreen();
-    //            },0);
             }else{
                 $rootScope.showNav = false;
                 $rootScope.bodyStyle = {"background-color" : "black"};
