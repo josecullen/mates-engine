@@ -34,7 +34,7 @@ define(["angular", "js/services", 'js/services/game-timer', 'js/services/game-in
                 gameTimer.gameTime.value += plusTime;
 
             }else{        
-                $log.error("incorrect answer");
+              //  $log.error("incorrect answer");
                 gameInstance.status.incorrects++;
                 gameInstance.status.lives.pop();
                 if(gameInstance.status.lives.length == 0){

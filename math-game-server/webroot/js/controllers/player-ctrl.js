@@ -26,9 +26,12 @@ define(["angular",
 
         $scope.log = "";
 
-
         $scope.$watch('gameInstance.instance.status', function(newValue, oldValue) {
             $scope.checkGameOver(newValue);
+        });
+
+        $scope.$watch('gameInstance.status.problemStatus', function(newStatus){
+            $log.info("problem status : "+newStatus);
         });
 
         $scope.checkGameOver = function(gameStatus){
@@ -54,43 +57,42 @@ define(["angular",
         $scope.onPauseCallback = function(answer){               
             
             var problemStatus = gameLevels.checkAnswer(answer);
-
-            if(problemStatus.isCorrect && problemStatus.isProblemEnds){
+            if(isProblemEnds(problemStatus)){
                 gameTooltips.showHideTooltips(true);
-                gameTooltips.setResponseLevel(gameScoring.update(true));
+
+                if(problemStatus.isCorrect && problemStatus.isProblemEnds){
+                    gameTooltips.setResponseLevel(gameScoring.update(true));
+                }else{
+                    gameTooltips.setResponseLevel(gameScoring.update(false));
+                }
+
                 $scope.sendScoring();
-            
-                gameLevels.next();
-                if(gameLevels.order.problem == 0){
+
+                if(gameLevels.order.problem == 0 && gameLevels.order.level != 0){
                     gameInstance.status.problemStatus = "SHOW_NEW_LEVEL";    
                 }else{
-                    gameInstance.status.problemStatus = "SHOW_SOLUTION";
+                    $scope.solvedClass = 'solved-in';
+                    $timeout(function(){
+                        gameInstance.status.problemStatus = "SHOW_SOLUTION";
+                    }, 150);
+
                 }            
 
                 $timeout(function(){
-                    gameTimer.problemTime.reset();
-                    gameTooltips.showHideTooltips(false);
-                    gameInstance.status.problemStatus = "SHOW_PROBLEM";    
-                }, 1500);
-            }else if(!problemStatus.isCorrect){
-                gameTooltips.showHideTooltips(true);
-                gameTooltips.setResponseLevel(gameScoring.update(false));
-                $scope.sendScoring();
-            
-                gameLevels.next();
-                if(gameLevels.order.problem == 0){
-                    gameInstance.status.problemStatus = "SHOW_NEW_LEVEL";    
-                }else{
-                    gameInstance.status.problemStatus = "SHOW_SOLUTION";
-                }            
 
-                $timeout(function(){
                     gameTimer.problemTime.reset();
                     gameTooltips.showHideTooltips(false);
                     gameInstance.status.problemStatus = "SHOW_PROBLEM";    
+                    gameLevels.next();
+                    $scope.solvedClass = '';
+
                 }, 1500);
             }
 
+        }
+
+        function isProblemEnds(problemStatus){
+            return problemStatus.isCorrect && problemStatus.isProblemEnds || !problemStatus.isCorrect;
         }
 
     	$scope.response = function(answer){

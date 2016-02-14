@@ -1,15 +1,33 @@
-.vertical-in{
-  opacity: 1;
 
-}
-.vertical-in.ng-hide-remove, .vertical-in.ng-leave{
+.vertical-in{
+    opacity: 1;
+
+  -webkit-transition:all linear 0.5s;
   transition: all linear 0.5s;
 }	
+
 .vertical-in.ng-hide, .vertical-in.ng-leave.ng-leave-active{
   line-height: 0;
   opacity: 0;
   padding: 0 10px;
+  font-size : 7em;
 }
+
+.vertical-in.ng-show{
+  line-height: 0;
+  opacity: 1;
+  padding: 0 -10px;
+}
+
+.solved-in{
+  opacity: 0;
+}
+
+.solved-in{
+  -webkit-animation-name: mymove;  /* Chrome, Safari, Opera */
+  -webkit-animation-duration: 1s;  /* Chrome, Safari, Opera */
+}
+
 
 .first-position{
   transition: all linear 0.5s;
@@ -23,3 +41,10 @@
     top: -50px;
 }
 
+
+
+@-webkit-keyframes mymove {
+    0% {opacity: 0;}
+    50% {opacity: 0;}
+    100% {opacity: 1;}
+}
