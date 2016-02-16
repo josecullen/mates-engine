@@ -61,6 +61,7 @@
 								'js/controllers/admin-instances-ctrl',
 								'js/controllers/admin-instance-stats',								
 								'js/controllers/player-ctrl',
+								'js/controllers/game-over-ctrl',
 								'angular-route', 
 								'bootstrap' ]
 					}

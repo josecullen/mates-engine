@@ -124,6 +124,8 @@ public class ApplicationServer {
 
 
 		
+		
+		
 		SockJSHandlerOptions options = new SockJSHandlerOptions().setHeartbeatInterval(2000);
 		SockJSHandler sockJSHandler = SockJSHandler.create(vertx, options); 
 		
@@ -170,4 +172,6 @@ public class ApplicationServer {
 		server.requestHandler(router::accept).listen(PORT);
 		System.out.println("Server open in port "+PORT);
 	}
-	}
+	
+	
+}

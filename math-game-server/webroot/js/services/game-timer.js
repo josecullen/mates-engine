@@ -15,6 +15,10 @@ define(["angular", "js/services"], function(angular, services){
     		resetProblemTime();
     		resume(callback);
     	}
+
+        var stop = function(){
+            $interval.cancel(stopGame);
+        }
     	
     	var resume = function(callback){
     		$interval.cancel(stopGame);
@@ -54,6 +58,7 @@ define(["angular", "js/services"], function(angular, services){
     		start : start,
 			pause : pause,
 			resume : resume,
+            stop : stop,
 			gameTime : {				
 				value : 60,
 				initTime : 60

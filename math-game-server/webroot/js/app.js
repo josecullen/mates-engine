@@ -32,6 +32,10 @@
 					templateUrl : 'partials/player-select-instance.html',
 					controller: 'playerCtrl'
 				})
+				.when('/game-over',{
+					templateUrl : 'partials/game-over.html',
+					controller: 'gameOverCtrl'
+				})
 				.otherwise({
 					redirectTo : '/player-select-instance'
 				});

@@ -1,7 +1,6 @@
 
 .vertical-in{
-    opacity: 1;
-
+  opacity: 1;
   -webkit-transition:all linear 0.5s;
   transition: all linear 0.5s;
 }	
@@ -10,7 +9,7 @@
   line-height: 0;
   opacity: 0;
   padding: 0 10px;
-  font-size : 7em;
+ /* font-size : 7em;*/
 }
 
 .vertical-in.ng-show{
@@ -26,8 +25,8 @@
 .solved-in{
   -webkit-animation-name: solved;  /* Chrome, Safari, Opera */
   -webkit-animation-duration: 1s;  /* Chrome, Safari, Opera */
-  animation-name: solved;  /* Chrome, Safari, Opera */
-  animation-duration: 1s;  /* Chrome, Safari, Opera */
+  animation-name: solved;  
+  animation-duration: 1s;  
 }
 
 
@@ -42,7 +41,6 @@
     position: relative;
     top: -50px;
 }
-
 
 
 @-webkit-keyframes solved {
@@ -62,11 +60,9 @@
   width: 100%;
 }
 
-
-
-
 .level-container.ng-enter, .level-container.ng-leave {
   transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
 }
 
 .level-container.ng-enter,

@@ -1,0 +1,40 @@
+<meta charset="UTF-8">
+<div  class="container">
+	<div class="row">
+		<div class="btn-group col-xs-4 ">			
+			<h3 style="color:#BCBCBC">Puntuación : {{gameInstance.status.score}}</h3>
+		</div>
+		<div class="btn-group col-xs-4 ">			
+			<h3 style="color:#BCBCBC">Posición : {{posicion}}</h3>
+		</div>
+		<div class="btn-group col-xs-4 ">			
+			<button 					
+				ng-click="selectGame()" 
+				onclick="toggleFullScreen()" 
+				class="btn btn-success btn-lg">
+				<b>¡JUGAR OTRA VEZ!</b>
+			</button>		
+		</div>
+
+	    <nvd3 options="options" data="data"></nvd3>
+	</div>
+</div>
+
+
+<!--
+<div class="btn-group btn-group-justified col-xs-9" role="group">
+			
+			<div class="btn-group" role="group">
+				<button 					
+					ng-click="$location('/player-select-instance')" 					
+					class="btn btn-success btn-lg">
+					<b>¡JUGAR OTRA VEZ!</b></button>
+			</div>
+		</div>
+
+<div class="btn-group" role="group">
+				<button ng-click="gameInstance.instance.status = 'NOT_SELECTED'" class="btn btn-warning">CAMBIAR USUARIO o JUEGO</button>
+			</div>
+
+
+-->

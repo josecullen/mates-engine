@@ -12,7 +12,7 @@ define(["angular",'js/services', 'js/services/game-services'], function(angular,
             problemCount: 0,
             corrects: 0,
             incorrects: 0,      
-            score: 0,       
+            score: 180,       
             time: 60,
             problemTime: 0,
             levelCount: 0
@@ -73,11 +73,23 @@ define(["angular",'js/services', 'js/services/game-services'], function(angular,
             gameInstance.status.instanceId = gameInstance.instance._id;
         }
 
+        var resetAll = function(){
+            resetStatus();
+            $log.info("reset resetAll");
+            
+
+            gameInstance.instance = {status : "NOT_SELECTED" };
+            $log.info(gameInstance.instance.status);
+        }
+
         var gameInstance = {
             instance : { status : "NOT_SELECTED" },
             status : status,
-            join : joinGame
+            join : joinGame,
+            resetAll : resetAll
         };
+
+
 
         return gameInstance;
 

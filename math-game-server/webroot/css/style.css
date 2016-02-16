@@ -150,3 +150,8 @@ span{
     color: white;
     background-color: #C10D0D;
 }
+
+
+svg text {
+    fill: #CBCBCB;
+}

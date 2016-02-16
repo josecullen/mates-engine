@@ -18,6 +18,7 @@ define(["angular",
         $log.info("playerCtrl");
         $scope.gameTimer = gameTimer;
         $scope.gameLevels = gameLevels;
+
         $scope.gameInstance = gameInstance;
 
     	$scope.instances = [];
@@ -27,7 +28,7 @@ define(["angular",
         $scope.log = "";
 
         $scope.$watch('gameInstance.instance.status', function(newValue, oldValue) {
-            $scope.checkGameOver(newValue);
+            $scope.checkGameOver(gameInstance.instance.status);
         });
 
         $scope.$watch('gameInstance.status.problemStatus', function(newStatus){
@@ -35,9 +36,16 @@ define(["angular",
         });
 
         $scope.checkGameOver = function(gameStatus){
+            $log.info("checkGameOver "+gameInstance.instance.status);
+
             if(gameStatus == 'GAME_OVER' || gameStatus == 'NOT_SELECTED'){
                 $rootScope.showNav = true;
                 $rootScope.bodyStyle = {"background-color" : "white"};
+                if(gameStatus == 'GAME_OVER'){ 
+                    gameTimer.stop();
+
+                    $location.path('/game-over');                
+                }
             }else{
                 $rootScope.showNav = false;
                 $rootScope.bodyStyle = {"background-color" : "black"};
@@ -49,6 +57,7 @@ define(["angular",
             $scope.prueba = gameTime <= 0;
             if($scope.prueba){
                 $scope.gameTimer.pause(0);
+                $log.info("game over por tiempo");
                 gameInstance.instance.status = 'GAME_OVER';
                 $scope.checkGameOver(gameInstance.instance.status);
             }
@@ -74,7 +83,7 @@ define(["angular",
                     $scope.solvedClass = 'solved-in';
                     $timeout(function(){
                         gameInstance.status.problemStatus = "SHOW_SOLUTION";
-                    }, 150);
+                    }, 100);
 
                 }            
 
@@ -90,6 +99,8 @@ define(["angular",
             }
 
         }
+
+
 
         function isProblemEnds(problemStatus){
             return problemStatus.isCorrect && problemStatus.isProblemEnds || !problemStatus.isCorrect;
@@ -110,14 +121,7 @@ define(["angular",
         $scope.joinGame = function(name, instance){
             
             $log.info("join game . . ." );
-  /*
-            $timeout(function(){
-  
-                $log.info("requestFullscreen");
-                $scope.log = "requestFullscreen";
-                enableFullScreen();
-            },0);
-*/
+
             gameInstance.join(name, instance, function(){
                 gameLevels.order.reset();
                 gameLevels.next();
@@ -126,43 +130,7 @@ define(["angular",
             
         }
         
-/*        
-        function enableFullScreen(){
-            var all = document.getElementById("allBody");
-            if (document.body.requestFullscreen) {
-                document.body.requestFullscreen();
-            } else if (document.body.webkitRequestFullscreen) {
-                document.body.webkitRequestFullscreen();
-            } else if (document.body.mozRequestFullScreen) {
-                document.body.mozRequestFullScreen();
-            } else if (document.body.msRequestFullscreen) {
-                $scope.log = "msRequestFullscreen";
-                loading = document.getElementById('full_loading');
-                loading.msRequestFullscreen();
 
-                $timeout(function(){
-                    document.body.msRequestFullscreen();
-                },0);
-  
-
-            }else{
-                $scope.log = "fullscreen no compatible ";
-            }
-        }
-
-        function disableFullScreen(){
-            $scope.log = "disableFullscreen";
-            if (document.body.exitFullscreen) {
-                document.body.exitFullscreen();
-            } else if (document.body.webkitExitFullscreen) {
-                document.body.webkitExitFullscreen();
-            } else if (document.body.mozCancelFullScreen) {
-                document.body.mozCancelFullScreen();
-            } else if (document.body.msExitFullscreen) {
-                document.body.msExitFullscreen();
-            }
-        }
-*/
         $timeout(function(){
             game.instance.all.get().then(function(response){
                 console.log(response);

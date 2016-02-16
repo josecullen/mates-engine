@@ -42,7 +42,20 @@ public class OneInstanceHandler {
 					
 			});			
 		}else{
-			handler.response().end(":(");
+			JsonObject dbRequest = new JsonObject()
+			.put("collection", "instance")
+			.put("query", new JsonObject().put("_id", instanceId));
+			
+			handler.vertx().eventBus().send("find-one", dbRequest.encode(), ar ->{
+				if(ar.succeeded()){
+					
+					JsonObject instance = new JsonObject(ar.result().body().toString());						
+					handler.response().end(instance.encode());
+				}
+					
+			});			
+			
+//			handler.response().end(":(");
 	
 		};
 	};

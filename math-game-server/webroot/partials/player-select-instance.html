@@ -28,8 +28,7 @@
 	</div>
 	<div class="all-height-100 no-margin" ng-if="gameInstance.status.problemStatus != 'SHOW_NEW_LEVEL' ">
 		<game-info></game-info>
-		<div class="content all-height-75">
-		
+		<div class="content all-height-75">		
 			<h3 
 				class="problem-expression vertical-in" 
 				mathjax-bind="gameLevels.getActualProblem().problemExpression" 
@@ -38,13 +37,12 @@
 			<h3 class="problem-expression" ng-class="solvedClass" 
 				mathjax-bind="gameLevels.getActualProblem().solvedExpression" 
 				ng-show="gameInstance.status.problemStatus == 'SHOW_SOLUTION'">
-			</h3>
-			
+			</h3>			
 		</div>
 
 		<div class="container-fluid">
 			<div class="row">
-				<div class="btn-group btn-group-justified" role="group">
+				<div class="btn-group btn-group-justified" style="top: -10px" role="group">
 					<div 	class="btn-group" 
 							role="group" 
 							ng-repeat="answer in gameLevels.getActualProblem().answerOptions track by $index">
@@ -62,22 +60,5 @@
 			</div>
 		</div>
 
-	</div>
-</div>
-
-<div ng-if="gameInstance.instance.status == 'GAME_OVER'">
-	<div class="row">
-		<div class="btn-group btn-group-justified col-xs-9" role="group">
-			<div class="btn-group" role="group">
-				<button ng-click="gameInstance.instance.status = 'NOT_SELECTED'" class="btn btn-warning">CAMBIAR USUARIO o JUEGO</button>
-			</div>
-			<div class="btn-group" role="group">
-				<button 
-					ng-click="joinGame(player.name, gameInstance.instance)" 
-					onclick="toggleFullScreen()" 
-					class="btn btn-success btn-lg">
-					<b>¡JUGAR OTRA VEZ!</b></button>
-			</div>
-		</div>
 	</div>
 </div>

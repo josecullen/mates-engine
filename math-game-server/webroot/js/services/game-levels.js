@@ -34,17 +34,11 @@ define(["angular", "js/services", 'js/services/game-instance'], function(angular
         }
 
         var verifyAnswer = function(answer){
-            //$log.info("verifyAnswer : "+answer);
-            //$log.info(correctAnswerList);
-
             for (var i = correctAnswerList.length - 1; i >= 0; i--) {                
                 
                 if(answer == correctAnswerList[i]){
-        //            $log.warn(answer + " == " + correctAnswerList[i] + " = true");
                     alreadyAnswer.push(correctAnswerList.splice(i, 1));
                     return true;
-                }else{
-           //         $log.warn(answer + " == " + correctAnswerList[i] + " = false");
                 }
                 
             };
@@ -75,8 +69,6 @@ define(["angular", "js/services", 'js/services/game-instance'], function(angular
 
         // Devuelve true si continúa el juego y false si ya no hay más problemas.
         var nextOrder = function(){
-            //$log.info("nextOrder");
-            //$log.info(order);
             alreadyAnswer = [];
             correctAnswerList = [];
 
@@ -104,13 +96,11 @@ define(["angular", "js/services", 'js/services/game-instance'], function(angular
         }
 
         function fillCorrectAnswerList(){
-           // $log.info("fillCorrectAnswerList");
             alreadyAnswer = [];
             correctAnswerList = [];
             actualProblem.correctAnswer.forEach(function(answer){
                 correctAnswerList.push(answer);
             });
-            //$log.info(correctAnswerList);
         }
 
         function resetOrder(){
@@ -118,8 +108,6 @@ define(["angular", "js/services", 'js/services/game-instance'], function(angular
             game.order.level = 0;
             game.order.problem = 0;
             game.order.gameOver = false;
-            //$log.info(game.order);
-            //$log.info("reseted order");
             actualProblem = undefined;
         }
 
