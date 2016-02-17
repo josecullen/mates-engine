@@ -42,7 +42,7 @@ define(["angular",
                 $rootScope.showNav = true;
                 $rootScope.bodyStyle = {"background-color" : "white"};
                 if(gameStatus == 'GAME_OVER'){ 
-                    gameTimer.stop();
+//                    gameTimer.stop();
 
                     $location.path('/game-over');                
                 }
@@ -55,9 +55,10 @@ define(["angular",
 
         $scope.timeCallback = function(gameTime, problemTime){
             $scope.prueba = gameTime <= 0;
-            if($scope.prueba){
+            if($scope.prueba && gameInstance.instance.status != 'NOT_SELECTED'){
                 $scope.gameTimer.pause(0);
-                $log.info("game over por tiempo");
+                $log.info("game over por tiempo");        
+                
                 gameInstance.instance.status = 'GAME_OVER';
                 $scope.checkGameOver(gameInstance.instance.status);
             }

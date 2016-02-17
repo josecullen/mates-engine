@@ -12,7 +12,7 @@ define(["angular",'js/services', 'js/services/game-services'], function(angular,
             problemCount: 0,
             corrects: 0,
             incorrects: 0,      
-            score: 180,       
+            score: 0,       
             time: 60,
             problemTime: 0,
             levelCount: 0

@@ -8,7 +8,7 @@ define(["angular",
         ['$scope', 'game','$location', 'gameInstance', '$document', '$log', '$timeout',
         function( $scope, game, $location, gameInstance, $document, $log,$timeout){
         	$scope.gameInstance = gameInstance;
-
+        	$scope.score = gameInstance.status.score;
         	$scope.selectGame = function(){
         		$location.path('/player-select-instance');
         	}
