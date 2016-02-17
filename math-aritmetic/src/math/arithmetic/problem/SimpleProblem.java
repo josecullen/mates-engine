@@ -8,6 +8,9 @@ import math.arithmetic.parser.ArithmeticParser;
 import math.arithmetic.tree.ArithmeticOperandNode;
 import math.arithmetic.tree.ArithmeticOperationNode;
 import math.core.tree.broadcast.BroadcastAction;
+
+import java.util.List;
+
 import builders.ArithmeticVariableBuilder;
 import builders.OperationBuilder;
 
@@ -114,8 +117,18 @@ public class SimpleProblem implements Problem{
 		String[] stringAnswers = new String[options];
 		answers[0] = br.getResult();
 		
-		for(int i = 1; i < answers.length; i++)
-			answers[i] = ArithmeticVariableUtil.getNoRepeatedAnswer(answers[0], answers, variableBuilder.getDivisionFactor());		
+//		for(int i = 1; i < answers.length; i++)
+//			answers[i] = ArithmeticVariableUtil.getNoRepeatedAnswer(answers[0], answers, variableBuilder.getDivisionFactor());		
+		List<Double> posibleAnswers = 
+				ArithmeticVariableUtil.getValuesWithDivisionFactor(20, br.getResult(), variableBuilder.getDivisionFactor());
+		
+		for(int i = 1; i < options; i++){
+			answers[i] = posibleAnswers.remove((int)Math.random()*posibleAnswers.size());
+			if(answers[i] == answers[0]){
+				i--;
+			}
+		}
+		
 		
 		for(int i = 0; i < answers.length; i++)
 			stringAnswers[i] = ArithmeticVariableUtil.getValueString(answers[i]);

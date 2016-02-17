@@ -1,6 +1,10 @@
 package math.arithmetic.operand;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ArithmeticVariableUtil {
+	
 	public static double getValueWithDivisionFactor(double min, double max, int divisionFactor){
 		double value = (Math.random() * (max - min)) + min;
 		double decimals = (int)((value - (int)value)*100);			
@@ -14,6 +18,26 @@ public class ArithmeticVariableUtil {
 		value =  (value - (value - (int)value)) + addDecimals;
 		return value;
 	}
+	
+	public static List<Double> getValuesWithDivisionFactor(int size, double center, int divisionFactor){
+		List<Double> values = new ArrayList<>();
+		
+		if(divisionFactor == 1){
+			// Si el factor de división es 1, pero la respuesta es, ej: 1,5, quiere decir
+			// que el verdadero factor de división es 2.
+			// esto puede ocurrir con la división de números enteros.
+			divisionFactor = getDivisor(center);
+		}
+		
+		for(int i = 0; i < size; i++){
+			double value = ((i*1.0 - size / 2 ) / divisionFactor) + center ;
+			values.add(value);
+		}
+		
+		return values;
+	}
+	
+	
 	
 	public static String getValueString(ArithmeticVariable variable){
 		String result = "";
@@ -78,6 +102,20 @@ public class ArithmeticVariableUtil {
 			}
 		}
 		return answer;
+	}
+	
+	
+	public static void main(String[] args) {
+		List<Double> values = getValuesWithDivisionFactor(20, 10, 12);
+		for(int i = 0; i < values.size(); i++){
+			System.out.print(values.get(i)+ " - ");
+		}
+		System.out.println();
+		values = getValuesWithDivisionFactor(20, 10, 1);
+		for(int i = 0; i < values.size(); i++){
+			System.out.print(values.get(i)+ " - ");
+		}
+		
 	}
 	
 }
