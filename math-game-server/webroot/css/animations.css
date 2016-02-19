@@ -1,15 +1,14 @@
 
 .vertical-in{
   opacity: 1;
-  -webkit-transition:all linear 0.5s;
-  transition: all linear 0.5s;
+  -webkit-transition:all linear 0.25s;
+  transition: all linear 0.25s;
 }	
 
 .vertical-in.ng-hide, .vertical-in.ng-leave.ng-leave-active{
   line-height: 0;
   opacity: 0;
   padding: 0 10px;
- /* font-size : 7em;*/
 }
 
 .vertical-in.ng-show{
@@ -18,17 +17,60 @@
   padding: 0 -10px;
 }
 
+
+
 .solved-in{
   opacity: 0;
 }
 
 .solved-in{
-  -webkit-animation-name: solved;  /* Chrome, Safari, Opera */
-  -webkit-animation-duration: 1s;  /* Chrome, Safari, Opera */
+  -webkit-animation-name: solved;  
+  -webkit-animation-duration: 0.5s;  
   animation-name: solved;  
-  animation-duration: 1s;  
+  animation-duration: 0.5s;  
 }
 
+
+
+
+
+@-webkit-keyframes solved {
+    0% {opacity: 0;}
+    50% {opacity: 0;}
+    90% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+@keyframes solved {
+    0% {opacity: 0;}
+    50% {opacity: 0;}
+    90% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+.level-container{
+  position: absolute;
+  width: 100%;
+}
+
+.level-container.ng-enter, .level-container.ng-leave {
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.740) 0.25s;
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.740) 0.25s;
+}
+
+.level-container.ng-enter,
+.level-container.ng-leave.ng-leave-active {
+  top : -200px;
+}
+
+.level-container.ng-leave,
+.level-container.ng-enter.ng-enter-active {
+  top:0px;
+}
+
+/*
+    Estadísticas
+*/
 
 .first-position{
   transition: all linear 0.5s;
@@ -41,39 +83,3 @@
     position: relative;
     top: -50px;
 }
-
-
-@-webkit-keyframes solved {
-    0% {opacity: 0;}
-    50% {opacity: 0;}
-    100% {opacity: 1;}
-}
-
-@keyframes solved {
-    0% {opacity: 0;}
-    50% {opacity: 0;}
-    100% {opacity: 1;}
-}
-
-.level-container{
-  position: absolute;
-  width: 100%;
-}
-
-.level-container.ng-enter, .level-container.ng-leave {
-  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-}
-
-.level-container.ng-enter,
-.level-container.ng-leave.ng-leave-active {
-  opacity:0;
-  top : -200px;
-}
-
-.level-container.ng-leave,
-.level-container.ng-enter.ng-enter-active {
-  opacity:1;
-  top:0px;
-}
-

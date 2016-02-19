@@ -68,7 +68,7 @@ define(["angular",
             
             var problemStatus = gameLevels.checkAnswer(answer);
             if(isProblemEnds(problemStatus)){
-                gameTooltips.showHideTooltips(true);
+                //gameTooltips.showHideTooltips(true);
 
                 if(problemStatus.isCorrect && problemStatus.isProblemEnds){
                     gameTooltips.setResponseLevel(gameScoring.update(true));
@@ -77,26 +77,36 @@ define(["angular",
                 }
 
                 $scope.sendScoring();
-
-                if(gameLevels.order.problem == 0 && gameLevels.order.level != 0){
-                    gameInstance.status.problemStatus = "SHOW_NEW_LEVEL";    
-                }else{
-                    $scope.solvedClass = 'solved-in';
-                    $timeout(function(){
-                        gameInstance.status.problemStatus = "SHOW_SOLUTION";
-                    }, 100);
-
-                }            
-
-                $timeout(function(){
-
-                    gameTimer.problemTime.reset();
-                    gameTooltips.showHideTooltips(false);
-                    gameInstance.status.problemStatus = "SHOW_PROBLEM";    
+                var showNewLevel = gameLevels.isLastProblemForLevel(gameLevels.order.problem);
+                if(showNewLevel){
+                    gameInstance.status.problemStatus = "SHOW_NEW_LEVEL";  
                     gameLevels.next();
-                    $scope.solvedClass = '';
 
-                }, 1500);
+                    $timeout(function(){
+
+                        gameTimer.problemTime.reset();
+                        gameTooltips.showHideTooltips(false);
+                        gameInstance.status.problemStatus = "SHOW_PROBLEM";    
+                        $scope.solvedClass = '';
+
+                     }, 2000);  
+                }else{
+               //     $scope.solvedClass = 'solved-in';
+                    gameInstance.status.problemStatus = "SHOW_SOLUTION";
+                                            
+
+                    $timeout(function(){
+                        gameTimer.problemTime.reset();
+                        gameLevels.next();    
+                        gameTooltips.showHideTooltips(false);
+                        gameInstance.status.problemStatus = "SHOW_PROBLEM";    
+               
+                        $scope.solvedClass = '';
+
+                    }, 100);
+                }            
+               
+               
             }
 
         }
@@ -108,7 +118,7 @@ define(["angular",
         }
 
     	$scope.response = function(answer){
-            gameTimer.pause(1700, $scope.onPauseCallback(answer));    		 
+            gameTimer.pause(100, $scope.onPauseCallback(answer));    		 
     	};
 
         $scope.sendScoring = function(){
@@ -123,10 +133,18 @@ define(["angular",
             
             $log.info("join game . . ." );
 
-            gameInstance.join(name, instance, function(){
+            gameInstance.join(name, instance, function(){                
                 gameLevels.order.reset();
-                gameLevels.next();
-                gameTimer.start($scope.timeCallback);
+                gameLevels.next();            
+                gameInstance.instance.status = 'SUCCESS';
+                gameInstance.status.problemStatus = "SHOW_NEW_LEVEL";      
+                $timeout(function(){
+                    gameInstance.status.problemStatus = "SHOW_PROBLEM";   
+                    gameTimer.start($scope.timeCallback);
+                },2500);
+              
+                
+                $log.info(gameInstance.instance);
             });
             
         }

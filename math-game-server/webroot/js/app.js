@@ -59,7 +59,7 @@
 		                $window.MathJax.Hub.Register.StartupHook("End",function () { 
 		                	$timeout(function(){
 			                	$element[0].style.visibility = '';
-		                	}, 1500);	                	
+		                	}, 0);	                	
 		                }); 
 
 		                

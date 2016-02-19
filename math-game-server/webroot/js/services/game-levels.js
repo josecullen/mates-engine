@@ -123,7 +123,8 @@ define(["angular", "js/services", 'js/services/game-instance'], function(angular
             next : next,
             order : order,
             checkAnswer : checkAnswer,
-            getActualProblem : getActualProblem
+            getActualProblem : getActualProblem,                
+            isLastProblemForLevel : isLastProblemForLevel
         }
 
         return game;

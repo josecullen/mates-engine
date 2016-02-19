@@ -28,19 +28,17 @@ define(["angular", "js/services"], function(angular, services){
         var showHideTooltips = function(mustShow){
             if(mustShow){
                 tooltips.show = true;
-                //tooltips.time.show = true;
             }else{
                 tooltips.show = false;
-                //tooltips.time.show = false;
            }
         }
 
         var setScoreTooltip = function(score){
-            tooltips.score.message = $sce.trustAsHtml('<h2>'+score+'</h2>');
+            tooltips.score.message = $sce.trustAsHtml('<h2>'+score+'pts.</h2>');
         }
 
         var setTimeTooltip = function(extraTime){
-            tooltips.time.message = $sce.trustAsHtml('<h2>'+extraTime+'</h2>');
+            tooltips.time.message = $sce.trustAsHtml('<h2>'+extraTime+'s.</h2>');
         }
 
         var setResponseLevel = function(responseLevel){

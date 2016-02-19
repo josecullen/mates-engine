@@ -75,11 +75,7 @@ define(["angular",'js/services', 'js/services/game-services'], function(angular,
 
         var resetAll = function(){
             resetStatus();
-            $log.info("reset resetAll");
-            
-
             gameInstance.instance = {status : "NOT_SELECTED" };
-            $log.info(gameInstance.instance.status);
         }
 
         var gameInstance = {
