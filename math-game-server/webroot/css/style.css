@@ -18,7 +18,10 @@ span{
     border-left-style: none !important;
     border-left-width: 0 !important;
 }
-
+svg text {
+    fill: #CBCBCB;
+    font-size: 1.5em;
+}
 
 .color-1{ background-color: black;  }
 .color-2{ background-color: blue;   }
@@ -152,9 +155,7 @@ span{
 }
 
 
-svg text {
-    fill: #CBCBCB;
-}
+
 
 .btn-xl {
     /*

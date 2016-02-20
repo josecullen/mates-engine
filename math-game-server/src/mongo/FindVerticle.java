@@ -50,12 +50,26 @@ public class FindVerticle extends AbstractVerticle {
 				  } else {			
 					  message.reply(res.cause());
 				  }
-			});
-			
-			
+			});			
 		});
 		
 		
+		MessageConsumer<String> runCommand = vertx.eventBus().consumer("run-command");
+		
+		runCommand.handler(message ->{
+			JsonObject jsonQuery = new JsonObject(message.body());		
+
+			client.runCommand("aggregate", jsonQuery , res->{
+				 if (res.succeeded()) {		
+					 System.out.println("\n");
+					 System.out.println(res.result());
+					 System.out.println(res.result().getJsonArray("result"));
+					  message.reply(res.result().getJsonArray("result").toString());				    
+				  } else {			
+					  message.reply(res.cause());
+				  }
+			});
+		});
 		
 	}
 }

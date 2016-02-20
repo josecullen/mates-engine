@@ -32,9 +32,13 @@ define(["angular", "js/controllers",'js/services/game-services', 'lib/sockjs-1.0
                 });
                 $scope.sendMessage($scope.instance.instanceId);
             };
-        
+            
             $scope.sock.onmessage = function(e) {
                 $log.info('message', e.data);
+                $scope.data = [{
+                    key: "Cumulative Return",
+                    values: []
+                }]
                 $scope.$apply(function() {
                     $scope.instance.data = JSON.parse(e.data);
 
@@ -43,11 +47,11 @@ define(["angular", "js/controllers",'js/services/game-services', 'lib/sockjs-1.0
                         "value": $scope.firstPosition.value
                     }
 
-                    $scope.instance.data.players.forEach(function(player) {
-                        if (typeof player.scoring != 'undefined') {
+                    $scope.instance.data.forEach(function(player) {
+                        if (typeof player.score != 'undefined') {
                             var newPlayer = {
                                 "label": player.name,
-                                "value": player.scoring.score
+                                "value": player.score
                             }
 
                             if($scope.candidateToFirst.value < newPlayer.value){
@@ -97,12 +101,12 @@ define(["angular", "js/controllers",'js/services/game-services', 'lib/sockjs-1.0
         $scope.options = {
             chart: {
                 type: 'discreteBarChart',
-                height: 600,
+                height: 550,
                 margin: {
                     top: 20,
-                    right: 20,
+                    right: 100,
                     bottom: 50,
-                    left: 55
+                    left: 100
                 },
                 x: function(d) {
                     return d.label;
@@ -116,11 +120,12 @@ define(["angular", "js/controllers",'js/services/game-services', 'lib/sockjs-1.0
                 },
                 duration: 500,
                 xAxis: {
-                    axisLabel: 'Jugadores'
+                    axisLabel: 'Jugadores',
+                    axisLabelDistance: 5
                 },
                 yAxis: {
                     axisLabel: 'Puntaje',
-                    axisLabelDistance: -10
+                    axisLabelDistance: 25
                 }
             }
         };

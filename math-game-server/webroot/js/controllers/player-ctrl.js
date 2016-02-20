@@ -143,7 +143,7 @@ define(["angular",
                     gameLevels.next(); 
                     gameInstance.status.problemStatus = "SHOW_PROBLEM";   
                     gameTimer.start($scope.timeCallback);
-                },2500);
+                },3000);
               
                 
                 $log.info(gameInstance.instance);
