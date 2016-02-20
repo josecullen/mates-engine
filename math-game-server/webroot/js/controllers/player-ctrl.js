@@ -80,16 +80,16 @@ define(["angular",
                 var showNewLevel = gameLevels.isLastProblemForLevel(gameLevels.order.problem);
                 if(showNewLevel){
                     gameInstance.status.problemStatus = "SHOW_NEW_LEVEL";  
+                        gameLevels.next();
 
                     $timeout(function(){
-                        gameLevels.next();
 
                         gameTimer.problemTime.reset();
                       //  gameTooltips.showHideTooltips(false);
                         gameInstance.status.problemStatus = "SHOW_PROBLEM";    
                         $scope.solvedClass = '';
 
-                     }, 2500);  
+                     }, 3000);  
                 }else{
                //     $scope.solvedClass = 'solved-in';
                     gameInstance.status.problemStatus = "SHOW_SOLUTION";
@@ -135,10 +135,12 @@ define(["angular",
 
             gameInstance.join(name, instance, function(){                
                 gameLevels.order.reset();
-                gameLevels.next();            
                 gameInstance.instance.status = 'SUCCESS';
                 gameInstance.status.problemStatus = "SHOW_NEW_LEVEL";      
+                           
+
                 $timeout(function(){
+                    gameLevels.next(); 
                     gameInstance.status.problemStatus = "SHOW_PROBLEM";   
                     gameTimer.start($scope.timeCallback);
                 },2500);
