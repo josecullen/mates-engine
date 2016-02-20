@@ -5,16 +5,17 @@
   transition: all linear 0.25s;
 }	
 
-.vertical-in.ng-hide, .vertical-in.ng-leave.ng-leave-active{
+.vertical-in.ng-hide{
   line-height: 0;
   opacity: 0;
-  padding: 0 10px;
+  padding: 20 50;
+  top: -20px;
 }
 
 .vertical-in.ng-show{
   line-height: 0;
   opacity: 1;
-  padding: 0 -10px;
+  padding: -20 -50;
 }
 
 

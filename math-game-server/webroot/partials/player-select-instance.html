@@ -33,15 +33,18 @@
 		<game-info></game-info>
 		
 				<div class="content all-height-75">		
-					<h3 
+					<h3 ng-repeat="problem in gameInstance.instance.levels[gameLevels.order.level] track by $index"
+						ng-show="$index == gameLevels.order.problem"
 						class="problem-expression vertical-in" 
-						mathjax-bind="gameLevels.getActualProblem().problemExpression" 
+						mathjax-bind="problem.problemExpression" 
 						ng-show="gameInstance.status.problemStatus == 'SHOW_PROBLEM'">
 					</h3>
+				<!--
 					<h3 class="problem-expression" ng-class="solvedClass" 
 						mathjax-bind="gameLevels.getActualProblem().solvedExpression" 
 						ng-show="gameInstance.status.problemStatus == 'SHOW_SOLUTION'">
 					</h3>			
+				-->
 				</div>
 
 				<div class="container-fluid"  ng-repeat="problem in gameInstance.instance.levels[gameLevels.order.level] track by $index">
@@ -53,7 +56,9 @@
 									ng-repeat="answer in problem.answerOptions track by $index">
 								<button 							
 									ng-click="response(answer)" 
-									class="btn btn-black btn-lg" 							
+									class="btn btn-black btn-lg btn-xl" 							
+				
+				
 									mathjax-bind="answer">
 								</button>
 							</div>	
@@ -64,7 +69,15 @@
 	</div>
 </div>
 <!--
+					ng-class="gameInstance.status.problemStatus == 'SHOW_SOLUTION' ?
+								( gameLevels.checkAnswer(answer).isCorrect ? 'btn-green' : 'btn-black') : 
+								'btn-black'"
 
+
+
+"gameInstance.status.problemStatus == 'SHOW_SOLUTION' ?
+								( gameLevels.checkAnswer(answer).isCorrect ? 'btn-green' : 'btn-red') : 
+								'btn-black'"
 
 mathjax-bind="problem.problemExpression" 
 						ng-show="gameInstance.status.problemStatus == 'SHOW_PROBLEM'">

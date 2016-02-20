@@ -1,6 +1,6 @@
 'use strict'
 define(["angular", "js/services"], function(angular, services){
-	services.factory('gameTooltips', ['$log', '$sce', function($log, $sce){				
+	services.factory('gameTooltips', ['$log', '$sce', '$timeout', function($log, $sce, $timeout){				
         
         var styleLevels = [
             'tooltip-nook',
@@ -28,6 +28,9 @@ define(["angular", "js/services"], function(angular, services){
         var showHideTooltips = function(mustShow){
             if(mustShow){
                 tooltips.show = true;
+                $timeout(function(){
+                    showHideTooltips(false);
+                },1500);
             }else{
                 tooltips.show = false;
            }

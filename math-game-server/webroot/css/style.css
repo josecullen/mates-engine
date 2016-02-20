@@ -155,3 +155,16 @@ span{
 svg text {
     fill: #CBCBCB;
 }
+
+.btn-xl {
+    /*
+    padding: 55px 2px;
+    
+    font-size: 24px;
+    */
+    
+    height: 50px;
+    border: solid 1px #979696;
+    line-height: 2.33;
+    border-radius: 0px;
+}
