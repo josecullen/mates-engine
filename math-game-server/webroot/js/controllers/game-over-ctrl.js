@@ -13,59 +13,35 @@ define(["angular",
         		$location.path('/player-select-instance');
         	}
 
-        	game.instance.one.get(
-			    gameInstance.status.id,
-			    gameInstance.status.instanceId,
-			    "NO_RANDOM"
+        	game.player.all.get(
+			    gameInstance.status.instanceId
 			).then(function(response){
+				$log.info(response);
+
 			    var positions = new Array();
 
-			    response.players.forEach(function(player){			        
-			        if(player.scoring != undefined){
-			            var playerScore = {};
-			            playerScore.id = player.id;
-			            playerScore.name = player.name;
-			            playerScore.score = player.scoring.score;
-
-			            if(positions.length == 0){
-			                positions.push(playerScore);
-			            }else{
-			                var isInserted = false;
-			                for(var i = 0; i < positions.length; i++ ){
-			                    if(playerScore.score > positions[i].score){
-			                        positions.splice(i,0,playerScore);
-			                        isInserted = true;
-			                        break;
-			                    }
-			                }                         
-			                if(!isInserted){
-			                    positions.push(playerScore);
-			                }
-			            }			        
-			        }			        
-			    });			   
-
 			    $scope.posicion = -1;
-			    for(var i = 0; i < positions.length; i++ ){			        
-			        if(gameInstance.status.score >= positions[i].score){
-			            $scope.posicion = i;
-			            break;
-			        }
-			    }     
 
-			    if(positions.length >= 6){
+				for(var i = 0; i < response.length; i++){
+					if(response[i].id == $scope.gameInstance.status.id){
+						$scope.posicion = i;
+						break;
+					}
+				}
+
+			    if(response.length >= 6){
 			        if($scope.posicion <= 2){
-			            positions = positions.slice(0,5);
-			        }else if(positions.length < $scope.posicion + 3){
-			            var dif = $scope.posicion + 3 - positions.length;
-			            positions = positions.slice($scope.posicion - 3 - dif,$scope.posicion +3 - dif);
+			            response = response.slice(0,5);
+			        }else if(response.length < $scope.posicion + 3){
+			            var dif = $scope.posicion + 3 - response.length;
+			            response = response.slice($scope.posicion - 3 - dif,$scope.posicion +3 - dif);
 			        }else{
-			            positions = positions.slice($scope.posicion - 3,$scope.posicion +3);                            
+			            response = response.slice($scope.posicion - 3,$scope.posicion +3);                            
 			        }
 			    }
 
 			    $scope.posicion = $scope.posicion + 1;
-			    $scope.data[0].values = positions;
+			    $scope.data[0].values = response;
 
 			    $timeout(function(){
 			    	$scope.gameInstance.resetAll();

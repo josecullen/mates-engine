@@ -48,14 +48,11 @@ public class OneInstanceHandler {
 			
 			handler.vertx().eventBus().send("find-one", dbRequest.encode(), ar ->{
 				if(ar.succeeded()){
-					
 					JsonObject instance = new JsonObject(ar.result().body().toString());						
 					handler.response().end(instance.encode());
-				}
-					
+				}					
 			});			
-			
-//			handler.response().end(":(");
+
 	
 		};
 	};

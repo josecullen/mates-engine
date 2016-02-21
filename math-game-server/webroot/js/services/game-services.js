@@ -41,8 +41,8 @@ define(["angular", "js/services"], function(angular, services){
 			},
 			player :{
 				all : {
-					get : function(){
-						return $http.get(playerAllPath).then(thenFunction);					
+					get : function(instanceId){
+						return $http.get(playerAllPath+"?instanceId="+instanceId).then(thenFunction);					
 					},
 					del : function(){
 						return $http.delete(playerAllPath).then(thenFunction);					
