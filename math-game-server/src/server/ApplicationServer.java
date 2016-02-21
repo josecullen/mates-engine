@@ -71,32 +71,6 @@ public class ApplicationServer {
 						 * {score:-1}} ])
 						 */
 
-						JsonObject proj1 = new JsonObject().put("$project",
-								new JsonObject().put("_id", "$_id").put("players", "$players"));
-						JsonObject match = new JsonObject().put("$match",
-								new JsonObject().put("_id", new JsonObject().put("$eq", "56c27e72f14c9afab415d008")));
-						JsonObject unwind = new JsonObject().put("$unwind", "$players");
-						JsonObject proj2 = new JsonObject().put("$project",
-								new JsonObject().put("name", "$players.name").put("score", "$players.scoring.score"));
-						JsonObject sort = new JsonObject().put("$sort", new JsonObject().put("score", -1));
-
-						JsonObject command = new JsonObject().put("aggregate", "instance").put("pipeline",
-								new JsonArray().add(proj1).add(match).add(unwind).add(proj2).add(sort));
-
-						vertx.eventBus().send("run-command", command.encode(), ar -> {
-							if (ar.succeeded()) {
-								// JsonArray resArr = new
-								// JsonArray(res.result());
-								System.out.println();
-								System.out.println("resArr : " + ar.result().body());
-
-							} else {
-								res.cause().printStackTrace();
-								System.out.println();
-								System.out.println("error : " + ar.cause().getMessage());
-							}
-						});
-
 					} else {
 						System.out.println("Deployment failed!");
 					}

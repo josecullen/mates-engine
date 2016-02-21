@@ -10,6 +10,14 @@ define(["angular", "js/services"], function(angular, services){
             'tooltip-great'
         ];
 
+        var responsTypes = [
+            "Incorrecto",
+            "Muy lento",
+            "Bien",
+            "Muy bien",
+            "¡Genial!"
+        ];
+
         var tooltips = {            
             tooltipClass : 'tooltip-ok',
             show : false,
@@ -21,6 +29,9 @@ define(["angular", "js/services"], function(angular, services){
             },
             lives : {
                 message : $sce.trustAsHtml('<h2>-1</h2>')
+            },
+            responseStatus :{
+              message : $sce.trustAsHtml('<h2></h2>')  
             }
         };
 
@@ -44,8 +55,13 @@ define(["angular", "js/services"], function(angular, services){
             tooltips.time.message = $sce.trustAsHtml('<h2>'+extraTime+'s.</h2>');
         }
 
+        var setResponseStatusTooltip = function(responseLevel){
+            tooltips.responseStatus.message = $sce.trustAsHtml('<h2>'+responsTypes[responseLevel]+'</h2>');
+        }
+
         var setResponseLevel = function(responseLevel){
             tooltips.tooltipClass = styleLevels[responseLevel];
+            setResponseStatusTooltip(responseLevel);
         }
 
         var gameTooltips = {
@@ -53,7 +69,8 @@ define(["angular", "js/services"], function(angular, services){
             showHideTooltips : showHideTooltips,
             setScoreTooltip : setScoreTooltip,
             setTimeTooltip : setTimeTooltip,
-            setResponseLevel : setResponseLevel
+            setResponseLevel : setResponseLevel,
+            setResponseStatusTooltip : setResponseStatusTooltip
         }
 
         return gameTooltips;

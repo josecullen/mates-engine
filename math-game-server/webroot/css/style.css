@@ -81,7 +81,8 @@ svg text {
 }
 
 .tooltip-great + .tooltip > .tooltip-inner {
-    background-color: #00FF18;
+    background-color: #06E01B;
+    color: #18247F;
 }
 .tooltip-good + .tooltip > .tooltip-inner {
     background-color: #7FC879;

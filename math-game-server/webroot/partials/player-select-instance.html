@@ -38,51 +38,36 @@
 						class="problem-expression vertical-in" 
 						mathjax-bind="problem.problemExpression" 
 						ng-show="gameInstance.status.problemStatus == 'SHOW_PROBLEM'">
-					</h3>
-				<!--
-					<h3 class="problem-expression" ng-class="solvedClass" 
-						mathjax-bind="gameLevels.getActualProblem().solvedExpression" 
-						ng-show="gameInstance.status.problemStatus == 'SHOW_SOLUTION'">
-					</h3>			
-				-->
+					</h3>				
 				</div>
+				<div ng-class="tooltips.tooltipClass" 
+					uib-tooltip-html="tooltips.responseStatus.message" 
+					tooltip-placement="top"
+					tooltip-is-open="tooltips.show" 
+					tooltip-enable="tooltips.show"
+					ng-mouseover=""
+					onmouseover="">
+					<div 
+						class="container-fluid"  
+						ng-repeat="problem in gameInstance.instance.levels[gameLevels.order.level] track by $index">
+						<div class="row" ng-show="$index == gameLevels.order.problem">
 
-				<div class="container-fluid"  ng-repeat="problem in gameInstance.instance.levels[gameLevels.order.level] track by $index">
-					<div class="row" ng-show="$index == gameLevels.order.problem">
-
-						<div class="btn-group btn-group-justified" style="top: -15px" role="group">
-							<div 	class="btn-group" 
-									role="group" 
-									ng-repeat="answer in problem.answerOptions track by $index">
-								<button 							
-									ng-click="response(answer)" 
-									class="btn btn-black btn-lg btn-xl" 							
-				
-				
-									mathjax-bind="answer">
-								</button>
-							</div>	
+							<div class="btn-group btn-group-justified" style="top: -15px" role="group">
+								<div 	class="btn-group" 
+										role="group" 
+										ng-repeat="answer in problem.answerOptions track by $index">
+									<button 							
+										ng-click="response(answer)" 
+										class="btn btn-black btn-lg btn-xl" 							
+					
+					
+										mathjax-bind="answer">
+									</button>
+								</div>	
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 	</div>
 </div>
-<!--
-					ng-class="gameInstance.status.problemStatus == 'SHOW_SOLUTION' ?
-								( gameLevels.checkAnswer(answer).isCorrect ? 'btn-green' : 'btn-black') : 
-								'btn-black'"
-
-
-
-"gameInstance.status.problemStatus == 'SHOW_SOLUTION' ?
-								( gameLevels.checkAnswer(answer).isCorrect ? 'btn-green' : 'btn-red') : 
-								'btn-black'"
-
-mathjax-bind="problem.problemExpression" 
-						ng-show="gameInstance.status.problemStatus == 'SHOW_PROBLEM'">
--->
-
-<!--
-			<div ng-repeat="problem in gameInstance.instance.levels[gameLevels.order.level] track by $index">
-			-->
