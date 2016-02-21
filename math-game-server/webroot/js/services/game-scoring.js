@@ -16,17 +16,21 @@ define(["angular", "js/services", 'js/services/game-timer', 'js/services/game-in
                 gameInstance.status.corrects++;
 
                 if(gameTimer.problemTime.value < 5){
+                    gameInstance.status.responses.great++;
                     plusTime += 5;
                     plusScore += 3;
                     responseLevel = 4;
                 }else if(gameTimer.problemTime.value < 8){
+                    gameInstance.status.responses.good++;
                     plusTime += 3;
                     plusScore += 1;
                     responseLevel = 3;
                 }else if(gameTimer.problemTime.value < 10){
+                    gameInstance.status.responses.ok++;
                     plusTime += 1;
                     responseLevel = 2;
                 }else{
+                    gameInstance.status.responses.pass++;
                     responseLevel = 1;
                 }
                 
@@ -34,7 +38,7 @@ define(["angular", "js/services", 'js/services/game-timer', 'js/services/game-in
                 gameTimer.gameTime.value += plusTime;
 
             }else{        
-              //  $log.error("incorrect answer");
+                gameInstance.status.responses.nook++;
                 gameInstance.status.incorrects++;
                 gameInstance.status.lives.pop();
                 if(gameInstance.status.lives.length == 0){

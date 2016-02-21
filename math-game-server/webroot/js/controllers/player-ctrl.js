@@ -42,8 +42,6 @@ define(["angular",
                 $rootScope.showNav = true;
                 $rootScope.bodyStyle = {"background-color" : "white"};
                 if(gameStatus == 'GAME_OVER'){ 
-//                    gameTimer.stop();
-
                     $location.path('/game-over');                
                 }
             }else{
@@ -80,29 +78,18 @@ define(["angular",
                 var showNewLevel = gameLevels.isLastProblemForLevel(gameLevels.order.problem);
                 if(showNewLevel){
                     gameInstance.status.problemStatus = "SHOW_NEW_LEVEL";  
-                        gameLevels.next();
+                    gameLevels.next();
 
-                    $timeout(function(){
-
-                        gameTimer.problemTime.reset();
-                      //  gameTooltips.showHideTooltips(false);
-                        gameInstance.status.problemStatus = "SHOW_PROBLEM";    
-                        $scope.solvedClass = '';
-
-                     }, 3000);  
+                    
                 }else{
-               //     $scope.solvedClass = 'solved-in';
                     gameInstance.status.problemStatus = "SHOW_SOLUTION";
-                                            
 
                     $timeout(function(){
                         gameTimer.problemTime.reset();
                         gameLevels.next();    
-                  //      gameTooltips.showHideTooltips(false);
-                        gameInstance.status.problemStatus = "SHOW_PROBLEM";    
-               
+                        gameInstance.status.problemStatus = "SHOW_PROBLEM";                   
                         $scope.solvedClass = '';
-
+                        gameTimer.resume();
                     }, 250);
                 }            
                
@@ -118,7 +105,9 @@ define(["angular",
         }
 
     	$scope.response = function(answer){
-            gameTimer.pause(100, $scope.onPauseCallback(answer));    		 
+            //gameTimer.pause(250, $scope.onPauseCallback(answer));    		 
+            gameTimer.stop();
+            $scope.onPauseCallback(answer);
     	};
 
         $scope.sendScoring = function(){
@@ -138,13 +127,11 @@ define(["angular",
                 gameInstance.instance.status = 'SUCCESS';
                 gameInstance.status.problemStatus = "SHOW_NEW_LEVEL";      
                            
-
                 $timeout(function(){
-                    gameLevels.next(); 
+                    gameLevels.next();
                     gameInstance.status.problemStatus = "SHOW_PROBLEM";   
                     gameTimer.start($scope.timeCallback);
                 },3000);
-              
                 
                 $log.info(gameInstance.instance);
             });

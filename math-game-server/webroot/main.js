@@ -51,6 +51,7 @@
 						 	    'd3',
 						        'angular-nvd3',
 						        'js/directives/game-info-dir',
+						        'js/directives/game-level-dir',
 						        'lib/ui-bootstrap.min',
 						   //     'lib/sockjs-1.0.3.min',
 								'js/services/game-services',

@@ -23,12 +23,10 @@
 
 <div id="game-div" class="all-height-100 no-margin" ng-show="gameInstance.instance.status == 'SUCCESS'">	
 
-	<div class="level-container" ng-if="gameInstance.status.problemStatus == 'SHOW_NEW_LEVEL' ">	
-		<h3 class="level-message">Nivel {{gameLevels.order.level +1}}</h3>	
-	</div>
+	<game-level></game-level>
 
-
-	<div class="all-height-100 no-margin" 
+	<div 
+		class="all-height-100 no-margin" 
 		ng-show="gameInstance.status.problemStatus != 'SHOW_NEW_LEVEL'">
 		<game-info></game-info>
 		

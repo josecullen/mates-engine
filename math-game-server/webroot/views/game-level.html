@@ -1,0 +1,13 @@
+<div class="level-container" ng-if="gameInstance.status.problemStatus == 'SHOW_NEW_LEVEL' ">	
+	<div class="level-message">
+		<h2>Nivel {{gameLevels.order.level +1}}</h2>			
+	
+		<nvd3 options="options" data="data"></nvd3>	
+		<button 
+			class="level-clock btn btn-circle btn-lg" 
+			ng-class="clock" 
+			ng-disabled="clock == 'btn-warning'"
+			ng-click="clickClock()">{{count}}</button>
+	</div>
+	
+</div>
