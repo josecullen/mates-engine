@@ -10,7 +10,7 @@
 			'nvd3', 
 			'ui.bootstrap'
 		]);
-		app.config([ '$routeProvider', function($routeProvider) {
+		app.config([ '$routeProvider','$httpProvider', function($routeProvider,$httpProvider) {
 			$routeProvider
 				.when('/admin-game-edit/:gameId', {
 					templateUrl : 'partials/admin-game-edit.html',
@@ -39,6 +39,15 @@
 				.otherwise({
 					redirectTo : '/player-select-instance'
 				});
+
+
+			if (!$httpProvider.defaults.headers.get) {
+		        $httpProvider.defaults.headers.get = {};    
+		    }    
+		    $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+		    $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+		    $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';	
+
 		}]);
 		
 		app.directive("mathjaxBind", function() {

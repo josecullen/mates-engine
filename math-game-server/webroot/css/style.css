@@ -20,7 +20,7 @@ span{
 }
 svg text {
     fill: #CBCBCB;
-    font-size: 1.5em;
+    font-size: 1em;
 }
 
 .color-1{ background-color: black;  }
@@ -57,12 +57,11 @@ svg text {
 .all-height-75{
     height: 75%;
 }
-
 .level-message{
     text-align: center;
     position: relative;
-    top: 50%;
-    transform: translateY(-55%);  
+    top: 10%;
+    transform: translateY(-10%);  
     color: #DED7D7;
 }
 
@@ -70,10 +69,9 @@ svg text {
     text-align: center;
     position: relative;
     top: 50%;
-    transform: translateY(0%);   
+    transform: translateY(-20%);   
     color: #DED7D7;
 }
-
 .level-container{
     height: 100%;
     background-color: black;
