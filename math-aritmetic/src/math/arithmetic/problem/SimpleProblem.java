@@ -116,9 +116,8 @@ public class SimpleProblem implements Problem{
 		double[] answers = new double[options];
 		String[] stringAnswers = new String[options];
 		answers[0] = br.getResult();
+		System.out.println("|--- "+ br.getResult()+"\t"+variableBuilder.getDivisionFactor()+" ----|");
 		
-//		for(int i = 1; i < answers.length; i++)
-//			answers[i] = ArithmeticVariableUtil.getNoRepeatedAnswer(answers[0], answers, variableBuilder.getDivisionFactor());		
 		List<Double> posibleAnswers = 
 				ArithmeticVariableUtil.getValuesWithDivisionFactor(20, br.getResult(), variableBuilder.getDivisionFactor());
 		

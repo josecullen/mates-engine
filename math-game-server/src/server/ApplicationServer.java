@@ -42,6 +42,7 @@ public class ApplicationServer {
 
 	public static void main(String[] args) {
 		Vertx vertx = Vertx.vertx();
+		
 		HttpServer server = vertx.createHttpServer();
 		JsonObject mongoConfig = new JsonObject().put("db_name", "mathGame").put("host", "localhost")
 				.put("port", 27017);
