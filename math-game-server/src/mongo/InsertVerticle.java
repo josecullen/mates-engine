@@ -15,20 +15,6 @@ public class InsertVerticle extends AbstractVerticle {
 		
 		MongoClient client = MongoClient.createShared(vertx, mongoConfig);
 		
-//		MessageConsumer<String> insertGameBus = vertx.eventBus().consumer("insert-game");
-//		
-//		insertGameBus.handler(message -> {
-//			JsonObject game = new JsonObject(message.body());
-//			
-//			client.insert("game", game, res ->{
-//				  if (res.succeeded()) {
-//					  message.reply("Game saved! "+res.result());				    
-//				  } else {
-//					  System.out.println(res.cause());
-//					  message.reply(res.cause());
-//				  }
-//			});
-//		});
 		
 		MessageConsumer<String> insert = vertx.eventBus().consumer("insert");
 		

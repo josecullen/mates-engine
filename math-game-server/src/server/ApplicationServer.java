@@ -125,6 +125,30 @@ public class ApplicationServer {
 		router.put(PATH_INSTANCE_ONE).handler(OneInstanceHandler.PUT);
 		router.delete(PATH_INSTANCE_ONE).handler(OneInstanceHandler.DELETE);
 
+		
+		router.get(PATH+"mejoraCalidad").handler(context ->{
+			String mejora = context.request().getParam("mejora");
+			
+			JsonObject insertJson = new JsonObject().put("collection", "mejora").put("mejora", mejora);
+			
+			vertx.eventBus().send("insert", insertJson.encode(), ar -> {
+				if (ar.succeeded()) {
+					vertx.eventBus().send("find-all", insertJson.encode(), findAllAr ->{
+						if(findAllAr.succeeded()){
+							context.response().end(findAllAr.result().body().toString());
+						}else{
+							context.response().end("nook");
+						}
+					});
+					
+				} else {
+					context.response().end("nook");
+				}
+			});			
+		});
+		
+		
+		
 		router.route("/arithmetic/*").handler(
 				handler -> {
 					handler.response().end(
@@ -145,18 +169,6 @@ public class ApplicationServer {
 
 				System.out.println("Creando eventBus consumer " + instanceId);
 				MessageConsumer<String> consumer = eb.consumer(instanceId);
-
-				// consumer.handler(message -> {
-				// System.out.println("I have received a message: " +
-				// message.body());
-				// vertx.eventBus().send("find-one", query.encode(), ar ->{
-				// if(ar.succeeded()){
-				// sockJSSocket.write(Buffer.buffer(ar.result().body().toString()));
-				// }else{
-				// sockJSSocket.write(Buffer.buffer("query error"));
-				// }
-				// });
-				// });
 
 				JsonObject proj1 = new JsonObject().put("$project",
 						new JsonObject().put("_id", "$_id").put("players", "$players"));

@@ -13,6 +13,10 @@ define(["angular",
         		$location.path('/player-select-instance');
         	}
 
+            $scope.mejoraCalidad = function(){
+                $location.path('/mejora-calidad');
+            }
+
         	game.player.all.get(
 			    gameInstance.status.instanceId
 			).then(function(response){

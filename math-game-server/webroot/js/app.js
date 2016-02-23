@@ -36,6 +36,10 @@
 					templateUrl : 'partials/game-over.html',
 					controller: 'gameOverCtrl'
 				})
+				.when('/mejora-calidad',{
+					templateUrl : 'partials/mejora-calidad.html',
+					controller: 'mejoraCalidadCtrl'
+				})
 				.otherwise({
 					redirectTo : '/player-select-instance'
 				});

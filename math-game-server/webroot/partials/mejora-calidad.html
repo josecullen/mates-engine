@@ -1,0 +1,29 @@
+<meta charset="UTF-8">
+
+<h2>Mejora de Calidad</h2>
+<div ng-show="!mejoraSended">
+	<div class="form-group">
+	  <label for="comment">Contanos qué hace falta para tener una mejor experiencia:</label>
+	  <textarea class="form-control" rows="5" ng-model="mejora"></textarea>
+	</div>
+	<button 
+		ng-click="sendMejora()"
+		class="btn btn-success">Enviar</button>
+</div>
+<div ng-if="mejoraSended">
+	<h4 ng-style="display:inline">¡Gracias!
+	<button 					
+		ng-click="selectGame()" 
+		onclick="toggleFullScreen()" 
+		class="btn btn-success"
+		>
+		<b>¡JUGAR OTRA VEZ!</b>
+			</button>	
+			</h4>
+
+
+	<ul class="list-group">
+	  <li class="list-group-item" ng-repeat="mejora_ in mejoras track by $index">{{mejora_.mejora}}</li>
+	</ul>
+	
+</div>
