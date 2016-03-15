@@ -5,4 +5,5 @@ public interface Problem {
 	String getSolvedExpression();
 	String[] getAnswer();
 	String[] getAnswerOptions(int options);
+	
 }

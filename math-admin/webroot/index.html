@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>document.write('<base href="/" />');</script>
+<title>Insert title here</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">    
+
+<link rel='stylesheet' href="lib/bootstrap.min.css">
+<script type="text/javascript" src="lib/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="lib/bootstrap.min.js"></script>
+
+<script src="lib/angular2-beta/tools/es6-shim.min.js"></script>
+<script src="lib/angular2-beta/tools/system-polyfills.js"></script>
+
+<script src="lib/angular2-beta/angular2-polyfills.min.js"></script>
+<script src="lib/angular2-beta/tools/system.js"></script>
+<script src="lib/angular2-beta/tools/typescript.js"></script>
+<script src="lib/angular2-beta/angular2.min.js"></script>
+<!-- <script src="lib/angular2-beta/router.min.js"></script> -->
+<!-- <script src="lib/angular2-beta/angular2.dev.js"></script> -->
+<script src="lib/angular2-beta/Rx.min.js"></script>
+
+<script src="lib/angular2-beta/router.dev.js"></script>
+<script src="lib/angular2-beta/http.min.js"></script>
+<script src="lib/angular2-beta/tools/web-api.js"></script>
+
+
+
+<!-- 2. Configure SystemJS -->
+<script>
+	System.config({
+		transpiler : 'typescript',
+		typescriptOptions : {
+			emitDecoratorMetadata : true
+		},
+		packages : {
+			'app' : {
+				defaultExtension : 'ts'
+			}
+		}
+	});
+	System.import('app/main').then(null, console.error.bind(console));
+</script>
+
+
+
+
+</head>
+<body>
+	<admin></admin>
+</body>
+</html>

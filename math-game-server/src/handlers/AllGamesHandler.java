@@ -7,7 +7,7 @@ import io.vertx.ext.web.RoutingContext;
 public class AllGamesHandler {
 
 	public static Handler<RoutingContext> GET = handler ->{
-		handler.vertx().eventBus().send("find-all", new JsonObject().put("collection", "game").encode(), ar ->{
+		handler.vertx().eventBus().send("find-all", "game", ar ->{
 			if(ar.succeeded()){
 				handler.response().end(ar.result().body().toString());
 			}else{

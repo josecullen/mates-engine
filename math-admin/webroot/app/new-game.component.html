@@ -1,0 +1,118 @@
+<!-- <meta charset="UTF-8"> -->
+
+<div class="container">
+	<div class="input-group">
+		<span class="input-group-addon" id="basic-addon1">Nombre del Juego</span> 
+		<input #inputName class="form-control" [value]="gameConfig.name" (keyup)="gameConfig.name = inputName.value">
+	</div>
+	<br>
+	<button class="btn btn-info" (click)="changeShowTable()">{{showHideTables}}</button>
+
+	<div class=" col-xs-12" [style.display]="showProblemConfig">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nivel</th>					
+					<th>Expresión</th>
+					<th>Mínimo</th>
+					<th>Máximo</th>
+					<th>Signo</th>
+					<th>Operaciones</th>
+					<th>Divisor</th>
+					<th>Repeticiones</th>
+					<button class="btn glyphicon glyphicon-plus" (click)="addLevel()"></button>
+					<button class="btn glyphicon glyphicon-edit" (click)="editAll = !editAll"></button>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="#levelConfig of gameConfig.levelConfigs; #i = index">
+					<td>{{i+1}}</td>
+					<td><editable 
+							[edit]="editAll" [type]="'text'" [value]="levelConfig.problemConfig.form"
+							(valueChanged)="levelConfig.problemConfig.form = $event"> 
+					</editable></td>
+					<td><editable 
+							[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].min" 
+							(valueChanged)="levelConfig.problemConfig.variableConfigs[0].min = toNumber($event)">
+					</editable></td>
+					<td><editable 
+							[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].max" 
+							(valueChanged)="levelConfig.problemConfig.variableConfigs[0].max = toNumber($event)">
+					</editable></td>
+					<td><editable 
+							[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].sign" 
+							(valueChanged)="levelConfig.problemConfig.variableConfigs[0].sign = toNumber($event)">
+					</editable></td>
+					<td><editable 
+							[edit]="editAll" [type]="'text'" [value]="levelConfig.problemConfig.operations"
+							(valueChanged)="levelConfig.problemConfig.operations= $event"> 
+					</editable></td>
+					<td><editable 
+							[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].divisionFactor"
+							(valueChanged)="levelConfig.problemConfig.variableConfigs[0].divisionFactor = toNumber($event)"> </editable></td>
+					<td><editable 
+							[edit]="editAll" [value]="levelConfig.problemConfig.repetitions"
+							(valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)"> 
+					</editable></td>
+					
+					<button class="btn glyphicon glyphicon-trash" (click)="gameConfig.levelConfigs.splice(i,1)"></button>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+
+
+	<div class="col-xs-12" [style.display]="showScoreConfig">
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nivel</th>
+					<th>Puntaje</th>
+					<th>Extra 1</th>
+					<th>Extra 2</th>
+					<th>Extra 3</th>
+					<th>Precuenta</th>
+					<th>Con Tiempo</th>
+					<button class="btn glyphicon glyphicon-plus" (click)="addLevel()"></button>
+					<button class="btn glyphicon glyphicon-edit" (click)="editAll = !editAll"></button>
+				</tr>
+
+			</thead>
+			<tbody>
+				<tr *ngFor="#levelConfig of gameConfig.levelConfigs; #j = index">
+					<td>{{j+1}}</td>
+					<td><editable [edit]="editAll" [value]="levelConfig.scoreConfig.baseScore" (valueChanged)="levelConfig.score.baseScore = $event">
+						</editable></td>
+					<td><extra-score [edit]="editAll" [extraScore]="levelConfig.scoreConfig.extras[0]" (valueChanged)="levelConfig.scoreConfig.extras[0]= $event">
+						</extra-score></td>
+					<td><extra-score [edit]="editAll" [extraScore]="levelConfig.scoreConfig.extras[1]" (valueChanged)="levelConfig.scoreConfig.extras[1]= $event">
+						</extra-score></td>
+					<td><extra-score [edit]="editAll" [extraScore]="levelConfig.scoreConfig.extras[2]" (valueChanged)="levelConfig.scoreConfig.extras[2]= $event">
+						</extra-score></td>
+					<td><editable [edit]="editAll" [value]="levelConfig.scoreConfig.preCount" (valueChanged)="levelConfig.scoreConfig.preCount = $event">
+						</editable></td>
+					<td><editable [edit]="editAll" [type]="'checkbox'" [value]="levelConfig.scoreConfig.withTime"
+							(valueChanged)="levelConfig.scoreConfig.withTime = $event"> </editable></td>
+					<button class="btn glyphicon glyphicon-trash" (click)="gameConfig.levelConfigs.splice(i,1)"></button>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	
+
+
+</div>
+<h3 style="text-align:center">
+	<button class="btn btn-success" (click)="saveOrUpdateGame()">
+		{{getSaveMessage() }}
+	</button>
+
+</h3>
+
+<!-- <pre> -->
+<!-- {{printProblem()}} -->
+<!-- </pre> -->

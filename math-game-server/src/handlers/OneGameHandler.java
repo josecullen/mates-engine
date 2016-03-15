@@ -3,6 +3,8 @@ package handlers;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
+import math.math_admin.ErrorType;
+import math.math_admin.RestResponse;
 
 public class OneGameHandler {
 	
@@ -37,11 +39,10 @@ public class OneGameHandler {
 			JsonObject game = new JsonObject(data.toString()).put("collection", "game");
 			
 			handler.vertx().eventBus().send("insert", game.encode(), ar ->{
-		    	 if (ar.succeeded()) {
-		    		handler.response().end("Se ha guardado el juego satisfactoriamente: "+ ar.result().body().toString());		    		    
+		    	 if (ar.succeeded()) {		    		 
+		    		handler.response().end(RestResponse.createSucess("Se ha guardado el juego satisfactoriamente", ar.result().body().toString()) );		    		    
 		    	 }else{
-		    		 System.out.println("problem . . . "+ar.cause());
-		    		 handler.response().end("Ha ocurrido un inconveniente. . . "+ar.cause());
+		    		 handler.response().end(RestResponse.createError(ErrorType.INSERT_DB_ERROR, "Ha ocurrido un inconveniente. . . "+ar.cause()));
 		    	 }
 		    });
 			

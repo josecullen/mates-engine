@@ -1,9 +1,5 @@
 package server;
 
-import com.mongodb.client.model.Projections;
-
-import com.mongodb.operation.AggregateOperation;
-
 import handlers.AllGamesHandler;
 import handlers.AllInstanceHandler;
 import handlers.AllPlayersHandler;
@@ -20,14 +16,14 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.MongoClient;
 import io.vertx.ext.web.Router;
-import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.handler.impl.StaticHandlerImpl;
 import io.vertx.ext.web.handler.sockjs.SockJSHandler;
 import io.vertx.ext.web.handler.sockjs.SockJSHandlerOptions;
-import mongo.DeleteVerticle;
-import mongo.FindVerticle;
-import mongo.InsertVerticle;
-import mongo.UpdateVerticle;
+import math.math_admin.AdminVerticle;
+import math.mongo.DeleteVerticle;
+import math.mongo.FindVerticle;
+import math.mongo.InsertVerticle;
+import math.mongo.UpdateVerticle;
 
 public class ApplicationServer {
 	static int PORT = 10000;// 8081;
@@ -42,13 +38,15 @@ public class ApplicationServer {
 
 	public static void main(String[] args) {
 		Vertx vertx = Vertx.vertx();
-		
+
 		HttpServer server = vertx.createHttpServer();
 		JsonObject mongoConfig = new JsonObject().put("db_name", "mathGame").put("host", "localhost")
 				.put("port", 27017);
 		MongoClient client = MongoClient.createShared(vertx, mongoConfig);
 		EventBus eb = vertx.eventBus();
-
+		
+		vertx.deployVerticle(new AdminVerticle());
+		
 		vertx.deployVerticle(new InsertVerticle(), res -> {
 			if (res.succeeded()) {
 				System.out.println("Deployment id is: " + res.result());
@@ -62,16 +60,6 @@ public class ApplicationServer {
 				res -> {
 					if (res.succeeded()) {
 						System.out.println("Deployment id is: " + res.result());
-
-						/**
-						 * db.instance.aggregate([ { $project: {_id: "$_id",
-						 * players: "$players" }}, { $match : {_id: {$eq:
-						 * "56c27e72f14c9afab415d008"}}}, { $unwind:
-						 * "$players"}, { $project : {name: "$players.name",
-						 * score: "$players.scoring.score"} }, { $sort:
-						 * {score:-1}} ])
-						 */
-
 					} else {
 						System.out.println("Deployment failed!");
 					}
@@ -202,7 +190,7 @@ public class ApplicationServer {
 		router.route("/socketjs/*").handler(sockJSHandler);
 
 		StaticHandlerImpl shi = new StaticHandlerImpl();
-
+		
 		// shi.setAllowRootFileSystemAccess(true);
 		shi.setCachingEnabled(false);
 		shi.setMaxAgeSeconds(StaticHandlerImpl.DEFAULT_MAX_AGE_SECONDS);

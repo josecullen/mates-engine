@@ -31,7 +31,7 @@
 		<game-info></game-info>
 		
 				<div class="content all-height-75">		
-					<h3 ng-repeat="problem in gameInstance.instance.levels[gameLevels.order.level] track by $index"
+					<h3 ng-repeat="problem in gameInstance.instance.levels[gameLevels.order.level].gameProblems track by $index"
 						ng-show="$index == gameLevels.order.problem"
 						class="problem-expression vertical-in" 
 						mathjax-bind="problem.problemExpression" 
@@ -47,7 +47,7 @@
 					onmouseover="">
 					<div 
 						class="container-fluid"  
-						ng-repeat="problem in gameInstance.instance.levels[gameLevels.order.level] track by $index">
+						ng-repeat="problem in gameInstance.instance.levels[gameLevels.order.level].gameProblems track by $index">
 						<div class="row" ng-show="$index == gameLevels.order.problem">
 
 							<div class="btn-group btn-group-justified" style="top: -15px" role="group">

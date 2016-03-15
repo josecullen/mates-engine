@@ -23,15 +23,15 @@ public class AllPlayersHandler {
 		JsonObject command = new JsonObject().put("aggregate", "instance").put("pipeline",
 				new JsonArray().add(proj1).add(match).add(unwind).add(proj2).add(sort));			
 
-		handler.vertx().eventBus().send("run-command", command.encode(), ar -> {
-			if (ar.succeeded()) {
-				handler.response().end(ar.result().body().toString());			
-			} else {
-				handler.response().end(ar.cause().getMessage());
-			}
-		});
+//		handler.vertx().eventBus().send("run-command", command.encode(), ar -> {
+//			if (ar.succeeded()) {
+//				handler.response().end(ar.result().body().toString());			
+//			} else {
+//				handler.response().end(ar.cause().getMessage());
+//			}
+//		});
 		
-		//handler.response().end("Devuelve la lista de Juegos");
+		handler.response().end("Devuelve la lista de Juegos");
 
 	};
 	

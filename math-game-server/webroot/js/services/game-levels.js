@@ -8,10 +8,10 @@ define(["angular", "js/services", 'js/services/game-instance'], function(angular
             $log.info("next");
             
             if(actualProblem == undefined){            
-                actualProblem = gameInstance.instance.levels[0][0];
+                actualProblem = gameInstance.instance.levels[0].gameProblems[0];
             }else{
                 if(order.next()){
-                    actualProblem = gameInstance.instance.levels[order.level][order.problem];
+                    actualProblem = gameInstance.instance.levels[order.level].gameProblems[order.problem];
                 }
             }
             $log.info("actualProblem: ");
@@ -88,7 +88,7 @@ define(["angular", "js/services", 'js/services/game-instance'], function(angular
         }       
 
         function isLastProblemForLevel(problemNumber){
-            return problemNumber == gameInstance.instance.levels[order.level].length -1;
+            return problemNumber == gameInstance.instance.levels[order.level].gameProblems.length -1;
         } 
 
         function isLastLevelForGame(levelNumber){
