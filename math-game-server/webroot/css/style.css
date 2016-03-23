@@ -23,6 +23,10 @@ svg text {
     font-size: 1em;
 }
 
+.badge[disabled] {
+   background-color: #DCDCDC;
+}
+
 .color-1{ background-color: black;  }
 .color-2{ background-color: blue;   }
 .color-3{ background-color: green;  }

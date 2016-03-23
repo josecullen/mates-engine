@@ -1,6 +1,7 @@
 package handlers;
 
 
+import problem.ProblemFacade;
 import builders.ArithmeticVariableBuilder;
 import builders.EquationBuilder;
 import builders.OperationBuilder;
@@ -10,7 +11,6 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import math.arithmetic.problem.EquationLevel;
 import math.arithmetic.problem.SimpleProblem;
-import service.facade.ProblemFacade;
 
 public class OneInstanceHandler {
 	public static Handler<RoutingContext> GET = handler ->{

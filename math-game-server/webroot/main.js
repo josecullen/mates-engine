@@ -3,7 +3,7 @@
 
 	require
 			.config({
-				waitSeconds: 15,
+				waitSeconds: 30,
 				paths : {
 					// General dependencies
 					'angular' : 'lib/angular/angular.min',
