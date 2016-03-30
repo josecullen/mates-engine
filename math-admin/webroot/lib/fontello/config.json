@@ -1,0 +1,70 @@
+{
+  "name": "",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "qab5uvjyoc3uu4d2pvt8soshtgkuvpak",
+      "css": "minus",
+      "code": 59392,
+      "src": "typicons"
+    },
+    {
+      "uid": "c7b7ea4719f6592a6b36f8d041226e37",
+      "css": "divide-outline",
+      "code": 59393,
+      "src": "typicons"
+    },
+    {
+      "uid": "863fa3cea75a505bbc420a1db8b6b89b",
+      "css": "divide",
+      "code": 59394,
+      "src": "typicons"
+    },
+    {
+      "uid": "0677f879e75956571d8cbbb478487c47",
+      "css": "plus-outline",
+      "code": 59395,
+      "src": "typicons"
+    },
+    {
+      "uid": "1gf923f9wvaezxmfon515dglxa3drf0e",
+      "css": "plus",
+      "code": 59396,
+      "src": "typicons"
+    },
+    {
+      "uid": "7b67ab93e2dd09f8884b574925ab9352",
+      "css": "minus-outline",
+      "code": 59397,
+      "src": "typicons"
+    },
+    {
+      "uid": "1dq4tek4k8ea7zlj4kc3w83itnutaxg5",
+      "css": "cancel",
+      "code": 59398,
+      "src": "typicons"
+    },
+    {
+      "uid": "24aba8757d4a7b49568c98a577a85df3",
+      "css": "cancel-outline",
+      "code": 59399,
+      "src": "typicons"
+    },
+    {
+      "uid": "5de9370846a26947e03f63142a3f1c07",
+      "css": "angle-up",
+      "code": 59400,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "9c7ff134960bb5a82404e4aeaab366d9",
+      "css": "up-open",
+      "code": 59401,
+      "src": "entypo"
+    }
+  ]
+}

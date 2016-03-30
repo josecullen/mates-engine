@@ -6,12 +6,21 @@ import {GameConfig} from './game-config';
 import {ExtraScoreComponent} from './extra-score.component';
 import {AdminService} from './admin.service';
 import {HTTP_PROVIDERS}    from 'angular2/http';
+import {MathFormComponent} from './math-form-combo.component';
+import {SelectOperationComponent} from './select-operations.component';
 
 @Component({
     selector: 'new-game',
     templateUrl: 'app/new-game.component.html',
-    directives: [ROUTER_DIRECTIVES, Editable, ExtraScoreComponent],
-    providers: [HTTP_PROVIDERS, AdminService]
+    directives: [
+        ROUTER_DIRECTIVES, 
+        Editable, 
+        ExtraScoreComponent, 
+        MathFormComponent, 
+        SelectOperationComponent],
+    providers: [
+        HTTP_PROVIDERS, 
+        AdminService]
 
 })
 export class NewGameComponent {

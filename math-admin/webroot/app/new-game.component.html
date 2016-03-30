@@ -27,10 +27,13 @@
 			<tbody>
 				<tr *ngFor="#levelConfig of gameConfig.levelConfigs; #i = index">
 					<td>{{i+1}}</td>
-					<td><editable 
-							[edit]="editAll" [type]="'text'" [value]="levelConfig.problemConfig.form"
-							(valueChanged)="levelConfig.problemConfig.form = $event"> 
-					</editable></td>
+					<td>
+
+					<math-form-combo [form]="levelConfig.problemConfig.form" 
+					(form)="levelConfig.problemConfig.form = $event">
+					</math-form-combo>
+
+					</td>
 					<td><editable 
 							[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].min" 
 							(valueChanged)="levelConfig.problemConfig.variableConfigs[0].min = toNumber($event)">
@@ -43,10 +46,21 @@
 							[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].sign" 
 							(valueChanged)="levelConfig.problemConfig.variableConfigs[0].sign = toNumber($event)">
 					</editable></td>
-					<td><editable 
+					<td>
+
+					<select-operations
+						[operations]="levelConfig.problemConfig.operations" 
+						(operations)="levelConfig.problemConfig.operations = $event">
+					</select-operations>
+					
+<!--
+					<editable 
 							[edit]="editAll" [type]="'text'" [value]="levelConfig.problemConfig.operations"
 							(valueChanged)="levelConfig.problemConfig.operations= $event"> 
-					</editable></td>
+					</editable>
+-->
+
+					</td>
 					<td><editable 
 							[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].divisionFactor"
 							(valueChanged)="levelConfig.problemConfig.variableConfigs[0].divisionFactor = toNumber($event)"> </editable></td>

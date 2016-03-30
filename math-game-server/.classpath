@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry combineaccessrules="false" kind="src" path="/math-aritmetic"/>
 	<classpathentry kind="src" output="target/classes" path="src">
 		<attributes>
 			<attribute name="optional" value="true"/>
@@ -12,7 +11,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/math-server"/>
 	<classpathentry kind="lib" path="C:/Users/jcullen/Documents/libs/vert.x-3.2.0/lib/aether-api-1.0.2.v20150114.jar"/>
 	<classpathentry kind="lib" path="C:/Users/jcullen/Documents/libs/vert.x-3.2.0/lib/aether-connector-basic-1.0.2.v20150114.jar"/>
 	<classpathentry kind="lib" path="C:/Users/jcullen/Documents/libs/vert.x-3.2.0/lib/aether-impl-1.0.2.v20150114.jar"/>
@@ -114,8 +112,6 @@
 	<classpathentry kind="lib" path="C:/Users/jcullen/Documents/libs/vert.x-3.2.0/lib/vertx-web-templ-jade-3.2.0-shaded.jar"/>
 	<classpathentry kind="lib" path="C:/Users/jcullen/Documents/libs/vert.x-3.2.0/lib/vertx-web-templ-mvel-3.2.0-shaded.jar"/>
 	<classpathentry kind="lib" path="C:/Users/jcullen/Documents/libs/vert.x-3.2.0/lib/vertx-web-templ-thymeleaf-3.2.0-shaded.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/math-admin"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/math-mongo"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>

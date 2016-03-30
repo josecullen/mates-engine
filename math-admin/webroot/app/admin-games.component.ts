@@ -22,6 +22,43 @@ export class AdminGameComponent {
 		this.getGames();        
     }
 
+    getGames(){
+        this.adminService.getAllGames().subscribe(
+            res => {
+                this.gameConfigs = res;
+
+                this.gameConfigs.forEach(function(item){
+                    item.instanceGameDatas = Array<InstanceGameData>;
+                });                
+
+                this.getInstanceGameData();                
+                
+            },
+            error => console.log(error)
+        );
+    }
+
+    getInstanceGameData(){
+        this.adminService.getAllInstanceGameData().subscribe(
+            instanceRes => {
+                this.populateGameConfigsData(instanceRes);               
+            },
+            instanceError =>  console.log(instanceError)
+        );
+    }
+
+    populateGameConfigsData(instanceRes:InstanceGameData[]){
+        for(var i:number = 0; i < instanceRes.length; i++){
+            var instanceGameData:InstanceGameData = instanceRes[i];
+            this.gameConfigs.forEach(function(gameConfig){
+                if(instanceGameData.gameId == gameConfig._id){
+                    gameConfig.instanceGameDatas.push(instanceGameData);
+                    return;
+                }                                
+            });
+        }        
+    }
+
     removeGame(index:number){
         var gameConfig:GameConfig = this.gameConfigs[index];
         console.log(gameConfig._id);
@@ -45,9 +82,7 @@ export class AdminGameComponent {
                     console.log(res);
                 },
                 error => console.log(error));
-
-            this._router.navigate(['AdminGames']);
-            console.log(window.location.pathname);
+            
             window.location.reload();
 
         }else{        
@@ -71,43 +106,7 @@ export class AdminGameComponent {
         }
     }
 
-
-    getGames(){
-    	this.adminService.getAllGames().subscribe(
-        	res => {
-        		this.gameConfigs = res;
-
-                this.gameConfigs.forEach(function(item){
-                    item.instanceGameDatas = Array<InstanceGameData>;
-                });                
-
-                this.getInstanceGameData();                
-                
-        	},
-            error => console.log(error)
-        );
-    }
-
-    getInstanceGameData(){
-        this.adminService.getAllInstanceGameData().subscribe(
-            instanceRes => {
-                this.populateGameConfigsData(instanceRes);               
-            },
-            instanceError =>  console.log(instanceError)
-        );
-    }
-
-    populateGameConfigsData(instanceRes:InstanceGameData[]){
-        for(var i:number = 0; i < instanceRes.length; i++){
-            var instanceGameData:InstanceGameData = instanceRes[i];
-            this.gameConfigs.forEach(function(gameConfig){
-                if(instanceGameData.gameId.$oid == gameConfig._id.$oid){
-                    gameConfig.instanceGameDatas.push(instanceGameData);
-                    return;
-                }                                
-            });
-        }        
-    }
+    
 
     
 

@@ -8,10 +8,37 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>math</groupId>
+			<artifactId>math-mongo</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>math-aritmetic</groupId>
+			<artifactId>math-aritmetic</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>math</groupId>
+			<artifactId>math-admin</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>math-facade</groupId>
+			<artifactId>math-facade</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<artifactId>math-core</artifactId>
+			<groupId>math-core</groupId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<artifactId>math-aritmetic</artifactId>
 			<groupId>math-aritmetic</groupId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>math</groupId>
 			<artifactId>math-mongo</artifactId>
