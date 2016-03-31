@@ -19,7 +19,7 @@ class SimpleProblemConfig implements ProblemConfig {
         public form: string = "a + b",
         public operations: string = "+-"´,
         public repetitions: number = 5,
-        public problemType: ProblemType = ProblemType.SIMPLE
+        public problemType: string = ProblemType[ProblemType.SIMPLE]
         ) { }
 
     getType() {

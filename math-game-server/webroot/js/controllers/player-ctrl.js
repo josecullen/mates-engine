@@ -111,7 +111,7 @@ define(["angular",
     	};
 
         $scope.sendScoring = function(){
-            $log.info("sending scoring . . .");
+            $log.info("sending scoring . . . gameStatus : "+gameInstance.status);
             game.player.one.put(gameInstance.status).then(function(response){
                 $log.info("scoring sended");
                 $log.info(response);

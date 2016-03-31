@@ -32,26 +32,18 @@ define(["angular",'js/services', 'js/services/game-services'], function(angular,
             var params = {"playerName" : name, "instance" : selectedInstance };
             
             game.player.one.post(params).then(function(response){
-            
+                console.log("game.player.one : response");
+                console.log(response);
                 if(response.status == 'SUCCESS'){                    
-                    if(selectedInstance.type == "MULTI_INSTANCE_GAME"){
-                        $log.debug("MULTI_INSTANCE_GAME");
-                        
-                        game.instance.one.get(selectedInstance.gameId, selectedInstance._id, "RANDOM")
-                        .then(function(instanceResponse){
-                            gameInstance.instance = instanceResponse; 
-                            gameInstance.instance.type = "MULTI_INSTANCE_GAME";
-                            configGame(response.id);
-                            callback();
-                        });
                     
-                    }else{
-                        alert("same game");
-                        gameInstance.instance = selectedInstance;
-                        configGame(response.instanceId);
+                    game.instance.one.get(selectedInstance.gameId, selectedInstance._id, "RANDOM")
+                    .then(function(instanceResponse){
+                        console.log("instance response :");
+                        console.log(instanceResponse);
+                        gameInstance.instance = instanceResponse; 
+                        configGame(response.id);
                         callback();
-                    }
-                        
+                    });            
                 }
                 
             });         
@@ -84,7 +76,7 @@ define(["angular",'js/services', 'js/services/game-services'], function(angular,
         function configGame(id){
             gameInstance.instance.status = "SUCCESS";
             gameInstance.status.id = id;
-            gameInstance.status.instanceId = gameInstance.instance._id;
+            gameInstance.status.instanceId = gameInstance.instance.instanceId;
         }
 
         var resetAll = function(){

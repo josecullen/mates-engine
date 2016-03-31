@@ -12,7 +12,6 @@ import io.vertx.core.eventbus.MessageConsumer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.MongoClient;
-import io.vertx.ext.web.RoutingContext;
 import math.db.model.game.config.GameConfig;
 
 public class FindVerticle extends AbstractVerticle {
@@ -49,7 +48,7 @@ public class FindVerticle extends AbstractVerticle {
 		
 		runCommand.handler(message ->{
 			JsonObject jsonQuery = new JsonObject(message.body());		
-
+			System.out.println(jsonQuery);
 			client.runCommand("aggregate", jsonQuery , res->{
 				 if (res.succeeded()) {		
 					 System.out.println("\n");

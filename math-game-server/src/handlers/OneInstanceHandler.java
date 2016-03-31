@@ -21,17 +21,17 @@ public class OneInstanceHandler {
 	/**
 	 * Crea una instancia de un juego
 	 */
-	public static Handler<RoutingContext> GET = handler -> {
+	public static Handler<RoutingContext> GET = handler ->{
 		System.out.println("OneInstanceHandler GET");
-
-		String instanceId = handler.request().params().get("instanceId");
-		String gameId = handler.request().params().get("gameId");
 		
+		String instanceId = handler.request().params().get("instanceId");
+	 	String gameId = handler.request().params().get("gameId");
+			
 		Morphia morphia = new Morphia();
 		morphia.map(GameConfig.class);
 		Datastore ds = morphia.createDatastore(new com.mongodb.MongoClient(), "mathGame");
 
-		GameConfig gameConfig = ds.get(GameConfig.class, new ObjectId(gameId));
+		GameConfig gameConfig = ds.get(GameConfig.class, gameId);
 
 		GameInstance gameInstance = new GameInstance(instanceId, gameId, GameCreator.createLevels(gameConfig));
 
@@ -39,59 +39,62 @@ public class OneInstanceHandler {
 			handler.response().end(new ObjectMapper().writeValueAsString(gameInstance));
 		} catch (IOException ex) {
 			handler.response().end(ex.getMessage());
-		}
-
+		}					
+	
 	};
-
-	public static Handler<RoutingContext> POST = handler -> {
-		handler.request().bodyHandler(data -> {
-
+	
+	public static Handler<RoutingContext> POST = handler ->{
+		handler.request().bodyHandler(data ->{
+			
+			System.out.println("data" +data.toString());			 
+			
 			JsonObject requestJson = new JsonObject(data.toString());
-
+			
 			InstanceGameData instanceGameData = new InstanceGameData(
 					requestJson.getString("instanceName"), 
 					requestJson.getString("gameId"));
-			
+				
 			Morphia morphia = new Morphia();
 			morphia.map(InstanceGameData.class);
 			Datastore ds = morphia.createDatastore(new com.mongodb.MongoClient(), "mathGame");
-
+			
 			ds.save(instanceGameData);				
-
+			
 		});
 	};
-
-	public static Handler<RoutingContext> PUT = handler -> {
-
-		handler.request().bodyHandler(data -> {
+	
+	public static Handler<RoutingContext> PUT = handler ->{
+		
+		handler.request().bodyHandler(data ->{
 			System.out.println("PUT oneInstanceHandler data" + data.toString());
 			JsonObject instance = new JsonObject(data.toString()).put("collection", "instance");
-
-			handler.vertx().eventBus().send("save", instance.encode(), ar -> {
-				if (ar.succeeded()) {
-					handler.response().end(ar.result().body().toString());
-				} else {
-					System.out.println("problem . . . " + ar.cause());
-					handler.response().end(ar.result().body().toString());
-				}
-			});
-
+			
+			handler.vertx().eventBus().send("save", instance.encode(), ar ->{
+		    	 if (ar.succeeded()) {
+		    		handler.response().end(ar.result().body().toString());		    		    
+		    	 }else{
+		    		 System.out.println("problem . . . "+ar.cause());
+		    		 handler.response().end(ar.result().body().toString());
+		    	 }
+		    });
+			
 		});
+
 
 	};
-
-	public static Handler<RoutingContext> DELETE = handler -> {
+	
+	public static Handler<RoutingContext> DELETE = handler ->{
 		String instanceId = handler.request().params().get("instanceId");
-
+		
 		JsonObject deleteRequest = new JsonObject().put("collection", "instance").put("query",
 				new JsonObject().put("_id", instanceId));
-
-		handler.vertx().eventBus().send("remove", deleteRequest.encode(), ar -> {
-			if (ar.succeeded()) {
+		
+		handler.vertx().eventBus().send("remove", deleteRequest.encode(), ar ->{
+			if(ar.succeeded()){
 				handler.response().end(ar.result().body().toString());
 			}
-		});
-
+		});		
+		
 	};
 	
 	

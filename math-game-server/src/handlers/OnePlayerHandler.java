@@ -47,6 +47,7 @@ public class OnePlayerHandler {
 					.put("corrects", requestScore.getInteger("corrects"))
 					.put("incorrects", requestScore.getInteger("incorrects"));
 			
+			System.out.println(scoring);
 			
 			handler.vertx().eventBus().send("update-player-scoring", scoring.encode(), ar ->{
 				if (ar.succeeded()) {

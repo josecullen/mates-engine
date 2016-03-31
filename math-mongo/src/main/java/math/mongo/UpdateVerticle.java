@@ -60,7 +60,7 @@ public class UpdateVerticle extends AbstractVerticle {
 			JsonObject updateJson = new JsonObject().put("$push", new JsonObject().put("players", player));
 			System.out.println(updateJson.encodePrettily());			
 			
-			client.update("instance", new JsonObject().put("_id", instance.getString("_id")), updateJson, res ->{
+			client.update("instanceGameData", new JsonObject().put("_id", instance.getString("_id")), updateJson, res ->{
 				  if (res.succeeded()) {
 					  
 					  JsonObject result = new JsonObject()
@@ -95,7 +95,7 @@ public class UpdateVerticle extends AbstractVerticle {
 			System.out.println(matchJson.encodePrettily());
 			System.out.println(updateJson.encodePrettily());
 			
-			client.update("instance", matchJson, updateJson, res ->{
+			client.update("instanceGameData", matchJson, updateJson, res ->{
 				  if (res.succeeded()) {					  
 					  message.reply("OK - pushed player! "+res.result());
 					  System.out.println("publishing update: " + matchJson.getString("instanceId"));

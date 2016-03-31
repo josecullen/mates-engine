@@ -5,13 +5,23 @@
 	<artifactId>math-facade</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
+
+
 	<dependencies>
 		<dependency>
 			<groupId>math-aritmetic</groupId>
 			<artifactId>math-aritmetic</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>math-core</groupId>
+			<artifactId>math-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
+
+
+
 
 
 

@@ -139,7 +139,7 @@ public class ProblemFacade {
 	}
 	
 	
-	private static JsonObject parseProblemToJson(Problem problem){
+	public static JsonObject parseProblemToJson(Problem problem){
 		JsonObject jsonProblem = new JsonObject();
 		
 		JsonArray answerOptions = new JsonArray();

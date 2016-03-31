@@ -3,9 +3,6 @@
   <groupId>math-core</groupId>
   <artifactId>math-core</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
-  
-  
   <build>
     <sourceDirectory>src</sourceDirectory>
     <testSourceDirectory>test</testSourceDirectory>
@@ -20,6 +17,4 @@
       </plugin>
     </plugins>
   </build>
-  
-  
 </project>

@@ -5,9 +5,11 @@
 
 
 <div ng-if="gameInstance.instance.status == 'NOT_SELECTED'">
+	<label>Nombre: (El nombre debe tener más de 4 caracteres)</label>
 	<div class="input-group">
-		<span class="input-group-addon">Nombre: </span> 
-		<input type="text" ng-model="player.name" class="form-control"><span class="input-group-addon" style="cursor:pointer">OK!</span>
+		<input type="text" ng-model="player.name" class="form-control" ng-class="">
+		<span class="input-group-addon glyphicon glyphicon-ok btn-success active" ng-show="player.name.length >= 4"></span> 
+		<span class="input-group-addon glyphicon glyphicon-option-horizontal btn-warn active" ng-show="player.name.length < 4"></span> 
 	</div>
 	<br>
 	<ul class="list-group">
@@ -16,8 +18,9 @@
 			class="badge" 
 			ng-click="joinGame(player.name, instance)" 
 			ng-disabled="player.name.length < 4"
+			uib-tooltip="'El nombre debe tener al menos 4 letras'"			
 			onclick="enableFullScreen()" >¡Jugar!</button>
-			{{instance.gameName}}</li>
+			{{instance.instanceName}}</li>
 	</ul>
 </div>
 
