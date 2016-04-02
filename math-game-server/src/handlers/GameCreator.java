@@ -45,7 +45,7 @@ public class GameCreator {
 					
 					instanceProblems.add(new GameProblem(problem));
 				}
-				levels.add(new GameLevel(instanceProblems));
+				levels.add(new GameLevel(instanceProblems, levelConfig.getScoreConfig()));
 			}			
 		});
 		

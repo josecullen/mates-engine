@@ -98,10 +98,19 @@
 			<tbody>
 				<tr *ngFor="#levelConfig of gameConfig.levelConfigs; #j = index">
 					<td>{{j+1}}</td>
-					<td><editable [edit]="editAll" [value]="levelConfig.scoreConfig.baseScore" (valueChanged)="levelConfig.score.baseScore = $event">
+					<td>
+						<editable 
+							[edit]="editAll" 
+							[value]="levelConfig.scoreConfig.baseScore" 
+							(valueChanged)="levelConfig.scoreConfig.baseScore = $event">
 						</editable></td>
-					<td><extra-score [edit]="editAll" [extraScore]="levelConfig.scoreConfig.extras[0]" (valueChanged)="levelConfig.scoreConfig.extras[0]= $event">
-						</extra-score></td>
+					<td>
+						<extra-score 
+							[edit]="editAll" 
+							[extraScore]="levelConfig.scoreConfig.extras[0]" 
+							(valueChanged)="levelConfig.scoreConfig.extras[0]= $event">
+						</extra-score>
+					</td>
 					<td><extra-score [edit]="editAll" [extraScore]="levelConfig.scoreConfig.extras[1]" (valueChanged)="levelConfig.scoreConfig.extras[1]= $event">
 						</extra-score></td>
 					<td><extra-score [edit]="editAll" [extraScore]="levelConfig.scoreConfig.extras[2]" (valueChanged)="levelConfig.scoreConfig.extras[2]= $event">

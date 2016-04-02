@@ -5,14 +5,16 @@ import org.mongodb.morphia.annotations.Embedded;
 @Embedded
 public class ExtraScore {
 	private String name;
-	private int time;
-	private int extra;
+	private int extraTime;
+	private int extraScore;
+	private int thresholdTime;
 	
 	public ExtraScore() {}
-	public ExtraScore(String name, int time, int extra){
+	public ExtraScore(String name,int thresholdTime, int time, int extra){
 		this.name = name;
-		this.time = time;
-		this.extra = extra;
+		this.setThresholdTime(thresholdTime);
+		this.setExtraTime(time);
+		this.setExtraScore(extra);
 	}
 	
 	public String getName() {
@@ -22,21 +24,23 @@ public class ExtraScore {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getTime() {
-		return time;
+	public int getExtraTime() {
+		return extraTime;
 	}
-
-	public void setTime(int time) {
-		this.time = time;
+	public void setExtraTime(int extraTime) {
+		this.extraTime = extraTime;
 	}
-
-	public int getExtra() {
-		return extra;
+	public int getExtraScore() {
+		return extraScore;
 	}
-
-	public void setExtra(int extra) {
-		this.extra = extra;
+	public void setExtraScore(int extraScore) {
+		this.extraScore = extraScore;
+	}
+	public int getThresholdTime() {
+		return thresholdTime;
+	}
+	public void setThresholdTime(int thresholdTime) {
+		this.thresholdTime = thresholdTime;
 	}
 
 }

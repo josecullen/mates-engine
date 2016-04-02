@@ -1,7 +1,7 @@
-define(["angular", "js/services", 'js/services/game-timer', 'js/services/game-instance', 'js/services/game-tooltips'], 
+define(["angular", "js/services", 'js/services/game-timer', 'js/services/game-instance', 'js/services/game-tooltips', 'js/services/game-levels'], 
     function(angular, services){
-	services.factory('gameScoring', ['$log', 'gameTimer', 'gameInstance', 'gameTooltips',
-        function($log, gameTimer, gameInstance, gameTooltips){				
+	services.factory('gameScoring', ['$log', 'gameTimer', 'gameInstance', 'gameTooltips', 'gameLevels',
+        function($log, gameTimer, gameInstance, gameTooltips, gameLevels){				
 	    
         $log.info("gameScoring");
 
@@ -11,23 +11,27 @@ define(["angular", "js/services", 'js/services/game-timer', 'js/services/game-in
             var plusTime = 0;
 
             if(wasCorrect){
-                plusScore = 10;
+                var scoreConfig = gameInstance.instance.levels[gameLevels.order.level].scoreConfig;
 
+                plusScore = scoreConfig.baseScore;
                 gameInstance.status.corrects++;
 
-                if(gameTimer.problemTime.value < 5){
+                var extras = scoreConfig.extras;
+
+                if(gameTimer.problemTime.value < extras[0].thresholdTime){
                     gameInstance.status.responses.great++;
-                    plusTime += 5;
-                    plusScore += 3;
+                    plusTime += extras[0].extraTime;
+                    plusScore += extras[0].extraScore;
                     responseLevel = 4;
-                }else if(gameTimer.problemTime.value < 8){
+                }else if(gameTimer.problemTime.value < extras[1].thresholdTime){
                     gameInstance.status.responses.good++;
-                    plusTime += 3;
-                    plusScore += 1;
+                    plusTime += extras[1].extraTime;
+                    plusScore += extras[1].extraScore;
                     responseLevel = 3;
-                }else if(gameTimer.problemTime.value < 10){
+                }else if(gameTimer.problemTime.value < extras[2].thresholdTime){
                     gameInstance.status.responses.ok++;
-                    plusTime += 1;
+                    plusTime += extras[2].extraTime;
+                    plusScore += extras[2].extraScore;
                     responseLevel = 2;
                 }else{
                     gameInstance.status.responses.pass++;
