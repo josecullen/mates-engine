@@ -68,10 +68,10 @@ define(["angular",
             if(isProblemEnds(problemStatus)){
                 gameTooltips.showHideTooltips(true);
 
-                if(problemStatus.isCorrect && problemStatus.isProblemEnds){
-                    gameTooltips.setResponseLevel(gameScoring.update(true));
-                }else{
-                    gameTooltips.setResponseLevel(gameScoring.update(false));
+
+                gameScoring.update(problemStatus.isCorrect && problemStatus.isProblemEnds);
+                if(!problemStatus.isCorrect && gameInstance.status.lives.length == 0){
+                    gameInstance.instance.status = "GAME_OVER";                    
                 }
 
                 $scope.sendScoring();

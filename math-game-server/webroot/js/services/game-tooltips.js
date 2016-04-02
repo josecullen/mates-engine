@@ -2,20 +2,20 @@
 define(["angular", "js/services"], function(angular, services){
 	services.factory('gameTooltips', ['$log', '$sce', '$timeout', function($log, $sce, $timeout){				
         
-        var styleLevels = [
-            'tooltip-nook',
+        var styleLevels = [            
+            'tooltip-great',
+            'tooltip-good',            
+            'tooltip-ok',  
             'tooltip-pass',
-            'tooltip-ok',            
-            'tooltip-good',
-            'tooltip-great'
+            'tooltip-nook'
         ];
 
         var responsTypes = [
-            "Incorrecto",
-            "Muy lento",
-            "Bien",
+            "¡Genial!",
             "Muy bien",
-            "¡Genial!"
+            "Bien",            
+            "Muy lento",
+            "Incorrecto"
         ];
 
         var tooltips = {            
@@ -55,17 +55,42 @@ define(["angular", "js/services"], function(angular, services){
             tooltips.time.message = $sce.trustAsHtml('<h2>'+extraTime+'s.</h2>');
         }
 
-        var setResponseStatusTooltip = function(responseLevel){
-            tooltips.responseStatus.message = $sce.trustAsHtml('<h2>'+responsTypes[responseLevel]+'</h2>');
+        var setResponseStatusTooltip = function(extraName){
+            tooltips.responseStatus.message = $sce.trustAsHtml('<h2>'+extraName+'</h2>');
         }
 
         var setResponseLevel = function(responseLevel){
             tooltips.tooltipClass = styleLevels[responseLevel];
-            setResponseStatusTooltip(responseLevel);
+           // setResponseStatusTooltip(responseLevel);
+        }
+
+        var setTooltip = function(correct, scoreConfig, extraIndex){
+            if(correct){
+                var extraScore = 0;
+                var extraTime = 0;       
+                var extraName = "Muy lento";         
+                if(extraIndex != -1){
+                    extraScore = scoreConfig.extras[extraIndex].extraScore;
+                    extraTime = scoreConfig.extras[extraIndex].extraTime; 
+                    extraName = scoreConfig.extras[extraIndex].name;
+                }else{
+                    extraIndex = scoreConfig.extras.length;
+                }
+                setScoreTooltip(scoreConfig.baseScore+extraScore);
+                setTimeTooltip(extraTime);
+                setResponseLevel(extraIndex);                    
+                setResponseStatusTooltip(extraName);
+            }else{
+                setScoreTooltip(0);
+                setTimeTooltip(0);
+                setResponseLevel(responsTypes.length-1);
+                setResponseStatusTooltip("Incorrecto");
+            }
         }
 
         var gameTooltips = {
             tooltips : tooltips,
+            setTooltip : setTooltip,
             showHideTooltips : showHideTooltips,
             setScoreTooltip : setScoreTooltip,
             setTimeTooltip : setTimeTooltip,
