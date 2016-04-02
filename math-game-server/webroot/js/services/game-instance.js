@@ -25,6 +25,34 @@ define(["angular",'js/services', 'js/services/game-services'], function(angular,
             levelCount: 0
         };
 
+        var addResponse = function(responseId){
+            switch(responseId){
+                case 0:
+                    gameInstance.status.responses.great++;
+                    break;
+                case 1:
+                    gameInstance.status.responses.good++;
+                    break;
+                case 2:
+                    gameInstance.status.responses.ok++;
+                    break;
+                case 3:
+                    gameInstance.status.responses.pass++;
+                    break;
+                case -1:
+                    gameInstance.status.responses.nook++;
+                    break;
+            }
+        }
+
+        var addScore = function(scoreConfig, extraIndex){
+            gameInstance.addResponse(extraIndex);
+            gameInstance.status.score += scoreConfig.baseScore;
+            if(extraIndex >= 0 && extraIndex < scoreConfig.extras.length){
+                gameInstance.status.score += scoreConfig.extras[extraIndex].extraScore;
+            }
+        }
+
         var joinGame = function(name, selectedInstance, callback){
 
             resetStatus();
@@ -88,7 +116,9 @@ define(["angular",'js/services', 'js/services/game-services'], function(angular,
             instance : { status : "NOT_SELECTED" },
             status : status,
             join : joinGame,
-            resetAll : resetAll
+            resetAll : resetAll,
+            addResponse : addResponse,
+            addScore : addScore
         };
 
 

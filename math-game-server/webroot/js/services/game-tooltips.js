@@ -73,8 +73,6 @@ define(["angular", "js/services"], function(angular, services){
                     extraScore = scoreConfig.extras[extraIndex].extraScore;
                     extraTime = scoreConfig.extras[extraIndex].extraTime; 
                     extraName = scoreConfig.extras[extraIndex].name;
-                }else{
-                    extraIndex = scoreConfig.extras.length;
                 }
                 setScoreTooltip(scoreConfig.baseScore+extraScore);
                 setTimeTooltip(extraTime);

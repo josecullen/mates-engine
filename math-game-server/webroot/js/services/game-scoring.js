@@ -10,7 +10,7 @@ define(["angular", "js/services", 'js/services/game-timer', 'js/services/game-in
             var scoreConfig = gameInstance.instance.levels[gameLevels.order.level].scoreConfig;
             var extras = scoreConfig.extras;
             if(wasCorrect){
-                var extraIndex = -1;
+                var extraIndex = extras.length;
                 for(var i = 0; i < extras.length; i++){
                     if(gameTimer.problemTime.value < extras[i].thresholdTime){
                         extraIndex = i;
@@ -18,8 +18,10 @@ define(["angular", "js/services", 'js/services/game-timer', 'js/services/game-in
                     }
                 }
                 gameTooltips.setTooltip(true, scoreConfig, extraIndex);
+                gameInstance.addScore(scoreConfig, extraIndex);
             }else{
                 gameInstance.status.lives.pop();
+                gameInstance.addScore(scoreConfig, -1);
                 gameTooltips.setTooltip(false);
             }
 
