@@ -69,7 +69,7 @@ define(["angular", "js/services"], function(angular, services){
                 var extraScore = 0;
                 var extraTime = 0;       
                 var extraName = "Muy lento";         
-                if(extraIndex != -1){
+                if(extraIndex != scoreConfig.extras.length){
                     extraScore = scoreConfig.extras[extraIndex].extraScore;
                     extraTime = scoreConfig.extras[extraIndex].extraTime; 
                     extraName = scoreConfig.extras[extraIndex].name;
