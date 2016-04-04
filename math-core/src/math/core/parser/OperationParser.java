@@ -1,5 +1,7 @@
 package math.core.parser;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 import math.core.tree.MathNode;
@@ -9,17 +11,22 @@ import math.core.tree.OperationNode;
 public class OperationParser {
 	
 	
+	@SuppressWarnings("rawtypes")
 	public OperationParser(Function<String, OperandNode> operandInstancer, Function<String, OperationNode> operationInstancer) {
 		newOperandInstance = operandInstancer;
 		newOperationInstance = operationInstancer;
 	}
 	
 	
+	@SuppressWarnings("rawtypes")
 	private Function<String, OperandNode> newOperandInstance;
+	@SuppressWarnings("rawtypes")
 	private Function<String, OperationNode> newOperationInstance;
 
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MathNode parse(String expression){
+		
 		OperationNode operation = null;
 
 		try{
@@ -29,7 +36,7 @@ public class OperationParser {
 			}else{
 				expression = stripOuterBraces(expression);
 				String values[] = analyzeMorf(expression);
-				
+								
 				operation = newOperationInstance.apply(values[1]);
 				operation.getOperation().setSign(hasSign);
 				operation.setOperands(getLogicFromString(values[0]), getLogicFromString(values[2]));
@@ -43,6 +50,7 @@ public class OperationParser {
 
 	}
 	
+	@SuppressWarnings("unchecked")
 	private <T> MathNode<T> getLogicFromString(String value){
 		value = value.trim();
 		if(value.length() > 2){
@@ -67,7 +75,7 @@ public class OperationParser {
 	}
 	
 	/**
-	 * Detecta si la opación padre de la expresión tiene signo.
+	 * Detecta si la oparación padre de la expresión tiene signo.
 	 * Ejemplo
 	 * <ul>
 	 * 	<li><p>-(p or q) or p </p><p>No tiene signo, ya que la operación padre es el último 'or'</p></li>
@@ -138,23 +146,21 @@ public class OperationParser {
 	}
 	
 	private String[] analyzeMorf(String expression){
-		String values[] = new String[3];
-		expression = expression.trim();
+//		String values[] = new String[3];
+		List<String> values = new ArrayList<>();
 		
-		values[0] = getNextLogicFromExpression(expression);
 		
-		expression = expression.substring(values[0].length());
-				
-		expression = expression.trim();		
-		values[1] = expression.split(" ")[0];
-		
-		expression = expression.substring(values[1].length());
-				
-		expression = expression.trim();
+		while(!expression.isEmpty()){
+			expression = expression.trim();
+			String newValue = getNextLogicFromExpression(expression);
+			values.add(newValue.trim());
+			expression = expression.substring(newValue.length());
+		}
 
-		values[2] = getNextLogicFromExpression(expression);
+		String[] result = new String[values.size()];
+		result = values.toArray(result);
 		
-		return values;
+		return result;
 	}
 	
 	

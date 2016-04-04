@@ -63,7 +63,11 @@ public class ArithmeticBroadcastUtil {
 		});
 		
 		getExpression.setOperationAction(operationNode ->{
-			String expression = getExpression.runOn(operationNode.getLeftNode()) +" "+ operationNode.getOperation().getExpression() +" "+ getExpression.runOn(operationNode.getRightNode());
+			String expression = getExpression.runOn(
+					operationNode.getLeftNode()) +" "+ 
+					operationNode.getOperation().getExpression() +" "+ 
+					getExpression.runOn(operationNode.getRightNode()
+			);
 			return operationNode.getOperation().getSign() 
 					? "-( "+expression +" )"
 					: "( "+expression+" )";

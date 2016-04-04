@@ -14,7 +14,10 @@ export class MathFormComponent{
 		"a + b",
 		"a + (b + c)",
 		"(a + b) + c",
-		"(a + b) + (c + d)"
+		"(a + b) + (c + d)",
+		"( ((a + b) + (c + d)) + e )",
+		"( e + ((a + b) + (c + d) ) )",
+		"((a + b) + (c + d)) + (f + g)"
 		];
 
 
