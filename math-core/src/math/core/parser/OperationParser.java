@@ -146,9 +146,7 @@ public class OperationParser {
 	}
 	
 	private String[] analyzeMorf(String expression){
-//		String values[] = new String[3];
-		List<String> values = new ArrayList<>();
-		
+		List<String> values = new ArrayList<>();		
 		
 		while(!expression.isEmpty()){
 			expression = expression.trim();

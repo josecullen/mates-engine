@@ -1,19 +1,27 @@
 
+export class Stage{
+    constructor(
+        public levelConfigs:Array<LevelConfig> = [new LevelConfig()]
+        ){}
+}
+
+
 export class LevelConfig {
     constructor(
         public problemConfig: ProblemConfig = new SimpleProblemConfig(),
        	public scoreConfig: ScoreConfig = new ScoreConfig()
     ) { }
 }
-enum ProblemType {
-    SIMPLE
+export enum ProblemType {
+    SIMPLE, EQUATION
 }
 
-interface ProblemConfig {
+export interface ProblemConfig {
     getType(): ProblemType;
 }
 
-class SimpleProblemConfig implements ProblemConfig {
+
+export class SimpleProblemConfig implements ProblemConfig {
     constructor(
         public variableConfigs: Array<VariableConfig> = [new VariableConfig()],
         public form: string = "a + b",
@@ -24,6 +32,20 @@ class SimpleProblemConfig implements ProblemConfig {
 
     getType() {
         return ProblemType.SIMPLE;
+    }
+}
+
+
+export class EquationProblemConfig implements ProblemConfig {
+    constructor(
+        public variableConfigs: Array<VariableConfig> = [new VariableConfig(), new VariableConfig()],
+        public repetitions: number = 5,
+        public problemType: string = ProblemType[ProblemType.EQUATION],
+        public level:number = 2
+        ) { }
+
+    getType() {
+        return ProblemType.EQUATION;
     }
 }
 

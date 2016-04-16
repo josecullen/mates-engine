@@ -4,5 +4,5 @@ import org.mongodb.morphia.annotations.Embedded;
 
 @Embedded
 public enum ProblemType {
-	SIMPLE
+	SIMPLE, EQUATION
 }

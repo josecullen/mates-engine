@@ -1,0 +1,56 @@
+
+<div class=" col-xs-12" >
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Problema</th>					
+				<th>Expresión</th>
+				<th>Mínimo</th>
+				<th>Máximo</th>
+				<th>Signo</th>
+				<th>Operaciones</th>
+				<th>Divisor</th>
+				<th>Repeticiones</th>					
+				<button class="btn glyphicon glyphicon-plus" (click)="addLevel()"></button>
+				<button class="btn glyphicon glyphicon-edit" (click)="editAll = !editAll"></button>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="#levelConfig of levelConfigs; #i = index">
+				<td>{{i+1}}</td>
+				<td>
+
+				<math-form-combo [form]="levelConfig.problemConfig.form" 
+				(form)="levelConfig.problemConfig.form = $event">
+				</math-form-combo>
+
+				</td>
+				<td><editable
+						[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].min" 
+						(valueChanged)="levelConfig.problemConfig.variableConfigs[0].min = toNumber($event)">
+				</editable></td>
+				<td><editable 
+						[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].max" 
+						(valueChanged)="levelConfig.problemConfig.variableConfigs[0].max = toNumber($event)">
+				</editable></td>
+				<td><editable 
+						[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].sign" 
+						(valueChanged)="levelConfig.problemConfig.variableConfigs[0].sign = toNumber($event)">
+				</editable></td>
+				<td><select-operations
+						[operations]="levelConfig.problemConfig.operations" 
+						(operations)="levelConfig.problemConfig.operations = $event">
+				</select-operations></td>
+				<td><editable 
+						[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].divisionFactor"
+						(valueChanged)="levelConfig.problemConfig.variableConfigs[0].divisionFactor = toNumber($event)"> </editable></td>
+				<td><editable 
+						[edit]="editAll" [value]="levelConfig.problemConfig.repetitions"
+						(valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)"> 
+				</editable></td>
+				
+				<button class="btn glyphicon glyphicon-trash" (click)="gameConfig.levelConfigs.splice(i,1)"></button>
+			</tr>
+		</tbody>
+	</table>
+</div>

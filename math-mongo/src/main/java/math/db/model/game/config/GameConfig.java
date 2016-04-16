@@ -11,27 +11,36 @@ public class GameConfig {
 	@Id
 	private String id;
 	private String name;
-	private List<LevelConfig> levelConfigs;
+	private List<Stage> stages;
 
 	public GameConfig() {}
-	public GameConfig(String name, List<LevelConfig> levelConfigs){
+	public GameConfig(String name, List<Stage> stages){
 		this.name = name;
-		this.levelConfigs = levelConfigs;
+		this.stages = stages;
+	
 	}
 	
-	public List<LevelConfig> getLevelConfigs() {
-		return levelConfigs;
-	}
-
 	public String getName() {
 		return name;
 	}
-
-	public void setLevelConfigs(List<LevelConfig> levelConfigs) {
-		this.levelConfigs = levelConfigs;
-	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public List<Stage> getStages() {
+		return stages;
+	}
+	public void setStages(List<Stage> stages) {
+		this.stages = stages;
+	}
+	
+	
 }
+
+
+

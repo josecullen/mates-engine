@@ -1,11 +1,11 @@
-import {LevelConfig} from './level-config';
+import {Stage} from './level-config';
 
 export class GameConfig {
 	public _id:any;
 	public instanceGameDatas:Array<InstanceGameData>;
     constructor(
         public name: string = "Juego Nuevo",
-        public levelConfigs: Array<LevelConfig> = [new LevelConfig()];
+        public stages: Array<Stage> = [new Stage()];
         ) { }
 
 }

@@ -11,8 +11,7 @@ public class ProblemConfig {
 	private String operations;
 	private String form;
 	private int repetitions;
-
-
+	private int level;
 	public ProblemConfig() {}
 
 	public ProblemConfig(ProblemType problemType, List<VariableConfig> variableConfigs) {
@@ -33,6 +32,14 @@ public class ProblemConfig {
 		this.repetitions = repetitions;
 	}
 
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	
 	public String getForm() {
 		return form;
 	}

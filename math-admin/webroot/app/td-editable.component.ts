@@ -13,22 +13,20 @@ import {
 @Component({
     selector: 'editable',
     template: `        
-            <div *ngIf="!edit" (click)="startEdit(form)">{{value}}</div>
-            <div #divForm *ngIf="edit">
-                <input #form id="editForm"
-                    size="6"
-                    max="999"
-                    min="0"
-                    type="{{type}}"
-                    value="{{value}}"
-                    checked="{{value}}"
-                    (blur)="type == 'checkbox' ? editEnd(form.checked) : editEnd(form.value)"
-                    (keyup.enter)="type == 'checkbox' ? editEnd(form.checked) : editEnd(form.value)"
-                    (keyup.escape)="edit = !edit"
-                >
-            </div>
-        
-
+        <div *ngIf="!edit" (click)="startEdit(form)">{{value}}</div>
+        <div #divForm *ngIf="edit">
+            <input #form id="editForm"
+                size="6"
+                max="999"
+                min="0"
+                type="{{type}}"
+                value="{{value}}"
+                checked="{{value}}"
+                (blur)="type == 'checkbox' ? editEnd(form.checked) : editEnd(form.value)"
+                (keyup.enter)="type == 'checkbox' ? editEnd(form.checked) : editEnd(form.value)"
+                (keyup.escape)="edit = !edit"
+            >
+        </div>
     `
 })
 export class Editable {

@@ -36,7 +36,9 @@ public class OneInstanceHandler {
 		GameInstance gameInstance = new GameInstance(instanceId, gameId, GameCreator.createLevels(gameConfig));
 
 		try {
-			handler.response().end(new ObjectMapper().writeValueAsString(gameInstance));
+			String gameInstanceString = new ObjectMapper().writeValueAsString(gameInstance);
+			System.out.println(new JsonObject(gameInstanceString).encodePrettily());
+			handler.response().end(new JsonObject(gameInstanceString).encode());
 		} catch (IOException ex) {
 			handler.response().end(ex.getMessage());
 		}					
