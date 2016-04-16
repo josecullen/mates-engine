@@ -11,7 +11,7 @@ import {
 } from 'angular2/core';
 import {Editable} from './td-editable.component';
 import {ExtraScoreComponent} from './extra-score.component';
-import {LevelConfig} from './level-config';
+import {LevelConfig, SimpleProblemConfig} from './level-config';
 import {MathFormComponent} from './math-form-combo.component';
 import {SelectOperationComponent} from './select-operations.component';
 
@@ -25,6 +25,10 @@ import {SelectOperationComponent} from './select-operations.component';
         SelectOperationComponent]
 })
 export class ArithLevelComponent{
-    @Input() levelConfigs:Array<LevelConfig>;   
+    @Input() levelConfigs:Array<LevelConfig>;  
+
+    addLevel() {
+        this.levelConfigs.push(new LevelConfig(new SimpleProblemConfig()));
+    } 
     
 }

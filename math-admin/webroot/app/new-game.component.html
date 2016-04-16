@@ -8,8 +8,16 @@
 	<br>
 
 	<button class="btn btn-info" (click)="changeShowTable()">{{showHideTables}}</button>
-	<button class="btn btn-default" >Nueva Etapa</button>
+	<button class="btn btn-default" (click)="setStatus('CREATE_STAGE')" >Nueva Etapa</button>
+	<div *ngIf="state == 'CREATE_STAGE'">
+		<label>Elija el tipo de problemas de la nueva etapa</label>
+		
+		<select #optionSelected>
+			<option *ngFor="#problemOption of stageOptions" value="{{problemOption}}">{{problemOption}} </option>
+		</select>
 
+		<button class="btn btn-default" (click)="createStage(optionSelected.value)" >Crear Etapa</button>
+	</div>
 
 	<div *ngFor="#stage of gameConfig.stages; #i = index">
 		

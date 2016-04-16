@@ -1,6 +1,12 @@
 import {Component, Input, Output} from 'angular2/core';
 import {Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
-import {LevelConfig, EquationProblemConfig, ProblemType, Stage} from './level-config';
+import {
+    LevelConfig, 
+    EquationProblemConfig, 
+    ProblemType, 
+    Stage,
+    SimpleProblemConfig
+} from './level-config';
 import {Editable} from './td-editable.component';
 import {GameConfig} from './game-config';
 import {ExtraScoreComponent} from './extra-score.component';
@@ -36,11 +42,15 @@ export class NewGameComponent {
         ) { }
 
     gameConfig: GameConfig;
-    epics:Array<Array<LevelConfig>>;
     showProblemConfig = 'block';
     showScoreConfig = 'none';
     showHideTables = "Mostrar Configuración de Puntuación";
     showinTable = "scoreConfig";
+    state:string = 'none';
+
+    stageOptions:Array<String> = [
+        "SIMPLE", "EQUATION"
+    ]
 
     ngOnInit() {
         console.log("init NewGameComponent");
@@ -53,29 +63,6 @@ export class NewGameComponent {
             this.gameConfig.stages[0].levelConfigs[0].problemConfig = new EquationProblemConfig();
             this.gameConfig.stages[1].levelConfigs[0].problemConfig = new EquationProblemConfig();
         }       
-
-        //this.epics = this.splitInEpics(this.gameConfig.levelConfigs);
-    }
-
-    splitInEpics(levelConfigs:Array<LevelConfig>):Array<Array<LevelConfig>>{
-        let result:Array<Array<LevelConfig>> = new Array();
-
-        let type = levelConfigs[0].problemConfig.getType();
-        let from = 0;
-        let epic:Array<LevelConfig>;
-        for(let i = 1; i < levelConfigs.length; i++){
-            let newType:ProblemType = levelConfigs[i].problemConfig.getType();
-            if(type != newType){                
-                result.push(levelConfigs.slice(from, i));
-                from = i;
-                type = newType;
-            }
-            if(type == newType && i == levelConfigs.length - 1){
-                result.push(levelConfigs.slice(from, i+1)); 
-            }
-        }
-
-        return result;
     }
 
     changeShowTable() {
@@ -90,12 +77,41 @@ export class NewGameComponent {
         }
     }
 
-    isSimple(levelConfig:LevelConfig){
-        return levelConfig.problemConfig.getType() == ProblemType.SIMPLE;
+    createStage(problemType:String){
+        switch (problemType) {
+            case "SIMPLE":
+                this.gameConfig.stages.push(
+                    new Stage(
+                        [new LevelConfig(
+                            new SimpleProblemConfig()
+                            )
+                        ])
+                    )
+                break;
+            case "EQUATION":
+            this.gameConfig.stages.push(
+                    new Stage(
+                        [new LevelConfig(
+                            new EquationProblemConfig()
+                            )
+                        ])
+                    )
+                break;
+            default:
+                // code...
+                break;
+        }
+        this.state = 'none';
     }
 
-    addLevel() {
-        this.gameConfig.levelConfigs.push(new LevelConfig());
+    setStatus(state:string){
+        this.state = state;
+        console.log('change '+state);
+    }
+
+
+    isSimple(levelConfig:LevelConfig){
+        return levelConfig.problemConfig.getType() == ProblemType.SIMPLE;
     }
 
     printProblem() {
