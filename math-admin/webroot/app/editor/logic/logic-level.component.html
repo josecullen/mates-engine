@@ -1,0 +1,36 @@
+
+<div class=" col-xs-12" >
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Problema</th>					
+				<th>Expresión</th>
+				<th>LOGIC</th>
+				<th>Máximo</th>
+				<th>Signo</th>
+				<th>Operaciones</th>
+				<th>Divisor</th>
+				<th>Repeticiones</th>					
+				<button class="btn glyphicon glyphicon-plus" (click)="addLevel()"></button>
+				<button class="btn glyphicon glyphicon-edit" (click)="editAll = !editAll"></button>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="#levelConfig of levelConfigs; #i = index">
+				<td>{{i+1}}</td>
+
+				<td><select-logic-operations
+						[operations]="levelConfig.problemConfig.operations" 
+						(operations)="levelConfig.problemConfig.operations = $event">
+				</select-logic-operations></td>
+				
+				<td><editable 
+						[edit]="editAll" [value]="levelConfig.problemConfig.repetitions"
+						(valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)"> 
+				</editable></td>
+				
+				<button class="btn glyphicon glyphicon-trash" (click)="gameConfig.levelConfigs.splice(i,1)"></button>
+			</tr>
+		</tbody>
+	</table>
+</div>

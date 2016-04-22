@@ -38,7 +38,7 @@ public class OperationParser {
 				String values[] = analyzeMorf(expression);
 								
 				operation = newOperationInstance.apply(values[1]);
-				operation.getOperation().setSign(hasSign);
+//				operation.getOperation().setSign(hasSign);
 				operation.setOperands(getLogicFromString(values[0]), getLogicFromString(values[2]));
 				return operation;
 			}
@@ -139,7 +139,7 @@ public class OperationParser {
 		}else if(expression.charAt(0) == '-'){
 			logic = expression.substring(0,2);
 		}else{
-			logic = expression.substring(0,1);
+			logic = expression.split(" ")[0];//expression.substring(0,1);
 		}
 		
 		return logic;

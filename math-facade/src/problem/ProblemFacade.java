@@ -1,8 +1,8 @@
 package problem;
 
 import math.arithmetic.problem.EquationLevel;
-import math.arithmetic.problem.Problem;
 import math.arithmetic.problem.SimpleProblem;
+import math.core.problem.Problem;
 import builders.ArithmeticVariableBuilder;
 import builders.EquationBuilder;
 import builders.OperationBuilder;

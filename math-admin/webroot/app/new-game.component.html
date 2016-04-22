@@ -23,15 +23,22 @@
 		
 		<h2>Etapa {{i+1}}</h2>
 		
-			<arith-level *ngIf="isSimple(stage.levelConfigs[0])" 
+			<arith-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 0" 
 				[levelConfigs]="stage.levelConfigs"
 				[style.display]="showProblemConfig">
 			</arith-level>
 
-			<equation-level *ngIf="!isSimple(stage.levelConfigs[0])" 
+			<equation-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 1" 
 				[levelConfigs]="stage.levelConfigs"
 				[style.display]="showProblemConfig">
 			</equation-level>
+
+			<logic-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 2" 
+				[levelConfigs]="stage.levelConfigs"
+				[style.display]="showProblemConfig">
+			</logic-level>
+
+
 
 			<score 
 				[levelConfigs]="stage.levelConfigs"

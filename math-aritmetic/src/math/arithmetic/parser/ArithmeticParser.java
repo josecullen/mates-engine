@@ -24,6 +24,7 @@ public class ArithmeticParser {
 		node.setVariable(variable);
 		return node;
 	};
+	
 	protected static Function<String, OperationNode> newOperationInstance = expression ->{
 		ArithmeticOperationNode node = null;
 		Operation<Double> operation = OperationUtil.getInstanceFromExpression(expression);

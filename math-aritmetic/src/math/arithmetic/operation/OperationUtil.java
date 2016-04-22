@@ -31,38 +31,5 @@ public class OperationUtil {
 		return getOperationMap().get(expression);
 	}
 	
-//	public static class RandomOperationBuilder{
-//		private double probablySign = 0; // Por defecto no hay signo
-//		private String operationsPattern = "+-/*\\^";		
-//		
-//		public RandomOperationBuilder() {}
-//		
-//		public RandomOperationBuilder buildWithProbablySign(double probablySign){
-//			this.probablySign = probablySign;
-//			return this;
-//		}
-//		
-//		public RandomOperationBuilder buildWithThisOperations(String operationsPattern){
-//			this.operationsPattern = operationsPattern;
-//			return this;
-//		}
-//		
-//		public Operation<Double> build(){
-//			Map<String, Operation<Double>> operations = getOperationMap(operationsPattern); //getValidOperations(operationsPattern);
-//			
-//			Operation<Double> operation = getRandomOperation(operations);
-//			operation.setSign(probablySign >= Math.random());
-//			
-//			return operation;
-//		}
-//			
-//		private Operation<Double> getRandomOperation(Map<String, Operation<Double>> operations){
-//			String[] keys = new String[operations.keySet().size()];
-//			operations.keySet().toArray(keys);
-//			return operations.get(keys[(int)(Math.random()*keys.length)]);
-//		}
-//		
-//	}
-	
 	
 }

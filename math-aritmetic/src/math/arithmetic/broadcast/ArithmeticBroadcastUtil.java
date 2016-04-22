@@ -37,11 +37,7 @@ public class ArithmeticBroadcastUtil {
 	public double getResult(){
 		BroadcastAction<Double> broadcastGetResult = new BroadcastAction<Double>();
 		broadcastGetResult.setOperandAction(operandNode ->{					
-			
-//			if (operandNode.getVariable().getSign())
-//				return -((double)operandNode.getVariable().getValue());
-//			else
-				return operandNode.getVariable().getValue();
+			return operandNode.getVariable().getValue();
 		});
 		
 		broadcastGetResult.setOperationAction(operationNode -> {
@@ -74,6 +70,27 @@ public class ArithmeticBroadcastUtil {
 		});	
 	
 		return getExpression.runOn(tree);
+	}
+	
+	public String getExpressionWithNumbers(){
+	BroadcastAction<String> getExpression = new BroadcastAction<String>();
+		
+		getExpression.setOperandAction(operandNode ->{
+			return operandNode.getVariable().getValue().toString();
+		});
+		
+		getExpression.setOperationAction(operationNode ->{
+			String expression = getExpression.runOn(
+					operationNode.getLeftNode()) +" "+ 
+					operationNode.getOperation().getExpression() +" "+ 
+					getExpression.runOn(operationNode.getRightNode()
+			);
+			return operationNode.getOperation().getSign() 
+					? "-( "+expression +" )"
+					: "( "+expression+" )";
+		});	
+	
+		return getExpression.runOn(tree);	
 	}
 	
 	@SuppressWarnings("unchecked")

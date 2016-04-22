@@ -7,15 +7,11 @@ import math.core.tree.OperandNode;
 public class ArithmeticOperandNode extends OperandNode<Double> {
 	ArithmeticVariable variable;
 	
-//	Override
-//	public Double getResult() {
-//		return variable.getSign() ? variable.getValue()*-1 : variable.getValue();
-//	}
-//
-//	@Override
-//	public String getExpression() {
-//		return variable.getVariable();
-//	}
+	public ArithmeticOperandNode() {	}
+	
+	public ArithmeticOperandNode(String variable, double value, boolean sign){
+		this.variable = new ArithmeticVariable(variable, value, sign);
+	}	
 	
 	public ArithmeticVariable getVariable(){
 		return variable;
@@ -28,10 +24,5 @@ public class ArithmeticOperandNode extends OperandNode<Double> {
 	
 	
 
-	public ArithmeticOperandNode() {	}
-	
-	public ArithmeticOperandNode(String variable, double value, boolean sign){
-		this.variable = new ArithmeticVariable(variable, value, sign);
-	}
 	
 }

@@ -1,17 +1,20 @@
 import {Component, Input, Output} from 'angular2/core';
 import {Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
+import {HTTP_PROVIDERS}    from 'angular2/http';
 import {
     LevelConfig, 
     EquationProblemConfig, 
     ProblemType, 
     Stage,
-    SimpleProblemConfig
+    SimpleProblemConfig,
+    LogicProblemConfig
 } from './level-config';
+import {SelectLogicOperationComponent} from './editor/logic/logic-operations.component';
+import {LogicLevelComponent} from './editor/logic/logic-level.component';
 import {Editable} from './td-editable.component';
 import {GameConfig} from './game-config';
 import {ExtraScoreComponent} from './extra-score.component';
 import {AdminService} from './admin.service';
-import {HTTP_PROVIDERS}    from 'angular2/http';
 import {MathFormComponent} from './math-form-combo.component';
 import {SelectOperationComponent} from './select-operations.component';
 import {ScoreComponent} from './score.component';
@@ -29,7 +32,8 @@ import {EquationLevelComponent} from './equation-level.component';
         SelectOperationComponent,
         ScoreComponent,
         ArithLevelComponent,
-        EquationLevelComponent],
+        EquationLevelComponent,
+        LogicLevelComponent],
     providers: [
         HTTP_PROVIDERS, 
         AdminService]
@@ -49,7 +53,7 @@ export class NewGameComponent {
     state:string = 'none';
 
     stageOptions:Array<String> = [
-        "SIMPLE", "EQUATION"
+        "SIMPLE", "EQUATION", "LOGIC"
     ]
 
     ngOnInit() {
@@ -61,7 +65,7 @@ export class NewGameComponent {
             this.gameConfig.stages.push(new Stage());
             this.gameConfig.stages.push(new Stage());
             this.gameConfig.stages[0].levelConfigs[0].problemConfig = new EquationProblemConfig();
-            this.gameConfig.stages[1].levelConfigs[0].problemConfig = new EquationProblemConfig();
+            this.gameConfig.stages[1].levelConfigs[0].problemConfig = new LogicProblemConfig();
         }       
     }
 
@@ -97,6 +101,15 @@ export class NewGameComponent {
                         ])
                     )
                 break;
+            case "LOGIC":
+            this.gameConfig.stages.push(
+                    new Stage(
+                        [new LevelConfig(
+                            new LogicProblemConfig()
+                            )
+                        ])
+                    )
+                
             default:
                 // code...
                 break;
@@ -110,7 +123,7 @@ export class NewGameComponent {
     }
 
 
-    isSimple(levelConfig:LevelConfig){
+    getType(levelConfig:LevelConfig){
         return levelConfig.problemConfig.getType() == ProblemType.SIMPLE;
     }
 

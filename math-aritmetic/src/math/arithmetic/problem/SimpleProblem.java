@@ -7,6 +7,7 @@ import math.arithmetic.operation.DivisionOperation;
 import math.arithmetic.parser.ArithmeticParser;
 import math.arithmetic.tree.ArithmeticOperandNode;
 import math.arithmetic.tree.ArithmeticOperationNode;
+import math.core.problem.Problem;
 import math.core.tree.broadcast.BroadcastAction;
 
 import java.util.List;
@@ -27,8 +28,7 @@ public class SimpleProblem implements Problem{
 		this.expressionForm = expressionForm;	
 		variableBuilder = new ArithmeticVariableBuilder();
 		this.operationBuilder = new OperationBuilder();
-		init();
-			
+		init();			
 	}
 	
 	public SimpleProblem(String expressionForm, ArithmeticVariableBuilder rvi, OperationBuilder rob){
@@ -146,11 +146,7 @@ public class SimpleProblem implements Problem{
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-//		str.append("variables: ");
-//
-//		br.getVariablesBroadcast().forEach(variable ->{
-//			str.append("\t"+variable.getValue());
-//		});
+
 		str.append(getSolvedExpression());
 		
 		str.append("\nAnswers : \n");

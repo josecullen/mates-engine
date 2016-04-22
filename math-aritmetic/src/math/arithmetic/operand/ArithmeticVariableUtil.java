@@ -45,11 +45,7 @@ public class ArithmeticVariableUtil {
 		if(variable.getValue() % 1 == 0)
 			result = ""+variable.getValue().intValue();
 		else
-			result = getValueString(variable.getValue());//""+new DecimalFormat("#.##").format(variable.getValue());
-		
-		
-//		if(variable.getSign())
-//			result = "-"+result;			
+			result = getValueString(variable.getValue());
 		
 		return "{"+result+"}";
 	}

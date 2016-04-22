@@ -27,6 +27,7 @@
 <script src="lib/angular2-beta/tools/web-api.js"></script>
 <link rel="stylesheet" href="lib/fontello/css/animation.css">
 <link rel="stylesheet" href="lib/fontello/css/fontello.css">
+
 <!--[if IE 7]><link rel="stylesheet" href="css/fontello-ie7.css"><![endif]-->
 
 
@@ -45,17 +46,21 @@
 	});
 	System.import('app/main').then(null, console.error.bind(console));
 </script>
-
-
-<style type="text/css">
-	/*
-.width-0{
-	width: 1em;
-}
-*/
-
-</style>
-
+<!--
+<script type="text/javascript" src="lib/mathjax/MathJax.js?config=TeX-AMS_HTML-full"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {preview: "none"}
+});
+</script>
+-->
+<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
 
 </head>
 <body>

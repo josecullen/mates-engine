@@ -61,8 +61,12 @@ public class ArithmeticBroadcastUtilTest {
 	@Test
 	public void testNegativeOperations(){
 		operandLeft1.getVariable().setSign(true);
+		broadcastUtil.getVariablesBroadcast().forEach(variable ->
+			System.out.println(variable.getValue())
+		);
+		System.out.println(broadcastUtil.getExpressionWithNumbers());
 		System.out.println(broadcastUtil.getExpression());
-		assertEquals(8, broadcastUtil.getResult(), 0.1);
+		assertEquals(4, broadcastUtil.getResult(), 0.1);
 	}
 	
 

@@ -2,6 +2,7 @@ package math.arithmetic.problem;
 
 import math.arithmetic.operand.ArithmeticVariable;
 import math.arithmetic.operand.ArithmeticVariableUtil;
+import math.core.problem.Problem;
 
 public class EquationProblem implements Problem {
 	/**
@@ -28,8 +29,7 @@ public class EquationProblem implements Problem {
 
 	@Override
 	public String getProblemExpression() {
-		
-		
+				
 		switch (level) {
 			case LEVEL_1:
 				return getLevel1Expression();

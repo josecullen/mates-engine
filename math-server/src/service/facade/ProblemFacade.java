@@ -3,8 +3,8 @@ package service.facade;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import math.arithmetic.problem.Problem;
 import math.arithmetic.problem.SimpleProblem;
+import math.core.problem.Problem;
 import builders.ArithmeticVariableBuilder;
 import builders.OperationBuilder;
 

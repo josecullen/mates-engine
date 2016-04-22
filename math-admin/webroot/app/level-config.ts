@@ -13,11 +13,29 @@ export class LevelConfig {
     ) { }
 }
 export enum ProblemType {
-    SIMPLE, EQUATION
+    SIMPLE, EQUATION, LOGIC
 }
 
 export interface ProblemConfig {
     getType(): ProblemType;
+}
+
+export class BasicProblemConfig implements ProblemConfig{
+    constructor(
+        public repetitions: number = 5,
+        public problemType: string = ProblemType[ProblemType.LOGIC]
+        ) { }
+
+    getType() {
+        return ProblemType[this.problemType];
+    }
+}
+
+export class LogicProblemConfig extends BasicProblemConfig{
+    
+    constructor( public operations: string = "and|or|then|eq"){
+        super(3,ProblemType[ProblemType.LOGIC]);
+    }
 }
 
 

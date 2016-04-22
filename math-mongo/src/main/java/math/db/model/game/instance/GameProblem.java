@@ -1,6 +1,6 @@
 package math.db.model.game.instance;
 
-import math.arithmetic.problem.Problem;
+import math.core.problem.Problem;
 
 public class GameProblem {
 
