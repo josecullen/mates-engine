@@ -33,7 +33,7 @@ public class LogicProblemTest {
 //		split0(expression);	
 		
 		expressions.forEach(expression ->{
-			LogicProblem problem = new LogicProblem(expression, 0.1);		
+			LogicProblem problem = new LogicProblem(expression, 0.1, "and|or");		
 			System.out.println(problem.getProblemExpression());
 			String [] answer = problem.getAnswer();
 			System.out.println(answer[0]);

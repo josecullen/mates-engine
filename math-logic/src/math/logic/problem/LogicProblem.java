@@ -12,19 +12,21 @@ public class LogicProblem implements Problem {
 	private LogicOperationNode operationTree;
 	private String expressionForm;
 	private double probablySign;
+	private String operations;
 	private BroadcastAction<String> problemExpression; 
 	private LogicBroadcastUtil br;
 	
-	public LogicProblem(String expressionForm, double probablySign) {
+	public LogicProblem(String expressionForm, double probablySign, String operations) {
 		this.expressionForm = expressionForm;	
 		this.probablySign = probablySign;
+		this.operations = operations;
 		init();			
 	}
 	
 	private void init() {
-		operationTree = (LogicOperationNode)LogicParser.getInstance(probablySign).parse(expressionForm);
+		operationTree = (LogicOperationNode)LogicParser.getInstance(probablySign, operations).parse(expressionForm);
 		br = new LogicBroadcastUtil(operationTree);
-		br.randomizeOperations();
+//		br.randomizeOperations();
 		problemExpression = br.createProblemExpressionAction();	
 		
 	}

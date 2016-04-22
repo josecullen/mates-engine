@@ -22,7 +22,8 @@ import {SelectLogicOperationComponent} from "./logic-operations.component";
         Editable, 
         ExtraScoreComponent,
         MathFormComponent,
-        SelectLogicOperationComponent]
+        SelectLogicOperationComponent
+    ]
 })
 export class LogicLevelComponent{
     @Input() levelConfigs:Array<LevelConfig>;  

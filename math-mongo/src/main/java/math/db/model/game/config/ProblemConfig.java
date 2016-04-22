@@ -12,6 +12,7 @@ public class ProblemConfig {
 	private String form;
 	private int repetitions;
 	private int level;
+	private double sign;
 	public ProblemConfig() {}
 
 	public ProblemConfig(ProblemType problemType, List<VariableConfig> variableConfigs) {
@@ -79,4 +80,18 @@ public class ProblemConfig {
 	public void setRepetitions(int repetitions) {
 		this.repetitions = repetitions;
 	}
+
+	/**
+	 * Probabilidad de signo para todas las operaciones. Se utiliza en módulo de lógica
+	 * @return
+	 */
+	public double getSign() {
+		return sign;
+	}
+
+	public void setSign(double sign) {
+		this.sign = sign;
+	}
+	
+	
 }

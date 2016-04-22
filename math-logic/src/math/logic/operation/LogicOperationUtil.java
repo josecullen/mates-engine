@@ -30,7 +30,11 @@ public class LogicOperationUtil {
 	
 	public static Operation<Boolean> getRandom(){
 		Map<String, Operation<Boolean>> map = getOperationMap();
+		return new ArrayList<>(map.values()).get((int)(map.size() * Math.random()));
+	}
 
+	public static Operation<Boolean> getInstanceFromOperationsString(String operations_) {
+		Map<String, Operation<Boolean>> map = getOperationMap(operations_);
 		return new ArrayList<>(map.values()).get((int)(map.size() * Math.random()));
 	}
 }

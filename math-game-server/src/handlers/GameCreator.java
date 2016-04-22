@@ -15,6 +15,7 @@ import math.db.model.game.config.ProblemType;
 import math.db.model.game.config.VariableConfig;
 import math.db.model.game.instance.GameLevel;
 import math.db.model.game.instance.GameProblem;
+import math.logic.problem.LogicProblem;
 
 public class GameCreator {
 	
@@ -36,6 +37,11 @@ public class GameCreator {
 					levels.add(createSimpleGameLevel(levelConfig));
 				});
 				break;
+			case LOGIC:
+				stage.getLevelConfigs().forEach(levelConfig ->{
+					levels.add(createLogicGameLevel(levelConfig));
+				});
+				break;
 			default:
 				break;			
 			}			
@@ -45,6 +51,20 @@ public class GameCreator {
 	}
 
 	
+	private static GameLevel createLogicGameLevel(LevelConfig levelConfig) {
+		List<GameProblem> instanceProblems = new ArrayList<>();
+		ProblemConfig problemConfig = levelConfig.getProblemConfig();
+
+		for(int i = 0; i < problemConfig.getRepetitions() ; i++){			
+			instanceProblems.add(new GameProblem(
+					new LogicProblem(problemConfig.getForm(), problemConfig.getSign(), problemConfig.getOperations())
+			));
+		}
+		
+		return new GameLevel(instanceProblems, levelConfig.getScoreConfig());
+	}
+
+
 	private static GameLevel createSimpleGameLevel(LevelConfig levelConfig){
 		List<GameProblem> instanceProblems = new ArrayList();
 		ProblemConfig problemConfig = levelConfig.getProblemConfig(); 

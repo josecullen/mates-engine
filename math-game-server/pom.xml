@@ -18,6 +18,11 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>math-logic</groupId>
+			<artifactId>math-logic</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>math</groupId>
 			<artifactId>math-admin</artifactId>
 			<version>0.0.1-SNAPSHOT</version>

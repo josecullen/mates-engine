@@ -33,7 +33,10 @@ export class BasicProblemConfig implements ProblemConfig{
 
 export class LogicProblemConfig extends BasicProblemConfig{
     
-    constructor( public operations: string = "and|or|then|eq"){
+    constructor( 
+        public operations: string = "and|or|then|eq",
+        public form: string = "a + b",
+        public sign: number = 0){
         super(3,ProblemType[ProblemType.LOGIC]);
     }
 }

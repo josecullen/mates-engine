@@ -13,14 +13,17 @@ import math.logic.tree.LogicOperationNode;
 
 public class LogicParser {
 	private static double probablySign_ = 0;
+
+	private static String operations_;
 	
 	
 	public static OperationParser getInstance(){
 		return new OperationParser(newOperandInstance, newOperationInstance);
 	}
 	
-	public static OperationParser getInstance(double probablySign){
+	public static OperationParser getInstance(double probablySign, String operations){
 		probablySign_ = probablySign;
+		operations_ = operations;
 		return new OperationParser(newOperandInstance, newOperationInstance);
 	}
 	
@@ -33,7 +36,7 @@ public class LogicParser {
 	
 	protected static Function<String, OperationNode> newOperationInstance = expression ->{
 		LogicOperationNode node = null;
-		Operation<Boolean> operation = LogicOperationUtil.getInstanceFromExpression(expression);
+		Operation<Boolean> operation = LogicOperationUtil.getInstanceFromOperationsString(operations_);
 		
 		if(operation != null){
 			operation.setSign(probablySign_ >= Math.random());
