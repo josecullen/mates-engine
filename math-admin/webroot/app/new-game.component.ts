@@ -138,6 +138,11 @@ export class NewGameComponent {
         this.state = 'none';
     }
 
+    removeStage(index:number){
+        console.log("remove "+index);
+        this.gameConfig.stages.splice(index, index+1);
+    }
+
     setStatus(state:string){
         this.state = state;
         console.log('change '+state);

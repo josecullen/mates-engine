@@ -13,15 +13,28 @@
 		<label>Elija el tipo de problemas de la nueva etapa</label>
 		
 		<select #optionSelected>
-			<option *ngFor="#problemOption of stageOptions" value="{{problemOption}}">{{problemOption}} </option>
+			<option 
+				*ngFor="#problemOption of stageOptions" 
+				value="{{problemOption}}">{{problemOption}} 
+			</option>
 		</select>
 
-		<button class="btn btn-default" (click)="createStage(optionSelected.value)" >Crear Etapa</button>
+		<button 
+			class="btn btn-default" 
+			(click)="createStage(optionSelected.value)">
+			Crear Etapa
+		</button>
+
 	</div>
 
 	<div *ngFor="#stage of gameConfig.stages; #i = index">
 		
 		<h2>Etapa {{i+1}}</h2>
+		<button 
+			class="btn btn-error" 
+			(click)="removeStage(i); ">
+			Borrar
+		</button>
 		
 			<arith-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 0" 
 				[levelConfigs]="stage.levelConfigs"
