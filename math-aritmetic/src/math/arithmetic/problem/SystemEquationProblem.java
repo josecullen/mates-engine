@@ -1,6 +1,9 @@
 package math.arithmetic.problem;
 
+import static math.arithmetic.operand.ArithmeticVariableUtil.*;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import builders.ArithmeticVariableBuilder;
@@ -48,44 +51,40 @@ public class SystemEquationProblem implements Problem{
 			operations.add(operationBuilder.build());
 		}
 	}
-
+	
+	private void renewConstants(){
+		a = avbConst.build();
+		b = avbConst.build();
+		c = avbConst.build();
+		d = avbConst.build();
+	}
+	
+	
+	
+	
 	@Override
 	public String getProblemExpression() {
 		String problemExpression = null;
+		String problem1, problem2, problem3;
 		ListOperationEjecutor listOperation = new ListOperationEjecutor();
 		switch (level) {
 		case LEVEL_1:
-			listOperation
-				.left(a.getValue()*x.getValue())
-				.and(operations.get(0), b.getValue());
-			
-			problemExpression = 
-				ArithmeticVariableUtil.getValueString(a)+"x "+operations.get(0).getLaTex()+" "
-					+ArithmeticVariableUtil.getValueString(b)+" = "+ArithmeticVariableUtil.getValueString(listOperation.resolve());
+			problemExpression = getLevel1Expression(listOperation);
 			break;
 		case LEVEL_2:
-			listOperation
-				.left(a.getValue()*x.getValue())
-				.and(operations.get(0), b.getValue()*y.getValue())
-				.and(operations.get(1), c.getValue());
-			
-			problemExpression = 
-				ArithmeticVariableUtil.getValueString(a)+"x "+operations.get(0).getLaTex()+" "+
-				ArithmeticVariableUtil.getValueString(b)+"y "+operations.get(1).getLaTex()+" "
-					+ArithmeticVariableUtil.getValueString(c)+" = "+ArithmeticVariableUtil.getValueString(listOperation.resolve());
+			problem1 = getLevel2Expression(listOperation);
+			renewConstants();
+			problem2 = getLevel2Expression(listOperation);
+			problemExpression = decorateSystemString(problem1, problem2);
 			break;
 		case LEVEL_3:
-			listOperation
-				.left(a.getValue()*x.getValue())
-				.and(operations.get(0), b.getValue()*y.getValue())
-				.and(operations.get(1), c.getValue()*z.getValue())
-				.and(operations.get(2), d.getValue());
-			
-			problemExpression = 
-				ArithmeticVariableUtil.getValueString(a)+"x "+operations.get(0).getLaTex()+" "+
-				ArithmeticVariableUtil.getValueString(b)+"y "+operations.get(1).getLaTex()+" "+
-				ArithmeticVariableUtil.getValueString(c)+"z "+operations.get(2).getLaTex()
-					+ArithmeticVariableUtil.getValueString(d)+" = "+ArithmeticVariableUtil.getValueString(listOperation.resolve());
+			problem1 = getLevel3Expression(listOperation);
+			renewConstants();
+			problem2 = getLevel3Expression(listOperation);
+			renewConstants();
+			problem3 = getLevel3Expression(listOperation);
+			problemExpression = decorateSystemString(problem1, problem2, problem3);
+
 			break;
 		default:
 			break;
@@ -93,6 +92,65 @@ public class SystemEquationProblem implements Problem{
 		}
 		return problemExpression;
 	}
+	
+	
+	private String decorateSystemString(String... problems ) {
+		StringBuilder result = new StringBuilder("\\begin{cases} ");
+		Arrays.asList(problems).forEach(problem -> result.append(problem).append(" \\\\"));
+		result.append("\\end{cases}");
+		
+		return result.toString();
+	}
+
+	public String getLevel1Expression(ListOperationEjecutor listOperation){
+		String problemExpression = null;
+
+		listOperation
+			.left(a.getValue()*x.getValue())
+			.and(operations.get(0), b.getValue());
+	
+		problemExpression = 
+			getValueString(a)+"x "+operations.get(0).getLaTex()+" "
+				+getValueString(b)+" = "+getValueString(listOperation.resolve());
+		
+		return problemExpression;
+	}
+	
+	public String getLevel2Expression(ListOperationEjecutor listOperation){
+		String problemExpression = null;
+
+		listOperation
+			.left(a.getValue()*x.getValue())
+			.and(operations.get(0), b.getValue()*y.getValue())
+			.and(operations.get(1), c.getValue());
+	
+		problemExpression = 
+			getValueString(a)+"x "+operations.get(0).getLaTex()+" "+
+			getValueString(b)+"y "+operations.get(1).getLaTex()+" "+
+			getValueString(c)+" = "+getValueString(listOperation.resolve());
+		
+		return problemExpression;
+	}
+	
+	public String getLevel3Expression(ListOperationEjecutor listOperation){
+		String problemExpression = null;
+
+		listOperation
+			.left(a.getValue()*x.getValue())
+			.and(operations.get(0), b.getValue()*y.getValue())
+			.and(operations.get(1), c.getValue()*z.getValue())
+			.and(operations.get(2), d.getValue());
+		
+		problemExpression = 
+			getValueString(a)+"x "+operations.get(0).getLaTex()+" "+
+			getValueString(b)+"y "+operations.get(1).getLaTex()+" "+
+			getValueString(c)+"z "+operations.get(2).getLaTex()+
+			getValueString(d)+" = "+getValueString(listOperation.resolve());
+		
+		return problemExpression;
+	}
+	
+	
 	
 	private Double getProblemResult(){
 		double result = 0;
@@ -127,9 +185,9 @@ public class SystemEquationProblem implements Problem{
 		case LEVEL_1:
 			return new String[]{"x = "+x.getValue()};			
 		case LEVEL_2:				
-			return new String[]{"x = "+x.getValue(), "y = "+y.getValue()};
+			return new String[]{"x = "+x.getValue()+ "\\: y = "+y.getValue()};
 		case LEVEL_3:
-			return new String[]{"x = "+x.getValue(), "y = "+y.getValue(), "z = "+z.getValue()};
+			return new String[]{"x = "+x.getValue()+ "\\: y = "+y.getValue()+ "\\: z = "+z.getValue()};
 		default:
 			break;
 		
@@ -139,8 +197,52 @@ public class SystemEquationProblem implements Problem{
 
 	@Override
 	public String[] getAnswerOptions(int options) {
-		// TODO Auto-generated method stub
-		return null;
+		double[] answers = new double[options];
+
+		String[] result = new String[3];
+		
+		List<Double> posibleAnswers = 
+				ArithmeticVariableUtil.getValuesWithDivisionFactor(20, x.getValue(), avbX.getDivisionFactor());
+		
+		for(int i = 1; i < options; i++){
+			answers[i] = posibleAnswers.remove((int)Math.random()*posibleAnswers.size());
+			if(answers[i] == answers[0]){
+				i--;
+			}
+		}
+
+		
+		result[0] = getAnswer()[0];
+
+		switch (level) {
+			case LEVEL_1:
+				result[1] = "x = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size());
+				result[2] = "x = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size());
+				break;
+			case LEVEL_2:	
+				result[1] = "x = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size())+
+							"\\: y = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size());
+				result[2] = "x = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size())+
+							"\\: y = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size());
+				break;
+			case LEVEL_3:
+				result[1] = "x = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size())+
+							"\\: y = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size())+
+							"\\: z = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size());				
+				result[2] = "x = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size())+
+							"\\: y = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size())+
+							"\\: z = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size());
+			default:
+				break;
+			
+			}
+		
+		int newPosition = (int)(Math.random()*3);
+		String auxAnswer = result[newPosition];
+		result[newPosition] = result[0];
+		result[0] = auxAnswer;
+
+		return result;
 	}
 	
 	
