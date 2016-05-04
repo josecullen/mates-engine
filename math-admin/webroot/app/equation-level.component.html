@@ -4,14 +4,8 @@
 		<thead>
 			<tr>
 				<th>Problema</th>									
-				<th>a Mínimo</th>
-				<th>a Máximo</th>
-				<th>a Signo</th>
-				<th>a Div</th>
-				<th>x Mínimo</th>
-				<th>x Máximo</th>
-				<th>x Signo</th>
-				<th>x Div</th>
+				<th>a</th>
+				<th>x</th>
 				<th>Grado</th>
 				<th>Repeticiones</th>					
 				<button class="btn glyphicon glyphicon-plus" (click)="addLevel()"></button>
@@ -21,42 +15,20 @@
 		<tbody>
 			<tr *ngFor="#levelConfig of levelConfigs; #i = index">
 				<td>{{i+1}}</td>
-				<td><editable
-						[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].min" 
-						(valueChanged)="levelConfig.problemConfig.variableConfigs[0].min = toNumber($event)">
-				</editable></td>
-				<td><editable 
-						[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].max" 
-						(valueChanged)="levelConfig.problemConfig.variableConfigs[0].max = toNumber($event)">
-				</editable></td>
-				<td><editable 
-						[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].sign" 
-						(valueChanged)="levelConfig.problemConfig.variableConfigs[0].sign = toNumber($event)">
-				</editable></td>
-				<td><editable 
-						[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].divisionFactor"
-						(valueChanged)="levelConfig.problemConfig.variableConfigs[0].divisionFactor = toNumber($event)"> 
-				</editable></td>
-
 				
-				<td><editable
-						[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[1].min" 
-						(valueChanged)="levelConfig.problemConfig.variableConfigs[1].min = toNumber($event)">
-				</editable></td>
-				<td><editable 
-						[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[1].max" 
-						(valueChanged)="levelConfig.problemConfig.variableConfigs[1].max = toNumber($event)">
-				</editable></td>
-				<td><editable 
-						[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[1].sign" 
-						(valueChanged)="levelConfig.problemConfig.variableConfigs[1].sign = toNumber($event)">
-				</editable></td>
-				<td><editable 
-						[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[1].divisionFactor"
-						(valueChanged)="levelConfig.problemConfig.variableConfigs[1].divisionFactor = toNumber($event)"> 
-				</editable></td>
+				<td>
+                    <variable 
+                        [variableConfig]="levelConfig.problemConfig.variableConfigs[0]"
+                        (variableConfig)="levelConfig.problemConfig.variableConfigs[0] = $event">                        
+                    </variable>
+                </td>
 
-
+                <td>
+                    <variable 
+                        [variableConfig]="levelConfig.problemConfig.variableConfigs[1]"
+                        (variableConfig)="levelConfig.problemConfig.variableConfigs[1] = $event">                        
+                    </variable>
+                </td>
 				<td><editable 
 						[edit]="editAll" [value]="levelConfig.problemConfig.level"
 						(valueChanged)="levelConfig.problemConfig.level = toNumber($event)"> 

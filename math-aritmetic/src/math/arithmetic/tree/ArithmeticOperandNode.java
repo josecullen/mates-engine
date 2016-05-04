@@ -11,7 +11,11 @@ public class ArithmeticOperandNode extends OperandNode<Double> {
 	
 	public ArithmeticOperandNode(String variable, double value, boolean sign){
 		this.variable = new ArithmeticVariable(variable, value, sign);
-	}	
+	}
+	
+	public ArithmeticOperandNode(double value, boolean sign){
+		this.variable = new ArithmeticVariable("a", value, sign);
+	}
 	
 	public ArithmeticVariable getVariable(){
 		return variable;

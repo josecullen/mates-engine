@@ -14,6 +14,7 @@ import {ExtraScoreComponent} from './extra-score.component';
 import {LevelConfig, EquationProblemConfig} from './level-config';
 import {MathFormComponent} from './math-form-combo.component';
 import {SelectOperationComponent} from './select-operations.component';
+import {VariableComponent} from './editor/common/variable.component';
 
 @Component({
     selector: 'equation-level',
@@ -22,7 +23,8 @@ import {SelectOperationComponent} from './select-operations.component';
         Editable, 
         ExtraScoreComponent,
         MathFormComponent,
-        SelectOperationComponent]
+        SelectOperationComponent,
+        VariableComponent]
 })
 export class EquationLevelComponent{
     @Input() levelConfigs:Array<LevelConfig>;   

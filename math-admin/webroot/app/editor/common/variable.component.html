@@ -1,0 +1,64 @@
+<div 
+	*ngIf="!edit" 
+	(click)="toggleEdit()">{{variableConfig.min}} | {{variableConfig.max}} | {{variableConfig.divisionFactor}} | {{variableConfig.sign}}
+</div>
+<div *ngIf="edit" >
+	<table>
+		<thead>
+			<th>min</th>
+			<th>max</th>
+			<th>div</th>
+			<th>sign</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<input #inputMin
+						size="6"
+						max="999"
+						min="0"
+						type="number"
+						value="{{variableConfig.min}}"				
+						(keyup.enter)="editEnd(inputMin.value, inputMax.value, inputDiv.value, inputSign.value)"
+						(keyup.escape)="edit = !edit">
+				</td>
+				<td>
+					<input #inputMax
+						size="6"
+						max="999"
+						min="0"
+						type="number"
+						value="{{variableConfig.max}}"				
+						(keyup.enter)="editEnd(inputMin.value, inputMax.value, inputDiv.value, inputSign.value)"
+						(keyup.escape)="edit = !edit">
+				</td>
+				<td>
+					<input #inputDiv
+						size="6"
+						max="999"
+						min="0"
+						type="number"
+						value="{{variableConfig.divisionFactor}}"
+						(keyup.enter)="editEnd(inputMin.value, inputMax.value, inputDiv.value, inputSign.value)"
+						(keyup.escape)="edit = !edit">
+				</td>	
+				<td>
+					<input #inputSign
+						size="6"
+						max="999"
+						min="0"
+						step="0.1" 
+						type="number"
+						value="{{variableConfig.sign}}"
+						(blur)="editEnd(inputMin.value, inputMax.value, inputDiv.value, inputSign.value)"
+						(keyup.enter)="editEnd(inputMin.value, inputMax.value, inputDiv.value, inputSign.value)"
+						(keyup.escape)="edit = !edit">
+				</td>	
+			</tr>			
+
+		</tbody>
+
+	</table>
+
+	
+</div>

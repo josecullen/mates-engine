@@ -31,5 +31,12 @@ public class OperationUtil {
 		return getOperationMap().get(expression);
 	}
 	
+	public static boolean isPriority(Operation<Double> operation){
+		return 	operation instanceof MultiplicationOperation || 
+				operation instanceof DivisionOperation || 
+				operation instanceof PowOperation;
+		
+	}
+	
 	
 }

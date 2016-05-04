@@ -13,7 +13,7 @@ export class LevelConfig {
     ) { }
 }
 export enum ProblemType {
-    SIMPLE, EQUATION, LOGIC
+    SIMPLE, EQUATION, LOGIC, SYSTEM_EQUATION, MODULE
 }
 
 export interface ProblemConfig {
@@ -46,7 +46,7 @@ export class SimpleProblemConfig implements ProblemConfig {
     constructor(
         public variableConfigs: Array<VariableConfig> = [new VariableConfig()],
         public form: string = "a + b",
-        public operations: string = "+-"´,
+        public operations: string = "+-",
         public repetitions: number = 5,
         public problemType: string = ProblemType[ProblemType.SIMPLE]
         ) { }
@@ -70,7 +70,39 @@ export class EquationProblemConfig implements ProblemConfig {
     }
 }
 
-class VariableConfig {
+export class SystemEquationProblemConfig implements ProblemConfig {
+    constructor(
+        public variableConfigs: Array<VariableConfig> = [
+            new VariableConfig(), 
+            new VariableConfig()],
+        public form: string = "a + b",
+        public repetitions: number = 3,
+        public operations: string = "+-",
+        public problemType: string = ProblemType[ProblemType.SYSTEM_EQUATION],
+        public level:number = 2
+        ) { }
+
+    getType() {
+        return ProblemType.SYSTEM_EQUATION;
+    }
+}
+
+export class ModuleProblemConfig implements ProblemConfig {
+    constructor(
+        public variableConfigs: Array<VariableConfig> = [
+            new VariableConfig(), 
+            new VariableConfig(),
+            new VariableConfig()],
+        public repetitions: number = 3,
+        public problemType: string = ProblemType[ProblemType.MODULE]
+        ) { }
+
+    getType() {
+        return ProblemType.MODULE;
+    }
+}
+
+export class VariableConfig {
     constructor(
         public min: number = 1,
         public max: number = 5,

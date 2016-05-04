@@ -7,10 +7,13 @@ import {
     ProblemType, 
     Stage,
     SimpleProblemConfig,
-    LogicProblemConfig
+    LogicProblemConfig,
+    SystemEquationProblemConfig,
+    ModuleProblemConfig
 } from './level-config';
 import {SelectLogicOperationComponent} from './editor/logic/logic-operations.component';
 import {LogicLevelComponent} from './editor/logic/logic-level.component';
+import {SystemEquationLevelComponent} from './editor/system-equation/system-equation-level.component';
 import {Editable} from './td-editable.component';
 import {GameConfig} from './game-config';
 import {ExtraScoreComponent} from './extra-score.component';
@@ -33,7 +36,8 @@ import {EquationLevelComponent} from './equation-level.component';
         ScoreComponent,
         ArithLevelComponent,
         EquationLevelComponent,
-        LogicLevelComponent],
+        LogicLevelComponent,
+        SystemEquationLevelComponent],
     providers: [
         HTTP_PROVIDERS, 
         AdminService]
@@ -53,7 +57,7 @@ export class NewGameComponent {
     state:string = 'none';
 
     stageOptions:Array<String> = [
-        "SIMPLE", "EQUATION", "LOGIC"
+        "SIMPLE", "EQUATION", "LOGIC","SYSTEM_EQUATION","MODULE"
     ]
 
     ngOnInit() {
@@ -62,7 +66,6 @@ export class NewGameComponent {
 
         if(!this.gameConfig){
             this.gameConfig = new GameConfig();
-            this.gameConfig.stages.push(new Stage());
             this.gameConfig.stages.push(new Stage());
             this.gameConfig.stages[0].levelConfigs[0].problemConfig = new EquationProblemConfig();
             this.gameConfig.stages[1].levelConfigs[0].problemConfig = new LogicProblemConfig();
@@ -109,7 +112,25 @@ export class NewGameComponent {
                             )
                         ])
                     )
-                
+                break;
+            case "SYSTEM_EQUATION":
+                this.gameConfig.stages.push(
+                    new Stage(
+                        [new LevelConfig(
+                            new SystemEquationProblemConfig()
+                            )
+                        ])
+                    )
+                break;
+            case "MODULE":
+                this.gameConfig.stages.push(
+                    new Stage(
+                        [new LevelConfig(
+                            new ModuleProblemConfig()
+                            )
+                        ])
+                    )
+                break;
             default:
                 // code...
                 break;

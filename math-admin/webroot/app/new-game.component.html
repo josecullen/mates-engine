@@ -38,6 +38,10 @@
 				[style.display]="showProblemConfig">
 			</logic-level>
 
+			<system-equation-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 3" 
+				[levelConfigs]="stage.levelConfigs"
+				[style.display]="showProblemConfig">
+			</system-equation-level>
 
 
 			<score 

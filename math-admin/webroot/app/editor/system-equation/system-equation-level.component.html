@@ -1,0 +1,62 @@
+<div class=" col-xs-12" >
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Problema</th>                   
+                <th>Expresión</th>              
+                <th>Operaciones</th>
+                <th>a</th>
+                <th>x</th>
+                <th>Repeticiones</th>                   
+                <th>Nivel</th>
+                <button class="btn glyphicon glyphicon-plus" (click)="addLevel()"></button>
+                <button class="btn glyphicon glyphicon-edit" (click)="editAll = !editAll"></button>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="#levelConfig of levelConfigs; #i = index">
+                <td>{{i+1}}</td>
+
+                <math-form-combo 
+                    [form]="levelConfig.problemConfig.form" 
+                    (form)="levelConfig.problemConfig.form = $event">
+                </math-form-combo>
+
+                <td><select-operations
+                        [operations]="levelConfig.problemConfig.operations" 
+                        (operations)="levelConfig.problemConfig.operations = $event">
+                </select-operations></td>
+                
+                <td>
+                    <variable 
+                        [variableConfig]="levelConfig.problemConfig.variableConfigs[0]"
+                        (variableConfig)="levelConfig.problemConfig.variableConfigs[0]">                   
+                    </variable>
+                </td>
+
+                <td>
+                    <variable 
+                        [variableConfig]="levelConfig.problemConfig.variableConfigs[1]"
+                        (variableConfig)="levelConfig.problemConfig.variableConfigs[1]">                   
+                    </variable>
+                </td>
+
+                <td><editable 
+                        [edit]="editAll" [value]="levelConfig.problemConfig.repetitions"
+                        (valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)"> 
+                </editable></td>
+                
+                <td><editable 
+                        [edit]="editAll" [value]="levelConfig.problemConfig.level"
+                        (valueChanged)="levelConfig.problemConfig.level= toNumber($event)"> 
+                </editable></td>
+
+                <button 
+                    class="btn glyphicon glyphicon-trash" 
+                    (click)="gameConfig.levelConfigs.splice(i,1)">
+                </button>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
