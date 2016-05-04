@@ -14,6 +14,8 @@ import {
 import {SelectLogicOperationComponent} from './editor/logic/logic-operations.component';
 import {LogicLevelComponent} from './editor/logic/logic-level.component';
 import {SystemEquationLevelComponent} from './editor/system-equation/system-equation-level.component';
+import {ModuleLevelComponent} from './editor/module/module-level.component';
+
 import {Editable} from './td-editable.component';
 import {GameConfig} from './game-config';
 import {ExtraScoreComponent} from './extra-score.component';
@@ -37,7 +39,9 @@ import {EquationLevelComponent} from './equation-level.component';
         ArithLevelComponent,
         EquationLevelComponent,
         LogicLevelComponent,
-        SystemEquationLevelComponent],
+        SystemEquationLevelComponent,
+        ModuleLevelComponent
+        ],
     providers: [
         HTTP_PROVIDERS, 
         AdminService]

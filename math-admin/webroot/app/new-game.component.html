@@ -56,6 +56,10 @@
 				[style.display]="showProblemConfig">
 			</system-equation-level>
 
+			<module-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 4" 
+				[levelConfigs]="stage.levelConfigs"
+				[style.display]="showProblemConfig">
+			</module-level>
 
 			<score 
 				[levelConfigs]="stage.levelConfigs"

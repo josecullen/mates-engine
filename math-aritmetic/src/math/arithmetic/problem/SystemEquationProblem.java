@@ -5,6 +5,7 @@ import static math.arithmetic.operand.ArithmeticVariableUtil.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import builders.ArithmeticVariableBuilder;
 import builders.OperationBuilder;
@@ -183,11 +184,18 @@ public class SystemEquationProblem implements Problem{
 		
 		switch (level) {
 		case LEVEL_1:
-			return new String[]{"x = "+x.getValue()};			
+			return new String[]{"x = "+getValueString(x.getValue())};			
 		case LEVEL_2:				
-			return new String[]{"x = "+x.getValue()+ "\\: y = "+y.getValue()};
+			return new String[]{
+					"x = "+getValueString(x.getValue())+ 
+					"\\: y = "+getValueString(y.getValue())
+			};
 		case LEVEL_3:
-			return new String[]{"x = "+x.getValue()+ "\\: y = "+y.getValue()+ "\\: z = "+z.getValue()};
+			return new String[]{
+					"x = "+getValueString(x.getValue())+ 
+					"\\: y = "+getValueString(y.getValue())+ 
+					"\\: z = "+getValueString(z.getValue())
+			};
 		default:
 			break;
 		
@@ -202,7 +210,9 @@ public class SystemEquationProblem implements Problem{
 		String[] result = new String[3];
 		
 		List<Double> posibleAnswers = 
-				ArithmeticVariableUtil.getValuesWithDivisionFactor(20, x.getValue(), avbX.getDivisionFactor());
+				getValuesWithDivisionFactor(20, x.getValue(), avbX.getDivisionFactor());
+		
+		List<String> posiblesAsString = posibleAnswers.stream().map(posibleAnswer -> getValueString(posibleAnswer)).collect(Collectors.toList());
 		
 		for(int i = 1; i < options; i++){
 			answers[i] = posibleAnswers.remove((int)Math.random()*posibleAnswers.size());
@@ -210,28 +220,27 @@ public class SystemEquationProblem implements Problem{
 				i--;
 			}
 		}
-
 		
 		result[0] = getAnswer()[0];
 
 		switch (level) {
 			case LEVEL_1:
-				result[1] = "x = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size());
-				result[2] = "x = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size());
+				result[1] = "x = "+posiblesAsString.remove((int)Math.random()*posiblesAsString.size());
+				result[2] = "x = "+posiblesAsString.remove((int)Math.random()*posiblesAsString.size());
 				break;
 			case LEVEL_2:	
-				result[1] = "x = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size())+
-							"\\: y = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size());
-				result[2] = "x = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size())+
-							"\\: y = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size());
+				result[1] = "x = "+posiblesAsString.remove((int)Math.random()*posiblesAsString.size())+
+							"\\: y = "+posiblesAsString.remove((int)Math.random()*posiblesAsString.size());
+				result[2] = "x = "+posiblesAsString.remove((int)Math.random()*posiblesAsString.size())+
+							"\\: y = "+posiblesAsString.remove((int)Math.random()*posiblesAsString.size());
 				break;
 			case LEVEL_3:
-				result[1] = "x = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size())+
-							"\\: y = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size())+
-							"\\: z = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size());				
-				result[2] = "x = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size())+
-							"\\: y = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size())+
-							"\\: z = "+posibleAnswers.remove((int)Math.random()*posibleAnswers.size());
+				result[1] = "x = "+posiblesAsString.remove((int)Math.random()*posiblesAsString.size())+
+							"\\: y = "+posiblesAsString.remove((int)Math.random()*posiblesAsString.size())+
+							"\\: z = "+posiblesAsString.remove((int)Math.random()*posiblesAsString.size());				
+				result[2] = "x = "+posiblesAsString.remove((int)Math.random()*posiblesAsString.size())+
+							"\\: y = "+posiblesAsString.remove((int)Math.random()*posiblesAsString.size())+
+							"\\: z = "+posiblesAsString.remove((int)Math.random()*posiblesAsString.size());
 			default:
 				break;
 			
@@ -242,6 +251,8 @@ public class SystemEquationProblem implements Problem{
 		result[newPosition] = result[0];
 		result[0] = auxAnswer;
 
+		
+		
 		return result;
 	}
 	
