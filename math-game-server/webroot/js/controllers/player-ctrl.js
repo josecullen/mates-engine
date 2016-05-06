@@ -90,6 +90,14 @@ define(["angular",
                         gameInstance.status.problemStatus = "SHOW_PROBLEM";                   
                         $scope.solvedClass = '';
                         gameTimer.resume();
+                        console.log("level ",gameInstance.instance.levels[gameLevels.order.level]);
+                        
+                        var precount = gameInstance.instance.levels[gameLevels.order.level].scoreConfig.preCount;
+
+                        if(precount > 0){
+                            console.log("preCount ", precount);
+                            gameTimer.problemTime.extraTime = precount;
+                        }
                     }, 250);
                 }            
                
@@ -98,7 +106,13 @@ define(["angular",
 
         }
 
+        $scope.getPrecount = function(){
+            console.log("getPrecount ");
 
+            return gameInstance.instance.levels[gameLevels.order.level].scoreConfig.preCount;
+        }
+
+    
 
         function isProblemEnds(problemStatus){
             return problemStatus.isCorrect && problemStatus.isProblemEnds || !problemStatus.isCorrect;

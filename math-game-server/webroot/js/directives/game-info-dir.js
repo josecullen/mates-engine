@@ -1,4 +1,10 @@
-define(["angular", "js/directives", 'js/services/game-tooltips'], function(angular, directives){
+define(["angular", 
+	"js/directives", 
+	'js/services/game-tooltips',
+	'js/services/game-instance',
+	'js/services/game-levels',
+	'js/services/game-timer'
+	], function(angular, directives, gameTooltips, gameInstance){
 	directives.directive('gameInfo', function(){
 		return {
 			restrict : 'E',
@@ -7,11 +13,16 @@ define(["angular", "js/directives", 'js/services/game-tooltips'], function(angul
 		};
 	});
 	
-	directives.controller('gameInfoCtrl',['$scope','$sce', 'gameTooltips', 
-        function($scope, $sce, gameTooltips){
+	directives.controller('gameInfoCtrl',['$scope','$sce', 'gameTooltips','gameTimer',
+        function($scope, $sce, gameTooltips, gameTimer){
 		
         console.log("gameInfoCtrl");
 		$scope.tooltips = gameTooltips.tooltips;
 
+		$scope.getPrecount = function(){            
+            var preCount = gameTimer.problemTime.extraTime;
+            console.log("getPrecount ",preCount);
+            return preCount;
+        }
 	}]);
 });

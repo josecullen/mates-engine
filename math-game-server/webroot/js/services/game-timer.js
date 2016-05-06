@@ -28,7 +28,12 @@ define(["angular", "js/services"], function(angular, services){
     		}
 
     		stopGame = $interval(function(){
-    			timer.gameTime.value--;
+    			if(timer.problemTime.extraTime <= 0){
+                    timer.gameTime.value--;
+                }else{
+                    timer.problemTime.extraTime--;
+                }
+                //timer.gameTime.value--;
     			timer.problemTime.value++;
     			callbackPerSecond(timer.gameTime.value, timer.problemTime.value);
     		}, 1000);    
@@ -52,7 +57,12 @@ define(["angular", "js/services"], function(angular, services){
 
     	var resetProblemTime = function(){
     		timer.problemTime.value = 0;
+            timer.problemTime.extraTime = 0;            
     	}
+
+        var setExtraProblemTime = function(extraTime){
+            timer.problemTime.extraTime = extraTime;
+        }
 
     	var timer = {
     		start : start,
@@ -65,7 +75,8 @@ define(["angular", "js/services"], function(angular, services){
 			},
 			problemTime : {
 				reset : resetProblemTime,
-				value : 0
+				value : 0,
+                extraTime : 0
 			}			
 		};
 

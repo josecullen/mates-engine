@@ -28,13 +28,21 @@
 				</div>
 			</div>	
 			<div class="btn-group" role="group">
-				<button 	
+				<button ng-show="getPrecount() <= 0"	
 					class="btn btn-black" 
 					ng-class="tooltips.tooltipClass" 
 					uib-tooltip-html="tooltips.time.message" 
 					tooltip-placement="bottom"
 					tooltip-is-open="tooltips.show" 
 					tooltip-enable="true">Tiempos: {{gameTimer.gameTime.value}}
+				</button>
+				<button ng-show="getPrecount() > 0"	
+					class="btn btn-black" 
+					ng-class="tooltips.tooltipClass" 
+					uib-tooltip-html="tooltips.time.message" 
+					tooltip-placement="bottom"
+					tooltip-is-open="tooltips.show" 
+					tooltip-enable="true">Pre Cuenta: {{gameTimer.problemTime.extraTime}}
 				</button>
 			</div>		
 		</div>
