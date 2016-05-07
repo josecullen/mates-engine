@@ -21,7 +21,6 @@ define(["angular",
 
 		$scope.getPrecount = function(){            
             var preCount = gameTimer.problemTime.extraTime;
-            console.log("getPrecount ",preCount);
             return preCount;
         }
 	}]);

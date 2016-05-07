@@ -1,10 +1,13 @@
 package math.arithmetic.problem;
 
+import static math.arithmetic.operand.ArithmeticVariableUtil.getValueString;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import static math.arithmetic.operand.ArithmeticVariableUtil.*;
+import java.util.stream.Collectors;
 
 import math.arithmetic.operand.ArithmeticVariable;
-import math.arithmetic.operand.ArithmeticVariableUtil;
 import math.arithmetic.operation.ModuleOperation;
 import math.arithmetic.operation.PowOperation;
 import math.core.problem.Problem;
@@ -38,34 +41,48 @@ public class SimpleModuleProblem implements Problem {
 		double powResult = new PowOperation().operate(a.getValue(), pow.getValue());
 		return new ModuleOperation().operate((int)powResult, mod.getValue().intValue());
 	}
+	
+	public List<Integer> getAllAnswers(int module){
+		List<Integer> allAnswers = new ArrayList<Integer>();
+		
+		for(int i = 1; i <= module; i++){
+			allAnswers.add(i % module);
+		}
+		
+		return allAnswers;
+	}
 
 	@Override
 	public String[] getAnswerOptions(int options) {
-		double[] answers = new double[options];
-		String[] stringAnswers = new String[options];
+		int result = (int)result();
+		String[] stringAnswers = null;
+		List<Integer> allAnswers = getAllAnswers(mod.getValue().intValue());
 		
 		
-		List<Double> posibleAnswers = 
-				ArithmeticVariableUtil.getValuesWithDivisionFactor(20, result(), 1);
-		
-		answers[0] = result();
-		
-		for(int i = 1; i < options; i++){
-			answers[i] = posibleAnswers.remove((int)Math.random()*posibleAnswers.size());
-			if(answers[i] == answers[0]){
-				i--;
+		if(allAnswers.size() < 5){
+			stringAnswers = new String[allAnswers.size()];
+			for(int i = 0; i < allAnswers.size(); i++){
+				stringAnswers[i] = getValueString(allAnswers.get(i).doubleValue());
+			}			
+		}else{
+			stringAnswers = new String[5];
+			allAnswers = allAnswers.stream().filter(value -> 
+				!value.equals(result))
+					.unordered()
+					.collect(Collectors.toList());
+			
+			allAnswers.add(
+				(int)Math.random()*allAnswers.size(), (int)result
+			);
+			Collections.shuffle(allAnswers);
+			
+			for(int i = 0; i < 5; i++){
+				stringAnswers[i] = getValueString(new Double(allAnswers.get(i)));
 			}
 		}
-		
-		for(int i = 0; i < answers.length; i++)
-			stringAnswers[i] = getValueString(answers[i]);		
-		
-		int newPosition = (int)(Math.random()*3);
-		String auxAnswer = stringAnswers[newPosition];
-		stringAnswers[newPosition] = stringAnswers[0];
-		stringAnswers[0] = auxAnswer;
-		
 		return stringAnswers;
 	}
+	
+	
 
 }
