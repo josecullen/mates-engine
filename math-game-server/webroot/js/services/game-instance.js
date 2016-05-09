@@ -46,6 +46,7 @@ define(["angular",'js/services', 'js/services/game-services'], function(angular,
         }
 
         var addScore = function(scoreConfig, extraIndex){
+            console.log("OASDIJFASIODJFIAO", scoreConfig, extraIndex);
             gameInstance.addResponse(extraIndex);
             gameInstance.status.score += scoreConfig.baseScore;
             if(extraIndex >= 0 && extraIndex < scoreConfig.extras.length){

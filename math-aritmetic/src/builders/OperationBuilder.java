@@ -1,5 +1,11 @@
 package builders;
 
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import math.arithmetic.operation.OperationUtil;
@@ -31,9 +37,13 @@ public class OperationBuilder {
 	}
 
 	private Operation<Double> getRandomOperation(Map<String, Operation<Double>> operations) {
-		String[] keys = new String[operations.keySet().size()];
-		operations.keySet().toArray(keys);
-		return operations.get(keys[(int) (Math.random() * keys.length)]);
+//		String[] keys = new String[operations.keySet().size()];
+//		operations.keySet().toArray(keys);
+		
+		List<Operation<Double>> values = new ArrayList<>(operations.values());
+		shuffle(values);
+		return values.get((int) (Math.random() * values.size()));
+//		return operations.get(keys[(int) (Math.random() * keys.length)]);
 	}
 
 }

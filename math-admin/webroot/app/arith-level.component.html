@@ -36,6 +36,7 @@
 				</editable></td>
 				<td><editable 
 						[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].sign" 
+						[step]="0.1"
 						(valueChanged)="levelConfig.problemConfig.variableConfigs[0].sign = toNumber($event)">
 				</editable></td>
 				<td><select-operations

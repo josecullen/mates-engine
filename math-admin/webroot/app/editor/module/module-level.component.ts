@@ -10,7 +10,6 @@ import {
     NgSwitchDefault
 } from 'angular2/core';
 import {Editable} from '../../td-editable.component';
-import {ExtraScoreComponent} from '../../extra-score.component';
 import {LevelConfig, ModuleProblemConfig, ProblemType} from '../../level-config';
 import {VariableComponent} from '../common/variable.component';
 
@@ -19,7 +18,6 @@ import {VariableComponent} from '../common/variable.component';
     templateUrl: 'app/editor/module/module-level.component.html' ,
     directives: [
         Editable, 
-        ExtraScoreComponent,
         VariableComponent
     ]
 })

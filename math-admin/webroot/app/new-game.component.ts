@@ -18,11 +18,10 @@ import {ModuleLevelComponent} from './editor/module/module-level.component';
 
 import {Editable} from './td-editable.component';
 import {GameConfig} from './game-config';
-import {ExtraScoreComponent} from './extra-score.component';
 import {AdminService} from './admin.service';
 import {MathFormComponent} from './math-form-combo.component';
 import {SelectOperationComponent} from './select-operations.component';
-import {ScoreComponent} from './score.component';
+import {ScoreComponent} from './editor/score/score.component';
 import {ArithLevelComponent} from './arith-level.component';
 import {EquationLevelComponent} from './equation-level.component';
 
@@ -32,7 +31,6 @@ import {EquationLevelComponent} from './equation-level.component';
     directives: [
         ROUTER_DIRECTIVES, 
         Editable, 
-        ExtraScoreComponent, 
         MathFormComponent, 
         SelectOperationComponent,
         ScoreComponent,
@@ -153,8 +151,8 @@ export class NewGameComponent {
     }
 
 
-    getType(levelConfig:LevelConfig){
-        return levelConfig.problemConfig.getType() == ProblemType.SIMPLE;
+    getType(index:number){
+        return ProblemType[index];
     }
 
     printProblem() {

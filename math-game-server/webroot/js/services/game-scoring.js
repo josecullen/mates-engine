@@ -14,11 +14,13 @@ define(["angular", "js/services", 'js/services/game-timer', 'js/services/game-in
                 for(var i = 0; i < extras.length; i++){
                     if(gameTimer.problemTime.value < extras[i].thresholdTime){
                         extraIndex = i;
+                        gameTimer.gameTime.value += extras[i].extraTime;
                         break;
                     }
                 }
                 gameTooltips.setTooltip(true, scoreConfig, extraIndex);
                 gameInstance.addScore(scoreConfig, extraIndex);
+
             }else{
                 gameInstance.status.lives.pop();
                 gameInstance.addScore(scoreConfig, -1);

@@ -7,7 +7,6 @@
 	</div>
 	<br>
 
-	<button class="btn btn-info" (click)="changeShowTable()">{{showHideTables}}</button>
 	<button class="btn btn-default" (click)="setStatus('CREATE_STAGE')" >Nueva Etapa</button>
 	<div *ngIf="state == 'CREATE_STAGE'">
 		<label>Elija el tipo de problemas de la nueva etapa</label>
@@ -29,42 +28,46 @@
 
 	<div *ngFor="#stage of gameConfig.stages; #i = index">
 		
-		<h2>Etapa {{i+1}}</h2>
+		<h2>Etapa {{i+1}} {{getType(stage.levelConfigs[0].problemConfig.getType())}}</h2>
 		<button 
 			class="btn btn-error" 
 			(click)="removeStage(i); ">
 			Borrar
 		</button>
-		
-			<arith-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 0" 
-				[levelConfigs]="stage.levelConfigs"
-				[style.display]="showProblemConfig">
-			</arith-level>
 
-			<equation-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 1" 
-				[levelConfigs]="stage.levelConfigs"
-				[style.display]="showProblemConfig">
-			</equation-level>
+		<button 
+			class="btn btn-info" 
+			(click)="changeShowTable()">{{showHideTables}}</button>
 
-			<logic-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 2" 
-				[levelConfigs]="stage.levelConfigs"
-				[style.display]="showProblemConfig">
-			</logic-level>
+		<arith-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 0" 
+			[levelConfigs]="stage.levelConfigs"
+			[style.display]="showProblemConfig">
+		</arith-level>
 
-			<system-equation-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 3" 
-				[levelConfigs]="stage.levelConfigs"
-				[style.display]="showProblemConfig">
-			</system-equation-level>
+		<equation-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 1" 
+			[levelConfigs]="stage.levelConfigs"
+			[style.display]="showProblemConfig">
+		</equation-level>
 
-			<module-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 4" 
-				[levelConfigs]="stage.levelConfigs"
-				[style.display]="showProblemConfig">
-			</module-level>
+		<logic-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 2" 
+			[levelConfigs]="stage.levelConfigs"
+			[style.display]="showProblemConfig">
+		</logic-level>
 
-			<score 
-				[levelConfigs]="stage.levelConfigs"
-				[style.display]="showScoreConfig">
-			</score>
+		<system-equation-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 3" 
+			[levelConfigs]="stage.levelConfigs"
+			[style.display]="showProblemConfig">
+		</system-equation-level>
+
+		<module-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 4" 
+			[levelConfigs]="stage.levelConfigs"
+			[style.display]="showProblemConfig">
+		</module-level>
+
+		<score 
+			[levelConfigs]="stage.levelConfigs"
+			[style.display]="showScoreConfig">
+		</score>
 		
 	</div>
 	

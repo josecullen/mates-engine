@@ -10,7 +10,6 @@ import {
     NgSwitchDefault
 } from 'angular2/core';
 import {Editable} from './td-editable.component';
-import {ExtraScoreComponent} from './extra-score.component';
 import {LevelConfig, EquationProblemConfig} from './level-config';
 import {MathFormComponent} from './math-form-combo.component';
 import {SelectOperationComponent} from './select-operations.component';
@@ -21,7 +20,6 @@ import {VariableComponent} from './editor/common/variable.component';
     templateUrl: 'app/equation-level.component.html' ,
     directives: [
         Editable, 
-        ExtraScoreComponent,
         MathFormComponent,
         SelectOperationComponent,
         VariableComponent]

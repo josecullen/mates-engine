@@ -42,7 +42,7 @@ public class SimpleModuleProblem implements Problem {
 		return new ModuleOperation().operate((int)powResult, mod.getValue().intValue());
 	}
 	
-	public List<Integer> getAllAnswers(int module){
+	private List<Integer> getAllAnswers(int module){
 		List<Integer> allAnswers = new ArrayList<Integer>();
 		
 		for(int i = 1; i <= module; i++){
@@ -71,14 +71,18 @@ public class SimpleModuleProblem implements Problem {
 					.unordered()
 					.collect(Collectors.toList());
 			
-			allAnswers.add(
-				(int)Math.random()*allAnswers.size(), (int)result
-			);
 			Collections.shuffle(allAnswers);
+			allAnswers.subList(0, 4);
+			
+			allAnswers.add((int)Math.random()*5, (int)result);
+			
 			
 			for(int i = 0; i < 5; i++){
-				stringAnswers[i] = getValueString(new Double(allAnswers.get(i)));
+				stringAnswers[i] = getValueString(allAnswers.get(i).doubleValue());
 			}
+			
+			
+			
 		}
 		return stringAnswers;
 	}

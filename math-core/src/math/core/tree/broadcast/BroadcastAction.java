@@ -35,8 +35,15 @@ public class BroadcastAction<R> {
 			else
 				operandAction.apply((OperandNode)node);		
 		else
-			if(setResult)
+			if(setResult){
 				setResult(operationAction.apply((OperationNode)node));
+//				if(((OperationNode)node).leftNode instanceof OperationNode){
+//					runOn(((OperationNode)node).leftNode, setResult);
+//				}
+//				if(((OperationNode)node).rightNode instanceof OperationNode){
+//					runOn(((OperationNode)node).rightNode, setResult);
+//				}
+			}
 			else
 				operationAction.apply((OperationNode)node);
 		return getResult();

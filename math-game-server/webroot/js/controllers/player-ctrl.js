@@ -32,11 +32,11 @@ define(["angular",
         });
 
         $scope.$watch('gameInstance.status.problemStatus', function(newStatus){
-            $log.info("problem status : "+newStatus);
+            //$log.info("problem status : "+newStatus);
         });
 
         $scope.checkGameOver = function(gameStatus){
-            $log.info("checkGameOver "+gameInstance.instance.status);
+           // $log.info("checkGameOver "+gameInstance.instance.status);
 
             if(gameStatus == 'GAME_OVER' || gameStatus == 'NOT_SELECTED'){
                 $rootScope.showNav = true;
@@ -52,7 +52,7 @@ define(["angular",
         
 
         $scope.timeCallback = function(gameTime, problemTime){
-            $scope.prueba = gameTime <= 0;
+//            $scope.prueba = gameTime <= 0;
             if($scope.prueba && gameInstance.instance.status != 'NOT_SELECTED'){
                 $scope.gameTimer.pause(0);
                 $log.info("game over por tiempo");        
@@ -67,7 +67,6 @@ define(["angular",
             var problemStatus = gameLevels.checkAnswer(answer);
             if(isProblemEnds(problemStatus)){
                 gameTooltips.showHideTooltips(true);
-
 
                 gameScoring.update(problemStatus.isCorrect && problemStatus.isProblemEnds);
                 if(!problemStatus.isCorrect && gameInstance.status.lives.length == 0){
@@ -90,12 +89,12 @@ define(["angular",
                         gameInstance.status.problemStatus = "SHOW_PROBLEM";                   
                         $scope.solvedClass = '';
                         gameTimer.resume();
-                        console.log("level ",gameInstance.instance.levels[gameLevels.order.level]);
+                        //console.log("level ",gameInstance.instance.levels[gameLevels.order.level]);
                         
                         var precount = gameInstance.instance.levels[gameLevels.order.level].scoreConfig.preCount;
 
                         if(precount > 0){
-                            console.log("preCount ", precount);
+                            //console.log("preCount ", precount);
                             gameTimer.problemTime.extraTime = precount;
                         }
                     }, 250);
@@ -107,7 +106,7 @@ define(["angular",
         }
 
         $scope.getPrecount = function(){
-            console.log("getPrecount ");
+            //console.log("getPrecount ");
 
             return gameInstance.instance.levels[gameLevels.order.level].scoreConfig.preCount;
         }

@@ -19,6 +19,7 @@ import {
                 size="6"
                 max="999"
                 min="0"
+                step="{{step}}"
                 type="{{type}}"
                 value="{{value}}"
                 checked="{{value}}"
@@ -33,6 +34,7 @@ export class Editable {
     @Input() type: string = "number";
     @Input() value: any;
     @Input() edit: boolean = false;
+    @Input() step: number = 0;
     @Output() valueChanged: EventEmitter = new EventEmitter();
 
     el:ElementRef;

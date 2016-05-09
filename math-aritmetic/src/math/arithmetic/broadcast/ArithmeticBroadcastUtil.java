@@ -7,6 +7,7 @@ import math.arithmetic.operand.ArithmeticVariable;
 import math.arithmetic.tree.ArithmeticOperandNode;
 import math.core.tree.MathNode;
 import math.core.tree.OperandNode;
+import math.core.tree.OperationNode;
 import math.core.tree.broadcast.BroadcastAction;
 import math.core.tree.broadcast.BroadcastType;
 import math.core.tree.broadcast.OperandAction;
@@ -129,7 +130,13 @@ public class ArithmeticBroadcastUtil {
 		BroadcastAction<String> setOperations = new BroadcastAction<String>(BroadcastType.OPERATIONS);
 		
 		setOperations.setOperationAction(operationNode ->{
-			operationNode.setOperation(rob.build());
+			operationNode.setOperation(rob.build());	
+			if(operationNode.leftNode instanceof OperationNode){
+				setOperations.runOn(operationNode.leftNode);
+			}
+			if(operationNode.rightNode instanceof OperationNode){
+				setOperations.runOn(operationNode.rightNode);
+			}
 			return "";
 		});		
 		setOperations.runOn(tree);		

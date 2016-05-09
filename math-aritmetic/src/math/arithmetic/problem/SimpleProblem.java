@@ -64,6 +64,7 @@ public class SimpleProblem implements Problem{
 					? "-( "+expression +" )"
 					: "( "+expression+" )";
 		});	
+		renew();
 	}	
 	
 	public ArithmeticVariableBuilder getRandomVariableInstancer() {
