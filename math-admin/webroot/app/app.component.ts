@@ -1,5 +1,10 @@
-import {Component} from 'angular2/core';
-import {Router, RouteParams, ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
+import {Component} from '@angular/core';
+import {
+    Router, 
+    ROUTER_DIRECTIVES, 
+    RouteConfig, 
+    ROUTER_PROVIDERS
+} from '@angular/router-deprecated';
 import {NewGameComponent} from './new-game.component';
 import {AdminGameComponent} from './admin-games.component';
 import {AdminInstanceComponent} from './admin-instances.component';
@@ -8,7 +13,8 @@ import {AdminInstanceComponent} from './admin-instances.component';
 @Component({
     selector: 'admin',
     templateUrl: 'app/app.component.html',
-    directives: [ROUTER_DIRECTIVES, NewGameComponent]
+    directives: [ROUTER_DIRECTIVES, NewGameComponent],
+    providers: [ROUTER_PROVIDERS]
 })
 @RouteConfig([
     { path: '/new-game/:gameConfig', name: 'NewGame', component: NewGameComponent },

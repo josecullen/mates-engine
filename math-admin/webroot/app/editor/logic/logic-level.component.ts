@@ -8,7 +8,7 @@ import {
     NgSwitch,
     NgSwitchWhen,
     NgSwitchDefault
-} from 'angular2/core';
+} from '@angular/core';
 import {Editable} from '../../td-editable.component';
 import {LevelConfig, LogicProblemConfig, ProblemType} from '../../level-config';
 import {MathFormComponent} from '../../math-form-combo.component';

@@ -1,7 +1,7 @@
-import {Component} 		from 'angular2/core';
+import {Component} 		from '@angular/core';
 import {AdminService} 	from './admin.service';
-import {HTTP_PROVIDERS} from 'angular2/http';
-import {Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
+import {HTTP_PROVIDERS} from '@angular/http';
+import {Router, RouteParams, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {GameConfig, InstanceGameData} from './game-config';
 
 @Component({

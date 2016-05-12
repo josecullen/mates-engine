@@ -8,7 +8,7 @@ import {
     NgSwitch,
     NgSwitchWhen,
     NgSwitchDefault
-} from 'angular2/core';
+} from '@angular/core';
 import {Editable} from '../../td-editable.component';
 import {ExtraScoreComponent} from './extra-score.component';
 import {LevelConfig} from '../../level-config';

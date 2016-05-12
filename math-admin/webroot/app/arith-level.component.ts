@@ -8,7 +8,7 @@ import {
     NgSwitch,
     NgSwitchWhen,
     NgSwitchDefault
-} from 'angular2/core';
+} from '@angular/core';
 import {MathJaxDirective} from './mathjax.directive';
 import {Editable} from './td-editable.component';
 import {LevelConfig, SimpleProblemConfig} from './level-config';

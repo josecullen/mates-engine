@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter,ElementRef,
-	ApplicationRef} from 'angular2/core';
+	ApplicationRef} from '@angular/core';
 import {LevelConfig, ExtraScore} from '../../level-config';
 
 

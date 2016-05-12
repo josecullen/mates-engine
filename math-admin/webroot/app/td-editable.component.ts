@@ -8,7 +8,7 @@ import {
     NgSwitch,
     NgSwitchWhen,
     NgSwitchDefault
-} from 'angular2/core';
+} from '@angular/core';
 
 @Component({
     selector: 'editable',

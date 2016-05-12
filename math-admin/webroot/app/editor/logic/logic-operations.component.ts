@@ -1,5 +1,5 @@
-import {Component, Input, Output, EventEmitter}	from 'angular2/core';
-import {NgClass} from 'angular2/common';
+import {Component, Input, Output, EventEmitter}	from '@angular/core';
+import {NgClass} from '@angular/common';
 import {MathJaxDirective} from '../../mathjax.directive';
 
 

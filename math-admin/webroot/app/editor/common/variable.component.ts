@@ -5,7 +5,7 @@ import {
 	EventEmitter,
 	ElementRef,
 	ApplicationRef
-	} from 'angular2/core';
+	} from '@angular/core';
 import {VariableConfig} from '../../level-config';
 
 @Component({
