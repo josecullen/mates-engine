@@ -9,6 +9,7 @@ import {
     NgSwitchWhen,
     NgSwitchDefault
 } from 'angular2/core';
+import {MathJaxDirective} from './mathjax.directive';
 import {Editable} from './td-editable.component';
 import {LevelConfig, SimpleProblemConfig} from './level-config';
 import {MathFormComponent} from './math-form-combo.component';
@@ -20,7 +21,9 @@ import {SelectOperationComponent} from './select-operations.component';
     directives: [
         Editable, 
         MathFormComponent,
-        SelectOperationComponent]
+        SelectOperationComponent,
+        MathJaxDirective
+    ]
 })
 export class ArithLevelComponent{
     @Input() levelConfigs:Array<LevelConfig>;  
@@ -29,4 +32,8 @@ export class ArithLevelComponent{
         this.levelConfigs.push(new LevelConfig(new SimpleProblemConfig()));
     } 
     
+    toNumber(value) {
+        return Number(value);
+    }
+
 }

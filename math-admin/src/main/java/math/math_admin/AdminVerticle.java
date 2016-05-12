@@ -179,7 +179,16 @@ public class AdminVerticle extends AbstractVerticle {
 			});
 		});
 		
-		
+		router.get("/arithmetic/v2/problem").handler(context ->{
+			logger.debug("get /arithmetic/v2/games");
+			
+			vertx.eventBus().send("find-all", "gameConfig", res->{					
+				logger.info("result find-all :"+res.result().body().toString());
+				JsonArray gameConfigs = (JsonArray)res.result().body();
+				context.response().end(gameConfigs.encode());
+			});
+			
+		});	
 		
 		
 		StaticHandlerImpl shi = new StaticHandlerImpl();

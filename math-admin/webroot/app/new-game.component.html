@@ -28,7 +28,7 @@
 
 	<div *ngFor="#stage of gameConfig.stages; #i = index">
 		
-		<h2>Etapa {{i+1}} {{getType(stage.levelConfigs[0].problemConfig.getType())}}</h2>
+		<h2>Etapa {{i+1}} </h2>
 		<button 
 			class="btn btn-error" 
 			(click)="removeStage(i); ">
@@ -37,29 +37,30 @@
 
 		<button 
 			class="btn btn-info" 
-			(click)="changeShowTable()">{{showHideTables}}</button>
+			(click)="changeShowTable()">{{showHideTables}}
+		</button>
 
-		<arith-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 0" 
+		<arith-level *ngIf="stage.levelConfigs[0].problemConfig.problemType == 'SIMPLE'" 
 			[levelConfigs]="stage.levelConfigs"
 			[style.display]="showProblemConfig">
 		</arith-level>
 
-		<equation-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 1" 
+		<equation-level *ngIf="stage.levelConfigs[0].problemConfig.problemType == 'EQUATION'" 
 			[levelConfigs]="stage.levelConfigs"
 			[style.display]="showProblemConfig">
 		</equation-level>
 
-		<logic-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 2" 
+		<logic-level *ngIf="stage.levelConfigs[0].problemConfig.problemType == 'LOGIC'" 
 			[levelConfigs]="stage.levelConfigs"
 			[style.display]="showProblemConfig">
 		</logic-level>
 
-		<system-equation-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 3" 
+		<system-equation-level *ngIf="stage.levelConfigs[0].problemConfig.problemType == 'SYSTEM_EQUATION'" 
 			[levelConfigs]="stage.levelConfigs"
 			[style.display]="showProblemConfig">
 		</system-equation-level>
 
-		<module-level *ngIf="stage.levelConfigs[0].problemConfig.getType() == 4" 
+		<module-level *ngIf="stage.levelConfigs[0].problemConfig.problemType == 'MODULE'" 
 			[levelConfigs]="stage.levelConfigs"
 			[style.display]="showProblemConfig">
 		</module-level>

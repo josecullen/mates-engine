@@ -43,9 +43,12 @@
 						[operations]="levelConfig.problemConfig.operations" 
 						(operations)="levelConfig.problemConfig.operations = $event">
 				</select-operations></td>
-				<td><editable 
+				<td>
+					<editable 
 						[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].divisionFactor"
-						(valueChanged)="levelConfig.problemConfig.variableConfigs[0].divisionFactor = toNumber($event)"> </editable></td>
+						(valueChanged)="levelConfig.problemConfig.variableConfigs[0].divisionFactor = toNumber($event)">
+					</editable>
+				</td>
 				<td><editable 
 						[edit]="editAll" [value]="levelConfig.problemConfig.repetitions"
 						(valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)"> 
@@ -53,6 +56,13 @@
 				
 				<button class="btn glyphicon glyphicon-trash" (click)="gameConfig.levelConfigs.splice(i,1)"></button>
 			</tr>
+			<!--
+			<tr>
+				<td>
+					<h3 [MathJax]="'$(2 + 3) / (5 \\centerdot 4)$'"></h3>
+				</td>				
+			</tr>
+			-->
 		</tbody>
 	</table>
 </div>

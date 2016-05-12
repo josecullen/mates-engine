@@ -75,5 +75,9 @@ export class Editable {
         this.value = editedValue;
         this.valueChanged.emit(editedValue);
     }
+
+    toNumber(value) {
+        return Number(value);
+    }
 }
 

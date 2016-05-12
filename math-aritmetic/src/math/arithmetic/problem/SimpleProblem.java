@@ -10,6 +10,7 @@ import math.arithmetic.tree.ArithmeticOperationNode;
 import math.core.problem.Problem;
 import math.core.tree.broadcast.BroadcastAction;
 
+import java.util.Collections;
 import java.util.List;
 
 import builders.ArithmeticVariableBuilder;
@@ -114,20 +115,40 @@ public class SimpleProblem implements Problem{
 	}
 	
 	public String[] getAnswerOptions(int options){
-		double[] answers = new double[options];
+		Double[] answers = new Double[options];
 		String[] stringAnswers = new String[options];
-		answers[0] = br.getResult();
-		System.out.println("|--- "+ br.getResult()+"\t"+variableBuilder.getDivisionFactor()+" ----|");
+		double correct = br.getResult();
+		System.out.print("|--- "+ br.getResult()+"\t"+variableBuilder.getDivisionFactor()+" ---|");
 		
 		List<Double> posibleAnswers = 
 				ArithmeticVariableUtil.getValuesWithDivisionFactor(20, br.getResult(), variableBuilder.getDivisionFactor());
 		
-		for(int i = 1; i < options; i++){
-			answers[i] = posibleAnswers.remove((int)Math.random()*posibleAnswers.size());
-			if(answers[i] == answers[0]){
-				i--;
+		System.out.println("\t\tend "+br.getResult()+"\t"+posibleAnswers.size());
+		try{
+			Collections.shuffle(posibleAnswers);
+			posibleAnswers = posibleAnswers.subList(0, options);
+			if(!posibleAnswers.stream().anyMatch(ans -> ans == correct)){
+				posibleAnswers.set(0, correct);
+				Collections.shuffle(posibleAnswers);
 			}
+			posibleAnswers.toArray(answers);
+
+			
+		}catch(IndexOutOfBoundsException ex){
+			StringBuilder str = new StringBuilder();
+
+			str.append(getSolvedExpression());
+			
+			str.append("\nAnswers : \n");
+			
+			for(String answer : getAnswer())
+				str.append(answer);
+			
+			str.append("\n");
+			System.out.println(str.toString());
+			
 		}
+		
 		
 		
 		for(int i = 0; i < answers.length; i++)
