@@ -1,5 +1,89 @@
 
-<div class=" col-xs-12" >
+<div class=" container-fluid" >
+	<div class="row">
+		<div class="col-xs-1">Problema</div>
+		<div class="col-xs-2">Expresión</div>
+		<div class="col-xs-1">Mínimo</div>
+		<div class="col-xs-1">Máximo</div>
+		<div class="col-xs-1">Signo</div>
+		<div class="col-xs-2">Operaciones</div>
+		<div class="col-xs-1">Divisor</div>
+		<div class="col-xs-1">Repeticiones</div>
+		<div class="col-xs-1">
+			<button class="btn glyphicon glyphicon-plus" (click)="addLevel()"></button>
+		</div>
+		<div class="col-xs-1">
+			<button class="btn glyphicon glyphicon-edit" (click)="editAll = !editAll"></button>
+		</div>
+	</div>
+	<div  *ngFor="#levelConfig of levelConfigs; #i = index" >
+		<div class="row">
+
+			<div class="col-xs-1">{{i+1}}</div>
+			<div class="col-xs-2">
+				<math-form-combo 
+					[form]="levelConfig.problemConfig.form" 
+					(form)="levelConfig.problemConfig.form = $event">
+				</math-form-combo>
+			</div>
+
+			<div class="col-xs-1">
+				<editable
+					[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].min" 
+					(valueChanged)="levelConfig.problemConfig.variableConfigs[0].min = toNumber($event)">
+				</editable>
+			</div>
+			<div class="col-xs-1">
+				<editable 
+					[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].max" 
+					(valueChanged)="levelConfig.problemConfig.variableConfigs[0].max = toNumber($event)">
+				</editable>
+			</div>
+			<div class="col-xs-1">
+				<editable 
+					[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].sign" 
+					[step]="0.1"
+					(valueChanged)="levelConfig.problemConfig.variableConfigs[0].sign = toNumber($event)">
+				</editable>
+			</div>
+			<div class="col-xs-2">
+				<select-operations
+					[operations]="levelConfig.problemConfig.operations" 
+					(operations)="levelConfig.problemConfig.operations = $event">
+				</select-operations>
+			</div>
+			<div class="col-xs-1">
+				<editable 
+					[edit]="editAll" [value]="levelConfig.problemConfig.variableConfigs[0].divisionFactor"
+					(valueChanged)="levelConfig.problemConfig.variableConfigs[0].divisionFactor = toNumber($event)">
+				</editable>
+			</div>
+			<div class="col-xs-1">
+				<editable 
+					[edit]="editAll" [value]="levelConfig.problemConfig.repetitions"
+					(valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)"> 
+				</editable></div>
+			<div class="col-xs-1">
+				<button class="btn glyphicon glyphicon-trash" (click)="levelConfigs.splice(i,1)"></button>
+			</div>
+			<div class="col-xs-1">
+				<button class="btn glyphicon glyphicon-superscript" (click)="toggleShowProblem()"></button>
+			</div>
+		</div>
+		<div class="row" *ngIf="showProblem" style="background-color: lightgrey; margin-bottom: 10px" >
+			<div  class="col-xs-11" align="center">
+				<h4 [MathJax]="'$(2 + 3) / (5 \\centerdot 4)$'" [style.align]="center"></h4>
+			</div>	
+			<div class="col-xs-1">
+				<button class="btn glyphicon glyphicon-refresh" style="margin-top: 5px"></button>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<!--
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -16,6 +100,7 @@
 			</tr>
 		</thead>
 		<tbody>
+			
 			<tr *ngFor="#levelConfig of levelConfigs; #i = index">
 				<td>{{i+1}}</td>
 				<td>
@@ -55,12 +140,19 @@
 				</editable></td>
 				
 				<button class="btn glyphicon glyphicon-trash" (click)="gameConfig.levelConfigs.splice(i,1)"></button>
+				<button class="btn glyphicon glyphicon-superscript" (click)="toggleShowProblem()"></button>
+
 			</tr>
-			<tr>
-				<td>
-					<h3 [MathJax]="'$(2 + 3) / (5 \\centerdot 4)$'"></h3>
-				</td>				
+			<tr *ngIf="showProblem">
+				<td  colspan="8" align="center">
+					<h3 [MathJax]="'$(2 + 3) / (5 \\centerdot 4)$'" [style.align]="center"></h3>
+				</td>	
+				<td >
+				<button class="btn glyphicon glyphicon-refresh"></button>
+				</td>			
 			</tr>
 		</tbody>
 	</table>
+
+	-->
 </div>
