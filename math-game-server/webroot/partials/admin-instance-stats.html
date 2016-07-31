@@ -1,0 +1,24 @@
+<div ng-if="instance.status == 'SUCCESS'">
+    <div class="" >
+        <div class="well well-sm col-xs-12">
+            <h3>PRIMER PUESTO</h3>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-7 col-xs-offset-1">
+                    <div class="well first-position" ng-class="firstPositionNameClass">
+                        <span><strong>NOMBRE</strong></span>
+                        <h2>{{firstPosition.label}}</h2>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="well first-position" ng-class="firstPositionScoreClass">
+                        <span><strong>PUNTOS</strong></span>
+                        <h2>{{firstPosition.value}}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nvd3 options="options" data="data"></nvd3>
+</div>

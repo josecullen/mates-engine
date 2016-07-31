@@ -1,0 +1,212 @@
+a {
+    color: white;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+
+span{
+    border-left-style: none !important;
+    border-left-width: 0 !important;
+}
+svg text {
+    fill: #CBCBCB;
+    font-size: 1em;
+}
+
+.badge[disabled] {
+   background-color: #DCDCDC;
+}
+
+.color-1{ background-color: black;  }
+.color-2{ background-color: blue;   }
+.color-3{ background-color: green;  }
+.color-4{ background-color: grey;   }
+.color-5{ background-color: red;    }
+
+.contenido{
+    margin-top: 50px;
+    width: 100%;
+    height: 200px;
+    background-color: #E16969;
+}
+
+
+.btn-group{
+    margin:0;
+    padding: 0;
+}
+
+.content{
+    background-color: #D7D7D7;
+    opacity: 0.7;
+}
+
+.content > h3{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    color: black; 
+}
+
+.all-height-75{
+    height: 75%;
+}
+.level-message{
+    text-align: center;
+    position: relative;
+    top: 10%;
+    transform: translateY(-10%);  
+    color: #DED7D7;
+}
+
+.level-clock{
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-20%);   
+    color: #DED7D7;
+}
+.level-container{
+    height: 100%;
+    background-color: black;
+    /*#470D0D;*/
+}
+
+.well{
+    background-color: #FFC35A;
+    border : none;
+}
+.well > h3 {
+    margin: 0;
+    padding: 0;
+}
+
+.tooltip-great + .tooltip > .tooltip-inner {
+    background-color: #06E01B;
+    color: #18247F;
+}
+.tooltip-good + .tooltip > .tooltip-inner {
+    background-color: #7FC879;
+}
+.tooltip-ok + .tooltip > .tooltip-inner {
+    background-color: #C4D534;
+}
+.tooltip-pass + .tooltip > .tooltip-inner {
+    background-color: #9F9A9A;
+}
+.tooltip-nook + .tooltip > .tooltip-inner {
+    background-color: #D80B0B;
+}
+
+
+
+.inner-center{    
+    position: relative;
+    width: 100px;
+    height: 50px;
+    top: 20%;
+    margin: 0 auto;     
+}
+
+.inner-right{   
+    position: relative;
+    width: 100px;
+    height: 50px;
+    margin: -30px 80%;      
+    background-color: #038403;
+}
+
+.first-position-data{
+    display: inline;
+}
+
+.problem-expression {
+    text-align: center;
+}
+
+.btn-black {
+    color: white;
+    background-color: black;
+}
+
+
+.btn-black:hover,
+.btn-black:active,
+.btn-black:link,
+.btn-black:visited,
+.btn-black:focus,
+.btn-black:checked,
+.btn-black:disabled,
+.btn-black:empty,
+.btn-black:enabled,
+.btn-black:invalid,
+.btn-black:target,
+.btn-black::selection,
+.btn-black:required{
+    color: white;
+    background-color: black;
+}
+
+.btn-green {
+    color: white;
+    background-color: green;
+}
+.btn-red {
+    color: white;
+    background-color: #C10D0D;
+}
+
+
+
+
+.btn-xl {
+    /*
+    padding: 55px 2px;
+    
+    font-size: 24px;
+    */
+    
+    height: 50px;
+    border: solid 1px #979696;
+    line-height: 2.33;
+    border-radius: 0px;
+}
+
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
+}
+
+

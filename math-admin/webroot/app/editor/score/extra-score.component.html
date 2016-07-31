@@ -1,0 +1,62 @@
+<div 
+	*ngIf="!edit" 
+	(click)="startEdit()">
+	{{extraScore.name}} : {{extraScore.thresholdTime}} |{{extraScore.extraTime}} | {{extraScore.extraScore}}
+</div>
+<div *ngIf="edit" >
+	<table>
+		<thead>
+			<th>nombre</th>
+			<th>umbral</th>
+			<th>tiempo</th>
+			<th>puntos</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<input #formName
+						size="6"
+						type="text"
+						value="{{extraScore.name}}"				
+						(keyup.enter)="editEnd(formName.value, formTimeThre.value, formTime.value, formExtra.value)"
+						(keyup.escape)="edit = !edit">
+				</td>
+				<td>
+					<input #formTimeThre
+						size="6"
+						max="999"
+						min="0"
+						type="number"
+						value="{{extraScore.thresholdTime}}"				
+						(keyup.enter)="editEnd(formName.value, formTimeThre.value, formTime.value, formExtra.value)"
+						(keyup.escape)="edit = !edit">
+				</td>
+				<td>
+					<input #formTime
+						size="6"
+						max="999"
+						min="0"
+						type="number"
+						value="{{extraScore.extraTime}}"				
+						(keyup.enter)="editEnd(formName.value, formTimeThre.value, formTime.value, formExtra.value)"
+						(keyup.escape)="edit = !edit">
+				</td>	
+				<td>
+					<input #formExtra
+						size="6"
+						max="999"
+						min="0"
+						type="number"
+						value="{{extraScore.extraScore}}"
+						(blur)="editEnd(formName.value, formTimeThre.value, formTime.value, formExtra.value)"
+						(keyup.enter)="editEnd(formName.value, formTimeThre.value, formTime.value, formExtra.value)"
+						(keyup.escape)="edit = !edit">
+				</td>	
+			</tr>			
+
+		</tbody>
+
+	</table>
+
+	
+</div>

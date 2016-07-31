@@ -1,0 +1,88 @@
+<!-- <meta charset="UTF-8"> -->
+
+<div class="container">
+	<div class="input-group">
+		<span class="input-group-addon" id="basic-addon1">Nombre del Juego</span> 
+		<input #inputName class="form-control" [value]="gameConfig.name" (keyup)="gameConfig.name = inputName.value">
+	</div>
+	<br>
+
+	<button class="btn btn-default" (click)="setStatus('CREATE_STAGE')" >Nueva Etapa</button>
+	<div *ngIf="state == 'CREATE_STAGE'">
+		<label>Elija el tipo de problemas de la nueva etapa</label>
+		
+		<select #optionSelected>
+			<option 
+				*ngFor="#problemOption of stageOptions" 
+				value="{{problemOption}}">{{problemOption}} 
+			</option>
+		</select>
+
+		<button 
+			class="btn btn-default" 
+			(click)="createStage(optionSelected.value)">
+			Crear Etapa
+		</button>
+
+	</div>
+
+	<div *ngFor="#stage of gameConfig.stages; #i = index">
+		
+		<h2>Etapa {{i+1}} </h2>
+		<button 
+			class="btn btn-error" 
+			(click)="removeStage(i); ">
+			Borrar
+		</button>
+
+		<button 
+			class="btn btn-info" 
+			(click)="changeShowTable()">{{showHideTables}}
+		</button>
+
+		<arith-level *ngIf="stage.levelConfigs[0].problemConfig.problemType == 'SIMPLE'" 
+			[levelConfigs]="stage.levelConfigs"
+			[style.display]="showProblemConfig">
+		</arith-level>
+
+		<equation-level *ngIf="stage.levelConfigs[0].problemConfig.problemType == 'EQUATION'" 
+			[levelConfigs]="stage.levelConfigs"
+			[style.display]="showProblemConfig">
+		</equation-level>
+
+		<logic-level *ngIf="stage.levelConfigs[0].problemConfig.problemType == 'LOGIC'" 
+			[levelConfigs]="stage.levelConfigs"
+			[style.display]="showProblemConfig">
+		</logic-level>
+
+		<system-equation-level *ngIf="stage.levelConfigs[0].problemConfig.problemType == 'SYSTEM_EQUATION'" 
+			[levelConfigs]="stage.levelConfigs"
+			[style.display]="showProblemConfig">
+		</system-equation-level>
+
+		<module-level *ngIf="stage.levelConfigs[0].problemConfig.problemType == 'MODULE'" 
+			[levelConfigs]="stage.levelConfigs"
+			[style.display]="showProblemConfig">
+		</module-level>
+
+		<score 
+			[levelConfigs]="stage.levelConfigs"
+			[style.display]="showScoreConfig">
+		</score>
+		
+	</div>
+	
+	
+
+
+</div>
+<h3 style="text-align:center">
+	<button class="btn btn-success" (click)="saveOrUpdateGame()">
+		{{getSaveMessage() }}
+	</button>
+
+</h3>
+
+ <pre> 
+ {{printProblem()}}   
+ </pre> 

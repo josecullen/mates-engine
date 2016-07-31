@@ -1,0 +1,66 @@
+    <md-grid-list cols="5" rowHeight="50px" [style.background]="'#DB4646'">
+       <md-grid-tile>
+         <counter [config]="config.levelCounter"></counter>
+         <md-icon class="md-24" style="color:#921919;">stars</md-icon>
+       </md-grid-tile>
+       <md-grid-tile>
+        <counter [config]="config.scoreCounter"></counter>
+        <md-icon class="md-24" style="color:#921919;">add_circle</md-icon>
+       </md-grid-tile>
+       <md-grid-tile>
+         <counter [config]="config.livesCounter"></counter>
+         <md-icon class="md-24" style="color:#921919;">favorite</md-icon>
+       </md-grid-tile>
+       <md-grid-tile>
+         <counter
+            [config]="config.timerCounter"
+            ></counter>
+         <md-icon class="md-24" style="color:#921919;">timer</md-icon>
+       </md-grid-tile>
+       <md-grid-tile>
+         <md-icon class="md-24" style="color:#921919; align:right">launch</md-icon>
+       </md-grid-tile>
+    </md-grid-list>
+
+<div class="extras" [ngClass]="{showExtras : config.showExtras, hideExtras: !config.showExtras}">
+    <md-grid-list cols="5" rowHeight="50px" >
+       <md-grid-tile>
+       </md-grid-tile>
+       <md-grid-tile>
+       </md-grid-tile>
+       <md-grid-tile>
+       </md-grid-tile>
+       <md-grid-tile [style.background]="'lightgreen'">
+         <counter [config]="config.extraTimeCounter" ></counter>
+         <md-icon class="md-24" style="color:#921919;">timer_off</md-icon>
+
+
+       </md-grid-tile>
+       <md-grid-tile>
+       </md-grid-tile>
+    </md-grid-list>
+</div>
+
+<div class="tooltips" [ngClass]="{show: config.showTooltips, hide: !config.showTooltips}">
+    <md-grid-list cols="5" rowHeight="50px" >
+       <md-grid-tile>
+
+       </md-grid-tile>
+       <md-grid-tile>
+
+       </md-grid-tile>
+       <md-grid-tile>
+         <span class="tooltip-value">1</span>
+         <md-icon class="md-24 tooltip-down" style="color:#921919;">keyboard_arrow_down</md-icon>
+       </md-grid-tile>
+       <md-grid-tile>
+
+         <span class="tooltip-value">5</span>
+         <md-icon class="md-24 tooltip-up" style="color:lightgreen;">keyboard_arrow_up</md-icon>
+
+       </md-grid-tile>
+       <md-grid-tile>
+
+       </md-grid-tile>
+    </md-grid-list>
+</div>

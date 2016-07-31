@@ -1,0 +1,26 @@
+	
+	
+	<div class="all-height-100 no-margin" >	
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Mates</a>
+				</div>
+				<div class="navbar-header">
+					
+				</div>
+
+				<div class="navbar-header collapse navbar-collapse" >
+					<ul class="nav navbar-nav" >
+						<li><a (click)="gotoNewGame()">Crear Juego</a></li>
+						<li><a [routerLink]="['AdminGames']">Administrar Juegos</a></li>
+						<li><a [routerLink]="['AdminInstances']">Administrar Instancias</a></li>
+					</ul>
+				</div>					
+			</div>
+		</nav>
+	</div>
+	<br><br><br><br>
+	
+	<router-outlet></router-outlet>
+		

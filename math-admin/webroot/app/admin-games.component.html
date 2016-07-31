@@ -1,0 +1,41 @@
+<!-- <meta charset="UTF-8"> -->
+<div class="container">
+
+
+
+<div *ngFor="#gameConfig of gameConfigs; #i = index">
+
+  <div class="input-group" >
+    <input type="text" [value]="gameConfig.name" class="form-control" disabled="true">
+    <span class="input-group-btn">
+      <button 
+        class="btn btn-default glyphicon glyphicon-pencil" 
+        type="button" (click)="edit(gameConfig)"></button>
+    </span>
+    <span class="input-group-btn">
+      <button class="btn btn-default glyphicon glyphicon-plus" (click)="createInstance(gameConfig)" type="button"></button>
+    </span>
+    <span class="input-group-btn">
+      <a class="btn btn-default glyphicon glyphicon-trash" (click)="removeGame(i)" type="button"></a>
+    </span>   
+  </div>
+
+  <div class="input-group" *ngFor="#instanceGameData of gameConfig.instanceGameDatas; #j = index">
+    <input #instanceName type="text" [value]="instanceGameData.instanceName" (keyup)="instanceGameData.instanceName = instanceName.value" class="form-control">
+    <span class="input-group-btn">
+      <button class="btn btn-default glyphicon glyphicon-save" (click)="saveInstance(instanceGameData)" type="button"></button>
+    </span>
+    <span class="input-group-btn">
+      <button class="btn btn-default glyphicon glyphicon-stats" (click)="createInstance(i)" type="button"></button>
+    </span>
+    <span class="input-group-btn">
+      <button class="btn btn-default glyphicon glyphicon-minus" (click)="removeInstance(i,j)" type="button"></button>
+    </span>
+    <span class="input-group-btn">
+      <a class="btn btn-default glyphicon glyphicon-trash" (click)="removeGame(gameConfig._id)" type="button"></a>
+    </span>   
+  </div> 
+
+</div>
+
+</div>

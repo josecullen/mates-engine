@@ -1,0 +1,45 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+version = '1.0'
+
+
+dependencies {
+    compile project(':math-core')
+    compile project(':math-aritmetic')
+    compile project(':math-game-mongo')
+    compile project(':math-game-facade')
+    compile 'io.vertx:vertx-core:3.2.0'
+    compile 'io.vertx:vertx-web:3.2.0'
+    compile 'io.vertx:vertx-mongo-client:3.2.0'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.7.2'
+    compile 'org.mongodb.morphia:morphia:1.0.1'
+    testCompile 'junit:junit:4.12'
+}
+
+task execute(type: JavaExec) {
+    main = "math.game.admin.AdminVerticle"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task fatJar(type: Jar){
+  manifest {
+      attributes 'Implementation-Version': '1.0',
+      'Main-Class': 'math.game.admin.AdminVerticle'
+  }
+  baseName = project.name + '-all'
+  from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+  with jar
+}
+
+task copyWebroot(type: Copy){
+    from 'webroot'
+    into 'build/libs/webroot'
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Version': '1.0',
+        'Main-Class': 'math.math_admin.AdminVerticle'
+
+    }
+}

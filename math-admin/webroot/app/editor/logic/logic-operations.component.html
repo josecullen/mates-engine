@@ -1,0 +1,37 @@
+
+<div class="input-group">
+
+	<button class="btn btn-sm icon-and width-0" 
+		[ngClass]="{
+			'icon-and' : operation.and, 
+			'btn-success': operation.and, 
+			'icon-and-outline' : !operation.and  }"
+		(click)="operation.and = !operation.and; changeValue();"
+		[MathJax]="'$\\land$'">
+	</button>
+
+	<button class="btn btn-sm width-0"  
+		[ngClass]="{
+			'icon-or' : operation.or, 
+			'btn-success': operation.or, 
+			'icon-or-outline' : !operation.or  }"
+		(click)="operation.or = !operation.or;changeValue(); "
+		[MathJax]="'$\\lor$'">
+	</button>
+
+	<button class="btn btn-sm width-0" 
+		[ngClass]="{ 'btn-success': operation.then }"
+		(click)="operation.then = !operation.then; changeValue(); "
+		[MathJax]="'$\\Rightarrow$'">
+	</button>
+
+	<button class="btn btn-sm width-0"
+		[ngClass]="{
+			'icon-eq' : operation.eq, 
+			'btn-success': operation.eq, 
+			'icon-eq-outline' : !operation.eq  }"
+		(click)="operation.eq = !operation.eq; changeValue(); "
+		[MathJax]="'$\\Leftrightarrow$'">
+	</button>
+	
+</div>

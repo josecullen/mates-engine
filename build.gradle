@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+allprojects{
+  repositories {
+      mavenCentral()
+      mavenLocal()
+      maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+  }
+
+}
+
+
+dependencies {
+  compile project(':math-core')
+  compile project(':math-aritmetic')
+  compile project(':math-logic')
+}
+
+task admin(type: JavaExec) {
+    main = "math.math_admin.AdminVerticle"
+    // We'll talk about this shortly
+    classpath sourceSets.main.runtimeClasspath,
+    project(':math-admin').sourceSets.main.runtimeClasspath
+}

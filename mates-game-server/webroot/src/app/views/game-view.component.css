@@ -1,0 +1,31 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  min-height: 25vh;
+}
+
+.answer-button{
+  display: block;
+  background-color: #DB4646;
+  color: white;
+  width: 100%;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 97vh;
+}
+
+section.content {
+  display: flex;
+  flex-direction: column;
+  background-color: #DB4646;
+  flex: 1;
+}
+
+footer {
+  font-family: 'Oswald', sans-serif;
+  background-color: #FFC107;
+  color: #333;
+}

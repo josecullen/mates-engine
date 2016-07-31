@@ -1,0 +1,22 @@
+<div class="flex-container">
+<header>
+  <game-toolbar
+    [config]="toolbarConfig"
+    ></game-toolbar>
+</header>
+
+<br>
+
+<section class="content">
+   <h3 [MathJax]="'$\\land$'"></h3>
+</section>
+
+<br>
+
+<footer>
+  <answer-buttons
+    [answers]="gameProblem.answerOptions"
+    (answer)="processAnswer($event)">
+  </answer-buttons>
+</footer>
+</div>
