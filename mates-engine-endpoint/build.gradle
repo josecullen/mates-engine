@@ -1,0 +1,20 @@
+
+group 'mates-engine'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'io.vertx:vertx-core:3.3.2'
+    compile 'io.vertx:vertx-web:3.3.2'
+    compile project(':math-core')
+    compile project(':math-aritmetic')
+    compile project(':math-logic')
+}

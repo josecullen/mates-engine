@@ -1,1 +1,1 @@
-include 'math-core', 'math-aritmetic', 'math-logic', 'math-game-mongo', 'math-admin', 'math-game-server', 'math-game-facade', 'mates-game-persistence', 'mates-game-server'
+include 'math-core', 'math-aritmetic', 'math-logic', 'mates-engine-endpoint'

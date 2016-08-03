@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'maven'
 
 allprojects{
   repositories {
@@ -15,11 +16,7 @@ dependencies {
   compile project(':math-core')
   compile project(':math-aritmetic')
   compile project(':math-logic')
+  compile project(':mates-engine-endpoint')
 }
 
-task admin(type: JavaExec) {
-    main = "math.math_admin.AdminVerticle"
-    // We'll talk about this shortly
-    classpath sourceSets.main.runtimeClasspath,
-    project(':math-admin').sourceSets.main.runtimeClasspath
-}
+
