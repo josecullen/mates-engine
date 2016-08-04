@@ -74,6 +74,8 @@ public class LogicBroadcastUtil {
 					? "\\sim( "+expression +" )"
 					: "( "+expression+" )";
 		});
+		
+		problemExpression.runOn(tree);
 		return problemExpression;
 	}
 	
