@@ -119,7 +119,15 @@ A continuación pasaremos a enumerar los endpoints de la aplicación y los datos
 }
 ```
 
-
+### logic-problem `/v1/aritmetic/logic-problem`
+#### body
+```json
+{
+    "expression": expression,
+    "probablySign": probablySign,
+    "operations": operations ["and|or|then|eq"]
+}
+```
 
 
 
