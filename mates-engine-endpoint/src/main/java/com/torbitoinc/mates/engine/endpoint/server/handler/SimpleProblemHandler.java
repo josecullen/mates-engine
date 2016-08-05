@@ -9,6 +9,7 @@ import com.torbitoinc.mates.engine.endpoint.model.AritmeticVariableConfig;
 import com.torbitoinc.mates.engine.endpoint.model.MatesBadRequest;
 import com.torbitoinc.mates.engine.endpoint.model.OperationConfig;
 import com.torbitoinc.mates.engine.endpoint.model.Problem;
+import com.torbitoinc.mates.engine.endpoint.model.SimpleProblemConfig;
 
 import io.vertx.core.Handler;
 import io.vertx.core.json.Json;
@@ -31,9 +32,9 @@ public class SimpleProblemHandler implements Handler<RoutingContext> {
 				bodyChecker = new BodyChecker(context.getBodyAsJson());
 				
 				math.core.problem.Problem problemGen = new SimpleProblem(
-					bodyChecker.getExpression(),
-					bodyChecker.getAritmeticVariableConfig().createBuilder(),
-					bodyChecker.getOperationConfig().createBuilder()
+					bodyChecker.getSimpleProblemConfig().getExpression(),
+					bodyChecker.getSimpleProblemConfig().getAritmeticVariableConfig().createBuilder(),
+					bodyChecker.getSimpleProblemConfig().getOperationConfig().createBuilder()
 				);
 
 				future.complete(Problem.create(problemGen));
@@ -70,32 +71,17 @@ public class SimpleProblemHandler implements Handler<RoutingContext> {
 	
 
 	class BodyChecker {
-		private AritmeticVariableConfig aritmeticVariableConfig;
-		private OperationConfig operationConfig;
-		private String expression;
-
+		private SimpleProblemConfig simpleProblemConfig;
+		
 		public BodyChecker(JsonObject body) throws JsonParseException, JsonMappingException, IOException {
-			String aritmeticVariableString = body.getJsonObject("aritmeticVariableConfig").toString();
-			String operationString = body.getJsonObject("operationConfig").toString();
-			expression = body.getString("expression");
-
-			aritmeticVariableConfig = mapper.readValue(aritmeticVariableString, AritmeticVariableConfig.class);
-			operationConfig = mapper.readValue(operationString, OperationConfig.class);
-			
+			simpleProblemConfig = mapper.readValue(body.toString(), SimpleProblemConfig.class);
 		}
 
-		public AritmeticVariableConfig getAritmeticVariableConfig() {
-			return aritmeticVariableConfig;
+		public SimpleProblemConfig getSimpleProblemConfig(){
+			return simpleProblemConfig;
 		}
-
-		public OperationConfig getOperationConfig() {
-			return operationConfig;
-		}
-
-		public String getExpression() {
-			return expression;
-		}
-
+		
+		
 	}
 	
 	
