@@ -1,20 +1,20 @@
 package com.torbitoinc.mates.engine.endpoint.model;
 
-import com.torbitoinc.mates.engine.endpoint.exception.ErrorResponse;
-
-import io.vertx.core.json.JsonObject;
+import java.util.Arrays;
+import java.util.List;
 
 public class MatesBadRequest extends MatesException{
-
 	private static final long serialVersionUID = 1L;
-	private ErrorResponse errorResponse;
+	public static final MatesBadRequest DEFAULT = new MatesBadRequest(Arrays.asList("Bad Request"));
+	List<String> errors;
 	
-	public MatesBadRequest(JsonObject bodyRequest, String path, String restMethod, String message) {
-		errorResponse = new ErrorResponse(bodyRequest, path, restMethod, message);
+	
+	public MatesBadRequest(List<String> errors) {
+		this.errors = errors;
 	}
 
-	public ErrorResponse getErrorResponse(){
-		return errorResponse;
+	public List<String> getErrors(){
+		return errors;
 	}
 	
 	

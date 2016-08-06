@@ -1,15 +1,19 @@
 package com.torbitoinc.mates.engine.endpoint.server.handler;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.xml.internal.ws.developer.MemberSubmissionAddressing.Validation;
 import com.torbitoinc.mates.engine.endpoint.model.AritmeticVariableConfig;
 import com.torbitoinc.mates.engine.endpoint.model.MatesBadRequest;
 import com.torbitoinc.mates.engine.endpoint.model.OperationConfig;
 import com.torbitoinc.mates.engine.endpoint.model.Problem;
 import com.torbitoinc.mates.engine.endpoint.model.SimpleProblemConfig;
+import com.torbitoinc.mates.engine.endpoint.validation.RequestValidation;
 
 import io.vertx.core.Handler;
 import io.vertx.core.json.Json;
@@ -39,15 +43,12 @@ public class SimpleProblemHandler implements Handler<RoutingContext> {
 
 				future.complete(Problem.create(problemGen));
 				
-			} catch (Exception e) {
-				
-				future.fail(new MatesBadRequest(
-					context.getBodyAsJson(), 
-					context.request().path(),
-					context.request().method().name(),
-					"")
-				);
-				
+			}
+			catch (MatesBadRequest e){				
+				future.fail(e);
+			}
+			catch (Exception e) {				
+				future.fail(new MatesBadRequest(Arrays.asList("Bad request")));				
 			}
 
 		}, false, res -> {
@@ -55,12 +56,13 @@ public class SimpleProblemHandler implements Handler<RoutingContext> {
 				MatesBadRequest ex = (MatesBadRequest) res.cause();
 				context
 					.response()
+					.setStatusCode(400)
 					.putHeader("content-type", "application/json; charset=utf-8")
-					.end(Json.encodePrettily(ex.getErrorResponse()));
+					.end(Json.encodePrettily(ex.getErrors()));
 				
 			}else{
 				context
-					.response()
+					.response()					
 					.putHeader("content-type", "application/json; charset=utf-8")
 					.end(Json.encodePrettily(res.result()));
 			}
@@ -75,6 +77,12 @@ public class SimpleProblemHandler implements Handler<RoutingContext> {
 		
 		public BodyChecker(JsonObject body) throws JsonParseException, JsonMappingException, IOException {
 			simpleProblemConfig = mapper.readValue(body.toString(), SimpleProblemConfig.class);
+			
+			List<String> errors = RequestValidation.validate(simpleProblemConfig);
+			
+			if(!errors.isEmpty()){
+				throw new MatesBadRequest(errors);
+			}
 		}
 
 		public SimpleProblemConfig getSimpleProblemConfig(){

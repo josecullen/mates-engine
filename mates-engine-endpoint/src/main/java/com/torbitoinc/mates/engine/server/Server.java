@@ -1,3 +1,5 @@
+package com.torbitoinc.mates.engine.server;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.torbitoinc.mates.engine.endpoint.server.handler.EquationProblemHandler;
 import com.torbitoinc.mates.engine.endpoint.server.handler.LogicProblemHandler;
@@ -7,13 +9,13 @@ import com.torbitoinc.mates.engine.endpoint.server.handler.SystemEquationProblem
 
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
+
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 
 public class Server {
 	private static final int port = 9090;
-	private static final ObjectMapper mapper = new ObjectMapper();
 	private static final SimpleProblemHandler SIMPLE_PROBLEM_HANDLER = new SimpleProblemHandler();
 	private static final EquationProblemHandler EQUATION_PROBLEM_HANDLER = new EquationProblemHandler();
 	private static final SimpleModuleHandler SIMPLE_MODULE_HANDLER = new SimpleModuleHandler();
@@ -29,7 +31,6 @@ public class Server {
 		Router router = Router.router(vertx);
 		
 		router.post("/v1/aritmetic/*").handler(BodyHandler.create());
-//		router.post("/v1/aritmetic/equation-problem").handler(BodyHandler.create());
 		
 		router.post("/v1/aritmetic/simple-problem").handler(SIMPLE_PROBLEM_HANDLER);
 		router.post("/v1/aritmetic/equation-problem").handler(EQUATION_PROBLEM_HANDLER);

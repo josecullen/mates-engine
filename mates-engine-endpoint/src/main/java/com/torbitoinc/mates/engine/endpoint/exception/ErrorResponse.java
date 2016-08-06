@@ -1,5 +1,7 @@
 package com.torbitoinc.mates.engine.endpoint.exception;
 
+import java.util.List;
+
 import io.vertx.core.json.JsonObject;
 
 public class ErrorResponse {
@@ -13,6 +15,16 @@ public class ErrorResponse {
 		setMessage(message2);
 		setPath(path2);
 		setRestMethod(restMethod2);
+	}
+
+	public ErrorResponse(List<String> errors) {
+		setMessage(errors);
+	}
+	
+	private void setMessage(List<String> errors) {
+		StringBuilder message = new StringBuilder();
+		errors.forEach(error -> message.append(error).append("\n"));
+		setMessage(message.toString());
 	}
 
 	public JsonObject getBodyRequest() {
