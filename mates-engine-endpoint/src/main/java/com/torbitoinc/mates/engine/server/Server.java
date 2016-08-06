@@ -1,6 +1,5 @@
 package com.torbitoinc.mates.engine.server;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.torbitoinc.mates.engine.endpoint.server.handler.EquationProblemHandler;
 import com.torbitoinc.mates.engine.endpoint.server.handler.LogicProblemHandler;
 import com.torbitoinc.mates.engine.endpoint.server.handler.SimpleModuleHandler;
@@ -9,7 +8,6 @@ import com.torbitoinc.mates.engine.endpoint.server.handler.SystemEquationProblem
 
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
-
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
@@ -36,7 +34,7 @@ public class Server {
 		router.post("/v1/aritmetic/equation-problem").handler(EQUATION_PROBLEM_HANDLER);
 		router.post("/v1/aritmetic/simple-module-problem").handler(SIMPLE_MODULE_HANDLER);
 		router.post("/v1/aritmetic/system-equation-problem").handler(SYSTEM_EQUATION_PROBLEM_HANDLER);
-		router.post("/v1/aritmetic/logic-problem").handler(LOGIC_PROBLEM_HANDLER);
+		router.post("/v1/logic/logic-problem").handler(LOGIC_PROBLEM_HANDLER);
 		
 		server.requestHandler(router::accept).listen(port, handler ->{
 			if(handler.succeeded())
