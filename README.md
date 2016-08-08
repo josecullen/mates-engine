@@ -119,7 +119,7 @@ A continuación pasaremos a enumerar los endpoints de la aplicación y los datos
 }
 ```
 
-### logic-problem `/v1/aritmetic/logic-problem`
+### logic-problem `/v1/logic/logic-problem`
 #### body
 ```json
 {
