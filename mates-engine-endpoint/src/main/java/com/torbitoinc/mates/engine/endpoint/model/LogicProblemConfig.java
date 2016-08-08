@@ -1,6 +1,6 @@
 package com.torbitoinc.mates.engine.endpoint.model;
 
-public class LogicProblemConfig {
+public class LogicProblemConfig extends CommonProblemConfig{
 	private String expression;
 	private double probablySign;
 	private String operations;

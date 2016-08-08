@@ -2,7 +2,7 @@ package com.torbitoinc.mates.engine.endpoint.model;
 
 import math.arithmetic.problem.EquationLevel;
 
-public class SystemEquationConfig {
+public class SystemEquationConfig extends CommonProblemConfig{
 	private EquationLevel equationLevel;
 	private AritmeticVariableConfig constant, x;
 	private OperationConfig operationConfig;

@@ -8,7 +8,7 @@ import builders.ArithmeticVariableBuilder;
  * @author josecullen
  *
  */
-public class AritmeticVariableConfig {
+public class AritmeticVariableConfig{
 	private double min = 0, max = 5, probablySign = 0;
 
 	private int divisionFactor = 1;

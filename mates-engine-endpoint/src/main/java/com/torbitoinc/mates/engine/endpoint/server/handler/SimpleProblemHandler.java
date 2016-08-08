@@ -1,13 +1,14 @@
 package com.torbitoinc.mates.engine.endpoint.server.handler;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.torbitoinc.mates.engine.endpoint.model.MatesBadRequest;
+import com.torbitoinc.mates.engine.endpoint.exception.MatesBadRequest;
 import com.torbitoinc.mates.engine.endpoint.model.Problem;
 import com.torbitoinc.mates.engine.endpoint.model.SimpleProblemConfig;
 import com.torbitoinc.mates.engine.endpoint.validation.RequestValidation;
@@ -32,13 +33,20 @@ public class SimpleProblemHandler implements Handler<RoutingContext> {
 			try {
 				bodyChecker = new BodyChecker(context.getBodyAsJson());
 				
-				math.core.problem.Problem problemGen = new SimpleProblem(
-					bodyChecker.getSimpleProblemConfig().getExpression(),
-					bodyChecker.getSimpleProblemConfig().getAritmeticVariableConfig().createBuilder(),
-					bodyChecker.getSimpleProblemConfig().getOperationConfig().createBuilder()
-				);
-
-				future.complete(Problem.create(problemGen));
+				List<Problem> problems = new ArrayList<>();
+				for(int i = 0; i < bodyChecker.getSimpleProblemConfig().getRepetitions(); i++){
+				
+					math.core.problem.Problem problemGen = new SimpleProblem(
+						bodyChecker.getSimpleProblemConfig().getExpression(),
+						bodyChecker.getSimpleProblemConfig().getAritmeticVariableConfig().createBuilder(),
+						bodyChecker.getSimpleProblemConfig().getOperationConfig().createBuilder()
+					);
+					
+					problems.add(Problem.create(problemGen));
+					
+				}
+				
+				future.complete(problems);
 				
 			}
 			catch (MatesBadRequest e){				
@@ -76,7 +84,7 @@ public class SimpleProblemHandler implements Handler<RoutingContext> {
 			simpleProblemConfig = mapper.readValue(body.toString(), SimpleProblemConfig.class);
 			
 			List<String> errors = RequestValidation.validate(simpleProblemConfig);
-			
+			System.out.println("repetitions "+simpleProblemConfig.getRepetitions());
 			if(!errors.isEmpty()){
 				throw new MatesBadRequest(errors);
 			}

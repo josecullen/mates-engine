@@ -1,13 +1,14 @@
 package com.torbitoinc.mates.engine.endpoint.server.handler;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.torbitoinc.mates.engine.endpoint.exception.MatesBadRequest;
 import com.torbitoinc.mates.engine.endpoint.model.EquationProblemConfig;
-import com.torbitoinc.mates.engine.endpoint.model.MatesBadRequest;
 import com.torbitoinc.mates.engine.endpoint.model.Problem;
 import com.torbitoinc.mates.engine.endpoint.validation.RequestValidation;
 
@@ -29,15 +30,19 @@ public class EquationProblemHandler implements Handler<RoutingContext>{
 			try {
 				bodyChecker = new BodyChecker(context.getBodyAsJson());
 				
-				math.core.problem.Problem problemGen = new EquationProblem(
-					bodyChecker.getEquationProblemConfig().getEquationLevel(),
-					bodyChecker.getEquationProblemConfig().getA().createBuilder().build(),
-					bodyChecker.getEquationProblemConfig().getX1().createBuilder().build(),
-					bodyChecker.getEquationProblemConfig().getX2().createBuilder().build(),
-					bodyChecker.getEquationProblemConfig().getX3().createBuilder().build()
-				);
-				
-				future.complete(Problem.create(problemGen));
+				List<Problem> problems = new ArrayList<>();
+				for(int i = 0; i < bodyChecker.getEquationProblemConfig().getRepetitions(); i++){
+					math.core.problem.Problem problemGen = new EquationProblem(
+							bodyChecker.getEquationProblemConfig().getEquationLevel(),
+							bodyChecker.getEquationProblemConfig().getA().createBuilder().build(),
+							bodyChecker.getEquationProblemConfig().getX1().createBuilder().build(),
+							bodyChecker.getEquationProblemConfig().getX2().createBuilder().build(),
+							bodyChecker.getEquationProblemConfig().getX3().createBuilder().build()
+						);
+					
+					problems.add(Problem.create(problemGen));
+				}
+				future.complete(problems);
 				
 			} 
 			catch (MatesBadRequest e){				

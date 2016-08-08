@@ -1,4 +1,4 @@
-package com.torbitoinc.mates.engine.endpoint.model;
+package com.torbitoinc.mates.engine.endpoint.exception;
 
 import java.util.Arrays;
 import java.util.List;

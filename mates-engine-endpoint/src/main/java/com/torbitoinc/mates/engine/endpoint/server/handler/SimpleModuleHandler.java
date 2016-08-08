@@ -1,12 +1,13 @@
 package com.torbitoinc.mates.engine.endpoint.server.handler;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.torbitoinc.mates.engine.endpoint.model.MatesBadRequest;
+import com.torbitoinc.mates.engine.endpoint.exception.MatesBadRequest;
 import com.torbitoinc.mates.engine.endpoint.model.Problem;
 import com.torbitoinc.mates.engine.endpoint.model.SimpleModuleConfig;
 import com.torbitoinc.mates.engine.endpoint.validation.RequestValidation;
@@ -28,14 +29,19 @@ public class SimpleModuleHandler implements Handler<RoutingContext>{
 			
 			try {
 				bodyChecker = new BodyChecker(context.getBodyAsJson());
-				
-				math.core.problem.Problem problemGen = new SimpleModuleProblem(
-					bodyChecker.getSimpleModuleConfig().getA().createBuilder().build(),
-					bodyChecker.getSimpleModuleConfig().getMod().createBuilder().build(),
-					bodyChecker.getSimpleModuleConfig().getPow().createBuilder().build()
-				);
-				
-				future.complete(Problem.create(problemGen));
+
+				List<Problem> problems = new ArrayList<>();
+				for(int i = 0; i < bodyChecker.getSimpleModuleConfig().getRepetitions(); i++){
+
+					math.core.problem.Problem problemGen = new SimpleModuleProblem(
+						bodyChecker.getSimpleModuleConfig().getA().createBuilder().build(),
+						bodyChecker.getSimpleModuleConfig().getMod().createBuilder().build(),
+						bodyChecker.getSimpleModuleConfig().getPow().createBuilder().build()
+					);
+					
+					problems.add(Problem.create(problemGen));
+				}
+				future.complete(problems);				
 				
 			}
 			catch (MatesBadRequest e){				

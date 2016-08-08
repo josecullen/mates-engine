@@ -1,6 +1,6 @@
 package com.torbitoinc.mates.engine.endpoint.model;
 
-public class SimpleProblemConfig {
+public class SimpleProblemConfig extends CommonProblemConfig{
 	private AritmeticVariableConfig aritmeticVariableConfig;
 	private OperationConfig operationConfig;
 	private String expression;

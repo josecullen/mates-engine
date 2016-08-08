@@ -29,6 +29,7 @@ public class Server {
 		Router router = Router.router(vertx);
 		
 		router.post("/v1/aritmetic/*").handler(BodyHandler.create());
+		router.post("/v1/logic/*").handler(BodyHandler.create());
 		
 		router.post("/v1/aritmetic/simple-problem").handler(SIMPLE_PROBLEM_HANDLER);
 		router.post("/v1/aritmetic/equation-problem").handler(EQUATION_PROBLEM_HANDLER);

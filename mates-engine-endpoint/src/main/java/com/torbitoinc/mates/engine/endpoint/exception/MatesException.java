@@ -1,4 +1,4 @@
-package com.torbitoinc.mates.engine.endpoint.model;
+package com.torbitoinc.mates.engine.endpoint.exception;
 
 public class MatesException extends RuntimeException{
 	
