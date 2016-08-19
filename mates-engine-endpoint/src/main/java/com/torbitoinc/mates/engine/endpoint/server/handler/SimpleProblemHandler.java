@@ -53,6 +53,7 @@ public class SimpleProblemHandler implements Handler<RoutingContext> {
 				future.fail(e);
 			}
 			catch (Exception e) {				
+				e.printStackTrace();
 				future.fail(new MatesBadRequest(Arrays.asList("Bad request")));				
 			}
 

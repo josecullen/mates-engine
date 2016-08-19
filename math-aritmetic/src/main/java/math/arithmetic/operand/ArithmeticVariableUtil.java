@@ -77,7 +77,7 @@ public class ArithmeticVariableUtil {
 		int divisor = 1; 
 		while((number * divisor) % 1 != 0){
 			divisor++;
-			System.out.print(". ");
+//			System.out.print(". ");
 			if(divisor % 100 == 0){
 				System.out.println();
 			}			
@@ -86,7 +86,7 @@ public class ArithmeticVariableUtil {
 			}
 			
 		}
-		System.out.println("\ndivisor: "+divisor);
+//		System.out.println("\ndivisor: "+divisor);
 		return divisor;
 	}
 	
