@@ -1,13 +1,79 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-1">Problema</div>
+    <div class="col-xs-3">a</div>
+		<div class="col-xs-3">x</div>
+    <div class="col-xs-2">grado</div>
+    <div class="col-xs-1">Repeticiones</div>
+    <div class="col-xs-1">
+      <button class="btn glyphicon glyphicon-plus" (click)="addLevel()"></button>
+    </div>
+    <div class="col-xs-1">
+      <button class="btn glyphicon glyphicon-edit" (click)="editAll = !editAll"></button>
+    </div>
+	</div>
+	<div  *ngFor="#levelConfig of levelConfigs; #i = index" >
 
+		<div class="row">
+			<div class="col-xs-1">
+				{{i+1}}
+			</div>
+			<div class="col-xs-3">
+				<variable
+						[variableConfig]="levelConfig.problemConfig.variableConfigs[0]"
+						(variableConfig)="levelConfig.problemConfig.variableConfigs[0] = $event">
+				</variable>
+			</div>
+			<div class="col-xs-3">
+				<variable
+						[variableConfig]="levelConfig.problemConfig.variableConfigs[1]"
+						(variableConfig)="levelConfig.problemConfig.variableConfigs[1] = $event">
+				</variable>
+			</div>
+			<div class="col-xs-2">
+				<editable
+						[edit]="editAll" [value]="levelConfig.problemConfig.level"
+						(valueChanged)="levelConfig.problemConfig.level = toNumber($event)">
+				</editable>
+			</div>
+			<div class="col-xs-1">
+				<editable
+						[edit]="editAll" [value]="levelConfig.problemConfig.repetitions"
+						(valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)">
+				</editable>
+			</div>
+			<div class="col-xs-1">
+        <button
+            class="btn glyphicon glyphicon-trash"
+            (click)="gameConfig.levelConfigs.splice(i,1)">
+        </button>
+      </div>
+      <div class="col-xs-1">
+        <button class="btn glyphicon glyphicon-superscript" (click)="toggleShowProblem()"></button>
+      </div>
+		</div>
+
+		<sample-problem
+			[levelConfig]="levelConfig"
+			[problemType]="getProblemType()"
+			[showProblem]="showProblem"
+		></sample-problem>
+
+	</div>
+
+</div>
+
+
+<!--
 <div class=" col-xs-12" >
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>Problema</th>									
+				<th>Problema</th>
 				<th>a</th>
 				<th>x</th>
 				<th>Grado</th>
-				<th>Repeticiones</th>					
+				<th>Repeticiones</th>
 				<button class="btn glyphicon glyphicon-plus" (click)="addLevel()"></button>
 				<button class="btn glyphicon glyphicon-edit" (click)="editAll = !editAll"></button>
 			</tr>
@@ -15,37 +81,46 @@
 		<tbody>
 			<tr *ngFor="#levelConfig of levelConfigs; #i = index">
 				<td>{{i+1}}</td>
-				
+
 				<td>
-                    <variable 
+                    <variable
                         [variableConfig]="levelConfig.problemConfig.variableConfigs[0]"
-                        (variableConfig)="levelConfig.problemConfig.variableConfigs[0] = $event">                        
+                        (variableConfig)="levelConfig.problemConfig.variableConfigs[0] = $event">
                     </variable>
                 </td>
 
                 <td>
-                    <variable 
+                    <variable
                         [variableConfig]="levelConfig.problemConfig.variableConfigs[1]"
-                        (variableConfig)="levelConfig.problemConfig.variableConfigs[1] = $event">                        
+                        (variableConfig)="levelConfig.problemConfig.variableConfigs[1] = $event">
                     </variable>
                 </td>
-				<td><editable 
+				<td><editable
 						[edit]="editAll" [value]="levelConfig.problemConfig.level"
-						(valueChanged)="levelConfig.problemConfig.level = toNumber($event)"> 
+						(valueChanged)="levelConfig.problemConfig.level = toNumber($event)">
 				</editable></td>
 
-				<td><editable 
+				<td><editable
 						[edit]="editAll" [value]="levelConfig.problemConfig.repetitions"
-						(valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)"> 
+						(valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)">
 				</editable></td>
-				
+
 				<button class="btn glyphicon glyphicon-trash" (click)="gameConfig.levelConfigs.splice(i,1)"></button>
+
+				<button class="btn glyphicon glyphicon-superscript" (click)="toggleShowProblem()"></button>
+				<sample-problem
+					[levelConfig]="levelConfig"
+					[problemType]="getProblemType()"
+					[showProblem]="showProblem"
+				></sample-problem>
 			</tr>
 		</tbody>
 	</table>
 </div>
+
+-->
 <!--
-<pre> 
- {{printProblem()}}   
- </pre> 
+<pre>
+ {{printProblem()}}
+ </pre>
  -->

@@ -1,0 +1,158 @@
+
+<<<<<<< HEAD
+<div class=" col-xs-12" >
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Problema</th>					
+				<th>Expresión</th>				
+				<th>Operaciones</th>
+				<th>Signo</th>
+				<th>Repeticiones</th>					
+=======
+
+<div class=" container-fluid" >
+	<div class="row">
+		<div class="col-xs-1">Problema</div>
+		<div class="col-xs-3">Expresión</div>
+		<div class="col-xs-2">Operaciones</div>
+		<div class="col-xs-2">Signo</div>
+		<div class="col-xs-2">Repeticiones</div>
+		<div class="col-xs-1">
+			<button class="btn glyphicon glyphicon-plus" (click)="addLevel()"></button>
+		</div>
+		<div class="col-xs-1">
+			<button class="btn glyphicon glyphicon-edit" (click)="editAll = !editAll"></button>
+		</div>
+	</div>
+
+	<div  *ngFor="#levelConfig of levelConfigs; #i = index" >
+		<div class="row">
+			<div class="col-xs-1">
+				{{i+1}}
+			</div>
+			<div class="col-xs-3">
+				<math-form-combo
+					[form]="levelConfig.problemConfig.form"
+					(form)="levelConfig.problemConfig.form = $event">
+				</math-form-combo>
+			</div>
+			<div class="col-xs-2">
+				<select-logic-operations
+						[operations]="levelConfig.problemConfig.operations"
+						(operations)="levelConfig.problemConfig.operations = $event">
+				</select-logic-operations>
+			</div>
+			<div class="col-xs-2">
+				<editable
+						[edit]="editAll" [value]="levelConfig.problemConfig.sign"
+						(valueChanged)="levelConfig.problemConfig.sign = toNumber($event)">
+				</editable>
+			</div>
+			<div class="col-xs-2">
+				<editable
+						[edit]="editAll" [value]="levelConfig.problemConfig.repetitions"
+						(valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)">
+				</editable>
+			</div>
+			<div class="col-xs-1">
+				<button class="btn glyphicon glyphicon-trash" (click)="gameConfig.levelConfigs.splice(i,1)"></button>
+			</div>
+			<div class="col-xs-1">
+				<button class="btn glyphicon glyphicon-superscript" (click)="toggleShowProblem()"></button>
+			</div>
+		</div>
+		<sample-problem
+			[levelConfig]="levelConfig"
+			[problemType]="getProblemType()"
+			[showProblem]="showProblem"
+		></sample-problem>
+	</div>
+
+
+
+</div>
+
+<!--
+
+<div class="col-xs-12">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Problema</th>
+				<th>Expresión</th>
+				<th>Operaciones</th>
+				<th>Signo</th>
+				<th>Repeticiones</th>
+>>>>>>> gradle-refactor
+				<button class="btn glyphicon glyphicon-plus" (click)="addLevel()"></button>
+				<button class="btn glyphicon glyphicon-edit" (click)="editAll = !editAll"></button>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="#levelConfig of levelConfigs; #i = index">
+				<td>{{i+1}}</td>
+
+<<<<<<< HEAD
+				<math-form-combo 
+					[form]="levelConfig.problemConfig.form" 
+=======
+				<math-form-combo
+					[form]="levelConfig.problemConfig.form"
+>>>>>>> gradle-refactor
+					(form)="levelConfig.problemConfig.form = $event">
+				</math-form-combo>
+
+				<td><select-logic-operations
+<<<<<<< HEAD
+						[operations]="levelConfig.problemConfig.operations" 
+						(operations)="levelConfig.problemConfig.operations = $event">
+				</select-logic-operations></td>
+				
+				<td><editable 
+						[edit]="editAll" [value]="levelConfig.problemConfig.sign" 
+						(valueChanged)="levelConfig.problemConfig.sign = toNumber($event)">
+				</editable></td>
+
+				<td><editable 
+						[edit]="editAll" [value]="levelConfig.problemConfig.repetitions"
+						(valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)"> 
+				</editable></td>
+				
+				<button class="btn glyphicon glyphicon-trash" (click)="gameConfig.levelConfigs.splice(i,1)"></button>
+			</tr>
+		</tbody>
+	</table>
+</div>
+=======
+						[operations]="levelConfig.problemConfig.operations"
+						(operations)="levelConfig.problemConfig.operations = $event">
+				</select-logic-operations></td>
+
+				<td><editable
+						[edit]="editAll" [value]="levelConfig.problemConfig.sign"
+						(valueChanged)="levelConfig.problemConfig.sign = toNumber($event)">
+				</editable></td>
+
+				<td><editable
+						[edit]="editAll" [value]="levelConfig.problemConfig.repetitions"
+						(valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)">
+				</editable></td>
+
+				<button class="btn glyphicon glyphicon-trash" (click)="gameConfig.levelConfigs.splice(i,1)"></button>
+
+				<button class="btn glyphicon glyphicon-superscript" (click)="toggleShowProblem()"></button>
+				<sample-problem
+					[levelConfig]="levelConfig"
+					[problemType]="getProblemType()"
+					[showProblem]="showProblem"
+				></sample-problem>
+
+			</tr>
+
+
+		</tbody>
+	</table>
+</div>
+-->
+>>>>>>> gradle-refactor

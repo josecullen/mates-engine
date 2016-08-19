@@ -1,0 +1,22 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+
+allprojects{
+  repositories {
+      mavenCentral()
+      mavenLocal()
+      maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+  }
+
+}
+
+
+dependencies {
+  compile project(':math-core')
+  compile project(':math-aritmetic')
+  compile project(':math-logic')
+  compile project(':mates-engine-endpoint')
+}
+
+

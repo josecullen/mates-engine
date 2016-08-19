@@ -1,13 +1,87 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-1">Problema</div>
+    <div class="col-xs-3">Operaciones</div>
+    <div class="col-xs-2">a</div>
+    <div class="col-xs-2">x</div>
+    <div class="col-xs-1">Repeticiones</div>
+    <div class="col-xs-1">Nivel</div>
+    <div class="col-xs-1">
+      <button class="btn glyphicon glyphicon-plus" (click)="addLevel()"></button>
+    </div>
+    <div class="col-xs-1">
+      <button class="btn glyphicon glyphicon-edit" (click)="editAll = !editAll"></button>
+    </div>
+  </div>
+
+  <div  *ngFor="#levelConfig of levelConfigs; #i = index" >
+    <div class="row">
+
+      <div class="col-xs-1">
+        {{i+1}}
+      </div>
+
+      <div class="col-xs-3">
+        <select-operations
+                [operations]="levelConfig.problemConfig.operations"
+                (operations)="levelConfig.problemConfig.operations = $event">
+        </select-operations>
+      </div>
+      <div class="col-xs-2">
+        <variable
+            [variableConfig]="levelConfig.problemConfig.variableConfigs[0]"
+            (variableConfig)="levelConfig.problemConfig.variableConfigs[0]">
+        </variable>
+      </div>
+      <div class="col-xs-2">
+        <variable
+            [variableConfig]="levelConfig.problemConfig.variableConfigs[1]"
+            (variableConfig)="levelConfig.problemConfig.variableConfigs[1]">
+        </variable>
+      </div>
+      <div class="col-xs-1">
+        <editable
+                [edit]="editAll" [value]="levelConfig.problemConfig.repetitions"
+                (valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)">
+        </editable>
+      </div>
+      <div class="col-xs-1">
+        <editable
+                [edit]="editAll" [value]="levelConfig.problemConfig.level"
+                (valueChanged)="levelConfig.problemConfig.level= toNumber($event)">
+        </editable>
+      </div>
+      <div class="col-xs-1">
+        <button
+            class="btn glyphicon glyphicon-trash"
+            (click)="gameConfig.levelConfigs.splice(i,1)">
+        </button>
+      </div>
+      <div class="col-xs-1">
+        <button class="btn glyphicon glyphicon-superscript" (click)="toggleShowProblem()"></button>
+      </div>
+
+    </div>
+    <sample-problem
+      [levelConfig]="levelConfig"
+      [problemType]="getProblemType()"
+      [showProblem]="showProblem"
+    ></sample-problem>
+  </div>
+
+</div>
+
+<!--
 <div class=" col-xs-12" >
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Problema</th>                   
-                <th>Expresión</th>              
+                <th>Problema</th>
+                <th>Expresión</th>
                 <th>Operaciones</th>
                 <th>a</th>
                 <th>x</th>
-                <th>Repeticiones</th>                   
+                <th>Repeticiones</th>
                 <th>Nivel</th>
                 <button class="btn glyphicon glyphicon-plus" (click)="addLevel()"></button>
                 <button class="btn glyphicon glyphicon-edit" (click)="editAll = !editAll"></button>
@@ -17,46 +91,54 @@
             <tr *ngFor="#levelConfig of levelConfigs; #i = index">
                 <td>{{i+1}}</td>
 
-                <math-form-combo 
-                    [form]="levelConfig.problemConfig.form" 
+                <math-form-combo
+                    [form]="levelConfig.problemConfig.form"
                     (form)="levelConfig.problemConfig.form = $event">
                 </math-form-combo>
 
                 <td><select-operations
-                        [operations]="levelConfig.problemConfig.operations" 
+                        [operations]="levelConfig.problemConfig.operations"
                         (operations)="levelConfig.problemConfig.operations = $event">
                 </select-operations></td>
-                
+
                 <td>
-                    <variable 
+                    <variable
                         [variableConfig]="levelConfig.problemConfig.variableConfigs[0]"
-                        (variableConfig)="levelConfig.problemConfig.variableConfigs[0]">                   
+                        (variableConfig)="levelConfig.problemConfig.variableConfigs[0]">
                     </variable>
                 </td>
 
                 <td>
-                    <variable 
+                    <variable
                         [variableConfig]="levelConfig.problemConfig.variableConfigs[1]"
-                        (variableConfig)="levelConfig.problemConfig.variableConfigs[1]">                   
+                        (variableConfig)="levelConfig.problemConfig.variableConfigs[1]">
                     </variable>
                 </td>
 
-                <td><editable 
+                <td><editable
                         [edit]="editAll" [value]="levelConfig.problemConfig.repetitions"
-                        (valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)"> 
-                </editable></td>
-                
-                <td><editable 
-                        [edit]="editAll" [value]="levelConfig.problemConfig.level"
-                        (valueChanged)="levelConfig.problemConfig.level= toNumber($event)"> 
+                        (valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)">
                 </editable></td>
 
-                <button 
-                    class="btn glyphicon glyphicon-trash" 
+                <td><editable
+                        [edit]="editAll" [value]="levelConfig.problemConfig.level"
+                        (valueChanged)="levelConfig.problemConfig.level= toNumber($event)">
+                </editable></td>
+
+                <button
+                    class="btn glyphicon glyphicon-trash"
                     (click)="gameConfig.levelConfigs.splice(i,1)">
                 </button>
+
+                <button class="btn glyphicon glyphicon-superscript" (click)="toggleShowProblem()"></button>
+        				<sample-problem
+        					[levelConfig]="levelConfig"
+        					[problemType]="getProblemType()"
+        					[showProblem]="showProblem"
+        				></sample-problem>
 
             </tr>
         </tbody>
     </table>
 </div>
+-->

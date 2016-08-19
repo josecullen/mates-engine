@@ -1,0 +1,7 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+dependencies {
+    compile project(':math-core')
+    testCompile 'junit:junit:4.12'
+}

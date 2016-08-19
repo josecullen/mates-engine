@@ -1,0 +1,170 @@
+<<<<<<< HEAD
+
+=======
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-1">Problema</div>
+		<div class="col-xs-3">a</div>
+		<div class="col-xs-3">pow</div>
+		<div class="col-xs-2">mod</div>
+		<div class="col-xs-1">Repeticiones</div>
+		<div class="col-xs-1">
+			<button class="btn glyphicon glyphicon-plus" (click)="addLevel()"></button>
+		</div>
+		<div class="col-xs-1">
+			<button class="btn glyphicon glyphicon-edit" (click)="editAll = !editAll"></button>
+		</div>
+	</div>
+
+	<div  *ngFor="#levelConfig of levelConfigs; #i = index" >
+
+		<div class="row">
+			<div class="col-xs-1">
+				{{i+1}}
+			</div>
+			<div class="col-xs-3">
+				<variable
+						[variableConfig]="levelConfig.problemConfig.variableConfigs[0]"
+						(variableConfig)="levelConfig.problemConfig.variableConfigs[0] = $event">
+				</variable>
+			</div>
+			<div class="col-xs-3">
+				<variable
+						[variableConfig]="levelConfig.problemConfig.variableConfigs[1]"
+						(variableConfig)="levelConfig.problemConfig.variableConfigs[1] = $event">
+				</variable>
+			</div>
+			<div class="col-xs-2">
+				<variable
+						[variableConfig]="levelConfig.problemConfig.variableConfigs[2]"
+						(variableConfig)="levelConfig.problemConfig.variableConfigs[2] = $event">
+				</variable>
+			</div>
+			<div class="col-xs-1">
+				<editable
+						[edit]="editAll" [value]="levelConfig.problemConfig.repetitions"
+						(valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)">
+				</editable>
+			</div>
+			<div class="col-xs-1">
+				<button class="btn glyphicon glyphicon-trash" (click)="gameConfig.levelConfigs.splice(i,1)"></button>
+			</div>
+			<div class="col-xs-1">
+				<button class="btn glyphicon glyphicon-superscript" (click)="toggleShowProblem()"></button>
+			</div>
+		</div>
+
+		<sample-problem
+			[levelConfig]="levelConfig"
+			[problemType]="getProblemType()"
+			[showProblem]="showProblem"
+		></sample-problem>
+	</div>
+</div>
+
+
+<!--
+>>>>>>> gradle-refactor
+<div class=" col-xs-12" >
+	<table class="table table-striped">
+		<thead>
+			<tr>
+<<<<<<< HEAD
+				<th>Problema</th>									
+				<th>a</th>
+				<th>pow</th>
+				<th>mod</th>
+				<th>Repeticiones</th>					
+=======
+				<th>Problema</th>
+				<th>a</th>
+				<th>pow</th>
+				<th>mod</th>
+				<th>Repeticiones</th>
+>>>>>>> gradle-refactor
+				<button class="btn glyphicon glyphicon-plus" (click)="addLevel()"></button>
+				<button class="btn glyphicon glyphicon-edit" (click)="editAll = !editAll"></button>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="#levelConfig of levelConfigs; #i = index">
+				<td>{{i+1}}</td>
+<<<<<<< HEAD
+				
+				<td>
+                    <variable 
+=======
+
+				<td>
+                    <variable
+>>>>>>> gradle-refactor
+                        [variableConfig]="levelConfig.problemConfig.variableConfigs[0]"
+                        (variableConfig)="levelConfig.problemConfig.variableConfigs[0] = $event">
+                    </variable>
+                </td>
+
+                <td>
+<<<<<<< HEAD
+                    <variable 
+                        [variableConfig]="levelConfig.problemConfig.variableConfigs[1]"
+                        (variableConfig)="levelConfig.problemConfig.variableConfigs[1] = $event">                        
+=======
+                    <variable
+                        [variableConfig]="levelConfig.problemConfig.variableConfigs[1]"
+                        (variableConfig)="levelConfig.problemConfig.variableConfigs[1] = $event">
+>>>>>>> gradle-refactor
+                    </variable>
+                </td>
+
+                <td>
+<<<<<<< HEAD
+                    <variable 
+                        [variableConfig]="levelConfig.problemConfig.variableConfigs[2]"
+                        (variableConfig)="levelConfig.problemConfig.variableConfigs[2] = $event">                        
+                    </variable>
+                </td>
+
+				<td><editable 
+						[edit]="editAll" [value]="levelConfig.problemConfig.repetitions"
+						(valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)"> 
+				</editable></td>
+				
+				<button class="btn glyphicon glyphicon-trash" (click)="gameConfig.levelConfigs.splice(i,1)"></button>
+=======
+                    <variable
+                        [variableConfig]="levelConfig.problemConfig.variableConfigs[2]"
+                        (variableConfig)="levelConfig.problemConfig.variableConfigs[2] = $event">
+                    </variable>
+                </td>
+
+				<td><editable
+						[edit]="editAll" [value]="levelConfig.problemConfig.repetitions"
+						(valueChanged)="levelConfig.problemConfig.repetitions= toNumber($event)">
+				</editable></td>
+
+				<button class="btn glyphicon glyphicon-trash" (click)="gameConfig.levelConfigs.splice(i,1)"></button>
+				<button class="btn glyphicon glyphicon-superscript" (click)="toggleShowProblem()"></button>
+				<sample-problem
+					[levelConfig]="levelConfig"
+					[problemType]="getProblemType()"
+					[showProblem]="showProblem"
+				></sample-problem>
+>>>>>>> gradle-refactor
+			</tr>
+		</tbody>
+	</table>
+</div>
+<<<<<<< HEAD
+<!--
+<pre> 
+ {{printProblem()}}   
+ </pre> 
+ -->	
+=======
+-->
+<!--
+<pre>
+ {{printProblem()}}
+ </pre>
+ -->
+>>>>>>> gradle-refactor

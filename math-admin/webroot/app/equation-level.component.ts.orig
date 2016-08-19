@@ -1,0 +1,83 @@
+import {
+<<<<<<< HEAD
+    Component, 
+    ElementRef, 
+    Input, 
+    Output, 
+=======
+    Component,
+    ElementRef,
+    Input,
+    Output,
+>>>>>>> gradle-refactor
+    EventEmitter,
+    ApplicationRef,
+    NgSwitch,
+    NgSwitchWhen,
+    NgSwitchDefault
+} from '@angular/core';
+import {Editable} from './td-editable.component';
+<<<<<<< HEAD
+import {LevelConfig, EquationProblemConfig} from './level-config';
+import {MathFormComponent} from './math-form-combo.component';
+import {SelectOperationComponent} from './select-operations.component';
+import {VariableComponent} from './editor/common/variable.component';
+=======
+import {LevelConfig, EquationProblemConfig, ProblemType} from './level-config';
+import {MathFormComponent} from './math-form-combo.component';
+import {SelectOperationComponent} from './select-operations.component';
+import {VariableComponent} from './editor/common/variable.component';
+import {SampleProblemComponent} from './editor/common/sample-problem.component';
+>>>>>>> gradle-refactor
+
+@Component({
+    selector: 'equation-level',
+    templateUrl: 'app/equation-level.component.html' ,
+    directives: [
+<<<<<<< HEAD
+        Editable, 
+        MathFormComponent,
+        SelectOperationComponent,
+        VariableComponent]
+})
+export class EquationLevelComponent{
+    @Input() levelConfigs:Array<LevelConfig>;   
+    
+=======
+        Editable,
+        MathFormComponent,
+        SelectOperationComponent,
+        VariableComponent,
+        SampleProblemComponent
+      ]
+})
+export class EquationLevelComponent{
+    @Input() levelConfigs:Array<LevelConfig>;
+    showProblem:boolean = false;
+
+>>>>>>> gradle-refactor
+    printProblem() {
+        return JSON.stringify(this.levelConfigs);
+    }
+
+    toNumber(value) {
+        return Number(value);
+    }
+
+    addLevel() {
+        this.levelConfigs.push(new LevelConfig(new EquationProblemConfig()));
+    }
+
+<<<<<<< HEAD
+}
+=======
+    toggleShowProblem(){
+        this.showProblem = !this.showProblem;
+    }
+
+    getProblemType(){
+      return ProblemType.EQUATION;
+    }
+
+}
+>>>>>>> gradle-refactor

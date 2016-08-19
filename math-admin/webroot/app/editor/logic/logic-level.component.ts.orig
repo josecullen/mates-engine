@@ -1,0 +1,71 @@
+import {
+<<<<<<< HEAD
+    Component, 
+    ElementRef, 
+    Input, 
+    Output, 
+=======
+    Component,
+    ElementRef,
+    Input,
+    Output,
+>>>>>>> gradle-refactor
+    EventEmitter,
+    ApplicationRef,
+    NgSwitch,
+    NgSwitchWhen,
+    NgSwitchDefault
+} from '@angular/core';
+import {Editable} from '../../td-editable.component';
+import {LevelConfig, LogicProblemConfig, ProblemType} from '../../level-config';
+import {MathFormComponent} from '../../math-form-combo.component';
+import {SelectLogicOperationComponent} from "./logic-operations.component";
+<<<<<<< HEAD
+=======
+import {SampleProblemComponent} from '../common/sample-problem.component';
+>>>>>>> gradle-refactor
+
+@Component({
+    selector: 'logic-level',
+    templateUrl: 'app/editor/logic/logic-level.component.html' ,
+    directives: [
+<<<<<<< HEAD
+        Editable, 
+        MathFormComponent,
+        SelectLogicOperationComponent
+    ]
+})
+export class LogicLevelComponent{
+    @Input() levelConfigs:Array<LevelConfig>;  
+
+    addLevel() {
+        this.levelConfigs.push(new LevelConfig(new LogicProblemConfig()));
+    } 
+    
+}
+=======
+        Editable,
+        MathFormComponent,
+        SelectLogicOperationComponent,
+        SampleProblemComponent
+    ]
+})
+export class LogicLevelComponent{
+    @Input() levelConfigs:Array<LevelConfig>;
+    showProblem:boolean = false;
+
+    addLevel() {
+        this.levelConfigs.push(new LevelConfig(new LogicProblemConfig()));
+    }
+
+    toggleShowProblem(){
+        this.showProblem = !this.showProblem;
+    }
+
+    getProblemType(){
+      return ProblemType.LOGIC;
+    }
+
+
+}
+>>>>>>> gradle-refactor

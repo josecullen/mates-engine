@@ -1,0 +1,6 @@
+/target/
+<<<<<<< HEAD
+=======
+/build/
+/bin/
+>>>>>>> gradle-refactor
