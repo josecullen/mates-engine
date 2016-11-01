@@ -46,7 +46,7 @@ public class LogicBroadcastUtil {
 			String valueString = "";
 			boolean sign = operandNode.getVariable().getSign();
 			if(sign)
-				valueString = "\\sim";	
+				valueString = "\\sim ";	
 			
 			if(innerStatus.getCount() == variableToShow){
 				innerStatus.setVariableToShow(operandNode.getVariable());
@@ -72,6 +72,8 @@ public class LogicBroadcastUtil {
 					? "\\sim( "+expression +" )"
 					: "( "+expression+" )";
 		});
+		
+		problemExpression.runOn(tree);
 		return problemExpression;
 	}
 	

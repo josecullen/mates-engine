@@ -53,9 +53,9 @@ public class LogicProblem implements Problem {
 		boolean result2 = br.getResult();
 		
 		if(result1 && result2){
-			answer[0] = "Tautología";
+			answer[0] = "TautologÃ­a";
 		}else if(!result1 && !result2){
-			answer[0] = "Contradicción";
+			answer[0] = "ContradicciÃ³n";
 		}else if(result1 && variableResult1){
 			answer[0] = "Verdadero";
 		}else{
@@ -67,7 +67,7 @@ public class LogicProblem implements Problem {
 
 	@Override
 	public String[] getAnswerOptions(int options) {
-		return new String[]{"Tautología","Verdadero", "Falso","Contradicción"};
+		return new String[]{"TautologÃ­a","Verdadero", "Falso","ContradicciÃ³n"};
 	}
 
 }
